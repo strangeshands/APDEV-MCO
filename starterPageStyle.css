@@ -114,8 +114,7 @@ input[type="text"],  input[type="password"], input[type="email"] {
      align-self: flex-start;
      text-align: left; 
      color: rgba(255, 255, 255, 0.80); 
-     font-size: 18px; 
-     font-weight: 600; 
-     word-wrap: break-word;
+     font-size: 15px; 
+     font-weight: 500; 
      margin-bottom: 10px;
 }
