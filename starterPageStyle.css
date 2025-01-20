@@ -96,11 +96,29 @@ a {
 
      gap: 10px;
      width: 150%;
-     margin-right: 110px;
+     
+}
+
+.inputUsername {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     width: 100%;
+}
+
+.inputPassword {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     width: 100%;
 }
 
 input[type="text"],  input[type="password"], input[type="email"] {
-     width: 150%;
+     width: 93%;
      padding: 10px;
      margin-bottom: -10px;
      
