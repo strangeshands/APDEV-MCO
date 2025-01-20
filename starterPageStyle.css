@@ -117,6 +117,24 @@ a {
      width: 100%;
 }
 
+.inputEmail {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     width: 100%;
+}
+
+.inputConfirmpass {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     width: 100%;
+}
+
 input[type="text"],  input[type="password"], input[type="email"] {
      width: 93%;
      padding: 10px;
