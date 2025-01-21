@@ -277,6 +277,10 @@ header {
      transform: scale(1.02);
 }
 
+.viewPosts:active, .viewComments:active, .editProfile:active {
+     transform: scale(0.95); 
+}
+
 .navBarDivider {
      background-color: #E4F3F6;
 
@@ -315,6 +319,10 @@ header {
 .settings:hover, .help:hover, .logOut:hover {
      color: #16133B;
      transform: scale(1.02);
+}
+
+.settings:active, .help:active, .logOut:active {
+     transform: scale(0.95); 
 }
 
 .timeline {
@@ -371,7 +379,7 @@ header {
      justify-content: center;
      align-items: center;
 
-     gap: 5px;
+     gap: 0px;
 
      width: 100%;
 }
@@ -437,7 +445,7 @@ header {
      justify-content: flex-start;
      align-items: center;
 
-     padding: 10px;
+     padding: 0px 10px 10px 10px;
      width: 100%;
      box-sizing: border-box;
 }
