@@ -102,6 +102,7 @@ header {
      align-items: center;
 
      padding: 10px;
+     gap: 20px;
      border-radius: 12px;
 
      width: 100%;
@@ -110,7 +111,8 @@ header {
      height: 630px;
      
      background-color: #1D1E1F; 
-     /*background-color: red; */
+
+     position: sticky;
 }
 
 .profile {
@@ -226,31 +228,105 @@ header {
      width: 100%;
 }
 
-.registeredOoptions {
+.registeredOptions {
      display: flex;
      flex-direction: column;
      justify-content: center;
-     align-items: center;
+     align-items: flex-start;
 
      width: 100%;
+
 }
 
 .viewPosts {
      font-size: 16;
      font-weight: Bold;
      color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
 }
 
 .viewComments {
      font-size: 16;
      font-weight: Bold;
      color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
 }
 
 .editProfile {
      font-size: 16;
      font-weight: Bold;
      color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
+}
+
+.navBarDivider {
+     background-color: #E4F3F6;
+
+     margin: 10px;
+
+     width: 95%;
+     box-sizing: border-box;
+     height: 1px;
+}
+
+.otherOptions {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: flex-start;
+
+     width: 100%;
+}
+
+.settings {
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
+}
+
+.help {
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
+}
+
+.logOut {
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
 }
 
 .timeline {
