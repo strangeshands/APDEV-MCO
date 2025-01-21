@@ -177,12 +177,18 @@ main {
     margin: 16px 0;
 }
 
-.postActions {
+.postActions, .commentActions {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 8px;
     margin-top: 16px;
+}
+
+.datePosted {
+    font-size: 13px;
+    flex: 1;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .horizontalBar {
