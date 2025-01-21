@@ -61,6 +61,10 @@ button:active {
      gap: 10px;
      width: 100%;
 }
+
+.logOut img {
+     margin-right: 3px;
+}
 /* ---------- BUTTONS ---------- */
 
 /* ---------- HEADER ---------- */

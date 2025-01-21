@@ -344,6 +344,10 @@ input[type="text"] {
      color: #DF0606;
 }
 
+.logOut img {
+     margin-right: 3px;
+}
+
 .settings:hover, .help:hover, .logOut:hover {
      color: #16133B;
      transform: scale(1.02);
