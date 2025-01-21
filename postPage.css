@@ -155,10 +155,6 @@ main {
 
 }
 
-.postText {
-    color: rgba(255, 255, 255, 0.7);
-}
-
 .moreOptions {
     background: none;
     border: none;
@@ -226,7 +222,6 @@ main {
 }
 
 .commentText {
-    color: rgba(255, 255, 255, 0.7);
     margin-top: 8px;
 }
 
