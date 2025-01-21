@@ -179,8 +179,16 @@ main {
 
 .postActions {
     display: flex;
-    gap: 16px;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
     margin-top: 16px;
+}
+
+.horizontalBar {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 16px 0;
 }
 
 .actionButton {
@@ -212,7 +220,7 @@ main {
 }
 
 .commentText {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.7);
     margin-top: 8px;
 }
 
