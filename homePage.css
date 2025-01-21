@@ -141,7 +141,7 @@ input[type="text"] {
      align-items: flex-start;
 
      gap: 32px;
-     padding: 32px;
+     padding: 32px 180px;
 
      width: 100%;
      box-sizing: border-box;
@@ -159,7 +159,7 @@ input[type="text"] {
 
      width: 100%;
      min-width: 220px;
-     max-width: 342px;
+     max-width: 320px;
      height: auto;
      
      background-color: #1D1E1F; 
