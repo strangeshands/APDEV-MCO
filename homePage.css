@@ -131,7 +131,7 @@ input[type="text"] {
      align-items: flex-start;
 
      gap: 32px;
-     padding: 32px;
+     padding: 32px 180px;
 
      width: 100%;
      box-sizing: border-box;
@@ -149,7 +149,7 @@ input[type="text"] {
 
      width: 100%;
      min-width: 220px;
-     max-width: 342px;
+     max-width: 320px;
      height: auto;
      
      background-color: #1D1E1F; 
@@ -204,7 +204,7 @@ input[type="text"] {
      margin: 0;
 }
 
-.followersAndfollowing {
+.likesAndPosts {
      display: flex;
      justify-content: center;
      align-items: center;
@@ -216,7 +216,7 @@ input[type="text"] {
      box-sizing: border-box;
 }
 
-.followers {
+.likes {
      display: flex;
      flex-direction: column;
      justify-content: center;
@@ -227,7 +227,7 @@ input[type="text"] {
      width: 100%;
 }
 
-.following {
+.posts {
      display: flex;
      flex-direction: column;
      justify-content: center;
@@ -238,7 +238,7 @@ input[type="text"] {
      width: 100%;
 }
 
-.followNumbers {
+.numbers {
      font-size: 14px;
      font-weight: Bold;
      color: #E4F3F6;
@@ -246,7 +246,7 @@ input[type="text"] {
      margin: 0;
 }
 
-.followCategory {
+.numberCategory {
      font-size: 14px;
      color: #B3B3B3;
 
@@ -324,11 +324,11 @@ input[type="text"] {
      width: 100%;
 }
 
-.settings, .help, .logOut {
+.logOut {
      font-family: "Inter";
      font-size: 20;
      font-weight: Bold;
-     color: #E4F3F6;
+     color: #DF0606;
      background-color: #1D1E1F;
 
      display: flex;
@@ -340,16 +340,12 @@ input[type="text"] {
      width: 100%;
 }
 
-.logOut {
-     color: #DF0606;
-}
-
-.settings:hover, .help:hover, .logOut:hover {
+.logOut:hover {
      color: #16133B;
      transform: scale(1.02);
 }
 
-.settings:active, .help:active, .logOut:active {
+.logOut:active {
      transform: scale(0.95); 
 }
 
