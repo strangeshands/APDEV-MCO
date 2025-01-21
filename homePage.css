@@ -312,7 +312,7 @@ header {
 
 .settings, .help, .logOut {
      font-family: "Inter";
-     font-size: 16;
+     font-size: 20;
      font-weight: Bold;
      color: #E4F3F6;
      background-color: #1D1E1F;
@@ -324,6 +324,10 @@ header {
      gap: 10px;
 
      width: 100%;
+}
+
+.logOut {
+     color: #DF0606;
 }
 
 .settings:hover, .help:hover, .logOut:hover {
