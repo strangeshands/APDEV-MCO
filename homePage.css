@@ -214,7 +214,7 @@ input[type="text"] {
      margin: 0;
 }
 
-.followersAndfollowing {
+.likesAndPosts {
      display: flex;
      justify-content: center;
      align-items: center;
@@ -226,7 +226,7 @@ input[type="text"] {
      box-sizing: border-box;
 }
 
-.followers {
+.likes {
      display: flex;
      flex-direction: column;
      justify-content: center;
@@ -237,7 +237,7 @@ input[type="text"] {
      width: 100%;
 }
 
-.following {
+.posts {
      display: flex;
      flex-direction: column;
      justify-content: center;
@@ -248,7 +248,7 @@ input[type="text"] {
      width: 100%;
 }
 
-.followNumbers {
+.numbers {
      font-size: 14px;
      font-weight: Bold;
      color: #E4F3F6;
@@ -256,7 +256,7 @@ input[type="text"] {
      margin: 0;
 }
 
-.followCategory {
+.numberCategory {
      font-size: 14px;
      color: #B3B3B3;
 
