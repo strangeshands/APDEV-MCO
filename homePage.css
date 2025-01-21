@@ -1,252 +1,475 @@
 /*
-    This is a CSS file used in homePage.html
+This is a CSS file used in homePage.html
 */
 
 @font-face {
-    font-family: 'Inter'; 
-    src: url('resources/InterFont.ttf');
+     font-family: 'Inter'; 
+     src: url('resources/InterFont.ttf');
 }
 
 @font-face {
-    font-family: 'Jost'; 
-    src: url('resources/Jost-Bold.ttf');
+     font-family: 'Jost'; 
+     src: url('resources/Jost-Bold.ttf');
 }
 
 body {
-    background-color: #030909;
-    background-repeat: repeat;
-    font-family: "Inter";
+     background-color: #030909;
+     background-repeat: repeat;
+     font-family: "Inter";
 
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-     
-    margin: 0;
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     align-items: flex-start;
+          
+     margin: 0;
 }
 
 header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 
-    padding: 0px 32px;
-    gap: auto;
-    width: 100%;
-    box-sizing: border-box;
-    height: 88px;
+     padding: 0px 32px;
+     gap: auto;
+     width: 100%;
+     box-sizing: border-box;
+     height: 88px;
 
-    border-bottom: 1px solid white
+     border-bottom: 1px solid white
 }
 
 .logoAndBrandName {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 
-    gap: 10px;
+     gap: 10px;
 }
 
 .brandName {
-    color: #98D5DC; 
-    font-family: "Jost"; 
+     color: #98D5DC; 
+     font-family: "Jost"; 
 
-    font-size: 16px; 
-    font-weight: Bold; 
+     font-size: 16px; 
+     font-weight: Bold; 
 
-    padding: 0px 10px;
+     padding: 0px 10px;
 }
 
 .headerSpace {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+     display: flex;
+     justify-content: flex-end;
+     align-items: center;
 
-    padding: 0px 20px 0px 600px;
-    width: 100%;
-    max-width: 2000px;
-    height: 54px;
-
+     padding: 0px 20px 0px 600px;
+     width: 100%;
+     max-width: 2000px;
+     height: 54px;
 }
 
 .searchBar {
-    background-color: #ECE6F0;
-    color: #49454F;
-    
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+     background-color: #ECE6F0;
+     color: #49454F;
+     
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
 
-    height: 48px;
-    width: 100%;
-    max-width: 805px;
+     height: 48px;
+     width: 100%;
+     max-width: 805px;
 
-    border-radius: 28px;
+     border-radius: 28px;
 }
 
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
+     display: flex;
+     justify-content: center;
+     align-items: flex-start;
 
-    gap: 32px;
-    padding: 32px;
+     gap: 32px;
+     padding: 32px;
 
-    width: 100%;
-    box-sizing: border-box;
+     width: 100%;
+     box-sizing: border-box;
 }
 
 .navBar {
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     align-items: center;
 
-    width: 100%;
-    height: 630px;
-    min-width: 220px;
-    max-width: 342px;
+     padding: 10px;
+     gap: 20px;
+     border-radius: 12px;
 
-    background-color: gray;
+     width: 100%;
+     min-width: 220px;
+     max-width: 342px;
+     height: 630px;
+     
+     background-color: #1D1E1F; 
+
+     position: sticky;
+}
+
+.profile {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     padding: 10px;
+     gap: 24px;
+
+     width: 100%;
+}
+
+.userProfilePic {
+     background-color: #D9D9D9;
+     border-radius: 99px;
+
+     width: 100px;
+     height: 100px;
+}
+
+.usernameAndhandle {
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     align-items: center;
+
+     gap: 4px;
+
+     width: 100%;
+     height: auto;
+}
+
+.profileUsername {
+     font-size: 18px;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     margin: 0;
+}
+
+.profileUserhandle {
+     font-size: 16px;
+     color: #B3B3B3;
+
+     margin: 0;
+}
+
+.followersAndfollowing {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 0px 10px;
+     gap: auto;
+
+     width: 100%;
+     box-sizing: border-box;
+}
+
+.followers {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     gap: 4px;
+
+     width: 100%;
+}
+
+.following {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     gap: 4px;
+
+     width: 100%;
+}
+
+.followNumbers {
+     font-size: 14px;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     margin: 0;
+}
+
+.followCategory {
+     font-size: 14px;
+     color: #B3B3B3;
+
+     margin: 0;
+}
+
+.bio {
+     font-size: 14;
+     color: #E4F3F6;
+     text-align: center;
+
+     margin: 10px;
+}
+
+.navBarContent {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     width: 100%;
+}
+
+.registeredOptions {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: flex-start;
+
+     width: 100%;
+
+}
+
+.viewPosts {
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
+}
+
+.viewComments {
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
+}
+
+.editProfile {
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
+}
+
+.navBarDivider {
+     background-color: #E4F3F6;
+
+     margin: 10px;
+
+     width: 95%;
+     box-sizing: border-box;
+     height: 1px;
+}
+
+.otherOptions {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: flex-start;
+
+     width: 100%;
+}
+
+.settings {
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
+}
+
+.help {
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
+}
+
+.logOut {
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
 }
 
 .timeline {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
 
-    gap: 20px;
+     gap: 20px;
 
-    width: 100%;
-    min-width: 600px;
+     width: 100%;
+     min-width: 560px;
 }
 
 .newPost {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 
-    gap: 10px;
+     gap: 10px;
 
-    width: 100%;
+     width: 100%;
 }
 
 .newPostButton {
-    background-color: #98D5DC;
-    font-size: 16px;
-    font-weight: Bold;
+     background-color: #98D5DC;
+     font-size: 16px;
+     font-weight: Bold;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 
-    border-radius: 12px;
+     border-radius: 12px;
 
-    width: 100%;
-    height: 48px;
+     width: 100%;
+     height: 48px;
 }
 
 .post {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
 
-    gap: 10px;
+     gap: 10px;
 
-    width: 100%;
+     width: 100%;
 }
 
 .mainPost {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
 
-    gap: 5px;
+     gap: 5px;
 
-    width: 100%;
+     width: 100%;
 }
 
 .postUser {    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 
-    gap: 12px;
-    padding: 0px 10px;
+     gap: 12px;
+     padding: 0px 10px;
 
-    width: 100%;
-    box-sizing: border-box;
+     width: 100%;
+     box-sizing: border-box;
 }
 
 .profilePic {
-    background-color: #D9D9D9;
-    border-radius: 99px;
+     background-color: #D9D9D9;
+     border-radius: 99px;
 
-    width: 45px;
-    height: 40px;
+     width: 45px;
+     height: 40px;
 }
 
 .username {
-    font-size: 18px;
-    font-weight: Bold;
-    color: #E4F3F6;
+     font-size: 18px;
+     font-weight: Bold;
+     color: #E4F3F6;
 
-    width: 100%;
+     width: 100%;
 }
 
 .optionsButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     justify-content: center;
+     align-items: center;
 
-    padding: 2px 0px;
+     padding: 2px 0px;
 
-    width: 5px;
-    height: 20px;
-    color: #E4F3F6;
+     width: 5px;
+     height: 20px;
+     color: #E4F3F6;
 }
 
 .postContent {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
 
-    padding: 0px 10px;
+     padding: 0px 10px;
 
-    width: 100%;
-    box-sizing: border-box;
+     width: 100%;
+     box-sizing: border-box;
 }
 
 .postText {
-    font-size: 18px;
-    color: #E4F3F6;
+     font-size: 18px;
+     color: #E4F3F6;
 }
 
 .postImageContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
 
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
+     padding: 10px;
+     width: 100%;
+     box-sizing: border-box;
 }
 
 .postImage {
-    width: 100%;
-    box-sizing: border-box;
-    border-radius: 12px;
+     width: 100%;
+     box-sizing: border-box;
+     border-radius: 12px;
 }
 
 .postAnalytics {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+     display: flex;
+     justify-content: flex-end;
+     align-items: center;
 
-    padding: 0px 16px;
-    gap: 32px;
+     padding: 0px 16px;
+     gap: 32px;
 
-    width: 100%;
-    box-sizing: border-box;
+     width: 100%;
+     box-sizing: border-box;
 }
 
 .hearts {
@@ -259,65 +482,65 @@ header {
 }
 
 .comments {
-    padding: 2px;
+     padding: 2px;
 }
 
 .followingTab {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
 
-    padding: 10px;
-    gap: 12px;
-    border-radius: 12px;
+     padding: 10px;
+     gap: 12px;
+     border-radius: 12px;
 
-    width: 100%;
-    height: auto;
-    min-width: 200px;
-    max-width: 342px;
+     width: 100%;
+     height: auto;
+     min-width: 180px;
+     max-width: 342px;
 
-    background-color: #1D1E1F;
+     background-color: #1D1E1F;
 }
 
 .followingTabHeader {
-    font-size: 20px;
-    font-weight: Bold;
-    color: #E4F3F6;
+     font-size: 20px;
+     font-weight: Bold;
+     color: #E4F3F6;
 
-    padding: 10px;
+     padding: 10px;
 
-    width: 100%;
-    height: auto;
-    box-sizing: border-box;
+     width: 100%;
+     height: auto;
+     box-sizing: border-box;
 }
 
-.following {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+.myFollowing {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: flex-start;
 
-    width: 100%;
+     width: 100%;
 }
 
 .user {
-    font-size: 16;
-    font-weight: Bold;
-    color: #E4F3F6;
+     font-size: 16;
+     font-weight: Bold;
+     color: #E4F3F6;
 
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
 
-    padding: 10px;
-    gap: 12px;
+     padding: 10px;
+     gap: 12px;
 }
 
 .followingUserProfilePic {
-    background-color: #D9D9D9;
-    border-radius: 99px;
+     background-color: #D9D9D9;
+     border-radius: 99px;
 
-    width: 32px;
-    height: 32px;
+     width: 32px;
+     height: 32px;
 }
