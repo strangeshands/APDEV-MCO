@@ -20,7 +20,7 @@ html, body {
 }
 
 .inviBrk {
-     height: 10px;
+     height: 5px;
 }
 /* ---------- GENERAL ---------- */
 
@@ -60,6 +60,15 @@ button:active {
 
      gap: 10px;
      width: 100%;
+}
+
+.usertags {
+     width: auto;
+     margin-top: 2px;
+
+     opacity: 80%;
+     font-size: 12px;
+     text-align: justify;
 }
 
 .logOut img {
@@ -178,7 +187,7 @@ input[type="text"] {
 
      display: flex;
      flex-direction: column;
-     justify-content: space-between;
+     justify-content: start;
      gap: 15px;
 
      color: white;
@@ -190,10 +199,12 @@ input[type="text"] {
 
      display: flex;
      flex-direction: column;
-     justify-content: space-between;
      gap: 15px;
 
-     background-color: black;
+     padding: 20px;
+     border-radius: 15px;
+
+     background-color: #1D1E1F;
 }
 
 .col1-sub-container {
@@ -256,28 +267,189 @@ input[type="text"] {
      font-size: 14px;
      opacity: 80%;
 
-     margin: 0;
+     margin: 2px 0 0 0;
 }
 
-.regulartext, .usertags {
+.regulartext {
      font-size: 14px;
      text-align: justify;
 
      margin: 0;
 }
 
-.usertags {
-     opacity: 80%;
-     margin-left: 10px;
-}
-
 h3 {
      margin-top: 0;
 }
 
-#col2-sub-container {
+#tabrow {
      width: 100%;
-     height: 300px;
+     height: auto;
 
-     background-color: white;
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+
+     padding: 10px;
+
+     box-shadow: 0px 2px white;
+}
+
+.tab {
+     font-size: 20px;
+     font-weight: bold;
+     color: white;
+
+     width: 100%;
+     background-color: inherit;
+     margin-bottom: 10px;
+}
+
+#taglist {
+     width: 100%;
+}
+
+.col2-sub-container {
+     width: 100%;
+     height: auto;
+     
+     display: flex;
+
+     border-radius: 15px;
+     padding: 20px;
+}
+
+/* ---------- POSTS ---------- */
+#poststab {
+     color: white;
+}
+
+.pfpPost {
+     border-radius: 100px;
+     width: 45px;
+     height: 45px;
+}
+
+.pfpPost img {
+     width: 100%;
+     height: 100%;
+     
+     aspect-ratio: 1/1;
+     border-radius: 100%;
+     
+     object-fit: cover;
+     object-position: center;
+}
+
+#pfpuserrow, #userandpfp {
+     display: flex;
+     align-items: center;
+
+     justify-content: space-between;
+     gap: 15px;
+}
+
+.pfpdisplayname {
+     font-weight: bold;
+     font-size: 20px;
+}
+
+.smallbutton {
+     color: white;
+     background-color: inherit;
+}
+
+.pfpusername {
+     font-size: 13px;
+     opacity: 80%;
+}
+
+#pfpnames {
+     display: grid;
+}
+
+#usercaption {
+     padding-top: 20px;
+}
+
+#userphoto {
+     margin: 20px 0;
+}
+
+#userphotocontainer {
+     width: 100%;
+     height: 200px;
+
+     max-height: 200px;
+     max-width: inherit;
+
+     /* display: grid;
+     align-items: center;
+     justify-content: center;
+     grid: 200px / auto auto auto auto; */
+
+     display: flex;
+     justify-content: center;
+
+     gap: 10px;
+}
+
+.clickable-image {
+     width: 100%;
+     height: 100%;
+
+     object-fit: cover;
+     overflow: hidden;
+     cursor: pointer;
+     transition: transform 0.2s;
+     border-radius: 15px;
+}
+
+.clickable-image:hover, .close:hover {
+     transform: scale(1.005);
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+     display: none;
+     position: fixed; 
+     z-index: 1000; 
+     left: 0;
+     top: 0;
+
+     width: 100%;
+     height: 100%;
+
+     overflow: auto;
+     background-color: rgba(0, 0, 0, 0.8); 
+}
+
+#userphotocontainer-modal {
+     position: absolute; 
+     top: 50%;
+     left: 50%; 
+     transform: translate(-50%, -50%);
+
+     max-width: 90%;
+     max-height: 90%; 
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+ 
+.modal-content {
+     width: 90%;
+     height: 90%; 
+     object-fit: contain;
+}
+ 
+.close {
+     position: absolute;
+     top: 10px;
+     right: 25px;
+     color: white;
+     font-size: 35px;
+     font-weight: bold;
+     cursor: pointer;
+     transition: transform 0.2s;
 }

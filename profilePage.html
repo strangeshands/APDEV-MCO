@@ -60,6 +60,11 @@
                          <!-- BIO -->
                          <div class="col1-sub-container"> 
                               <h3> BIO </h3>
+
+                              <!-- IF NO BIO AVAILABLE -->
+                              <!--<p id="bio" class="regulartext"> No bio yet</p>-->
+
+                              <!-- BIO AVAILABLE -->
                               <p id="bio" class="regulartext"> Tech enthusiast and occasional gamer with a love for coding, creativity, 
                                    and meaningful conversations. I enjoy exploring new ideas, diving into pop culture, and 
                                    learning something new every day. Offline, you’ll find me experimenting in the kitchen or 
@@ -68,12 +73,23 @@
 
                          <!-- TAGS -->
                          <div class="col1-sub-container"> 
-                              <h3> Tags </h3>
-                              <p class="usertags"> No tags used</p>
-                              <div class="inviBrk"> </div>
-                              <p class="usertags"> #TagHere</p>
-                              <div class="inviBrk"> </div>
-                              <p class="usertags"> #TagHere</p>
+                              <h3> TAGS </h3>
+
+                              <!-- IF NO TAGS AVAILABLE -->
+                              <!--<p class="regulartext" style="opacity: 80%;"> No tags available</p>-->
+
+                              <!-- TAGS AVAILABLE -->
+                              <div id="taglist">
+                                   <button class="usertags"> 
+                                        #TagHere
+                                   </button>
+                                   <button class="usertags"> 
+                                        #AnotherTagHere
+                                   </button>
+                                   <button class="usertags"> 
+                                        #ProbablyAnotherTagHere
+                                   </button>
+                              </div>
                          </div>
 
                          <!-- SETTINGS -->
@@ -91,10 +107,92 @@
 
                     <!-- USER POSTS/COMMENTS COLUMN -->
                     <div id="col2">
-                         <div id="col2-sub-container"> 
+                         <!-- TAB SELECTION ROW -->
+                         <div id="tabrow"> 
+                              <button class="tab">
+                                   Posts
+                              </button>
+                              <button class="tab">
+                                   Comments
+                              </button>
+                              <button class="tab">
+                                   Bookmarks
+                              </button>
+                              <button class="tab">
+                                   Likes
+                              </button>
+                         </div>
+
+                         <!-- SPECIFIC TAB -->
+                         <div class="col2-sub-container">
+                              <div id="poststab">
+
+                                   <!-- USER DETAILS -->
+                                   <div id="pfpuserrow">
+                                        <div id="userandpfp">
+                                             <div class="pfpPost">
+                                                  <img src="resources/pfpSample.jpg"/>
+                                             </div>
+
+                                             <div id="pfpnames">
+                                                  <span class="pfpdisplayname">DARNA</span>
+                                                  <span class="pfpusername">@AkoSiDarna</span>
+                                             </div>
+                                        </div>
+
+                                        <button class="smallbutton">
+                                             <img src="resources/Options Button.svg"/>
+                                        </button>
+                                   </div>
+
+                                   <!-- USER CAPTION HERE -->
+                                   <div id="usercaption">
+                                        Life is a journey, and every step we take brings us closer to discovering who we truly are. 
+                                        It’s about embracing the highs and lows, the challenges and triumphs, and finding 
+                                        joy in the little things. Whether it’s a breathtaking sunset, a cozy moment with friends, or 
+                                        the satisfaction of achieving a long-awaited goal, these moments shape our story. Let’s 
+                                        live with purpose, dream big, and never stop learning or growing. Remember, it’s not about 
+                                        perfection, but progress. Surround yourself with positivity, chase your passions, and be 
+                                        the reason someone smiles today. The best chapters are yet to be written!
+                                   </div>
+
+                                   <!-- USER PHOTO -->
+                                    <div id="userphoto">
+                                        <div id="imageModal" class="modal">
+                                             <span class="close">&times;</span>
+                                             <div id="userphotocontainer-modal"> 
+                                                  <img class="modal-content" id="modalImage">
+                                             </div>
+                                             <div id="caption"></div>
+                                        </div>
+                                         
+                                        <div id="userphotocontainer"> 
+                                             <img src="resources/hamster.jpg" class="clickable-image" onclick="openModal(this)">
+                                             <img src="resources/monkey.jpg" class="clickable-image" onclick="openModal(this)">
+                                             <img src="resources/cat.jpg" class="clickable-image" onclick="openModal(this)">
+                                             <img src="resources/grass.jpg" class="clickable-image" onclick="openModal(this)">
+                                        </div>
+                                    </div>
+                              </div>
                          </div>
                     </div>
                </div>
           </div>
      </body>
 </html>
+
+<!-- JAVASCRIPT -->
+<script>
+     function openModal(image) {
+          const modal = document.getElementById("imageModal");
+          const modalImg = document.getElementById("modalImage");
+          const captionText = document.getElementById("caption");
+     
+          modal.style.display = "block";
+          modalImg.src = image.src;
+     
+          modal.onclick = function () {
+          modal.style.display = "none";
+          };
+     }
+</script>
