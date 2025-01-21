@@ -334,11 +334,11 @@ input[type="text"] {
      width: 100%;
 }
 
-.settings, .help, .logOut {
+.logOut {
      font-family: "Inter";
      font-size: 20;
      font-weight: Bold;
-     color: #E4F3F6;
+     color: #DF0606;
      background-color: #1D1E1F;
 
      display: flex;
@@ -350,16 +350,12 @@ input[type="text"] {
      width: 100%;
 }
 
-.logOut {
-     color: #DF0606;
-}
-
-.settings:hover, .help:hover, .logOut:hover {
+.logOut:hover {
      color: #16133B;
      transform: scale(1.02);
 }
 
-.settings:active, .help:active, .logOut:active {
+.logOut:active {
      transform: scale(0.95); 
 }
 
