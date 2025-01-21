@@ -25,6 +25,24 @@ body {
      margin: 0;
 }
 
+button {
+     border: none; 
+     cursor: pointer;
+
+     border-radius: 8px;
+     transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+     background-color: #7FB8C8;
+     transform: scale(1.02);
+}
+ 
+
+button:active {
+     transform: scale(0.95); 
+}
+
 header {
      display: flex;
      justify-content: center;
@@ -238,40 +256,25 @@ header {
 
 }
 
-.viewPosts {
-     font-size: 16;
+.viewPosts, .viewComments, .editProfile {
+     font-family: "Inter";
+     font-size: 20;
      font-weight: Bold;
      color: #E4F3F6;
+     background-color: #1D1E1F;
 
      display: flex;
-     justify-content: center;
+     justify-content: flex-start;
      align-items: center;
 
      gap: 10px;
+
+     width: 100%;
 }
 
-.viewComments {
-     font-size: 16;
-     font-weight: Bold;
-     color: #E4F3F6;
-
-     display: flex;
-     justify-content: center;
-     align-items: center;
-
-     gap: 10px;
-}
-
-.editProfile {
-     font-size: 16;
-     font-weight: Bold;
-     color: #E4F3F6;
-
-     display: flex;
-     justify-content: center;
-     align-items: center;
-
-     gap: 10px;
+.viewPosts:hover, .viewComments:hover, .editProfile:hover {
+     color: #16133B;
+     transform: scale(1.02);
 }
 
 .navBarDivider {
@@ -293,40 +296,25 @@ header {
      width: 100%;
 }
 
-.settings {
+.settings, .help, .logOut {
+     font-family: "Inter";
      font-size: 16;
      font-weight: Bold;
      color: #E4F3F6;
+     background-color: #1D1E1F;
 
      display: flex;
-     justify-content: center;
+     justify-content: flex-start;
      align-items: center;
 
      gap: 10px;
+
+     width: 100%;
 }
 
-.help {
-     font-size: 16;
-     font-weight: Bold;
-     color: #E4F3F6;
-
-     display: flex;
-     justify-content: center;
-     align-items: center;
-
-     gap: 10px;
-}
-
-.logOut {
-     font-size: 16;
-     font-weight: Bold;
-     color: #E4F3F6;
-
-     display: flex;
-     justify-content: center;
-     align-items: center;
-
-     gap: 10px;
+.settings:hover, .help:hover, .logOut:hover {
+     color: #16133B;
+     transform: scale(1.02);
 }
 
 .timeline {
