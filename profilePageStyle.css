@@ -446,9 +446,6 @@ h3 {
      left: 50%; 
      transform: translate(-50%, -50%);
 
-     max-width: 90%;
-     max-height: 90%; 
-
      display: flex;
      justify-content: center;
      align-items: center;
@@ -457,6 +454,10 @@ h3 {
 .modal-content {
      width: 90%;
      height: 90%; 
+
+     max-width: 90vh;
+     max-height: 90vh; 
+
      object-fit: contain;
 }
  
@@ -489,4 +490,14 @@ h3 {
      background-color: transparent;
      opacity: 80%;
      transform: scale(1.08);
+}
+
+.post-break {
+     background-color: white;
+     height: 2px;
+     margin: 20px 0;
+}
+
+.USERPOST {
+     background-color: white;
 }
