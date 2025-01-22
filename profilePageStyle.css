@@ -368,7 +368,18 @@ h3 {
 }
 
 #usercaption {
-     padding-top: 20px;
+     padding-top: 15px;
+}
+
+#posttags {
+     padding-top: 15px;
+     opacity: 50%;
+     font-size: 13px;
+}
+
+#posttags a {
+     color: white;
+     text-decoration: none;
 }
 
 #userphoto {
@@ -388,7 +399,7 @@ h3 {
      grid: 200px / auto auto auto auto; */
 
      display: flex;
-     justify-content: center;
+     justify-content: space-between;
 
      gap: 10px;
 }
@@ -404,8 +415,14 @@ h3 {
      border-radius: 15px;
 }
 
-.clickable-image:hover, .close:hover {
-     transform: scale(1.005);
+.clickable-image:hover {
+     transform: scale(1.008);
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close:hover {
+     transform: scale(1.05);
+     color: #7FB8C8;
      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -452,4 +469,24 @@ h3 {
      font-weight: bold;
      cursor: pointer;
      transition: transform 0.2s;
+}
+
+#postoptionrow {
+     display: flex;
+     align-items: center;
+     justify-content: flex-end;
+     gap: 8px;
+
+     height: auto;
+     width: auto;
+}
+
+.postoptionbutton {
+     background-color: transparent;
+}
+
+.postoptionbutton:hover {
+     background-color: transparent;
+     opacity: 80%;
+     transform: scale(1.08);
 }
