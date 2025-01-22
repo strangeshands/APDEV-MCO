@@ -1,0 +1,82 @@
+/* ---------- HTML SEGMENT ---------- */
+<header>
+     <div id="headercol1">
+          <img id="logo" src="resources/Logo.svg" />
+          <p id="appName"> Connectify </p>
+     </div>
+     <div id="headercol2">
+          <div class="searchBar">
+               <img src="resources/Trailing-Elements.svg" alt="Search Icon">
+               <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+          </div>
+     </div>
+</header>
+/* ---------- HTML SEGMENT ---------- */
+
+/* ---------- HEADER ---------- */
+#appName {
+     font-family: "JostBold";
+     color: #98D5DC;
+     font-size: 20px;
+     font-weight: 400;
+}
+
+header {
+     position: sticky;
+     top: 0;
+     background-color: black;
+     height: 80px;
+     width: 100%;
+     margin: 0;
+
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     gap: 20px;
+     padding: 0 30px 0 20px;
+
+     box-shadow: 2px 2px white;
+}
+
+#logo {
+     margin-right: 15px;
+}
+
+#headercol1 {
+     display: flex; 
+     justify-content: flex-start; 
+     align-items: center;
+}
+
+#headercol2 {
+     display: flex;
+     justify-content: flex-end; 
+     align-items: center;
+}
+
+.searchBar {
+     background-color: #ECE6F0;
+     color: #49454F;
+     
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+
+     height: 35px;
+     width: 400px;
+     max-width: 800px;
+
+     border-radius: 30px;
+}
+
+input[type="text"] {
+     background: none;
+     border: none;
+     width: 100%;
+     height: 100%;
+
+     color: #49454F;
+     font-size: 13px;
+     outline: none;
+}
+/* ---------- HEADER ---------- */
