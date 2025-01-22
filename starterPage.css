@@ -99,34 +99,7 @@ a {
      
 }
 
-.inputUsername {
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-
-     width: 100%;
-}
-
-.inputPassword {
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-
-     width: 100%;
-}
-
-.inputEmail {
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-
-     width: 100%;
-}
-
-.inputConfirmpass {
+.inputs {
      display: flex;
      flex-direction: column;
      justify-content: center;
