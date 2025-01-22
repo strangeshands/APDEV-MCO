@@ -2,4 +2,4 @@
 
 **/resources** : includes resource files (images, fonts, etc.)  
 **/templates** : includes template files for specific sections, items, etc.  
-               : use by copy-pasting
+&nbsp;&nbsp;&nbsp;: use by copy-pasting
