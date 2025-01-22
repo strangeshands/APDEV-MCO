@@ -55,6 +55,13 @@
                          <div id="caption"></div>
                     </div>
                          
+                    <!--<div id="userphotocontainer"> 
+                         <img src="resources/hamster.jpg" class="clickable-image" onclick="sendImageToParent(this)">
+                         <img src="resources/monkey.jpg" class="clickable-image" onclick="sendImageToParent(this)">
+                         <img src="resources/cat.jpg" class="clickable-image" onclick="sendImageToParent(this)">
+                         <img src="resources/grass.jpg" class="clickable-image" onclick="sendImageToParent(this)">
+                    </div>-->
+
                     <div id="userphotocontainer"> 
                          <img src="resources/hamster.jpg" class="clickable-image" onclick="openModal(this)">
                          <img src="resources/monkey.jpg" class="clickable-image" onclick="openModal(this)">
@@ -213,4 +220,11 @@
           modal.style.display = "none";
           };
      }
+
+     /*function sendImageToParent(imageElement) {
+          const imageSrc = imageElement.src;
+          window.parent.postMessage(
+               { type: "imageClick", src: imageSrc }, 
+               window.location.origin);
+     }*/
 </script>

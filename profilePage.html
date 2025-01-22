@@ -162,14 +162,6 @@
 
                                         <!-- POST PHOTO HERE -->
                                         <div id="userphoto">
-                                             <div id="imageModal" class="modal">
-                                                  <span class="close">&times;</span>
-                                                  <div id="userphotocontainer-modal"> 
-                                                       <img class="modal-content" id="modalImage">
-                                                  </div>
-                                                  <div id="caption"></div>
-                                             </div>
-                                                  
                                              <div id="userphotocontainer"> 
                                                   <img src="resources/hamster.jpg" class="clickable-image" onclick="openModal(this)">
                                                   <img src="resources/monkey.jpg" class="clickable-image" onclick="openModal(this)">
@@ -275,6 +267,15 @@
                     </div>
                </div>
           </div>
+
+          <!-- IMAGE MODAL -->
+          <div id="imageModal" class="modal">
+               <span class="close">&times;</span>
+               <div id="userphotocontainer-modal"> 
+                    <img class="modal-content" id="modalImage">
+               </div>
+               <div id="caption"></div>
+          </div>
      </body>
 </html>
 
@@ -285,6 +286,7 @@
           const modalImg = document.getElementById("modalImage");
           const captionText = document.getElementById("caption");
      
+          console.log("Image source:", image.src);
           modal.style.display = "block";
           modalImg.src = image.src;
      
@@ -292,6 +294,15 @@
                modal.style.display = "none";
           };
      }
+
+     /*window.addEventListener("message", (event) => {
+          if (event.origin !== window.location.origin) 
+               return;
+
+          const { type, src } = event.data;
+          if (type === "imageClick") 
+               openModal(src);
+     });*/
 
      function showContent(tabId, button) {
           const tabContents = document.querySelectorAll('.tab-content');
