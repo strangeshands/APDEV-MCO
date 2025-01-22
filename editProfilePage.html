@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title> [username] - Edit Profile </title>
+          <link rel="stylesheet" type="text/css" href="editProfile.css">
+          <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
+     </head>
+     <body>
+          <header>
+               <div id="headercol1">
+                    <img id="logo" src="resources/Logo.svg" />
+                    <p id="appName"> Connectify </p>
+               </div>
+               <div id="headercol2">
+                    <div class="searchBar">
+                         <img src="resources/Trailing-Elements.svg" alt="Search Icon">
+                         <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+                    </div>
+               </div>
+          </header>
+
+          <div id="base">
+
+               <!-- OPTIONS -->
+               <div id="col1" class="base-columns">
+                    <div class="col1-sub-container"> 
+                         <button class="discard">
+                              Discard Changes
+                         </button>
+
+                         <div id="button-brk" class="inviBrk"></div>
+
+                         <button class="save">
+                              Save
+                         </button>
+                    </div>
+
+                    <div class="col1-sub-container"> 
+                         <button class="delete-account">
+                              Delete Account
+                         </button>
+                    </div>
+               </div>
+
+               <div class="column-brk"></div>
+
+               <div id="col2" class="base-columns">
+                    <div class="col2-row">
+                         <div class="col1-row1-col">
+                              <div id="pfpcontainer">
+                                   <div id="pfpPic">
+                                        <img src="resources/pfpSample.jpg" />
+                                   </div>
+                              </div>
+
+                              <button class="change-photo">
+                                   Change Profile Photo
+                              </button>
+                         </div>
+
+                         <div class="col1-row1-col">
+                              <div id="profileHeader">
+                                   <img src="resources/headerSample.jpg" />
+                              </div>
+                              <button class="change-photo">
+                                   Change Header
+                              </button>
+                         </div>
+                    </div>
+
+                    <div id="input-details" class="col2-row">
+                         <div id="change-username" class="input-fields">
+                              <p class="input-label"> Username </p>
+                              <input type="text" id="username" name="username" placeholder="New username">
+                         </div>
+
+                         <div id="change-display-name" class="input-fields">
+                              <p class="input-label"> Display Name </p>
+                              <input type="text" id="display-name" name="display-name" placeholder="New display name">
+                         </div>
+
+                         <div id="change-bio" class="input-fields">
+                              <p class="input-label"> Bio </p>
+                              <textarea id="bio" name="bio" rows="5" cols="80" placeholder="New bio..."></textarea>
+                         </div>
+
+                         <div id="change-email" class="input-fields">
+                              <p class="input-label"> Email </p>
+                              <input type="email" id="email" name="email" placeholder="New email">
+                         </div>
+
+                         <div id="change-password" class="input-fields">
+                              <p class="input-label"> Password </p>
+                              <input type="password" id="password" name="password" placeholder="New password">
+                         </div>
+
+                         <div id="confirm-password" class="input-fields">
+                              <p class="input-label"> Confirm Password </p>
+                              <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password">
+                         </div>
+                    </div>
+               </div>
+               
+          </div>
+     </body>
+</html>
