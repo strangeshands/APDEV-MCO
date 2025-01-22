@@ -14,33 +14,16 @@
      font-family: "Inter"; 
 }
 
-html, body {
-     min-width: 1000px; 
-     overflow-x: auto;
+body {
+     padding-right: 20px;
+     color: white;
+     height: 100%;  /* Full height */
 }
 
 .inviBrk {
      height: 5px;
 }
 /* ---------- GENERAL ---------- */
-
-body {
-     background-color: black;
-}
-
-iframe {
-     width: 100%;
-     height: 100vh;
-     border: none;
-}
-
-.tab-content {
-     width:100%;
-}
-
-#commentstab, #bookmarkstab {
-     padding: 0px;
-}
 
 /* ---------- BUTTONS ---------- */
 button {
@@ -449,8 +432,8 @@ h3 {
      left: 0;
      top: 0;
 
-     width: 100%;
-     height: 100%;
+     width: 100vw;
+     height: 100vh;
 
      overflow: auto;
      background-color: rgba(0, 0, 0, 0.8); 
