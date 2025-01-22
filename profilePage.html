@@ -109,23 +109,16 @@
                     <div id="col2">
                          <!-- TAB SELECTION ROW -->
                          <div id="tabrow"> 
-                              <button class="tab">
-                                   Posts
-                              </button>
-                              <button class="tab">
-                                   Comments
-                              </button>
-                              <button class="tab">
-                                   Bookmarks
-                              </button>
-                              <button class="tab">
-                                   Likes
-                              </button>
+                              <button class="tab active" onclick="showContent('poststab', this)">Posts</button>
+                              <button class="tab" onclick="showContent('commentstab', this)">Comments</button>
+                              <button class="tab" onclick="showContent('bookmarks', this)">Bookmarks</button>
+                              <button class="tab" onclick="showContent('likes', this)">Likes</button>
                          </div>
 
                          <!-- SPECIFIC TAB -->
                          <div class="col2-sub-container">
-                              <div id="poststab">
+                              <!-- POSTS TAB -->
+                              <div id="poststab" class="tab-content">
 
                                    <!-- SET OF USER POST -->
                                    <div class="USERPOST"> 
@@ -263,7 +256,9 @@
                                         <div class="post-break"></div>
                                    </div>
                                    <!-- SET OF USER POST -->
-
+                              </div>
+                              <div id="commentstab" class="tab-content">
+                                   comments here
                               </div>
                          </div>
                     </div>
@@ -285,5 +280,28 @@
           modal.onclick = function () {
           modal.style.display = "none";
           };
+     }
+
+     function showContent(tabId, button) {
+          // Hide all tab content
+          const tabContents = document.querySelectorAll('.tab-content');
+          tabContents.forEach(content => {
+               content.style.display = 'none'; // Hide all tabs
+          });
+
+          // Remove active class from all buttons
+          const tabButtons = document.querySelectorAll('.tab');
+          tabButtons.forEach(tab => {
+               tab.classList.remove('active');
+          });
+
+          // Show the selected tab content
+          const selectedTabContent = document.getElementById(tabId);
+          if (selectedTabContent) {
+               selectedTabContent.style.display = 'block'; // Show only the active tab
+          }
+
+          // Add active class to the clicked button
+          button.classList.add('active');
      }
 </script>
