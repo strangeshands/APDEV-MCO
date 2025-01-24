@@ -137,6 +137,8 @@ input[type="text"] {
      box-sizing: border-box;
 }
 
+/* ---------- NAV BAR ---------- */
+
 .navBar {
      display: flex;
      flex-direction: column;
@@ -300,7 +302,7 @@ input[type="text"] {
 
 }
 
-.viewProfile, .editProfile {
+.navBarButtons {
      font-family: "Inter";
      font-size: 16px;
      font-weight: Bold;
@@ -316,37 +318,16 @@ input[type="text"] {
      width: 100%;
 }
 
-.viewProfile:hover, .editProfile:hover {
-     color: #16133B;
-     transform: scale(1.02);
-}
-
-.viewProfile:active, .editProfile:active {
-     transform: scale(0.95); 
-}
-
-.logOut {
-     font-family: "Inter";
-     font-size: 16px;
-     font-weight: Bold;
+#logOut {
      color: #DF0606;
-     background-color: #1D1E1F;
-
-     display: flex;
-     justify-content: flex-start;
-     align-items: center;
-
-     gap: 10px;
-
-     width: 100%;
 }
 
-.logOut:hover {
+.navBarButtons:hover {
      color: #16133B;
      transform: scale(1.02);
 }
 
-.logOut:active {
+.navBarButtons:active {
      transform: scale(0.95); 
 }
 
@@ -467,6 +448,10 @@ input[type="text"] {
 .userPost:active {
      transform: scale(0.95); 
 }
+
+/* ---------- NAV BAR ---------- */
+
+/* ---------- POST FEED ---------- */
 
 .timeline {
      display: flex;
@@ -740,3 +725,5 @@ input[type="text"] {
      box-sizing: border-box;
      height: 1px;
 }
+
+/* ---------- POST FEED ---------- */
