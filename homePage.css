@@ -711,7 +711,7 @@ input[type="text"] {
 }
 
 .postInteractions:active {
-     transform: scale(0.95); 
+     transform: scale(0.25); 
 }
 
 .postDivider {
