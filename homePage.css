@@ -547,10 +547,34 @@ input[type="text"] {
      height: 40px;
 }
 
+.usernameAndTime {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: flex-start;
+
+     padding: 0px;
+     gap: 4px;
+
+     width: 100%;
+}
+
 .username {
      font-size: 18px;
      font-weight: Bold;
      color: #E4F3F6;
+
+     margin: 0px;
+
+     width: 100%;
+}
+
+.timePosted {
+     font-size: 14px;
+     font-style: italic;
+     color: #E4F3F6;
+
+     margin: 0px;
 
      width: 100%;
 }
