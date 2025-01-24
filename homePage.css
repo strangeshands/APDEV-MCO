@@ -599,7 +599,55 @@ input[type="text"] {
      border-radius: 12px;
 }
 
-.postAnalytics {
+.tagsAndAnalytics {
+     display: flex;
+     justify-content: flex-start;
+     align-items: flex-start;
+
+     padding: 0px 16px 0px 10px;
+     gap: 32px;
+
+     width: 100%;
+     box-sizing: border-box;
+}
+
+.tags {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: flex-start;
+     align-items: flex-start;
+
+     gap: 12px;
+
+     width: 100%;
+     height: auto;
+}
+
+.tag {
+     background-color: #98D5DC;
+     font-size: 14px;
+     font-weight: Bold;
+     color: #030909;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 5px 10px;
+     
+     width: auto;
+     height: auto;
+}
+
+.tag:hover {
+     transform: scale(1.05);
+}
+
+.tag:active {
+     transform: scale(0.95); 
+}
+
+.analytics {
      display: flex;
      justify-content: flex-end;
      align-items: center;
