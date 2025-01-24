@@ -606,7 +606,8 @@ input[type="text"] {
      font-weight: Bold;
      color: #E4F3F6;
 
-     margin-bottom: 0px;
+     margin: 0px;
+
 }
 
 .postText {
@@ -656,28 +657,25 @@ input[type="text"] {
      height: auto;
 }
 
-.tag {
-     background-color: #98D5DC;
-     font-size: 14px;
-     font-weight: Bold;
-     color: #030909;
+.posttags {
 
      display: flex;
-     justify-content: center;
-     align-items: center;
+     flex-wrap: wrap;
+     justify-content: flex-start;
+     align-items: flex-start;
 
-     padding: 5px 10px;
-     
-     width: auto;
+     padding: 12px;
+     gap: 12px;
+
+     width: 100%;
      height: auto;
+
+     opacity: 50%;
 }
 
-.tag:hover {
-     transform: scale(1.05);
-}
-
-.tag:active {
-     transform: scale(0.95); 
+.posttags a {
+     color: white;
+     text-decoration: none;
 }
 
 .analytics {
