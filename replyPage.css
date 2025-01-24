@@ -120,6 +120,12 @@ main {
     margin-bottom: 24px;
 }
 
+.replyThread {
+    margin-left: 48px;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    padding-left: 16px;
+}
+
 .postHeader {
     display: flex;
     justify-content: space-between;
@@ -146,41 +152,55 @@ main {
 .userDetails {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    gap: -2px;
 }
 
 .username {
     font-weight: 500;
     line-height: 40px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
 
+.datePosted {
+    font-size: 9px;
+    font-style: italic;
+    color: #ccc;
 }
 
 .placeholderContent {
     background-color: #333;
     width: 100%;
-    height: 300px;
+    height: 900px;
     border-radius: 8px;
     margin: 16px 0;
 }
 
-.postActions, .commentActions {
+
+
+/* ------ editing ilalim ------ */
+.charLim{
     display: flex;
     justify-content: flex-end;
-    align-items: center;
-    gap: 8px;
-    margin-top: 16px;
+    color: #49454F;
+    font-size: 16px;
 }
 
-.datePosted {
-    font-size: 13px;
-    flex: 1;
-    color: rgba(255, 255, 255, 0.7);
-}
 
 .horizontalBar {
     height: 1px;
     background-color: rgba(255, 255, 255, 0.1);
     margin: 16px 0;
+}
+
+.postActions{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
 }
 
 .actionButton {
@@ -196,28 +216,15 @@ main {
     opacity: 1;
 }
 
-.comments {
-    margin-top: 32px;
-}
-
-.comment {
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.replyTo {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 14px;
-    margin: 4px 0;
-}
-
-.commentText {
-    margin-top: 8px;
-}
-
-.commentActions {
-    margin-top: 12px;
-    margin-left: 52px;
-    display: flex;
-    gap: 16px;
+.commentButton {
+    margin-left: auto;
+    background-color: #98D5DC;
+    color: #030909;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 100px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap; 
+    flex-shrink: 0; 
 }
