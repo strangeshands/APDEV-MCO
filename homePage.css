@@ -696,6 +696,16 @@ input[type="text"] {
      padding: 2px;
 }
 
+.postDivider {
+     background-color: #E4F3F6;
+
+     margin: 10px;
+
+     width: 100%;
+     box-sizing: border-box;
+     height: 1px;
+}
+
 .followingTab {
      display: flex;
      flex-direction: column;
