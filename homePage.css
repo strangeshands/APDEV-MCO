@@ -580,6 +580,9 @@ input[type="text"] {
 }
 
 .optionsButton {
+     background-color: #030909;
+     color: #E4F3F6;
+
      display: flex;
      justify-content: center;
      align-items: center;
@@ -588,7 +591,15 @@ input[type="text"] {
 
      width: 5px;
      height: 20px;
-     color: #E4F3F6;
+}
+
+.optionsButton:hover {
+     background-color: #030909;
+     transform: scale(1.05);
+}
+
+.optionsButton:active {
+     transform: scale(0.95); 
 }
 
 .postContent {
@@ -628,7 +639,7 @@ input[type="text"] {
      justify-content: flex-start;
      align-items: flex-start;
 
-     padding: 0px 16px 0px 10px;
+     padding: 0px 10px;
      gap: 32px;
 
      width: 100%;
@@ -676,8 +687,8 @@ input[type="text"] {
      justify-content: flex-end;
      align-items: center;
 
-     padding: 0px 16px;
-     gap: 32px;
+     padding: 0px;
+     gap: 20px;
 
      width: 100%;
      box-sizing: border-box;
@@ -688,12 +699,23 @@ input[type="text"] {
     justify-content: space-between;
     align-items: center;
 
-    width: 84px;
+    gap: 12px;
+
+    width: auto;
     height: auto;
 }
 
-.comments {
-     padding: 2px;
+.postInteractions {
+     background-color: #030909;
+}
+
+.postInteractions:hover {
+     background-color: #030909;
+     transform: scale(1.05);
+}
+
+.postInteractions:active {
+     transform: scale(0.95); 
 }
 
 .postDivider {
