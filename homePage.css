@@ -423,6 +423,7 @@ input[type="text"] {
 
      width: 100%;
 
+     background-color: #1D1E1F;
 }
 
 .userPostImage {
@@ -436,6 +437,8 @@ input[type="text"] {
      font-weight: Bold;
      color: #E4F3F6;
 
+     text-align: start;
+
      padding: 0px;
      margin: 0px;
 
@@ -447,11 +450,22 @@ input[type="text"] {
      font-size: 16px;
      color: #E4F3F6;
 
+     text-align: start;
+
      padding: 0px;
      margin: 0px;
 
      width: 100%;
      height: auto;
+}
+
+.userPost:hover .userPostTitle {
+     color: #16133B;
+     transform: scale(1.02);
+}
+
+.userPost:active {
+     transform: scale(0.95); 
 }
 
 .timeline {
