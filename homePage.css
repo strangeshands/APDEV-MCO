@@ -144,7 +144,7 @@ input[type="text"] {
      align-items: center;
 
      padding: 10px;
-     gap: 20px;
+     gap: 8px;
      border-radius: 12px;
 
      width: 100%;
@@ -270,6 +270,16 @@ input[type="text"] {
      width: 100%;
 }
 
+.navBarDivider {
+     background-color: #E4F3F6;
+
+     margin: 0px 0px 5px 0px;
+
+     width: 95%;
+     box-sizing: border-box;
+     height: 1px;
+}
+
 .registeredOptions {
      display: flex;
      flex-direction: column;
@@ -280,9 +290,9 @@ input[type="text"] {
 
 }
 
-.viewPosts, .viewComments, .editProfile {
+.viewProfile, .editProfile {
      font-family: "Inter";
-     font-size: 20;
+     font-size: 24;
      font-weight: Bold;
      color: #E4F3F6;
      background-color: #1D1E1F;
@@ -296,37 +306,18 @@ input[type="text"] {
      width: 100%;
 }
 
-.viewPosts:hover, .viewComments:hover, .editProfile:hover {
+.viewProfile:hover, .editProfile:hover {
      color: #16133B;
      transform: scale(1.02);
 }
 
-.viewPosts:active, .viewComments:active, .editProfile:active {
+.viewProfile:active, .editProfile:active {
      transform: scale(0.95); 
-}
-
-.navBarDivider {
-     background-color: #E4F3F6;
-
-     margin: 10px;
-
-     width: 95%;
-     box-sizing: border-box;
-     height: 1px;
-}
-
-.otherOptions {
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: flex-start;
-
-     width: 100%;
 }
 
 .logOut {
      font-family: "Inter";
-     font-size: 20;
+     font-size: 24;
      font-weight: Bold;
      color: #DF0606;
      background-color: #1D1E1F;
