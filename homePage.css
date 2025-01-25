@@ -96,6 +96,9 @@ header {
      display: flex;
      justify-content: flex-end; 
      align-items: center;
+
+     /* IF USER IS NOT LOGGED IN */
+     gap: 12px;
 }
 
 .searchBar {
@@ -122,6 +125,30 @@ input[type="text"] {
      color: #49454F;
      font-size: 13px;
      outline: none;
+}
+
+#logInButton {
+     background-color: #98D5DC;
+     font-size: 16px;
+     font-weight: Bold;
+     
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 8px 24px;
+
+     width: auto;
+     height: auto;
+}
+
+#logInButton:hover {
+     background-color: #7FB8C8;
+     transform: scale(1.02);
+}
+
+#logInButton:active {
+     transform: scale(0.95); 
 }
 /* ---------- HEADER ---------- */
 
@@ -683,8 +710,7 @@ input[type="text"] {
 .actionButton:hover {
      transform: scale(1.05);
 }
- 
- 
+
 .actionButton:active {
      transform: scale(0.75); 
 }
