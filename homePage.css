@@ -453,6 +453,10 @@ input[type="text"] {
 
      width: 100%;
      height: auto;
+
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
 }
 
 .userComment {
@@ -466,6 +470,10 @@ input[type="text"] {
 
      width: 100%;
      height: auto;
+
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
 }
 
 .userPost:hover {
