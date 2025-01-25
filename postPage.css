@@ -4,7 +4,7 @@
 }
 
 @font-face {
-    font-family: 'Jost';
+    font-family: 'JostBold';
     src: url('resources/Jost-Bold.ttf');
 }
 
@@ -18,12 +18,64 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 0 32px;
     height: 88px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    gap: 79px;
+    box-shadow: 2px 2px white;
+    position: relative;
+}
+
+.headerWrapper {
+    max-width: 800px; 
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerSpace {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-grow: 1;
+}
+
+.searchBar {
+    background-color: #ECE6F0;
+    color: #49454F;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 80px;
+    height: 35px;
+    width: 100%;
+    border-radius: 30px;
+    max-width: 100%;
+}
+
+input[type="text"] {
+    background: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+
+    color: #49454F;
+    font-size: 13px;
+    outline: none;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
 }
 
 .logoAndBrandName {
@@ -34,43 +86,14 @@ header {
 }
 
 .brandName {
+    font-family: "JostBold";
     color: #98D5DC;
-    font-family: "Jost";
-    font-size: 16px;
-    font-weight: bold;
-    white-space: nowrap; 
-}
-
-.headerSpace {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    max-width: 1000px;
-    width: 100%;
-}
-
-.searchBar {
-    background-color: #ECE6F0;
-    display: flex;
-    align-items: center;
-    padding: 0 16px;
-    height: 48px;
-    border-radius: 28px;
-    width: 100%;
+    font-size: 20px;
+    font-weight: 400;
 }
 
 .searchBar img {
     margin-right: 8px;
-}
-
-.searchBar input {
-    background: none;
-    border: none;
-    width: 100%;
-    height: 100%;
-    color: #49454F;
-    font-size: 16px;
-    outline: none;
 }
 
 .logInButton {
@@ -79,16 +102,10 @@ header {
     padding: 8px 24px;
     border: none;
     border-radius: 100px;
-    font-weight: 500;
+    font-weight: bold;
     cursor: pointer;
     white-space: nowrap; 
     flex-shrink: 0; 
-}
-
-main {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 24px;
 }
 
 .goBackLink {
@@ -130,6 +147,7 @@ main {
 .userInfo {
     display: flex;
     gap: 12px;
+    align-items: center;
 }
 
 .avatar {
@@ -141,6 +159,7 @@ main {
     align-items: center;
     justify-content: center;
     font-weight: bold;
+    min-width: 40px;
 }
 
 .userDetails {
@@ -150,9 +169,52 @@ main {
 }
 
 .username {
-    font-weight: 500;
-    line-height: 40px;
+    font-weight: bold;
+    line-height: 25px;
+}
 
+.time {
+    font-size: 12px;
+    font-style: italic;
+}
+
+.optionsButton {
+    background-color: #030909;
+    color: #E4F3F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+    width: 5px;
+    height: 20px;
+}
+
+#postOptions {
+    background-color: #1A1A1A;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+    opacity: 50%;
+    padding: 10px 0 20px;
+}
+
+.tags a {
+    color: white;
+    text-decoration: none;
+}
+
+.postTitle {
+    font-size: 24px;
+    font-weight: Bold;
+    color: #E4F3F6;
+    padding-bottom: 30px;
 }
 
 .placeholderContent {
@@ -171,16 +233,9 @@ main {
     margin-top: 16px;
 }
 
-.datePosted {
-    font-size: 13px;
-    flex: 1;
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.horizontalBar {
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 16px 0;
+.separator {
+    border-left: 2px solid white;
+    height: 35px;
 }
 
 .actionButton {
@@ -188,12 +243,32 @@ main {
     border: none;
     padding: 8px;
     cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .actionButton:hover {
-    opacity: 1;
+    transform: scale(1.05);
+}
+
+
+.actionButton:active {
+    transform: scale(0.95); 
+}
+
+.actionButton .counter {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 0;
+}
+
+.horizontalBar {
+    height: 1px;
+    box-shadow: 2px 2px white;
+    margin: 16px 0;
 }
 
 .comments {
@@ -202,7 +277,7 @@ main {
 
 .comment {
     padding: 16px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .replyTo {
@@ -212,12 +287,60 @@ main {
 }
 
 .commentText {
-    margin-top: 8px;
+    padding: 10px 20px;
 }
 
 .commentActions {
     margin-top: 12px;
     margin-left: 52px;
     display: flex;
-    gap: 16px;
+}
+
+.nestedCommentsContainer {
+    position: relative;
+    margin-left: 52px;
+}
+
+.nestedCommentTrigger {
+    display: flex;
+    align-items: center;
+    margin: 12px 0;
+    cursor: pointer;
+}
+
+.nestedCommentLine {
+    width: 24px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    margin-right: 12px;
+}
+
+.viewRepliesButton {
+    background: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.viewRepliesButton:hover {
+    color: #98D5DC;
+}
+
+.nestedComments {
+    display: none; 
+}
+
+.comment.nested-level-1 {
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    padding-left: 16px;
+}
+
+.comment.nested-level-2 {
+    border-left: 2px solid rgba(255, 255, 255, 0.05);
+    padding-left: 12px;
+}
+
+.commentActions.nested {
+    margin-left: 52px;
 }
