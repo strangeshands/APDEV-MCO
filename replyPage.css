@@ -73,18 +73,6 @@ header {
     outline: none;
 }
 
-.logInButton {
-    background-color: #98D5DC;
-    color: #030909;
-    padding: 8px 24px;
-    border: none;
-    border-radius: 100px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap; 
-    flex-shrink: 0; 
-}
-
 main {
     max-width: 800px;
     margin: 0 auto;
@@ -113,7 +101,7 @@ main {
     font-weight: bold;
 }
 
-.post {
+.postSpace {
     background-color: #1A1A1A;
     border-radius: 16px;
     padding: 24px;
@@ -121,9 +109,15 @@ main {
 }
 
 .replyThread {
-    margin-left: 48px;
-    border-left: 2px solid rgba(255, 255, 255, 0.1);
-    padding-left: 16px;
+    position: relative;
+    padding-left: 32px;
+    margin-left: 30px;
+    margin-top: 30px;
+    border-left: 2px solid rgba(255, 255, 255, 0.2); /* Vertical line */
+}
+
+.space {
+    margin-top: 50px;
 }
 
 .postHeader {
@@ -135,6 +129,7 @@ main {
 
 .userInfo {
     display: flex;
+    align-items: center;
     gap: 12px;
 }
 
@@ -153,32 +148,47 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: -2px;
 }
 
 .username {
     font-weight: 500;
     line-height: 40px;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+    color: #98D5DC;
 }
 
 .datePosted {
-    font-size: 9px;
+    font-size: 12px;
     font-style: italic;
-    color: #ccc;
+    color: #9FA1A1;
+    margin-left: -6px;
 }
 
 .placeholderContent {
     background-color: #333;
     width: 100%;
-    height: 900px;
+    height: 200px;
     border-radius: 8px;
     margin: 16px 0;
 }
 
+.replyPrompt {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 24px;
+}
 
+.prompt {
+    color: #9FA1A1;
+}
+
+.repliedUser {
+    color: #98D5DC;
+}
 
 /* ------ editing ilalim ------ */
 .charLim{

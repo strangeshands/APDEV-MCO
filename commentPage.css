@@ -73,18 +73,6 @@ header {
     outline: none;
 }
 
-.logInButton {
-    background-color: #98D5DC;
-    color: #030909;
-    padding: 8px 24px;
-    border: none;
-    border-radius: 100px;
-    font-weight: 500;
-    cursor: pointer;
-    white-space: nowrap; 
-    flex-shrink: 0; 
-}
-
 main {
     max-width: 800px;
     margin: 0 auto;
@@ -152,6 +140,7 @@ main {
 .username {
     font-weight: 500;
     line-height: 40px;
+    color: #98D5DC;
 
 }
 

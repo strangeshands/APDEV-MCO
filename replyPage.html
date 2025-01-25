@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Connectify - Comment</title>
+        <title>Connectify - Reply</title>
         <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
-        <link rel="stylesheet" type="text/css" href="commentPage.css">
+        <link rel="stylesheet" type="text/css" href="replyPage.css">
     </head>
 
     <body>
@@ -22,7 +22,6 @@
                     <img src="resources/Trailing-Elements.svg" alt="Search Icon">
                     <input type="text" placeholder="Search">
                 </div>
-                <button class="logInButton">Log In</button>
             </div>
         </header>
 
@@ -33,30 +32,16 @@
                 <span class="back">Back</span>
             </div>
 
-            <div class="origPost">
-                <div class="postHeader">
-                    <div class="OGuserInfo">
-                        <div class="avatar">C</div>
-                        <div class="userDetails">
-                            <div class="username">Username</div>
-                            <div class="datePosted">2 weeks ago</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="postText">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac tortor sed velit luctus malesuada. Aenean suscipit, arcu et pulvinar tincidunt, lorem felis tempor quam, sed euismod turpis neque et lorem. Fusce id libero ut nulla fringilla interdum. Curabitur posuere metus non nibh.
-                </div>
-                <div class="postContent">
-                    <div class="placeholderContent"></div>
-                </div>
-            </div>
-
-            <div class="replyThread">
-                <div class="replyPost">
+            <div class="postSpace">
+            
+                <div class="origPost">
                     <div class="postHeader">
                         <div class="userInfo">
                             <div class="avatar">C</div>
-                            <div class="username">Username</div>
+                                <div class="userDetails">
+                                    <div class="username">Username</div>
+                                    <div class="datePosted">2 weeks ago</div>
+                                </div>
                         </div>
                     </div>
                     <div class="postText">
@@ -65,12 +50,34 @@
                     <div class="postContent">
                         <div class="placeholderContent"></div>
                     </div>
-                    <div class="charLim">0/300</div>
-                    <div class="horizontalBar"></div>
-                    <div class="postActions">
-                        <button class="actionButton"><img src="resources/ImageAdd.svg" alt="Like"></button>
-                        <button class="commentButton">Comment</button>
+                </div>
+
+                <div class="replyThread">
+                    <div class="replyPost">
+                        <div class="postHeader">
+                            <div class="userInfo">
+                                <div class="avatar">C</div>
+                                <div class="username">Username</div>
+                            </div>
+                        </div>
+                        <div class="replyPrompt">
+                            <div class="prompt">replying to</div>
+                            <div class="repliedUser">@username</div>
+                        </div>
+                        <div class="postText">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac tortor sed velit luctus malesuada. Aenean suscipit, arcu et pulvinar tincidunt, lorem felis tempor quam, sed euismod turpis neque et lorem. Fusce id libero ut nulla fringilla interdum. Curabitur posuere metus non nibh.
+                        </div>
+                        <div class="postContent">
+                            <div class="placeholderContent"></div>
+                        </div>
+                        <div class="charLim">0/300</div>
                     </div>
+                </div>  
+
+                <div class="horizontalBar"></div>
+                <div class="postActions">
+                    <button class="actionButton"><img src="resources/ImageAdd.svg" alt="Like"></button>
+                    <button class="commentButton">Comment</button>
                 </div>
             </div>
     </body>
