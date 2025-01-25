@@ -195,24 +195,21 @@
                               </div>
                          </div>
                          
-                         <!-- INTERACTIONS -->
-                         <div class="interactions">
-                              <div class="hearts">
-                                   <button class="postInteractions heart" onclick="iconClicked(this, 'heart')">
-                                        <img src="resources/Heart.svg" class="postInteractionsIcon" alt="Heart">
-                                   </button>
-                                   <img src="resources/Line.svg" alt="Line">
-                                   <button class="postInteractions heartCrack" onclick="iconClicked(this, 'heartCrack')">
-                                        <img src="resources/HeartCrack.svg" class="postInteractionsIcon" alt="HeartCrack">
-                                   </button>
-                              </div>
-                              <button class="postInteractions comments" onclick="window.location.href='postPage.html'">
-                                   <img src="resources/Comments.svg" class="postInteractionsIcon" alt="Comments">
+                         <!-- ACTION BUTTONS -->
+                         <div class="commentActions">
+                              <button class="actionButton">
+                                  <img src="resources/Heart.svg" alt="Like">
+                                  <span class="counter">42</span>
                               </button>
-                              <button class="postInteractions bookmark" onclick="iconClicked(this, 'bookmark')">
-                                   <img src="resources/Bookmark.svg" class="postInteractionsIcon" alt="Bookmark">
+                              <div class="separator"></div>
+                              <button class="actionButton">
+                                  <img src="resources/HeartCrack.svg" alt="Dislike">
+                                  <span class="counter">8</span>
                               </button>
+                              <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                              <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                          </div>
+
                     </div>
 
                     <div class="postDivider"></div>
@@ -254,23 +251,19 @@
                               </div>
                          </div>
                          
-                         <!-- INTERACTIONS -->
-                         <div class="interactions">
-                              <div class="hearts">
-                                   <button class="postInteractions heart" onclick="iconClicked(this, 'heart')">
-                                        <img src="resources/Heart.svg" class="postInteractionsIcon" alt="Heart">
-                                   </button>
-                                   <img src="resources/Line.svg" alt="Line">
-                                   <button class="postInteractions heartCrack" onclick="iconClicked(this, 'heartCrack')">
-                                        <img src="resources/HeartCrack.svg" class="postInteractionsIcon" alt="HeartCrack">
-                                   </button>
-                              </div>
-                              <button class="postInteractions comments" onclick="window.location.href='postPage.html'">
-                                   <img src="resources/Comments.svg" class="postInteractionsIcon" alt="Comments">
+                         <!-- ACTION BUTTONS -->
+                         <div class="commentActions">
+                              <button class="actionButton">
+                                  <img src="resources/Heart.svg" alt="Like">
+                                  <span class="counter">42</span>
                               </button>
-                              <button class="postInteractions bookmark" onclick="iconClicked(this, 'bookmark')">
-                                   <img src="resources/Bookmark.svg" class="postInteractionsIcon" alt="Bookmark">
+                              <div class="separator"></div>
+                              <button class="actionButton">
+                                  <img src="resources/HeartCrack.svg" alt="Dislike">
+                                  <span class="counter">8</span>
                               </button>
+                              <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                              <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                          </div>
                          
                     </div>
@@ -316,76 +309,121 @@
                               </div>
                          </div>
                           
-                         <!-- INTERACTIONS -->
-                         <div class="interactions">
-                              <div class="hearts">
-                                   <button class="postInteractions heart" onclick="iconClicked(this, 'heart')">
-                                        <img src="resources/Heart.svg" class="postInteractionsIcon" alt="Heart">
-                                   </button>
-                                   <img src="resources/Line.svg" alt="Line">
-                                   <button class="postInteractions heartCrack" onclick="iconClicked(this, 'heartCrack')">
-                                        <img src="resources/HeartCrack.svg" class="postInteractionsIcon" alt="HeartCrack">
-                                   </button>
-                              </div>
-                              <button class="postInteractions comments" onclick="window.location.href='postPage.html'">
-                                   <img src="resources/Comments.svg" class="postInteractionsIcon" alt="Comments">
+                         <!-- ACTION BUTTONS -->
+                         <div class="commentActions">
+                              <button class="actionButton">
+                                  <img src="resources/Heart.svg" alt="Like">
+                                  <span class="counter">42</span>
                               </button>
-                              <button class="postInteractions bookmark" onclick="iconClicked(this, 'bookmark')">
-                                   <img src="resources/Bookmark.svg" class="postInteractionsIcon" alt="Bookmark">
+                              <div class="separator"></div>
+                              <button class="actionButton">
+                                  <img src="resources/HeartCrack.svg" alt="Dislike">
+                                  <span class="counter">8</span>
                               </button>
+                              <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                              <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                          </div>
+
                     </div>
 
                     <script>
+
                          function iconClicked(button, iconType) {
-                              var img = button.querySelector('.postInteractionsIcon'); // Gets the icon of the button
+                              // Get the image within the button
+                              const img = button.querySelector('img');
+                              
+                              // Get the counter element if it exists
+                              const counter = button.querySelector('.counter');
 
-                              if (iconType === 'heart') {
-
-                                   // Changes the image source when the button is clicked
-                                   if (img.src.includes('resources/Heart.svg')) {
-                                        img.src = 'resources/Heart-Clicked.svg';
-                                   } else {
-                                        img.src = 'resources/Heart.svg';  // Changes it back to the first image
+                              // Find the parent post or comment
+                              const post = button.closest('.post, .comment');
+                              
+                              // Path for different icon types
+                              const iconPaths = {
+                                   'heart': {
+                                   default: 'resources/Heart.svg',
+                                   clicked: 'resources/Heart-Clicked.svg'
+                                   },
+                                   'heartCrack': {
+                                   default: 'resources/HeartCrack.svg',
+                                   clicked: 'resources/HeartCrack-Clicked.svg'
+                                   },
+                                   'bookmark': {
+                                   default: 'resources/Bookmark.svg',
+                                   clicked: 'resources/Bookmark-Clicked.svg'
                                    }
+                              };
 
-                                   // If opposing heart is selected, change back to normal
-                                   var post = button.closest('.post'); // Get the parent container
-                                   var heartCrackImg = post.querySelector('.postInteractions.heartCrack .postInteractionsIcon');
-                                   if (heartCrackImg) {
-                                        if (heartCrackImg.src.includes('resources/HeartCrack-Clicked.svg')) {
-                                             heartCrackImg.src = 'resources/HeartCrack.svg';
+                              if (iconType === 'heart' || iconType === 'heartCrack') {
+                                   // Find like and dislike buttons
+                                   const likeButton = post.querySelector('.actionButton img[src*="Heart"]').closest('.actionButton');
+                                   const dislikeButton = post.querySelector('.actionButton img[src*="HeartCrack"]').closest('.actionButton');
+                                   
+                                   // Get like and dislike counters
+                                   const likeCounter = likeButton.querySelector('.counter');
+                                   const dislikeCounter = dislikeButton.querySelector('.counter');
+
+                                   // Determine current button details
+                                   const currentButton = iconType === 'heart' ? likeButton : dislikeButton;
+                                   const otherButton = iconType === 'heart' ? dislikeButton : likeButton;
+                                   const currentImg = currentButton.querySelector('img');
+                                   const otherImg = otherButton.querySelector('img');
+                                   const currentCounter = iconType === 'heart' ? likeCounter : dislikeCounter;
+                                   const otherCounter = iconType === 'heart' ? dislikeCounter : likeCounter;
+
+                                   // Normalize the current image's src path to ensure comparison works
+                                   const currentSrc = currentImg.src.split('/').pop(); // Extract only the filename
+                                   const isCurrentlyClicked = currentSrc === iconPaths[iconType].clicked.split('/').pop();
+
+                                   // Check the other button's state
+                                   const otherSrc = otherImg.src.split('/').pop();
+                                   const isOtherClicked = otherSrc === iconPaths[iconType === 'heart' ? 'heartCrack' : 'heart'].clicked.split('/').pop();
+
+                                   // Toggle current button state
+                                   if (isCurrentlyClicked) {
+                                        // If already clicked, reset (unlike/undislike)
+                                        currentImg.src = iconPaths[iconType].default;
+                                        currentCounter.textContent = Math.max(0, parseInt(currentCounter.textContent) - 1);
+                                   } else {
+                                        // If not clicked, set current button to clicked state
+                                        currentImg.src = iconPaths[iconType].clicked;
+                                        currentCounter.textContent = parseInt(currentCounter.textContent) + 1;
+
+                                        // If the other button was clicked, reset it
+                                        if (isOtherClicked) {
+                                             otherImg.src = iconPaths[iconType === 'heart' ? 'heartCrack' : 'heart'].default;
+                                             otherCounter.textContent = Math.max(0, parseInt(otherCounter.textContent) - 1);
                                         }
                                    }
-                              }
-                              else if (iconType === 'heartCrack') {
+                              } else if (iconType === 'bookmark') {
+                                   // Bookmark button logic
+                                   const currentSrc = img.src.split('/').pop(); // Extract only the filename
+                                   const isCurrentlyBookmarked = currentSrc === iconPaths.bookmark.clicked.split('/').pop();
 
-                                   // Changes the image source when the button is clicked
-                                   if (img.src.includes("resources/HeartCrack.svg")) {
-                                        img.src = "resources/HeartCrack-Clicked.svg"; 
+                                   // Toggle bookmark state
+                                   if (isCurrentlyBookmarked) {
+                                        img.src = iconPaths.bookmark.default;
                                    } else {
-                                        img.src = "resources/HeartCrack.svg";  // Changes it back to the first image
-                                   }
-
-                                   // If opposing heart is selected, change back to normal
-                                   var post = button.closest('.post'); // Get the parent container
-                                   var heartImg = post.querySelector('.postInteractions.heart .postInteractionsIcon');
-                                   if (heartImg) {
-                                        if (heartImg.src.includes('resources/Heart-Clicked.svg')) {
-                                             heartImg.src = 'resources/Heart.svg'; // Change bookmark icon
-                                        }
+                                        img.src = iconPaths.bookmark.clicked;
                                    }
                               }
-                              else if (iconType === 'bookmark') {
+                         }
 
-                                   // Changes the image source when the button is clicked
-                                   if (img.src.includes('resources/Bookmark.svg')) {
-                                        img.src = 'resources/Bookmark-Clicked.svg';  
-                                   } else {
-                                        img.src = 'resources/Bookmark.svg';  // Changes it back to the first image
+                         // Add event listeners to all action buttons
+                         document.addEventListener('DOMContentLoaded', () => {
+                              document.querySelectorAll('.actionButton').forEach(button => {
+                                   button.addEventListener('click', function() {
+                                   const img = this.querySelector('img');
+                                   if (img.src.includes('Heart.svg') || img.src.includes('Heart-Clicked.svg')) {
+                                        iconClicked(this, 'heart');
+                                   } else if (img.src.includes('HeartCrack.svg') || img.src.includes('HeartCrack-Clicked.svg')) {
+                                        iconClicked(this, 'heartCrack');
+                                   } else if (img.src.includes('Bookmark.svg') || img.src.includes('Bookmark-Clicked.svg')) {
+                                        iconClicked(this, 'bookmark');
                                    }
-                              }
-                         };
+                                   });
+                              });
+                         });
                     </script>
                
                </div>

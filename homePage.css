@@ -47,7 +47,7 @@ button {
      transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover {
+/* button:hover {
      background-color: #7FB8C8;
      transform: scale(1.02);
 }
@@ -55,7 +55,7 @@ button:hover {
 
 button:active {
      transform: scale(0.95); 
-}
+} */
 
 /* ---------- HEADER ---------- */
 #appName {
@@ -654,41 +654,46 @@ input[type="text"] {
      text-decoration: none;
 }
 
-.interactions {
-
+.postActions, .commentActions {
      display: flex;
      justify-content: flex-end;
      align-items: center;
 
-     padding: 0px;
-     gap: 20px;
-
+     gap: 8px;
      width: 100%;
-     box-sizing: border-box;
+
 }
 
-.hearts {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 12px;
-
-    width: auto;
-    height: auto;
+.separator {
+     border-left: 2px solid white;
+     height: 24px;
 }
 
-.postInteractions {
-     background-color: #030909;
+.actionButton {
+     background: none;
+     border: none;
+     padding: 0px 8px;
+     cursor: pointer;
+     transition: background-color 0.3s, transform 0.2s;
+     display: flex;
+     align-items: center;
+     gap: 6px;
 }
-
-.postInteractions:hover {
-     background-color: #030909;
+ 
+.actionButton:hover {
      transform: scale(1.05);
 }
-
-.postInteractions:active {
-     transform: scale(0.25); 
+ 
+ 
+.actionButton:active {
+     transform: scale(0.75); 
+}
+ 
+.actionButton .counter {
+     color: rgba(255, 255, 255, 0.7);
+     font-size: 15px;
+     font-weight: bold;
+     margin-left: 0;
 }
 
 .postDivider {
