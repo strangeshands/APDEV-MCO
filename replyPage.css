@@ -152,7 +152,7 @@ main {
     gap: -2px;
 }
 
-.username {
+.OGusername, .REPusername {
     font-weight: 500;
     line-height: 40px;
     margin-top: -10px;
