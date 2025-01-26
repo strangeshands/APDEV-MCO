@@ -319,19 +319,20 @@
                                    </button> -->
                               </div>
 
-                              <!-- TAGS-->
-                              <div class="posttags">
-                                   <a href="">#coding</a>
-                                   <a href="">#spiders</a>
-                                   <a href="">#web</a>
-                                   <a href="">#human</a>
-                                   <a href="">#confusion</a>
-                                   <a href="">#guy</a>
-                                   <a href="">#bugs</a>
-                              </div>
-
                               <!-- POST CONTENT -->
                               <div class="postContent" id="post3">
+
+                                   <!-- TAGS-->
+                                   <div class="posttags">
+                                        <a href="">#coding</a>
+                                        <a href="">#spiders</a>
+                                        <a href="">#web</a>
+                                        <a href="">#human</a>
+                                        <a href="">#confusion</a>
+                                        <a href="">#guy</a>
+                                        <a href="">#bugs</a>
+                                   </div>
+
                                    <p class="postTitle">hehe</p>
                                    <p class="postText">hamster</p>
                                    <div class="postImageContainer">
@@ -462,6 +463,10 @@
                          function storePostData(postId) {
                               const postTitle = document.getElementById(postId).querySelector('.postTitle').innerText;
                               const postText = document.getElementById(postId).querySelector('.postText').innerText;
+                              
+                              // Get all the tags and join them as a string (or an array if preferred)
+                              const postTagsElements = document.getElementById(postId).querySelectorAll('.posttags a');
+                              const postTags = Array.from(postTagsElements).map(tag => tag.innerText);  // Join tags as a comma-separated string
 
                               // Check if there's an image in the post
                               const postImageElement = document.getElementById(postId).querySelector('.postImageContainer img');
@@ -471,6 +476,7 @@
                               const contentObj = {
                                    postTitle: postTitle,
                                    postText: postText,
+                                   postTags: postTags,
                                    postImage: postImage
                               };
 

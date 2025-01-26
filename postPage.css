@@ -258,7 +258,7 @@ main {
     background-color: #1A1A1A;
 }
 
-.tags {
+#tags {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -270,7 +270,7 @@ main {
     padding: 10px 0 20px;
 }
 
-.tags a {
+#tags a {
     color: white;
     text-decoration: none;
 }

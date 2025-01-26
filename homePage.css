@@ -701,7 +701,7 @@ input[type="text"] {
      justify-content: flex-start;
      align-items: flex-start;
 
-     padding: 12px;
+     padding: 12px 0px;
      gap: 12px;
 
      width: 100%;
