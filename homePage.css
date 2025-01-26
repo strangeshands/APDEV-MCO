@@ -493,6 +493,10 @@ input[type="text"] {
 
 /* ---------- POST FEED ---------- */
 
+#emptyFeed {
+     color: #E4F3F6;
+}
+
 .timeline {
      display: flex;
      flex-direction: column;
