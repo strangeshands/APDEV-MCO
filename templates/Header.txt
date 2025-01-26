@@ -96,7 +96,7 @@ input[type="text"] {
           </div>
 
           <!-- IF USER IS NOT LOGGED IN -->
-          <button id="logInButton">Log In</button>
+          <button id="logInButton" onclick="window.location.href='loginPage.html'">Log In</button>
      </div>
 </header>
 /* ---------- HTML ---------- */
