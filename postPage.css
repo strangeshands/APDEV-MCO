@@ -134,9 +134,11 @@ button {
 }
 
 main {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 24px;
+
+    width: 100%;
 }
 
 .logoAndBrandName {
@@ -191,11 +193,13 @@ main {
     font-weight: bold;
 }
 
-.post {
+#post {
     background-color: #1A1A1A;
     border-radius: 16px;
     padding: 24px;
     margin-bottom: 24px;
+
+    width: 100%;
 }
 
 .postHeader {
@@ -271,19 +275,26 @@ main {
     text-decoration: none;
 }
 
-.postTitle {
+#postTitle {
     font-size: 24px;
     font-weight: Bold;
     color: #E4F3F6;
     padding-bottom: 30px;
+
+    width: 100%;
 }
 
-.placeholderContent {
-    background-color: #333;
+#placeholderContent {
     width: 100%;
-    height: 300px;
+    height: auto;
     border-radius: 8px;
     margin: 16px 0;
+}
+
+#postImage {
+     width: 100%;
+     height: 100%;
+     border-radius: 8px;
 }
 
 .postActions, .commentActions {
@@ -332,7 +343,7 @@ main {
     margin: 16px 0;
 }
 
-.comments {
+#comments {
     margin-top: 32px;
 }
 

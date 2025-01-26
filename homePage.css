@@ -659,7 +659,7 @@ input[type="text"] {
      align-items: flex-start;
 
      padding: 0px 10px;
-     gap: 20px;
+     gap: 0px;
 
      width: 100%;
      box-sizing: border-box;
@@ -671,14 +671,11 @@ input[type="text"] {
      color: #E4F3F6;
 
      margin: 0px;
-
 }
 
 .postText {
      font-size: 18px;
      color: #E4F3F6;
-
-     margin-top: 0px;
 }
 
 .postImageContainer {
@@ -686,7 +683,7 @@ input[type="text"] {
      justify-content: flex-start;
      align-items: center;
 
-     padding: 0px 10px 10px 10px;
+     padding: 0px;
      width: 100%;
      box-sizing: border-box;
 }

@@ -23,12 +23,12 @@
           </header>
         
         <main>
-            <div class="goBackLink">
+            <div class="goBackLink" onclick="window.location.href='homePage.html'">
                 <span class="arrow">&#8604;</span>
                 <span class="back">Back</span>
             </div>
 
-            <div class="post">
+            <div id="post">
                 <div class="postHeader">
                     <div class="userInfo">
                         <div class="avatar">C</div>
@@ -45,15 +45,15 @@
                     <a href="">#funny</a>
                     <a href="">#life</a>
                 </div>
-                <div class="postTitle">
+                <div id="postTitle">
                     This is a title
                 </div>
-                <div class="postText">
+                <div id="postText">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac tortor sed velit luctus malesuada. Aenean suscipit, arcu et pulvinar tincidunt, lorem felis tempor quam, sed euismod turpis neque et lorem. Fusce id libero ut nulla fringilla interdum. Curabitur posuere metus non nibh.
                 </div>
 
                 <div class="postContent">
-                    <div class="placeholderContent"></div>
+                    <div id="placeholderContent"></div>
                 </div>
 
                 <div class="postActions">
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="comments">
+            <div id="comments">
                 <h2>Comments</h2>
                 <div class="horizontalBar"></div>
                 <div class="comment-thread">
@@ -607,6 +607,23 @@
                 });
             });
         </script>
+
+          <script>
+               // Get content from localStorage and display it
+               const contentData = JSON.parse(localStorage.getItem('postData'));
+
+               if (contentData) {
+                    document.getElementById('postTitle').innerText = `${contentData.postTitle}`;
+                    document.getElementById('postText').innerText = `${contentData.postText}`;
+
+                    if (contentData.postImage) {
+                         document.getElementById('placeholderContent').innerHTML = `<img src="${contentData.postImage}" id="postImage">`;
+                    }
+               } else {
+                    document.getElementById('post').innerText = "Post Not Found";
+                    document.getElementById('comments').innerText = " ";
+               }
+          </script>
     </body>
 </html>
 
