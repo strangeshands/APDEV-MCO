@@ -409,6 +409,17 @@ input[type="text"] {
      width: 100%;
 }
 
+.noPostsOrComments {
+     color: #E4F3F6;
+     opacity: 50%;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     width: 100%;
+}
+
 .userPostsAndCommentsContent {
      display: flex;
      flex-direction: column;
