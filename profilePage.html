@@ -23,7 +23,7 @@
           <div id="content">
                <div id="profileHeader">
                     <!--<img src="resources/headerSample.jpg"/>-->
-                    <img src="resources/headerSample.jpg" />
+                    <img src="resources/headerSample.jpg" onclick="openModal(this)" />
                </div>
                
                <div id="sub-container">
@@ -34,7 +34,7 @@
                               <!-- PFP and USERNAME -->
                               <div id="pfpcontainer">
                                    <div id="pfpPic">
-                                        <img src="resources/pfpSample.jpg" />
+                                        <img src="resources/pfpSample.jpg" onclick="openModal(this)" />
                                    </div>
 
                                    <p class="maintext"> DARNA </p>
@@ -94,11 +94,11 @@
 
                          <!-- SETTINGS -->
                          <div class="col1-sub-container"> 
-                              <button class="editProfile">
+                              <button class="editProfile" onclick="window.location.href='editProfilePage.html'">
                                    <img src="resources/Edit Icon.svg" alt="">
                                    Edit Profile
                               </button>
-                              <button class="logOut">
+                              <button class="logOut" onclick="window.location.href='loginPage.html'">
                                    <img src="resources/Log Out Icon.svg" alt="">
                                    Log Out
                               </button>
@@ -177,7 +177,7 @@
                                              </button>
                                              <img src="resources/Line.svg" alt="Line">
                                              <button class="postoptionbutton">
-                                                  <img src="resources/Heart Crack.svg"/>
+                                                  <img src="resources/HeartCrack.svg"/>
                                              </button>
                                              <button class="postoptionbutton">
                                                   <img src="resources/Comments.svg"/>
@@ -323,3 +323,4 @@
           button.classList.add('active');
      }
 </script>
+
