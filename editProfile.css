@@ -167,8 +167,58 @@ button:active {
 }
 /* ---------- BUTTONS ---------- */
 
-/* ----------------------------- */
+/* ---------- MODAL ---------- */
+#crop-modal {
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     background-color: #1D1E1F;
 
+     color: white;
+     padding: 20px;
+     z-index: 1000;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+     border-radius: 10px;
+
+     min-width: 30vw;
+     max-height: 80vh;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+ }
+ 
+ #crop-modal img {
+     max-width: 70vw;
+     max-height: 50vh;
+     display: block;
+     margin: 0 auto;
+     border-radius: 5px;
+ }
+ 
+ #crop-modal button {
+     margin: 15px 0;
+     padding: 10px 15px;
+     border: none;
+     background-color: #007bff;
+     color: #fff;
+     cursor: pointer;
+     border-radius: 5px;
+ }
+ 
+ #crop-modal button:hover {
+     background-color: #0056b3;
+ }
+ 
+ /* Hide modal by default */
+ #crop-modal {
+     display: none;
+ } 
+/* ---------- MODAL ---------- */
+
+/* ----------------------------- */
 #base {
      margin: 20px 15px;
      padding: 15px;

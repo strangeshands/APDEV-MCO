@@ -1,4 +1,4 @@
-const profile1 = {
+var profile1 = {
      username: "@AkoSiDarna",
      display_name: "DARNA",
      bio: "", /*"Tech enthusiast and occasional gamer with a love for coding, creativity, " +
@@ -7,7 +7,12 @@ const profile1 = {
           "lost in a good book. Let’s share and grow together here!",*/
      likes: 3,
      posts: 2,
-     tags: ["#Movies", "#TVSeries", "#IndieFilms", "#SZA"]
+     tags: ["#Movies", "#TVSeries", "#IndieFilms", "#SZA"],
+
+     email: "darna@gmail.com",
+     password: "akosidarna",
+     header: "resources/headerSample.jpg",
+     pfp: "resources/pfpSample.jpg"
 };
 
 const post1 = {
