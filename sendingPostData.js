@@ -15,8 +15,10 @@ function storePostData(postId) {
      const userProfilePic = userProfilePicElement ? userProfilePicElement.getAttribute('src') : ''; // If no image, set empty string
      
      const username = document.getElementById(postId).querySelector('.username').innerText;
-
      const timePosted = document.getElementById(postId).querySelector('.timePosted').innerText;
+
+     const postLikeCounter = document.getElementById(postId).querySelector('.postLikeCounter').innerText;
+     const postDislikeCounter = document.getElementById(postId).querySelector('.postDislikeCounter').innerText;
 
      // Create an object to hold all the content
      const contentObj = {
@@ -26,7 +28,9 @@ function storePostData(postId) {
           postImage: postImage,
           userProfilePic: userProfilePic,
           username: username,
-          timePosted: timePosted
+          timePosted: timePosted,
+          postLikeCounter: postLikeCounter,
+          postDislikeCounter: postDislikeCounter
      };
 
      // Save the object as a JSON string in localStorage

@@ -14,8 +14,10 @@ if (contentData) {
      }
 
      document.getElementById('postUsername').innerText = `${contentData.username}`;
-
      document.getElementById('postTime').innerText = `${contentData.timePosted}`;
+
+     document.getElementById('postLikeCounter').innerText = `${contentData.postLikeCounter}`;
+     document.getElementById('postDislikeCounter').innerText = `${contentData.postDislikeCounter}`;
 
      // Display tags as individual <a> elements
      if (contentData.postTags && contentData.postTags.length > 0) {
