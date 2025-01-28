@@ -4,6 +4,7 @@
           <title> Connectify - [username] </title>
           <link rel="stylesheet" type="text/css" href="profilePage.css">
           <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
+          <script src="data.js"></script>
      </head>
 
      <body>
@@ -61,10 +62,7 @@
                          <div class="col1-sub-container"> 
                               <h3> BIO </h3>
 
-                              <!-- IF NO BIO AVAILABLE -->
-                              <!--<p id="bio" class="regulartext"> No bio yet</p>-->
-
-                              <!-- BIO AVAILABLE -->
+                              <!-- BIO PLACEHOLDER -->
                               <p id="bio" class="regulartext"></p>
                          </div>
 
@@ -280,18 +278,6 @@
 <script>
      /* ----- HARD CODED DATA ----- */
      document.addEventListener("DOMContentLoaded", () => {
-          const profile1 = {
-               display_name: "DARNA",
-               username: "@AkoSiDarna",
-               bio: "",/*"Tech enthusiast and occasional gamer with a love for coding, creativity, and meaningful conversations. " +
-                    "I enjoy exploring new ideas, diving into pop culture, and learning something new every day. " +
-                    "Offline, you’ll find me experimenting in the kitchen or lost in a good book. " +
-                    "Let’s share and grow together here!",*/
-               likes: 2,
-               posts: 2,
-               tags: ["#Movies", "#TVSeries", "#IndieFilms"]
-          };
-
           const displayNameElement = document.getElementById('display_name');
           const usernameElement = document.getElementById('username');
           const likesCountElement = document.getElementById('num_likes');
@@ -303,10 +289,7 @@
           likesCountElement.textContent = profile1.likes;
           postsCountElement.textContent = profile1.posts;
 
-          /* ---- BIO ---- */
           printBio(profile1.bio);
-
-          /* ---- TAGS ---- */
           printTags(profile1.tags);
      });
 
