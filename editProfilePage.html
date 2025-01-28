@@ -12,7 +12,7 @@
                     <p id="appName"> Connectify </p>
                </div>
                <div id="headercol2">
-                    <div class="searchBar">
+                    <div id="search-bar" class="searchBar">
                          <img src="resources/Trailing-Elements.svg" alt="Search Icon">
                          <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
                     </div>
@@ -24,13 +24,13 @@
                <!-- OPTIONS -->
                <div id="col1" class="base-columns">
                     <div class="col1-sub-container">
-                         <button class="discard">
+                         <button class="discard" onclick="window.location.href='profilePage.html'">
                               Discard Changes
                          </button>
 
                          <div id="button-brk" class="inviBrk"></div>
 
-                         <button class="save">
+                         <button class="save" onclick="window.location.href='profilePage.html'">
                               Save
                          </button>
                     </div>
@@ -69,34 +69,43 @@
                     </div>
 
                     <div id="input-details" class="col2-row">
-                         <div id="change-username" class="input-fields">
-                              <p class="input-label"> Username </p>
-                              <input type="text" id="username" name="username" placeholder="New username">
+                         <div class="input-col">
+                              <div id="change-username" class="input-fields">
+                                   <p class="input-label"> Username </p>
+                                   <input type="text" id="username" name="username" placeholder="New username">
+                              </div>
+                              <div id="change-display-name" class="input-fields">
+                                   <p class="input-label"> Display Name </p>
+                                   <input type="text" id="display-name" name="display-name" placeholder="New display name">
+                              </div>
+                              <div id="change-email" class="input-fields">
+                                   <p class="input-label"> Email </p>
+                                   <input type="email" id="email" name="email" placeholder="New email">
+                              </div>
+                              <div id="change-bio" class="input-fields">
+                                   <p class="input-label"> Bio </p>
+                                   <textarea id="bio" name="bio" rows="5" cols="80" placeholder="New bio..."></textarea>
+                              </div>
                          </div>
 
-                         <div id="change-display-name" class="input-fields">
-                              <p class="input-label"> Display Name </p>
-                              <input type="text" id="display-name" name="display-name" placeholder="New display name">
-                         </div>
+                         <div class="column-brk" style="height: 40vh"></div>
 
-                         <div id="change-bio" class="input-fields">
-                              <p class="input-label"> Bio </p>
-                              <textarea id="bio" name="bio" rows="5" cols="80" placeholder="New bio..."></textarea>
-                         </div>
-
-                         <div id="change-email" class="input-fields">
-                              <p class="input-label"> Email </p>
-                              <input type="email" id="email" name="email" placeholder="New email">
-                         </div>
-
-                         <div id="change-password" class="input-fields">
-                              <p class="input-label"> Password </p>
-                              <input type="password" id="password" name="password" placeholder="New password">
-                         </div>
-
-                         <div id="confirm-password" class="input-fields">
-                              <p class="input-label"> Confirm Password </p>
-                              <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password">
+                         <div class="input-col">
+                              <label> Change Password </label>
+                              <div id="password-edit">
+                                   <div id="current-password" class="input-fields password-edit">
+                                        <p class="input-label"> Current Password </p>
+                                        <input type="password" id="current-password" name="password" placeholder="Current password">
+                                   </div>
+                                   <div id="change-password" class="input-fields password-edit">
+                                        <p class="input-label"> New Password </p>
+                                        <input type="password" id="password" name="passsword" placeholder="New password">
+                                   </div>
+                                   <div id="confirm-password" class="input-fields password-edit">
+                                        <p class="input-label"> Confirm New Password </p>
+                                        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password">
+                                   </div>
+                              </div>
                          </div>
                     </div>
                </div>
