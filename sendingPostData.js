@@ -1,24 +1,32 @@
 function storePostData(postId) {
-     const postTitle = document.getElementById(postId).querySelector('.postTitle').innerText;
-     const postText = document.getElementById(postId).querySelector('.postText').innerText;
+
+     const postTitle = document.getElementById(postId).querySelector('.postTitle, .userPostTitle').innerText;
+     
+     const postTextElement = document.getElementById(postId).querySelector('.postText');
+     const postText = postTextElement ? postTextElement.innerText : '';
      
      // Get all the tags and join them as a string (or an array if preferred)
      const postTagsElements = document.getElementById(postId).querySelectorAll('.posttags a');
      const postTags = Array.from(postTagsElements).map(tag => tag.innerText);  // Join tags as a comma-separated string
 
      // Check if there's an image in the post
-     const postImageElement = document.getElementById(postId).querySelector('.postImageContainer img');
-     const postImage = postImageElement ? postImageElement.getAttribute('src') : ''; // If no image, set empty string
+     const postImageElement = document.getElementById(postId).querySelector('.postImageContainer img, .userPost img');
+     const postImage = postImageElement && postImageElement.getAttribute('src') !== "resources/Image Holder.svg" ? postImageElement.getAttribute('src') : ''; // If no image, set empty string
      
      // Check if there's an image in the profile pic
-     const userProfilePicElement = document.getElementById(postId).querySelector('.profilePic img');
-     const userProfilePic = userProfilePicElement ? userProfilePicElement.getAttribute('src') : ''; // If no image, set empty string
+     const userProfilePicElement = document.getElementById(postId).querySelector('.profilePic img, #userAvatar img');
+     const userProfilePic = userProfilePicElement ? userProfilePicElement.getAttribute('src') : document.getElementById('userAvatar').querySelector('img').getAttribute('src'); // If no image, set as user avatar
      
-     const username = document.getElementById(postId).querySelector('.username').innerText;
-     const timePosted = document.getElementById(postId).querySelector('.timePosted').innerText;
+     // Get the username and time posted, with fallbacks in case not found
+     const usernameElement = document.getElementById(postId).querySelector('.username');
+     const username = usernameElement ? usernameElement.innerText : document.getElementById('profileUsername').innerText;
+     const timePostedElement = document.getElementById(postId).querySelector('.timePosted');
+     const timePosted = timePostedElement ? timePostedElement.innerText : 'time posted';
 
-     const postLikeCounter = document.getElementById(postId).querySelector('.postLikeCounter').innerText;
-     const postDislikeCounter = document.getElementById(postId).querySelector('.postDislikeCounter').innerText;
+     const postLikeCounterElement = document.getElementById(postId).querySelector('.postLikeCounter');
+     const postLikeCounter = postLikeCounterElement ? postLikeCounterElement.innerText : '0'; // Default to 0 if not found
+     const postDislikeCounterElement = document.getElementById(postId).querySelector('.postDislikeCounter');
+     const postDislikeCounter = postDislikeCounterElement ? postDislikeCounterElement.innerText : '0'; // Default to 0 if not found
 
      // Create an object to hold all the content
      const contentObj = {
