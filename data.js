@@ -9,3 +9,15 @@ const profile1 = {
      posts: 2,
      tags: ["#Movies", "#TVSeries", "#IndieFilms", "#SZA"]
 };
+
+const post1 = {
+     user: profile1,
+     title: "JOURNEY",
+     caption: "Life is a journey, and every step we take brings us closer to discovering who we truly are. " +
+          "It’s about embracing the highs and lows, the challenges and triumphs, and finding joy in the little things. " +
+          "Whether it’s a breathtaking sunset, a cozy moment with friends, or the satisfaction of achieving a long-awaited goal, " +
+          "these moments shape our story. Let’s live with purpose, dream big, and never stop learning or growing.",
+     likes: 10,
+     dislikes: 2,
+     images:[]
+};
