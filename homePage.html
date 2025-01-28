@@ -39,12 +39,12 @@
                     <div class="profileNav">
                          <!-- PROFILE NAME, PIC, # OF LIKES/POSTS, BIO-->
                          <div class="profile">
-                              <div class="userAvatar">
+                              <div id="userAvatar">
                                    <img src="resources/pfpSample.jpg" class="userProfilePic" alt="User Profile Pic">
                               </div>
                               <div class="usernameAndhandle">
-                                   <p class="profileUsername">DARNA</p>
-                                   <p class="profileUserhandle">@AkoSiDarna</p>
+                                   <p id="profileUsername">DARNA</p>
+                                   <p id="profileUserhandle">@AkoSiDarna</p>
                               </div>
                          </div>
 
@@ -133,27 +133,36 @@
 
                          <div class="userPostsAndCommentsContent">
 
-
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                   <p class="userComment">funny reply</p>
-                              </button>
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                   <p class="userComment">long ass commmmeeennntttuhhhhhhhhhhh</p>
-                              </button>
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                   <p class="userComment">random meme</p>
-                              </button>
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                   <p class="userComment">existential dread</p>
-                              </button>
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                   <p class="userComment">:DDDDD</p>
-                              </button>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment1">
+                                   <button class="userPost" id="userComment1">
+                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
+                                        <p class="userComment">funny reply</p>
+                                   </button>
+                              </a>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment2">
+                                   <button class="userPost" id="userComment2">
+                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
+                                        <p class="userComment">long ass commmmeeennntttuhhhhhhhhhhh</p>
+                                   </button>
+                              </a>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment3">
+                                   <button class="userPost" id="userComment3">
+                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
+                                        <p class="userComment">random meme</p>
+                                   </button>
+                              </a>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment4">
+                                   <button class="userPost" id="userComment4">
+                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
+                                        <p class="userComment">existential dread</p>
+                                   </button>
+                              </a>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment5">
+                                   <button class="userPost" id="userComment5">
+                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
+                                        <p class="userComment">:DDDDD</p>
+                                   </button>
+                              </a>
                          </div>
                     </div>
 

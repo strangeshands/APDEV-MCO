@@ -14,19 +14,19 @@ function storePostData(postId) {
      const postImage = postImageElement && postImageElement.getAttribute('src') !== "resources/Image Holder.svg" ? postImageElement.getAttribute('src') : ''; // If no image, set empty string
      
      // Check if there's an image in the profile pic
-     const userProfilePicElement = document.getElementById(postId).querySelector('.profilePic img');
-     const userProfilePic = userProfilePicElement ? userProfilePicElement.getAttribute('src') : ''; // If no image, set empty string
+     const userProfilePicElement = document.getElementById(postId).querySelector('.profilePic img, #userAvatar img');
+     const userProfilePic = userProfilePicElement ? userProfilePicElement.getAttribute('src') : document.getElementById('userAvatar').querySelector('img').getAttribute('src'); // If no image, set as user avatar
      
      // Get the username and time posted, with fallbacks in case not found
      const usernameElement = document.getElementById(postId).querySelector('.username');
-     const username = usernameElement ? usernameElement.innerText : 'username';
+     const username = usernameElement ? usernameElement.innerText : document.getElementById('profileUsername').innerText;
      const timePostedElement = document.getElementById(postId).querySelector('.timePosted');
      const timePosted = timePostedElement ? timePostedElement.innerText : 'time posted';
 
      const postLikeCounterElement = document.getElementById(postId).querySelector('.postLikeCounter');
-    const postLikeCounter = postLikeCounterElement ? postLikeCounterElement.innerText : '0'; // Default to 0 if not found
-    const postDislikeCounterElement = document.getElementById(postId).querySelector('.postDislikeCounter');
-    const postDislikeCounter = postDislikeCounterElement ? postDislikeCounterElement.innerText : '0'; // Default to 0 if not found
+     const postLikeCounter = postLikeCounterElement ? postLikeCounterElement.innerText : '0'; // Default to 0 if not found
+     const postDislikeCounterElement = document.getElementById(postId).querySelector('.postDislikeCounter');
+     const postDislikeCounter = postDislikeCounterElement ? postDislikeCounterElement.innerText : '0'; // Default to 0 if not found
 
      // Create an object to hold all the content
      const contentObj = {

@@ -209,7 +209,7 @@ input[type="text"] {
      width: 100%;
 }
 
-.userAvatar {
+#userAvatar {
      background-color: #030909;
      border-radius: 99px;
 
@@ -239,7 +239,7 @@ input[type="text"] {
      height: auto;
 }
 
-.profileUsername {
+#profileUsername {
      font-size: 18px;
      font-weight: Bold;
      color: #E4F3F6;
@@ -247,7 +247,7 @@ input[type="text"] {
      margin: 0;
 }
 
-.profileUserhandle {
+#profileUserhandle {
      font-size: 16px;
      color: #B3B3B3;
 
