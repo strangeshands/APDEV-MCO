@@ -4,7 +4,7 @@
           <title> Connectify - [username] </title>
           <link rel="stylesheet" type="text/css" href="profilePage.css">
           <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
-          <script src="data.js"></script>
+          <script src="profile1-data.js"></script>
      </head>
 
      <body>
@@ -283,11 +283,13 @@
           const likesCountElement = document.getElementById('num_likes');
           const postsCountElement = document.getElementById('num_posts');
 
+          var profile = profile1
+
           // Populate the DOM elements with data from profile1
-          displayNameElement.textContent = profile1.display_name;
-          usernameElement.textContent = profile1.username;
-          likesCountElement.textContent = profile1.likes;
-          postsCountElement.textContent = profile1.posts;
+          displayNameElement.textContent = profile.display_name;
+          usernameElement.textContent = profile.username;
+          likesCountElement.textContent = profile.likes;
+          postsCountElement.textContent = profile.posts;
 
           printBio(profile1.bio);
           printTags(profile1.tags);
