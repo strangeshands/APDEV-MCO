@@ -77,13 +77,15 @@ button:active {
 }
 
 .usertags {
-     width: auto;
-     margin-top: 2px;
-
-     opacity: 80%;
+     display: inline-flex;
+     flex-wrap: wrap;
      font-size: 12px;
-     text-align: justify;
-}
+     opacity: 80%;
+     word-wrap: break-word;
+     overflow-wrap: break-word;
+     white-space: normal;
+ }
+ 
 
 .logOut img {
      margin-right: 3px;
@@ -324,7 +326,15 @@ h3 {
 }
 
 #taglist {
-     width: 100%;
+     width: auto;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 5px;
+}
+
+#no-tag-msg, .no-bio-msg {
+     font-size: 13px;
+     opacity: 80%;
 }
 
 .col2-sub-container {
@@ -497,6 +507,10 @@ h3 {
 
 .postoptionbutton {
      background-color: transparent;
+
+     display: flex;
+     align-items: center;
+     gap: 6px;
 }
 
 .postoptionbutton:hover {

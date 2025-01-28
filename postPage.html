@@ -6,77 +6,73 @@
         <link rel="stylesheet" type="text/css" href="postPage.css">
     </head>
     <body>
-        <header>
-            <div class="headerWrapper">
-                <div class="logoAndBrandName">
-                    <div class="logo">
-                        <img src="resources/Logo.svg" alt="Logo">
-                    </div>
-                    <div class="brandName">
-                        Connectify
-                    </div>
-                </div>
-        
-                <div class="headerSpace">
+          <header>
+               <div id="headercol1">
+                    <img id="logo" src="resources/Logo.svg" />
+                    <p id="appName"> Connectify </p>
+               </div>
+               <div id="headercol2">
                     <div class="searchBar">
-                        <img src="resources/Trailing-Elements.svg" alt="Search Icon">
-                        <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+                         <img src="resources/Trailing-Elements.svg" alt="Search Icon">
+                         <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
                     </div>
-                    <button class="logInButton">Log In</button>
-                </div>
-            </div>
-        </header>
+          
+                    <!-- IF USER IS NOT LOGGED IN -->
+                    <button id="logInButton" onclick="window.location.href='loginPage.html'">Log In</button>
+               </div>
+          </header>
         
         <main>
-            <div class="goBackLink">
+            <div class="goBackLink" onclick="window.location.href='homePage.html'">
                 <span class="arrow">&#8604;</span>
                 <span class="back">Back</span>
             </div>
 
-            <div class="post">
+            <div id="post">
                 <div class="postHeader">
                     <div class="userInfo">
-                        <div class="avatar">C</div>
+                        <div class="avatar" id="postAvatar"></div>
                         <div class="username-and-time">
-                            <div class="username">Username</div>
-                            <div class="time">4 hours ago</div>
+                            <div class="username" id="postUsername">Username</div>
+                            <div class="time" id="postTime">4 hours ago</div>
                         </div>
                     </div>
+                    <!-- IF POST BELONGS TO USER
                     <button class="optionsButton" id="postOptions">
                         <img src="resources/Options Button.svg" alt="Options">
-                    </button>
+                    </button> -->
                 </div>
-                <div class="tags">
+                <div id="tags">
                     <a href="">#funny</a>
                     <a href="">#life</a>
                 </div>
-                <div class="postTitle">
+                <div id="postTitle">
                     This is a title
                 </div>
-                <div class="postText">
+                <div id="postText">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac tortor sed velit luctus malesuada. Aenean suscipit, arcu et pulvinar tincidunt, lorem felis tempor quam, sed euismod turpis neque et lorem. Fusce id libero ut nulla fringilla interdum. Curabitur posuere metus non nibh.
                 </div>
 
                 <div class="postContent">
-                    <div class="placeholderContent"></div>
+                    <div id="placeholderContent"></div>
                 </div>
 
                 <div class="postActions">
                     <button class="actionButton">
                         <img src="resources/Heart.svg" alt="Like">
-                        <span class="counter">42</span>
+                        <span class="counter" id="postLikeCounter">42</span>
                     </button>
                     <div class="separator"></div>
                     <button class="actionButton">
                         <img src="resources/HeartCrack.svg" alt="Dislike">
-                        <span class="counter">7</span>
+                        <span class="counter" id="postDislikeCounter">7</span>
                     </button>
-                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='commentPage.html'"></button>
                     <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                 </div>
             </div>
 
-            <div class="comments">
+            <div id="comments">
                 <h2>Comments</h2>
                 <div class="horizontalBar"></div>
                 <div class="comment-thread">
@@ -89,9 +85,10 @@
                                     <div class="time">4 hours ago</div>
                                 </div>
                             </div>
+                            <!-- IF COMMENT BELONGS TO USER
                             <button class="optionsButton">
                                 <img src="resources/Options Button.svg" alt="Options">
-                            </button>
+                            </button> -->
                         </div>
                         <div class="commentText">
                             Main comment text goes here
@@ -106,7 +103,7 @@
                                 <img src="resources/HeartCrack.svg" alt="Dislike">
                                 <span class="counter">7</span>
                             </button>
-                            <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                            <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'" onclick="window.location.href='replyPage.html'"></button>
                             <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                         </div>
             
@@ -129,9 +126,10 @@
                                                 <div class="time">3 hours ago</div>
                                             </div>
                                         </div>
+                                        <!-- IF COMMENT BELONGS TO USER
                                         <button class="optionsButton">
-                                            <img src="resources/Options Button.svg" alt="Options">
-                                        </button>
+                                             <img src="resources/Options Button.svg" alt="Options">
+                                        </button> -->
                                     </div>
                                     <div class="commentText">
                                         First nested reply text
@@ -146,7 +144,7 @@
                                             <img src="resources/HeartCrack.svg" alt="Dislike">
                                             <span class="counter">7</span>
                                         </button>
-                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                                         <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                                     </div>
             
@@ -169,9 +167,10 @@
                                                             <div class="time">2 hours ago</div>
                                                         </div>
                                                     </div>
-                                                    <button class="optionsButton">
-                                                        <img src="resources/Options Button.svg" alt="Options">
-                                                    </button>
+                                                    <!-- IF COMMENT BELONGS TO USER
+                                                       <button class="optionsButton">
+                                                            <img src="resources/Options Button.svg" alt="Options">
+                                                       </button> -->
                                                 </div>
                                                 <div class="commentText">
                                                     Second level nested reply
@@ -186,7 +185,7 @@
                                                         <img src="resources/HeartCrack.svg" alt="Dislike">
                                                         <span class="counter">7</span>
                                                     </button>
-                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                                                     <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                                                 </div>
                                             </div>
@@ -205,9 +204,10 @@
                                                 <div class="time">3 hours ago</div>
                                             </div>
                                         </div>
+                                        <!-- IF COMMENT BELONGS TO USER
                                         <button class="optionsButton">
-                                            <img src="resources/Options Button.svg" alt="Options">
-                                        </button>
+                                             <img src="resources/Options Button.svg" alt="Options">
+                                        </button> -->
                                     </div>
                                     <div class="commentText">
                                         First nested reply text
@@ -222,7 +222,7 @@
                                             <img src="resources/HeartCrack.svg" alt="Dislike">
                                             <span class="counter">7</span>
                                         </button>
-                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                                         <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                                     </div>
             
@@ -245,9 +245,10 @@
                                                             <div class="time">2 hours ago</div>
                                                         </div>
                                                     </div>
-                                                    <button class="optionsButton">
-                                                        <img src="resources/Options Button.svg" alt="Options">
-                                                    </button>
+                                                    <!-- IF COMMENT BELONGS TO USER
+                                                       <button class="optionsButton">
+                                                            <img src="resources/Options Button.svg" alt="Options">
+                                                       </button> -->
                                                 </div>
                                                 <div class="commentText">
                                                     Second level nested reply
@@ -262,7 +263,7 @@
                                                         <img src="resources/HeartCrack.svg" alt="Dislike">
                                                         <span class="counter">7</span>
                                                     </button>
-                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                                                     <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                                                 </div>
                                             </div>
@@ -281,9 +282,10 @@
                                     <div class="time">4 hours ago</div>
                                 </div>
                             </div>
+                            <!-- IF COMMENT BELONGS TO USER
                             <button class="optionsButton">
                                 <img src="resources/Options Button.svg" alt="Options">
-                            </button>
+                            </button> -->
                         </div>
                         <div class="commentText">
                             Main comment text goes here
@@ -298,7 +300,7 @@
                                 <img src="resources/HeartCrack.svg" alt="Dislike">
                                 <span class="counter">7</span>
                             </button>
-                            <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                            <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                             <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                         </div>
             
@@ -321,9 +323,10 @@
                                                 <div class="time">3 hours ago</div>
                                             </div>
                                         </div>
+                                        <!-- IF COMMENT BELONGS TO USER
                                         <button class="optionsButton">
-                                            <img src="resources/Options Button.svg" alt="Options">
-                                        </button>
+                                             <img src="resources/Options Button.svg" alt="Options">
+                                        </button> -->
                                     </div>
                                     <div class="commentText">
                                         First nested reply text
@@ -338,7 +341,7 @@
                                             <img src="resources/HeartCrack.svg" alt="Dislike">
                                             <span class="counter">7</span>
                                         </button>
-                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                                         <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                                     </div>
             
@@ -361,9 +364,10 @@
                                                             <div class="time">2 hours ago</div>
                                                         </div>
                                                     </div>
-                                                    <button class="optionsButton">
-                                                        <img src="resources/Options Button.svg" alt="Options">
-                                                    </button>
+                                                    <!-- IF COMMENT BELONGS TO USER
+                                                       <button class="optionsButton">
+                                                            <img src="resources/Options Button.svg" alt="Options">
+                                                       </button> -->
                                                 </div>
                                                 <div class="commentText">
                                                     Second level nested reply
@@ -378,7 +382,7 @@
                                                         <img src="resources/HeartCrack.svg" alt="Dislike">
                                                         <span class="counter">7</span>
                                                     </button>
-                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                                                     <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                                                 </div>
                                             </div>
@@ -397,9 +401,10 @@
                                     <div class="time">4 hours ago</div>
                                 </div>
                             </div>
+                            <!-- IF COMMENT BELONGS TO USER
                             <button class="optionsButton">
                                 <img src="resources/Options Button.svg" alt="Options">
-                            </button>
+                            </button> -->
                         </div>
                         <div class="commentText">
                             Main comment text goes here
@@ -414,7 +419,7 @@
                                 <img src="resources/HeartCrack.svg" alt="Dislike">
                                 <span class="counter">7</span>
                             </button>
-                            <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                            <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                             <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                         </div>
             
@@ -437,9 +442,10 @@
                                                 <div class="time">3 hours ago</div>
                                             </div>
                                         </div>
+                                        <!-- IF COMMENT BELONGS TO USER
                                         <button class="optionsButton">
-                                            <img src="resources/Options Button.svg" alt="Options">
-                                        </button>
+                                             <img src="resources/Options Button.svg" alt="Options">
+                                        </button> -->
                                     </div>
                                     <div class="commentText">
                                         First nested reply text
@@ -454,7 +460,7 @@
                                             <img src="resources/HeartCrack.svg" alt="Dislike">
                                             <span class="counter">7</span>
                                         </button>
-                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                                         <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                                     </div>
             
@@ -477,9 +483,10 @@
                                                             <div class="time">2 hours ago</div>
                                                         </div>
                                                     </div>
-                                                    <button class="optionsButton">
-                                                        <img src="resources/Options Button.svg" alt="Options">
-                                                    </button>
+                                                    <!-- IF COMMENT BELONGS TO USER
+                                                       <button class="optionsButton">
+                                                            <img src="resources/Options Button.svg" alt="Options">
+                                                       </button> -->
                                                 </div>
                                                 <div class="commentText">
                                                     Second level nested reply
@@ -494,7 +501,7 @@
                                                         <img src="resources/HeartCrack.svg" alt="Dislike">
                                                         <span class="counter">7</span>
                                                     </button>
-                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button>
+                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
                                                     <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                                                 </div>
                                             </div>
@@ -507,111 +514,11 @@
                 </div>
             </div>
         </main>
-        <script>
-            document.querySelectorAll('.viewRepliesButton').forEach(button => {
-                button.addEventListener('click', function() {
-                    const nestedComments = this.closest('.nestedCommentsContainer').querySelector('.nestedComments');
-                    nestedComments.style.display = nestedComments.style.display === 'none' ? 'block' : 'none';
-                });
-            });
 
-            function iconClicked(button, iconType) {
-                // Get the image within the button
-                const img = button.querySelector('img');
-                
-                // Get the counter element if it exists
-                const counter = button.querySelector('.counter');
+        <script src="nestedComments.js"></script>
+        <script src="actionButton.js"></script>
 
-                // Find the parent post or comment
-                const post = button.closest('.post, .comment');
-                
-                // Path for different icon types
-                const iconPaths = {
-                    'heart': {
-                        default: 'resources/Heart.svg',
-                        clicked: 'resources/Heart-Clicked.svg'
-                    },
-                    'heartCrack': {
-                        default: 'resources/HeartCrack.svg',
-                        clicked: 'resources/HeartCrack-Clicked.svg'
-                    },
-                    'bookmark': {
-                        default: 'resources/Bookmark.svg',
-                        clicked: 'resources/Bookmark-Clicked.svg'
-                    }
-                };
-
-                if (iconType === 'heart' || iconType === 'heartCrack') {
-                    // Find like and dislike buttons
-                    const likeButton = post.querySelector('.actionButton img[src*="Heart"]').closest('.actionButton');
-                    const dislikeButton = post.querySelector('.actionButton img[src*="HeartCrack"]').closest('.actionButton');
-                    
-                    // Get like and dislike counters
-                    const likeCounter = likeButton.querySelector('.counter');
-                    const dislikeCounter = dislikeButton.querySelector('.counter');
-
-                    // Determine current button details
-                    const currentButton = iconType === 'heart' ? likeButton : dislikeButton;
-                    const otherButton = iconType === 'heart' ? dislikeButton : likeButton;
-                    const currentImg = currentButton.querySelector('img');
-                    const otherImg = otherButton.querySelector('img');
-                    const currentCounter = iconType === 'heart' ? likeCounter : dislikeCounter;
-                    const otherCounter = iconType === 'heart' ? dislikeCounter : likeCounter;
-
-                    // Normalize the current image's src path to ensure comparison works
-                    const currentSrc = currentImg.src.split('/').pop(); // Extract only the filename
-                    const isCurrentlyClicked = currentSrc === iconPaths[iconType].clicked.split('/').pop();
-
-                    // Check the other button's state
-                    const otherSrc = otherImg.src.split('/').pop();
-                    const isOtherClicked = otherSrc === iconPaths[iconType === 'heart' ? 'heartCrack' : 'heart'].clicked.split('/').pop();
-
-                    // Toggle current button state
-                    if (isCurrentlyClicked) {
-                        // If already clicked, reset (unlike/undislike)
-                        currentImg.src = iconPaths[iconType].default;
-                        currentCounter.textContent = Math.max(0, parseInt(currentCounter.textContent) - 1);
-                    } else {
-                        // If not clicked, set current button to clicked state
-                        currentImg.src = iconPaths[iconType].clicked;
-                        currentCounter.textContent = parseInt(currentCounter.textContent) + 1;
-
-                        // If the other button was clicked, reset it
-                        if (isOtherClicked) {
-                            otherImg.src = iconPaths[iconType === 'heart' ? 'heartCrack' : 'heart'].default;
-                            otherCounter.textContent = Math.max(0, parseInt(otherCounter.textContent) - 1);
-                        }
-                    }
-                } else if (iconType === 'bookmark') {
-                    // Bookmark button logic
-                    const currentSrc = img.src.split('/').pop(); // Extract only the filename
-                    const isCurrentlyBookmarked = currentSrc === iconPaths.bookmark.clicked.split('/').pop();
-
-                    // Toggle bookmark state
-                    if (isCurrentlyBookmarked) {
-                        img.src = iconPaths.bookmark.default;
-                    } else {
-                        img.src = iconPaths.bookmark.clicked;
-                    }
-                }
-            }
-
-            // Add event listeners to all action buttons
-            document.addEventListener('DOMContentLoaded', () => {
-                document.querySelectorAll('.actionButton').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const img = this.querySelector('img');
-                        if (img.src.includes('Heart.svg') || img.src.includes('Heart-Clicked.svg')) {
-                            iconClicked(this, 'heart');
-                        } else if (img.src.includes('HeartCrack.svg') || img.src.includes('HeartCrack-Clicked.svg')) {
-                            iconClicked(this, 'heartCrack');
-                        } else if (img.src.includes('Bookmark.svg') || img.src.includes('Bookmark-Clicked.svg')) {
-                            iconClicked(this, 'bookmark');
-                        }
-                    });
-                });
-            });
-        </script>
+        <script src="receivingPostData.js"></script>
     </body>
 </html>
 

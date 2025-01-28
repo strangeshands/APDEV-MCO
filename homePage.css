@@ -47,7 +47,7 @@ button {
      transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover {
+/* button:hover {
      background-color: #7FB8C8;
      transform: scale(1.02);
 }
@@ -55,7 +55,7 @@ button:hover {
 
 button:active {
      transform: scale(0.95); 
-}
+} */
 
 /* ---------- HEADER ---------- */
 #appName {
@@ -96,6 +96,9 @@ header {
      display: flex;
      justify-content: flex-end; 
      align-items: center;
+
+     /* IF USER IS NOT LOGGED IN */
+     gap: 12px;
 }
 
 .searchBar {
@@ -122,6 +125,30 @@ input[type="text"] {
      color: #49454F;
      font-size: 13px;
      outline: none;
+}
+
+#logInButton {
+     background-color: #98D5DC;
+     font-size: 16px;
+     font-weight: Bold;
+     
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 8px 24px;
+
+     width: auto;
+     height: auto;
+}
+
+#logInButton:hover {
+     background-color: #7FB8C8;
+     transform: scale(1.02);
+}
+
+#logInButton:active {
+     transform: scale(0.95); 
 }
 /* ---------- HEADER ---------- */
 
@@ -166,6 +193,7 @@ input[type="text"] {
      
      background-color: #1D1E1F; 
 
+     width: 100%;
      position: sticky;
 }
 
@@ -323,6 +351,7 @@ input[type="text"] {
 }
 
 .navBarButtons:hover {
+     background-color: #7FB8C8;
      color: #16133B;
      transform: scale(1.02);
 }
@@ -381,6 +410,17 @@ input[type="text"] {
      width: 100%;
 }
 
+.noPostsOrComments {
+     color: #E4F3F6;
+     opacity: 50%;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     width: 100%;
+}
+
 .userPostsAndCommentsContent {
      display: flex;
      flex-direction: column;
@@ -425,6 +465,10 @@ input[type="text"] {
 
      width: 100%;
      height: auto;
+
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
 }
 
 .userComment {
@@ -438,11 +482,19 @@ input[type="text"] {
 
      width: 100%;
      height: auto;
+
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+}
+
+.userPost:hover {
+     background-color: #7FB8C8;
+     transform: scale(1.02);
 }
 
 .userPost:hover .userPostTitle {
      color: #16133B;
-     transform: scale(1.02);
 }
 
 .userPost:active {
@@ -452,6 +504,10 @@ input[type="text"] {
 /* ---------- NAV BAR ---------- */
 
 /* ---------- POST FEED ---------- */
+
+#emptyFeed {
+     color: #E4F3F6;
+}
 
 .timeline {
      display: flex;
@@ -488,6 +544,15 @@ input[type="text"] {
 
      width: 100%;
      height: 48px;
+}
+
+.newPostButton:hover {
+     background-color: #7FB8C8;
+     transform: scale(1.02);
+}
+
+.newPostButton:active {
+     transform: scale(0.95); 
 }
 
 .post {     
@@ -528,8 +593,17 @@ input[type="text"] {
      background-color: #D9D9D9;
      border-radius: 99px;
 
-     width: 45px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     width: 40px;
      height: 40px;
+}
+
+.userProfilePic {
+     width: 100%;
+     height: 100%;
 }
 
 .usernameAndTime {
@@ -595,7 +669,7 @@ input[type="text"] {
      align-items: flex-start;
 
      padding: 0px 10px;
-     gap: 20px;
+     gap: 0px;
 
      width: 100%;
      box-sizing: border-box;
@@ -607,14 +681,11 @@ input[type="text"] {
      color: #E4F3F6;
 
      margin: 0px;
-
 }
 
 .postText {
      font-size: 18px;
      color: #E4F3F6;
-
-     margin-top: 0px;
 }
 
 .postImageContainer {
@@ -622,7 +693,7 @@ input[type="text"] {
      justify-content: flex-start;
      align-items: center;
 
-     padding: 0px 10px 10px 10px;
+     padding: 0px;
      width: 100%;
      box-sizing: border-box;
 }
@@ -640,7 +711,7 @@ input[type="text"] {
      justify-content: flex-start;
      align-items: flex-start;
 
-     padding: 12px;
+     padding: 12px 0px;
      gap: 12px;
 
      width: 100%;
@@ -654,41 +725,45 @@ input[type="text"] {
      text-decoration: none;
 }
 
-.interactions {
-
+.postActions, .commentActions {
      display: flex;
      justify-content: flex-end;
      align-items: center;
 
-     padding: 0px;
-     gap: 20px;
-
+     gap: 8px;
      width: 100%;
-     box-sizing: border-box;
+
 }
 
-.hearts {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 12px;
-
-    width: auto;
-    height: auto;
+.separator {
+     border-left: 2px solid white;
+     height: 24px;
 }
 
-.postInteractions {
-     background-color: #030909;
+.actionButton {
+     background: none;
+     border: none;
+     padding: 0px 8px;
+     cursor: pointer;
+     transition: background-color 0.3s, transform 0.2s;
+     display: flex;
+     align-items: center;
+     gap: 6px;
 }
-
-.postInteractions:hover {
-     background-color: #030909;
+ 
+.actionButton:hover {
      transform: scale(1.05);
 }
 
-.postInteractions:active {
-     transform: scale(0.25); 
+.actionButton:active {
+     transform: scale(0.75); 
+}
+ 
+.actionButton .counter {
+     color: rgba(255, 255, 255, 0.7);
+     font-size: 15px;
+     font-weight: bold;
+     margin-left: 0;
 }
 
 .postDivider {

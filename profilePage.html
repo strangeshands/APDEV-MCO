@@ -4,6 +4,7 @@
           <title> Connectify - [username] </title>
           <link rel="stylesheet" type="text/css" href="profilePage.css">
           <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
+          <script src="profile1-data.js"></script>
      </head>
 
      <body>
@@ -23,7 +24,7 @@
           <div id="content">
                <div id="profileHeader">
                     <!--<img src="resources/headerSample.jpg"/>-->
-                    <img src="resources/headerSample.jpg" />
+                    <img src="resources/headerSample.jpg" onclick="openModal(this)" />
                </div>
                
                <div id="sub-container">
@@ -34,11 +35,11 @@
                               <!-- PFP and USERNAME -->
                               <div id="pfpcontainer">
                                    <div id="pfpPic">
-                                        <img src="resources/pfpSample.jpg" />
+                                        <img src="resources/pfpSample.jpg" onclick="openModal(this)" />
                                    </div>
 
-                                   <p class="maintext"> DARNA </p>
-                                   <p class="subtext"> @AkoSiDarna </p>
+                                   <p class="maintext" id="display_name"></p>
+                                   <p class="subtext" id="username"></p>
                               </div>
 
                               <div class="inviBrk"> </div>
@@ -46,12 +47,12 @@
                               <!-- FOLLOW/ER COUNTS -->
                               <div id="count">
                                    <div id="followers">
-                                        <p class="maintext"> 218 </p>
+                                        <p class="maintext" id="num_likes"></p>
                                         <p class="subtext"> Likes </p>
                                    </div>
 
                                    <div id="following">
-                                        <p class="maintext"> 12 </p>
+                                        <p class="maintext" id="num_posts"></p>
                                         <p class="subtext"> Posts </p>
                                    </div>
                               </div>
@@ -61,14 +62,8 @@
                          <div class="col1-sub-container"> 
                               <h3> BIO </h3>
 
-                              <!-- IF NO BIO AVAILABLE -->
-                              <!--<p id="bio" class="regulartext"> No bio yet</p>-->
-
-                              <!-- BIO AVAILABLE -->
-                              <p id="bio" class="regulartext"> Tech enthusiast and occasional gamer with a love for coding, creativity, 
-                                   and meaningful conversations. I enjoy exploring new ideas, diving into pop culture, and 
-                                   learning something new every day. Offline, you’ll find me experimenting in the kitchen or 
-                                   lost in a good book. Let’s share and grow together here!</p>
+                              <!-- BIO PLACEHOLDER -->
+                              <p id="bio" class="regulartext"></p>
                          </div>
 
                          <!-- TAGS -->
@@ -80,7 +75,7 @@
 
                               <!-- TAGS AVAILABLE -->
                               <div id="taglist">
-                                   <button class="usertags"> 
+                                   <!--<button class="usertags"> 
                                         #TagHere
                                    </button>
                                    <button class="usertags"> 
@@ -88,17 +83,17 @@
                                    </button>
                                    <button class="usertags"> 
                                         #ProbablyAnotherTagHere
-                                   </button>
+                                   </button>-->
                               </div>
                          </div>
 
                          <!-- SETTINGS -->
                          <div class="col1-sub-container"> 
-                              <button class="editProfile">
+                              <button class="editProfile" onclick="window.location.href='editProfilePage.html'">
                                    <img src="resources/Edit Icon.svg" alt="">
                                    Edit Profile
                               </button>
-                              <button class="logOut">
+                              <button class="logOut" onclick="window.location.href='loginPage.html'">
                                    <img src="resources/Log Out Icon.svg" alt="">
                                    Log Out
                               </button>
@@ -177,7 +172,7 @@
                                              </button>
                                              <img src="resources/Line.svg" alt="Line">
                                              <button class="postoptionbutton">
-                                                  <img src="resources/Heart Crack.svg"/>
+                                                  <img src="resources/HeartCrack.svg"/>
                                              </button>
                                              <button class="postoptionbutton">
                                                   <img src="resources/Comments.svg"/>
@@ -281,6 +276,51 @@
 
 <!-- JAVASCRIPT -->
 <script>
+     /* ----- HARD CODED DATA ----- */
+     document.addEventListener("DOMContentLoaded", () => {
+          const displayNameElement = document.getElementById('display_name');
+          const usernameElement = document.getElementById('username');
+          const likesCountElement = document.getElementById('num_likes');
+          const postsCountElement = document.getElementById('num_posts');
+
+          var profile = profile1
+
+          // Populate the DOM elements with data from profile1
+          displayNameElement.textContent = profile.display_name;
+          usernameElement.textContent = profile.username;
+          likesCountElement.textContent = profile.likes;
+          postsCountElement.textContent = profile.posts;
+
+          printBio(profile1.bio);
+          printTags(profile1.tags);
+     });
+
+
+     /* ----- NECESSARY FUNCTIONS ----- */
+     function printTags (tags) {
+          const tagListElement = document.getElementById("taglist");
+
+          if (tags.length === 0) {
+               tagListElement.innerHTML = '<p class="regulartext" id="no-tag-msg">No tags available</p>';
+          } else {
+               tagListElement.innerHTML = tags
+                    .map(tag => `<button class="usertags">${tag}</button>`)
+                    .join("");
+          }
+     }
+
+     function printBio (bio) {
+          const bioElement = document.getElementById('bio');
+
+          if (bio.length === 0) {
+               bioElement.textContent = "Boring! No bio yet...";
+               bioElement.classList.add('no-bio-msg');
+          } else {
+               bioElement.textContent = bio;
+               bioElement.classList.remove('no-bio-msg');
+          }
+     }
+
      function openModal(image) {
           const modal = document.getElementById("imageModal");
           const modalImg = document.getElementById("modalImage");

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
      <head>
-          <title> Home </title>
+          <title> Connectify - Home </title>
           <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
           <link rel="stylesheet" type="text/css" href="homePage.css">
      </head>
@@ -18,6 +18,11 @@
                          <img src="resources/Trailing-Elements.svg" alt="Search Icon">
                          <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
                     </div>
+
+                    <!-- IF USER IS NOT LOGGED IN -->
+                    <!--
+                    <button id="logInButton" onclick="window.location.href='loginPage.html'">Log In</button>
+                    -->
                </div>
           </header>
           <!-- HEADER -->
@@ -26,6 +31,7 @@
 
           <div class="content">
 
+               <!-- IF USER IS LOGGED IN -->
                <!-- NAV BAR -->
                <div class="navBar">
 
@@ -38,19 +44,6 @@
                                    <p class="profileUsername">Username</p>
                                    <p class="profileUserhandle">@userhandle</p>
                               </div>
-                              <div class="likesAndPosts">
-                                   <div class="likes">
-                                        <p class="numbers">127</p>
-                                        <p class="numberCategory">Likes</p>
-                                   </div>
-                                   <div class="posts">
-                                        <p class="numbers">369</p>
-                                        <p class="numberCategory">Posts</p>
-                                   </div>
-                              </div>
-                              <p class="bio">
-                                   i am a person and i like cats, please don’t talk to me
-                              </p>
                          </div>
 
                          <div class="navBarDivider"></div>
@@ -84,6 +77,11 @@
                               <a class="userNavMore" href="profilePage.html">More ></a>
                          </div>
 
+                         <!-- IF USER HAS NOT MADE ANY POSTS YET -->
+                         <!--
+                         <div class="noPostsOrComments">No Posts Available</div>
+                         --> 
+
                          <div class="userPostsAndCommentsContent">
                               <button class="userPost" onclick="window.location.href='postPage.html'">
                                    <img class="userPostImage" src="resources/loginbg.png" alt="User Post Image">
@@ -116,14 +114,21 @@
                               <a class="userNavMore" href="profilePage.html">More ></a>
                          </div>
 
+                         <!-- IF USER HAS NOT MADE ANY COMMENTS YET -->
+                         <!--     
+                         <div class="noPostsOrComments">No Comments Available</div>
+                         -->
+
                          <div class="userPostsAndCommentsContent">
+
+
                               <button class="userPost" onclick="window.location.href='postPage.html'">
                                    <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
                                    <p class="userComment">funny reply</p>
                               </button>
                               <button class="userPost" onclick="window.location.href='postPage.html'">
                                    <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                   <p class="userComment">long ass commmmeeennnttt....</p>
+                                   <p class="userComment">long ass commmmeeennntttuhhhhhhhhhhh</p>
                               </button>
                               <button class="userPost" onclick="window.location.href='postPage.html'">
                                    <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
@@ -140,113 +145,127 @@
                          </div>
                     </div>
 
-               </div>
+               </div> 
                
                <!-- TIMELINE -->
                <div class="timeline">
                     <!-- NEW POST BUTTON -->
                     <div class="newPost">
-                         <button class="newPostButton">+ New Post</button>
+                         <button class="newPostButton" onclick="window.location.href='newPostPage.html'">+ New Post</button>
                     </div>
 
                     <div class="postDivider"></div>
+
+                    <!-- IF POST FEED IS EMPTY-->
+                    <!--
+                    <div class="emptyTimeline">
+                         <p id="emptyFeed">Wow, such empty</p>
+                     </div> 
+                    -->
                     
                     <!-- POST FEED -->
 
                     <!-- POST -->
-                    <div class="post">
+                    <div class="post" id="post1">
 
                          <div class="mainPost">
                               <!-- POST USER -->
                               <div class="postUser">
-                                   <div class="profilePic"></div>
+                                   <div class="profilePic">
+                                        <img src="resources/cat.jpg" alt="userProfilePicture" class="userProfilePic">
+                                   </div>
                                    <div class="usernameAndTime">
-                                        <p class="username">Username</p>
+                                        <p class="username">bartholomewThe5th</p>
                                         <p class="timePosted">4 minutes ago</p>
                                    </div>
-                                   <!-- POST OPTIONS -->
+
+                                   <!-- IF USER IS LOGGED IN -->
+                                   <!-- POST OPTIONS 
                                    <button class="optionsButton">
                                         <img src="resources/Options Button.svg" alt="Options">
-                                   </button>
-                              </div>
-
-                              <!-- TAGS -->
-                              <div class="posttags">
-                                   <a href="">#funny</a>
-                                   <a href="">#life</a>
-                                   <a href="">#school</a>
-                                   <a href="">#dolphin</a>
-                                   <a href="">#rainbow</a>
-                                   <a href="">#ocean</a>
-                                   <a href="">#morning</a>
-                                   <a href="">#depression</a>
-                                   <a href=""></a>
-                                   
+                                   </button> -->
                               </div>
 
                               <!-- POST CONTENT -->
                               <div class="postContent">
+
+                                   <!-- TAGS -->
+                                   <div class="posttags">
+                                        <a href="">#funny</a>
+                                        <a href="">#life</a>
+                                        <a href="">#school</a>
+                                        <a href="">#dolphin</a>
+                                        <a href="">#rainbow</a>
+                                        <a href="">#ocean</a>
+                                        <a href="">#morning</a>
+                                        <a href="">#depression</a>
+                                        <a href=""></a>
+                                   </div>
+
                                    <p class="postTitle">good morning</p>
                                    <p class="postText">text text text text text text text text text text text text text text text text text text text text text text text </p>
+                                   <div class="postImageContainer">
+                                        <img class="postImage" src="resources/loginbg.png" alt="Post Image">
+                                   </div>
                               </div>
 
-                              <div class="postImageContainer">
-                                   <img class="postImage" src="resources/loginbg.png" alt="Post Image">
-                              </div>
                          </div>
                          
-                         <!-- INTERACTIONS -->
-                         <div class="interactions">
-                              <div class="hearts">
-                                   <button class="postInteractions heart" onclick="iconClicked(this, 'heart')">
-                                        <img src="resources/Heart.svg" class="postInteractionsIcon" alt="Heart">
-                                   </button>
-                                   <img src="resources/Line.svg" alt="Line">
-                                   <button class="postInteractions heartCrack" onclick="iconClicked(this, 'heartCrack')">
-                                        <img src="resources/HeartCrack.svg" class="postInteractionsIcon" alt="HeartCrack">
-                                   </button>
-                              </div>
-                              <button class="postInteractions comments" onclick="window.location.href='postPage.html'">
-                                   <img src="resources/Comments.svg" class="postInteractionsIcon" alt="Comments">
+                         <!-- ACTION BUTTONS -->
+                         <div class="commentActions">
+                              <button class="actionButton">
+                                  <img src="resources/Heart.svg" alt="Like">
+                                  <span class="counter postLikeCounter">42</span>
                               </button>
-                              <button class="postInteractions bookmark" onclick="iconClicked(this, 'bookmark')">
-                                   <img src="resources/Bookmark.svg" class="postInteractionsIcon" alt="Bookmark">
+                              <div class="separator"></div>
+                              <button class="actionButton">
+                                  <img src="resources/HeartCrack.svg" alt="Dislike">
+                                  <span class="counter postDislikeCounter">8</span>
                               </button>
+                              <a href="postPage.html" class="postLink" data-post-id="post1"><button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button></a>
+                              <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                          </div>
+
                     </div>
 
                     <div class="postDivider"></div>
 
                     <!-- POST -->
-                    <div class="post">
+                    <div class="post" id="post2">
 
                          <div class="mainPost">
                               <!-- POST USER -->
                               <div class="postUser">
-                                   <div class="profilePic"></div>
+                                   <div class="profilePic">
+                                        <img src="resources/joella.jpg" alt="userProfilePicture" class="userProfilePic">
+                                   </div>
                                    <div class="usernameAndTime">
-                                        <p class="username">Username</p>
+                                        <p class="username">slaysianDivaOfLA</p>
                                         <p class="timePosted">7 hours ago</p>
                                    </div>
+
+                                   <!-- IF USER IS LOGGED IN -->
                                    <!-- POST OPTIONS -->
                                    <button class="optionsButton">
                                         <img src="resources/Options Button.svg" alt="">
                                    </button>
                               </div>
 
-                              <!-- TAGS -->
-                              <div class="posttags">
-                                   <a href="">#mug</a>
-                                   <a href="">#life</a>
-                                   <a href="">#stuff</a>
-                                   <a href="">#comedy</a>
-                                   <a href="">#hell</a>
-                              </div>
-
                               <!-- POST CONTENT -->
                               <div class="postContent">
+
+                                   <!-- TAGS -->
+                                   <div class="posttags">
+                                        <a href="">#mug</a>
+                                        <a href="">#life</a>
+                                        <a href="">#stuff</a>
+                                        <a href="">#comedy</a>
+                                        <a href="">#hell</a>
+                                   </div>
+
                                    <p class="postTitle">fix ur mug</p>
                                    <p class="postText">- Joella</p>
+                                   <div class="postImageContainer"></div>
                               </div>
 
                               <div class="postImageContainer">
@@ -254,23 +273,19 @@
                               </div>
                          </div>
                          
-                         <!-- INTERACTIONS -->
-                         <div class="interactions">
-                              <div class="hearts">
-                                   <button class="postInteractions heart" onclick="iconClicked(this, 'heart')">
-                                        <img src="resources/Heart.svg" class="postInteractionsIcon" alt="Heart">
-                                   </button>
-                                   <img src="resources/Line.svg" alt="Line">
-                                   <button class="postInteractions heartCrack" onclick="iconClicked(this, 'heartCrack')">
-                                        <img src="resources/HeartCrack.svg" class="postInteractionsIcon" alt="HeartCrack">
-                                   </button>
-                              </div>
-                              <button class="postInteractions comments" onclick="window.location.href='postPage.html'">
-                                   <img src="resources/Comments.svg" class="postInteractionsIcon" alt="Comments">
+                         <!-- ACTION BUTTONS -->
+                         <div class="commentActions">
+                              <button class="actionButton">
+                                  <img src="resources/Heart.svg" alt="Like">
+                                  <span class="counter postLikeCounter">35</span>
                               </button>
-                              <button class="postInteractions bookmark" onclick="iconClicked(this, 'bookmark')">
-                                   <img src="resources/Bookmark.svg" class="postInteractionsIcon" alt="Bookmark">
+                              <div class="separator"></div>
+                              <button class="actionButton">
+                                  <img src="resources/HeartCrack.svg" alt="Dislike">
+                                  <span class="counter postDislikeCounter">21</span>
                               </button>
+                              <a href="postPage.html"  class="postLink" data-post-id="post2"><button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button></a>
+                              <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                          </div>
                          
                     </div>
@@ -278,115 +293,69 @@
                     <div class="postDivider"></div>
 
                     <!-- POST -->
-                    <div class="post">
+                    <div class="post" id="post3">
 
                          <div class="mainPost">
                               <!-- POST USER -->
                               <div class="postUser">
-                                   <div class="profilePic"></div>
+                                   <div class="profilePic">
+                                        <img src="resources/jabee.jpg" alt="userProfilePicture" class="userProfilePic">
+                                   </div>
                                    <div class="usernameAndTime">
-                                        <p class="username">Username</p>
+                                        <p class="username">carbonaraEater</p>
                                         <p class="timePosted">5 days ago</p>
                                    </div>
-                                   <!-- POST OPTIONS -->
+
+                                   <!-- IF USER IS LOGGED IN -->
+                                   <!-- POST OPTIONS 
                                    <button class="optionsButton">
                                         <img src="resources/Options Button.svg" alt="">
-                                   </button>
-                              </div>
-
-                              <!-- TAGS-->
-                              <div class="posttags">
-                                   <a href="">#coding</a>
-                                   <a href="">#spiders</a>
-                                   <a href="">#web</a>
-                                   <a href="">#human</a>
-                                   <a href="">#confusion</a>
-                                   <a href="">#guy</a>
-                                   <a href="">#bugs</a>
+                                   </button> -->
                               </div>
 
                               <!-- POST CONTENT -->
                               <div class="postContent">
+
+                                   <!-- TAGS-->
+                                   <div class="posttags">
+                                        <a href="">#coding</a>
+                                        <a href="">#spiders</a>
+                                        <a href="">#web</a>
+                                        <a href="">#human</a>
+                                        <a href="">#confusion</a>
+                                        <a href="">#guy</a>
+                                        <a href="">#bugs</a>
+                                   </div>
+
                                    <p class="postTitle">hehe</p>
                                    <p class="postText">hamster</p>
+                                   <div class="postImageContainer">
+                                        <img class="postImage" src="resources/hamster.jpg" alt="Hamster">
+                                   </div>
                               </div>
 
-                              <div class="postImageContainer">
-                                   <img class="postImage" src="resources/hamster.jpg" alt="Hamster">
-                              </div>
                          </div>
                           
-                         <!-- INTERACTIONS -->
-                         <div class="interactions">
-                              <div class="hearts">
-                                   <button class="postInteractions heart" onclick="iconClicked(this, 'heart')">
-                                        <img src="resources/Heart.svg" class="postInteractionsIcon" alt="Heart">
-                                   </button>
-                                   <img src="resources/Line.svg" alt="Line">
-                                   <button class="postInteractions heartCrack" onclick="iconClicked(this, 'heartCrack')">
-                                        <img src="resources/HeartCrack.svg" class="postInteractionsIcon" alt="HeartCrack">
-                                   </button>
-                              </div>
-                              <button class="postInteractions comments" onclick="window.location.href='postPage.html'">
-                                   <img src="resources/Comments.svg" class="postInteractionsIcon" alt="Comments">
+                         <!-- ACTION BUTTONS -->
+                         <div class="commentActions">
+                              <button class="actionButton">
+                                  <img src="resources/Heart.svg" alt="Like">
+                                  <span class="counter postLikeCounter">57</span>
                               </button>
-                              <button class="postInteractions bookmark" onclick="iconClicked(this, 'bookmark')">
-                                   <img src="resources/Bookmark.svg" class="postInteractionsIcon" alt="Bookmark">
+                              <div class="separator"></div>
+                              <button class="actionButton">
+                                  <img src="resources/HeartCrack.svg" alt="Dislike">
+                                  <span class="counter postDislikeCounter">3</span>
                               </button>
+                              <a href="postPage.html" class="postLink" data-post-id="post3"><button class="actionButton"><img src="resources/Comments.svg" alt="Comment"></button></a>
+                              <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
                          </div>
+
                     </div>
 
-                    <script>
-                         function iconClicked(button, iconType) {
-                              var img = button.querySelector('.postInteractionsIcon'); // Gets the icon of the button
+                    <script src="actionButton.js"></script>
 
-                              if (iconType === 'heart') {
-
-                                   // Changes the image source when the button is clicked
-                                   if (img.src.includes('resources/Heart.svg')) {
-                                        img.src = 'resources/Heart-Clicked.svg';
-                                   } else {
-                                        img.src = 'resources/Heart.svg';  // Changes it back to the first image
-                                   }
-
-                                   // If opposing heart is selected, change back to normal
-                                   var post = button.closest('.post'); // Get the parent container
-                                   var heartCrackImg = post.querySelector('.postInteractions.heartCrack .postInteractionsIcon');
-                                   if (heartCrackImg) {
-                                        if (heartCrackImg.src.includes('resources/HeartCrack-Clicked.svg')) {
-                                             heartCrackImg.src = 'resources/HeartCrack.svg';
-                                        }
-                                   }
-                              }
-                              else if (iconType === 'heartCrack') {
-
-                                   // Changes the image source when the button is clicked
-                                   if (img.src.includes("resources/HeartCrack.svg")) {
-                                        img.src = "resources/HeartCrack-Clicked.svg"; 
-                                   } else {
-                                        img.src = "resources/HeartCrack.svg";  // Changes it back to the first image
-                                   }
-
-                                   // If opposing heart is selected, change back to normal
-                                   var post = button.closest('.post'); // Get the parent container
-                                   var heartImg = post.querySelector('.postInteractions.heart .postInteractionsIcon');
-                                   if (heartImg) {
-                                        if (heartImg.src.includes('resources/Heart-Clicked.svg')) {
-                                             heartImg.src = 'resources/Heart.svg'; // Change bookmark icon
-                                        }
-                                   }
-                              }
-                              else if (iconType === 'bookmark') {
-
-                                   // Changes the image source when the button is clicked
-                                   if (img.src.includes('resources/Bookmark.svg')) {
-                                        img.src = 'resources/Bookmark-Clicked.svg';  
-                                   } else {
-                                        img.src = 'resources/Bookmark.svg';  // Changes it back to the first image
-                                   }
-                              }
-                         };
-                    </script>
+                    <script src="sendingPostData.js"></script>
                
                </div>
 

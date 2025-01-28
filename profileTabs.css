@@ -73,74 +73,6 @@ button:active {
 }
 /* ---------- BUTTONS ---------- */
 
-/* ---------- HEADER ---------- */
-#appName {
-     font-family: "JostBold";
-     color: #98D5DC;
-     font-size: 20px;
-     font-weight: 400;
-}
-
-header {
-     position: sticky;
-     top: 0;
-     background-color: black;
-     height: 80px;
-     width: 100%;
-     margin: 0;
-
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     gap: 20px;
-     padding: 0 30px 0 20px;
-
-     box-shadow: 2px 2px white;
-}
-
-#logo {
-     margin-right: 15px;
-}
-
-#headercol1 {
-     display: flex; 
-     justify-content: flex-start; 
-     align-items: center;
-}
-
-#headercol2 {
-     display: flex;
-     justify-content: flex-end; 
-     align-items: center;
-}
-
-.searchBar {
-     background-color: #ECE6F0;
-     color: #49454F;
-     
-     display: flex;
-     justify-content: flex-start;
-     align-items: center;
-
-     height: 35px;
-     width: 400px;
-     max-width: 800px;
-
-     border-radius: 30px;
-}
-
-input[type="text"] {
-     background: none;
-     border: none;
-     width: 100%;
-     height: 100%;
-
-     color: #49454F;
-     font-size: 13px;
-     outline: none;
-}
-/* ---------- HEADER ---------- */
-
 #content {
      margin: auto;
      height: auto;
@@ -427,6 +359,7 @@ h3 {
 
 .modal {
      display: none;
+     align-content: center;
      position: fixed; 
      z-index: 1000; 
      left: 0;
@@ -478,11 +411,16 @@ h3 {
      width: auto;
 }
 
-.postoptionbutton {
+.actionButton {
      background-color: transparent;
+
+     display: flex;
+     align-items: center;
+     gap: 6px;
+     color: white;
 }
 
-.postoptionbutton:hover {
+.actionButton:hover {
      background-color: transparent;
      opacity: 80%;
      transform: scale(1.08);
@@ -496,4 +434,4 @@ h3 {
 
 .tab-content {
      display: none;
- }
+}
