@@ -10,12 +10,23 @@ function storePostData(postId) {
      const postImageElement = document.getElementById(postId).querySelector('.postImageContainer img');
      const postImage = postImageElement ? postImageElement.getAttribute('src') : ''; // If no image, set empty string
      
+     // Check if there's an image in the profile pic
+     const userProfilePicElement = document.getElementById(postId).querySelector('.profilePic img');
+     const userProfilePic = userProfilePicElement ? userProfilePicElement.getAttribute('src') : ''; // If no image, set empty string
+     
+     const username = document.getElementById(postId).querySelector('.username').innerText;
+
+     const timePosted = document.getElementById(postId).querySelector('.timePosted').innerText;
+
      // Create an object to hold all the content
      const contentObj = {
           postTitle: postTitle,
           postText: postText,
           postTags: postTags,
-          postImage: postImage
+          postImage: postImage,
+          userProfilePic: userProfilePic,
+          username: username,
+          timePosted: timePosted
      };
 
      // Save the object as a JSON string in localStorage

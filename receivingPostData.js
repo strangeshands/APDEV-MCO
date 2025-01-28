@@ -9,6 +9,14 @@ if (contentData) {
           document.getElementById('placeholderContent').innerHTML = `<img src="${contentData.postImage}" id="postImage">`;
      }
 
+     if (contentData.userProfilePic) {
+          document.getElementById('postAvatar').innerHTML = `<img src="${contentData.userProfilePic}" id="postProfilePic">`;
+     }
+
+     document.getElementById('postUsername').innerText = `${contentData.username}`;
+
+     document.getElementById('postTime').innerText = `${contentData.timePosted}`;
+
      // Display tags as individual <a> elements
      if (contentData.postTags && contentData.postTags.length > 0) {
           const tagsContainer = document.getElementById('tags');
