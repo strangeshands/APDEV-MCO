@@ -209,12 +209,22 @@ input[type="text"] {
      width: 100%;
 }
 
-.userProfilePic {
-     background-color: #D9D9D9;
+.userAvatar {
+     background-color: #030909;
      border-radius: 99px;
 
-     width: 100px;
-     height: 100px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     width: 160px;
+     height: 160px;
+}
+
+.userProfilePic {
+     border-radius: 50%;
+     width: 100%;
+     height: 100%;
 }
 
 .usernameAndhandle {
@@ -434,17 +444,21 @@ input[type="text"] {
      height: auto;
 }
 
+.userPostLink {
+     text-decoration: none;
+     width: 100%;
+}
+
 .userPost {
      display: flex;
      justify-content: flex-start;
      align-items: center;
+     background-color: #1D1E1F;
 
      padding: 10px;
      gap: 12px;
 
      width: 100%;
-
-     background-color: #1D1E1F;
 }
 
 .userPostImage {

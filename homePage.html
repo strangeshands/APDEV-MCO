@@ -39,10 +39,12 @@
                     <div class="profileNav">
                          <!-- PROFILE NAME, PIC, # OF LIKES/POSTS, BIO-->
                          <div class="profile">
-                              <div class="userProfilePic"></div>
+                              <div class="userAvatar">
+                                   <img src="resources/pfpSample.jpg" class="userProfilePic" alt="User Profile Pic">
+                              </div>
                               <div class="usernameAndhandle">
-                                   <p class="profileUsername">Username</p>
-                                   <p class="profileUserhandle">@userhandle</p>
+                                   <p class="profileUsername">DARNA</p>
+                                   <p class="profileUserhandle">@AkoSiDarna</p>
                               </div>
                          </div>
 
@@ -83,26 +85,36 @@
                          --> 
 
                          <div class="userPostsAndCommentsContent">
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/loginbg.png" alt="User Post Image">
-                                   <p class="userPostTitle">good morning</p>
-                              </button>
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/Image Holder.svg" alt="User Post Image">
-                                   <p class="userPostTitle">how are you</p>
-                              </button>
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/Image Holder.svg" alt="User Post Image">
-                                   <p class="userPostTitle">wake me up</p>
-                              </button>
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/monkey.jpg" alt="User Post Image">
-                                   <p class="userPostTitle">titleeeeee</p>
-                              </button>
-                              <button class="userPost" onclick="window.location.href='postPage.html'">
-                                   <img class="userPostImage" src="resources/hamster.jpg" alt="User Post Image">
-                                   <p class="userPostTitle">where am i</p>
-                              </button>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost1">
+                                   <button class="userPost" id="userPost1">
+                                        <img class="userPostImage" src="resources/sad-hamster.jpg" alt="User Post Image">
+                                        <p class="userPostTitle">good morning</p>
+                                   </button>
+                              </a>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost2">
+                                   <button class="userPost" id="userPost2">
+                                        <img class="userPostImage" src="resources/Image Holder.svg" alt="User Post Image">
+                                        <p class="userPostTitle">how are you</p>
+                                   </button>
+                              </a>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost3">
+                                   <button class="userPost" id="userPost3">
+                                        <img class="userPostImage" src="resources/Image Holder.svg" alt="User Post Image">
+                                        <p class="userPostTitle">wake me up</p>
+                                   </button>
+                              </a>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost4">
+                                   <button class="userPost" id="userPost4">
+                                        <img class="userPostImage" src="resources/monkey.jpg" alt="User Post Image">
+                                        <p class="userPostTitle">titleeeeee</p>
+                                   </button>
+                              </a>
+                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost5">
+                                   <button class="userPost" id="userPost5">
+                                        <img class="userPostImage" src="resources/hamster.jpg" alt="User Post Image">
+                                        <p class="userPostTitle">where am i</p>
+                                   </button>
+                              </a>
                          </div>
                     </div>
                     
