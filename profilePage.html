@@ -283,10 +283,10 @@
           const profile1 = {
                display_name: "DARNA",
                username: "@AkoSiDarna",
-               bio: "Tech enthusiast and occasional gamer with a love for coding, creativity, and meaningful conversations. " +
+               bio: "",/*"Tech enthusiast and occasional gamer with a love for coding, creativity, and meaningful conversations. " +
                     "I enjoy exploring new ideas, diving into pop culture, and learning something new every day. " +
                     "Offline, you’ll find me experimenting in the kitchen or lost in a good book. " +
-                    "Let’s share and grow together here!",
+                    "Let’s share and grow together here!",*/
                likes: 2,
                posts: 2,
                tags: ["#Movies", "#TVSeries", "#IndieFilms"]
@@ -294,33 +294,48 @@
 
           const displayNameElement = document.getElementById('display_name');
           const usernameElement = document.getElementById('username');
-          const bioElement = document.getElementById('bio');
           const likesCountElement = document.getElementById('num_likes');
           const postsCountElement = document.getElementById('num_posts');
 
           // Populate the DOM elements with data from profile1
           displayNameElement.textContent = profile1.display_name;
           usernameElement.textContent = profile1.username;
-          bioElement.textContent = profile1.bio;
           likesCountElement.textContent = profile1.likes;
           postsCountElement.textContent = profile1.posts;
 
           /* ---- BIO ---- */
+          printBio(profile1.bio);
 
           /* ---- TAGS ---- */
-          const tagListElement = document.getElementById("taglist");
-
-          if (profile1.tags.length === 0) {
-               tagListElement.innerHTML = '<p class="regulartext" id="no-tag-msg">No tags available</p>';
-          } else {
-               tagListElement.innerHTML = profile1.tags
-                    .map(tag => `<button class="usertags">${tag}</button>`)
-                    .join("");
-          }
+          printTags(profile1.tags);
      });
 
 
      /* ----- NECESSARY FUNCTIONS ----- */
+     function printTags (tags) {
+          const tagListElement = document.getElementById("taglist");
+
+          if (tags.length === 0) {
+               tagListElement.innerHTML = '<p class="regulartext" id="no-tag-msg">No tags available</p>';
+          } else {
+               tagListElement.innerHTML = tags
+                    .map(tag => `<button class="usertags">${tag}</button>`)
+                    .join("");
+          }
+     }
+
+     function printBio (bio) {
+          const bioElement = document.getElementById('bio');
+
+          if (bio.length === 0) {
+               bioElement.textContent = "Boring! No bio yet...";
+               bioElement.classList.add('no-bio-msg');
+          } else {
+               bioElement.textContent = bio;
+               bioElement.classList.remove('no-bio-msg');
+          }
+     }
+
      function openModal(image) {
           const modal = document.getElementById("imageModal");
           const modalImg = document.getElementById("modalImage");

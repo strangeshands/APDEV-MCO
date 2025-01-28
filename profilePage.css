@@ -332,8 +332,8 @@ h3 {
      gap: 5px;
 }
 
-#no-tag-msg {
-     font-size: 12px;
+#no-tag-msg, .no-bio-msg {
+     font-size: 13px;
      opacity: 80%;
 }
 
