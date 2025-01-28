@@ -90,23 +90,87 @@
                          </div>
                     </div>
 
+                    <div class="row-brk" style="width: inherit;"></div>
+
                     <div id="input-details" class="col2-row">
-                         <div class="input-col">
-                              <div id="change-username" class="input-fields">
-                                   <p class="input-label"> Username </p>
-                                   <input type="text" id="username" name="username" placeholder="New username">
+                         <div class="input-segment-rows">
+                              <div class="input-col">
+                                   <div id="change-username" class="input-fields">
+                                        <p class="input-label"> Username </p>
+                                        <input type="text" id="username" name="username" placeholder="New username">
+                                        <label id="username-feedback" class="input-feedback">insert feedback</label>
+                                   </div>
+                                   <div id="change-display-name" class="input-fields">
+                                        <p class="input-label"> Display Name </p>
+                                        <input type="text" id="display-name" name="display-name" placeholder="New display name">
+                                        <label id="dn-feedback" class="input-feedback">insert feedback</label>
+                                   </div>
                               </div>
-                              <div id="change-display-name" class="input-fields">
-                                   <p class="input-label"> Display Name </p>
-                                   <input type="text" id="display-name" name="display-name" placeholder="New display name">
+
+                              <div class="input-col">
+                                   <div id="change-bio" class="input-fields">
+                                        <p class="input-label"> Bio </p>
+                                        <textarea id="bio" name="bio" rows="5" cols="80" placeholder="New bio..."></textarea>
+                                   </div>
                               </div>
+                         </div>
+
+                         <div class="input-segment-rows button-row">
+                              <button id="save-changes" class="save-buttons">
+                                   Save Changes
+                              </button>
+                         </div>
+
+                         <div class="row-brk"></div>
+
+                         <div class="input-segment-rows">
+                              <div class="input-col">
+                                   <label> Account Information </label>
+                                   <div id="change-email" class="input-fields">
+                                        <p class="input-label"> Email </p>
+                                        <input type="email" id="email" name="email" placeholder="New email">
+                                        <label id="email-feedback" class="input-feedback">insert feedback</label>
+                                   </div>
+                                   <div id="change-ematelil" class="input-fields">
+                                        <p class="input-label"> Phone Number </p>
+                                        <input type="tel" id="tel-number" name="tel-number" placeholder="New number">
+                                        <label id="tel-feedback" class="input-feedback">insert feedback</label>
+                                   </div>
+
+                                   <div class="button-row">
+                                        <button id="update-acc" class="save-buttons">
+                                             Update Account
+                                        </button>
+                                   </div>
+                              </div>
+
+                              <div class="input-col">
+                                   <label> Change Password </label>
+                                   <div id="password-edit">
+                                        <div id="current-password" class="input-fields password-edit">
+                                             <p class="input-label"> Current Password </p>
+                                             <input type="password" id="current-password" name="password" placeholder="Current password">
+                                        </div>
+                                        <div id="change-password" class="input-fields password-edit">
+                                             <p class="input-label"> New Password </p>
+                                             <input type="password" id="password" name="passsword" placeholder="New password">
+                                             <label id="pw-feedback" class="input-feedback">insert feedback</label>
+                                        </div>
+                                        <div id="confirm-password" class="input-fields password-edit">
+                                             <p class="input-label"> Confirm New Password </p>
+                                             <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password">
+                                        </div>
+                                   </div>
+                                   <button id="update-pw" class="save-buttons" style:>
+                                        Update Password
+                                   </button>
+                              </div>
+                         </div>
+
+                         <!--<div class="input-col">
                               <div id="change-email" class="input-fields">
                                    <p class="input-label"> Email </p>
                                    <input type="email" id="email" name="email" placeholder="New email">
-                              </div>
-                              <div id="change-bio" class="input-fields">
-                                   <p class="input-label"> Bio </p>
-                                   <textarea id="bio" name="bio" rows="5" cols="80" placeholder="New bio..."></textarea>
                               </div>
                          </div>
 
@@ -128,7 +192,7 @@
                                         <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password">
                                    </div>
                               </div>
-                         </div>
+                         </div>-->
                     </div>
                </div>
                
