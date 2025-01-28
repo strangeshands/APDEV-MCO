@@ -332,6 +332,11 @@ h3 {
      gap: 5px;
 }
 
+#no-tag-msg {
+     font-size: 12px;
+     opacity: 80%;
+}
+
 .col2-sub-container {
      width: 100%;
      height: auto;

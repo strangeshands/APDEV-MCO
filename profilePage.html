@@ -37,8 +37,8 @@
                                         <img src="resources/pfpSample.jpg" onclick="openModal(this)" />
                                    </div>
 
-                                   <p class="maintext"> DARNA </p>
-                                   <p class="subtext"> @AkoSiDarna </p>
+                                   <p class="maintext" id="display_name"></p>
+                                   <p class="subtext" id="username"></p>
                               </div>
 
                               <div class="inviBrk"> </div>
@@ -46,12 +46,12 @@
                               <!-- FOLLOW/ER COUNTS -->
                               <div id="count">
                                    <div id="followers">
-                                        <p class="maintext"> 218 </p>
+                                        <p class="maintext" id="num_likes"></p>
                                         <p class="subtext"> Likes </p>
                                    </div>
 
                                    <div id="following">
-                                        <p class="maintext"> 12 </p>
+                                        <p class="maintext" id="num_posts"></p>
                                         <p class="subtext"> Posts </p>
                                    </div>
                               </div>
@@ -65,10 +65,7 @@
                               <!--<p id="bio" class="regulartext"> No bio yet</p>-->
 
                               <!-- BIO AVAILABLE -->
-                              <p id="bio" class="regulartext"> Tech enthusiast and occasional gamer with a love for coding, creativity, 
-                                   and meaningful conversations. I enjoy exploring new ideas, diving into pop culture, and 
-                                   learning something new every day. Offline, you’ll find me experimenting in the kitchen or 
-                                   lost in a good book. Let’s share and grow together here!</p>
+                              <p id="bio" class="regulartext"></p>
                          </div>
 
                          <!-- TAGS -->
@@ -80,7 +77,7 @@
 
                               <!-- TAGS AVAILABLE -->
                               <div id="taglist">
-                                   <button class="usertags"> 
+                                   <!--<button class="usertags"> 
                                         #TagHere
                                    </button>
                                    <button class="usertags"> 
@@ -88,7 +85,7 @@
                                    </button>
                                    <button class="usertags"> 
                                         #ProbablyAnotherTagHere
-                                   </button>
+                                   </button>-->
                               </div>
                          </div>
 
@@ -281,6 +278,49 @@
 
 <!-- JAVASCRIPT -->
 <script>
+     /* ----- HARD CODED DATA ----- */
+     document.addEventListener("DOMContentLoaded", () => {
+          const profile1 = {
+               display_name: "DARNA",
+               username: "@AkoSiDarna",
+               bio: "Tech enthusiast and occasional gamer with a love for coding, creativity, and meaningful conversations. " +
+                    "I enjoy exploring new ideas, diving into pop culture, and learning something new every day. " +
+                    "Offline, you’ll find me experimenting in the kitchen or lost in a good book. " +
+                    "Let’s share and grow together here!",
+               likes: 2,
+               posts: 2,
+               tags: ["#Movies", "#TVSeries", "#IndieFilms"]
+          };
+
+          const displayNameElement = document.getElementById('display_name');
+          const usernameElement = document.getElementById('username');
+          const bioElement = document.getElementById('bio');
+          const likesCountElement = document.getElementById('num_likes');
+          const postsCountElement = document.getElementById('num_posts');
+
+          // Populate the DOM elements with data from profile1
+          displayNameElement.textContent = profile1.display_name;
+          usernameElement.textContent = profile1.username;
+          bioElement.textContent = profile1.bio;
+          likesCountElement.textContent = profile1.likes;
+          postsCountElement.textContent = profile1.posts;
+
+          /* ---- BIO ---- */
+
+          /* ---- TAGS ---- */
+          const tagListElement = document.getElementById("taglist");
+
+          if (profile1.tags.length === 0) {
+               tagListElement.innerHTML = '<p class="regulartext" id="no-tag-msg">No tags available</p>';
+          } else {
+               tagListElement.innerHTML = profile1.tags
+                    .map(tag => `<button class="usertags">${tag}</button>`)
+                    .join("");
+          }
+     });
+
+
+     /* ----- NECESSARY FUNCTIONS ----- */
      function openModal(image) {
           const modal = document.getElementById("imageModal");
           const modalImg = document.getElementById("modalImage");
@@ -323,4 +363,3 @@
           button.classList.add('active');
      }
 </script>
-
