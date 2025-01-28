@@ -193,6 +193,7 @@ input[type="text"] {
      
      background-color: #1D1E1F; 
 
+     width: 100%;
      position: sticky;
 }
 
