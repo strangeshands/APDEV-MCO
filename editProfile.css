@@ -162,7 +162,13 @@ button:active {
      font-size: 15px;
 }
 
-.change-photo:hover, .save-buttons:hover {
+#crop-modal button {
+     margin: 15px 0;
+     background-color: #1D1E1F;
+}
+
+.change-photo:hover, 
+.save-buttons:hover {
      color: #1D1E1F;
 }
 
@@ -208,19 +214,23 @@ button:active {
  
  #crop-modal button {
      margin: 15px 0;
-     padding: 10px 15px;
+     padding: 5px 10px;
+
      border: none;
-     background-color: #007bff;
-     color: #fff;
+     color: #1D1E1F;
+     background-color: #7FB8C8;
      cursor: pointer;
+
+     font-weight: bold;
+
      border-radius: 5px;
  }
  
  #crop-modal button:hover {
-     background-color: #0056b3;
+     background-color: white;
+     opacity: 80%;
  }
  
- /* Hide modal by default */
  #crop-modal {
      display: none;
  } 
