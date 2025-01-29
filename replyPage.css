@@ -92,14 +92,14 @@ input[type="text"] {
 /* ---------- BODY ---------- */
 
 html, body {
-    height: 100%; /* Ensure both html and body elements cover the full height of the viewport */
-    margin: 0; /* Remove default margin */
+    height: 100%;
+    margin: 0;
 }
 
 body {
-    background-color: #030909; /* Change to your desired background color */
+    background-color: #030909;
     font-family: "Inter";
-    min-height: 100%; /* Ensure body fills the entire height */
+    min-height: 100%;
 }
 
 main {    

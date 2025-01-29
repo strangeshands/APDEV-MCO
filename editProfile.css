@@ -17,9 +17,13 @@
 html, body {
      min-width: 1000px; 
      overflow-x: auto;
-
-     background-color: black;
 }
+
+body {
+     background-color: #030909;
+     font-family: "Inter";
+     min-height: 100%;
+ }
 
 .inviBrk {
      height: 5px;
@@ -28,7 +32,8 @@ html, body {
 .column-brk {
      width: 2px;
      height: 80vh;
-     background-color: white;
+     background-color:#49454F;
+     ;
 
      margin: 0 10px;
 }
@@ -36,7 +41,7 @@ html, body {
 .row-brk {
      height: 2px;
      width: 100%;
-     background-color: white;
+     background-color: #49454F;
 
      margin: 15px 0;
 }
@@ -51,20 +56,17 @@ html, body {
 }
 
 header {
-     position: sticky;
-     top: 0;
-     background-color: black;
-     height: 80px;
-     width: 100%;
-     margin: 0;
-
      display: flex;
      justify-content: space-between;
      align-items: center;
-     gap: 20px;
-     padding: 0 30px 0 20px;
+ 
+     background-color: black;
+ 
+     padding: 0 32px;
+     gap: 79px;
+     height: 88px;
 
-     box-shadow: 2px 2px white;
+     border-bottom: 1px solid #49454F;
 }
 
 #logo {
@@ -386,7 +388,7 @@ button:active {
      width: 80%;
      padding: 10px;
      
-     border: 1px solid #ccc;
+     border: 1px solid #49454F;
      border-radius: 4px;
      font-size: 13px; 
      font-family: "Inter";  
@@ -410,7 +412,7 @@ textarea {
      padding: 10px;
      margin: 0;
 
-     border: 1px solid #ccc;
+     border: 1px solid #49454F;
      border-radius: 4px;
      font-size: 13px; 
      font-family: "Inter";     

@@ -30,13 +30,10 @@ html, body {
 
 body {
      background-color: #030909;
-     background-repeat: repeat;
+     color: white;
      font-family: "Inter";
-
-     display: flex;
-     flex-direction: column;
-     justify-content: flex-start;
-     align-items: flex-start;
+     margin: 0;
+     min-height: 100vh;
 }
 
 button {
@@ -66,20 +63,17 @@ button:active {
 }
 
 header {
-     position: sticky;
-     top: 0;
-     background-color: black;
-     height: 80px;
-     width: 100%;
-     margin: 0;
-
      display: flex;
      justify-content: space-between;
      align-items: center;
-     gap: 20px;
-     padding: 0 30px 0 20px;
-
-     box-shadow: 2px 2px white;
+ 
+     background-color: black;
+ 
+     padding: 0 32px;
+     gap: 79px;
+     height: 88px;
+ 
+     border-bottom: 1px solid #49454F;
 }
 
 #logo {
@@ -321,7 +315,7 @@ input[type="text"] {
 }
 
 .navBarDivider {
-     background-color: #E4F3F6;
+     background-color: #49454F;
 
      margin: 0px 0px 5px 0px;
 
@@ -781,7 +775,7 @@ input[type="text"] {
 }
 
 .postDivider {
-     background-color: #E4F3F6;
+     background-color: #49454F;
 
      margin: 10px;
 
