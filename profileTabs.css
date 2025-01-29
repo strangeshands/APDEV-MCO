@@ -435,3 +435,26 @@ h3 {
 .tab-content {
      display: none;
 }
+
+
+
+#reply-to-msg {
+     margin-bottom: 25px;
+     padding: 5px;
+     background-color: #7FB8C8;
+     color: #1D1E1F;
+     border-radius: 5px;
+}
+
+#reply-to-button {
+     background-color: #7FB8C8;
+     color: #1D1E1F;
+     padding: 5px;
+     border-radius: 5px;
+     font-size: 15px;
+     font-weight: bold;
+}
+
+.comment {
+     margin-left: 30px;
+}

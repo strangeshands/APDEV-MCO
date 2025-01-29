@@ -3,9 +3,14 @@
      <head>
           <link rel="stylesheet" type="text/css" href="profileTabs.css">
      </head>
-     <body>
-          <!-- SET OF USER POST -->
-          <div class="post"> 
+     <body style="background-color: black;">
+          <!-- SET OF COMMENT -->
+          <div id="reply-to-msg">
+               <button id="reply-to-button">
+                    Replied to @userhere
+               </button>
+          </div>
+          <div class="comment"> 
                <!-- USER DETAILS -->
                <div id="pfpuserrow">
                     <div id="userandpfp">
@@ -54,13 +59,6 @@
                          </div>
                          <div id="caption"></div>
                     </div>
-                         
-                    <!--<div id="userphotocontainer"> 
-                         <img src="resources/hamster.jpg" class="clickable-image" onclick="sendImageToParent(this)">
-                         <img src="resources/monkey.jpg" class="clickable-image" onclick="sendImageToParent(this)">
-                         <img src="resources/cat.jpg" class="clickable-image" onclick="sendImageToParent(this)">
-                         <img src="resources/grass.jpg" class="clickable-image" onclick="sendImageToParent(this)">
-                    </div>-->
 
                     <div id="userphotocontainer"> 
                          <img src="resources/hamster.jpg" class="clickable-image" onclick="openModal(this)">
@@ -68,123 +66,6 @@
                          <img src="resources/cat.jpg" class="clickable-image" onclick="openModal(this)">
                          <img src="resources/grass.jpg" class="clickable-image" onclick="openModal(this)">
                     </div>
-               </div>
-
-               <!-- POST OPTIONS -->
-               <div id="postoptionrow">
-                    <button id="heart" class="actionButton">
-                         <img src="resources/Heart.svg"/>
-                         <span class="counter">42</span>
-                    </button>
-                    <img src="resources/Line.svg" alt="Line">
-                    <button id="heartCrack" class="actionButton">
-                         <img src="resources/HeartCrack.svg"/>
-                         <span class="counter">42</span>
-                    </button>
-                    <button class="actionButton">
-                         <img src="resources/Comments.svg"/>
-                    </button>
-                    <button id="bookmark" class="actionButton">
-                         <img src="resources/bookmark.svg"/>
-                    </button>
-               </div>
-
-               <div class="post-break"></div>
-          </div>
-          <!-- SET OF USER POST -->
-
-          <!-- SET OF USER POST -->
-          <div class="post"> 
-               <!-- USER DETAILS -->
-               <div id="pfpuserrow">
-                    <div id="userandpfp">
-                         <div class="pfpPost">
-                              <img src="resources/pfpSample.jpg"/>
-                         </div>
-
-                         <div id="pfpnames">
-                              <span class="pfpdisplayname">DARNA</span>
-                              <span class="pfpusername">@AkoSiDarna</span>
-                         </div>
-                    </div>
-
-                    <button class="smallbutton">
-                         <img src="resources/Options Button.svg"/>
-                    </button>
-               </div>
-
-               <!-- POST TAGS HERE -->
-               <div id="posttags">
-                    <a href="">#TagHere</a>
-               </div>
-
-               <!-- POST TITLE HERE -->
-               <div id="posttile">
-                    <h2> iPhone 16 </h2>
-               </div>
-
-               <!-- POST CAPTION HERE -->
-               <div id="usercaption">
-                    sorry guys i don't have a photo but guess who just got a new iphone 16 pro max 256gb 
-                    fully paid no installment (not me)
-               </div>
-
-               <!-- POST OPTIONS -->
-               <div id="postoptionrow">
-                    <button id="heart" class="actionButton">
-                         <img src="resources/Heart.svg"/>
-                         <span class="counter">42</span>
-                    </button>
-                    <img src="resources/Line.svg" alt="Line">
-                    <button id="heartCrack" class="actionButton">
-                         <img src="resources/HeartCrack.svg"/>
-                         <span class="counter">42</span>
-                    </button>
-                    <button class="actionButton">
-                         <img src="resources/Comments.svg"/>
-                    </button>
-                    <button id="bookmark" class="actionButton">
-                         <img src="resources/bookmark.svg"/>
-                    </button>
-               </div>
-
-               <div class="post-break"></div>
-          </div>
-          <!-- SET OF USER POST -->
-
-          <!-- SET OF USER POST -->
-          <div class="post"> 
-               <!-- USER DETAILS -->
-               <div id="pfpuserrow">
-                    <div id="userandpfp">
-                         <div class="pfpPost">
-                              <img src="resources/pfpSample.jpg"/>
-                         </div>
-
-                         <div id="pfpnames">
-                              <span class="pfpdisplayname">DARNA</span>
-                              <span class="pfpusername">@AkoSiDarna</span>
-                         </div>
-                    </div>
-
-                    <button class="smallbutton">
-                         <img src="resources/Options Button.svg"/>
-                    </button>
-               </div>
-
-               <!-- POST TAGS HERE -->
-               <div id="posttags">
-                    <a href="">#TagHere</a>
-               </div>
-
-               <!-- POST TITLE HERE -->
-               <div id="posttile">
-                    <h2> Free Guy Review </h2>
-               </div>
-
-               <!-- POST CAPTION HERE -->
-               <div id="usercaption">
-                    what u guys think about ryan's movie? i only watched it because of that one cameo. hahaha!
                </div>
 
                <!-- POST OPTIONS -->

@@ -26,6 +26,7 @@ html, body {
 
 body {
      background-color: #030909;
+     color: white;
 }
 
 iframe {
@@ -36,6 +37,7 @@ iframe {
 
 .tab-content {
      width:100%;
+     padding-right: 10px;
 }
 
 #commentstab, #bookmarkstab {
@@ -343,6 +345,10 @@ h3 {
 
      border-radius: 15px;
      padding: 20px;
+
+     height: 100vh;      
+     overflow-y: scroll;
+     overflow-x: hidden;
 }
 
 /* ---------- POSTS ---------- */
@@ -469,8 +475,12 @@ h3 {
      top: 50%;
      left: 50%; 
      transform: translate(-50%, -50%);
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
 }
- 
+
 .modal-content {
      width: 90%;
      height: 90%; 
@@ -525,4 +535,52 @@ h3 {
 
 .tab-content {
      display: none;
- }
+}
+
+.counter {
+     color: white;
+     font-family: "Inter";
+}
+
+.no-post-msg {
+     text-align: center;
+     font-family: "Inter";
+
+     font-weight: bold;
+     opacity: 80%;
+}
+
+#create-first {
+     font-size: 15px;
+     color: #98D5DC;
+}
+
+#create-first-link {
+     text-decoration: none;
+}
+
+/* --- COMMENTS TAB SPECIFIC --- */
+#reply-to-msg {
+     margin-bottom: 25px;
+     margin-left: -30px;
+     padding: 10px;
+     background-color: #7FB8C8;
+     color: #1D1E1F;
+     border-radius: 5px;
+
+     font-size: 15px;
+     font-weight: bold;
+     cursor: pointer;
+}
+
+.comment {
+     margin-left: 30px;
+}
+
+#commentstab, #bookmarkstab {
+     padding-right: 10px;
+}
+
+#usercaption, #posttile {
+     cursor: pointer
+}
