@@ -25,7 +25,7 @@ const userComments = [
           displayName: "DARNA",
           username: "@AkoSiDarna",
           pfp: "resources/pfpSample.jpg",
-          tags: ["#Bucky", "#ARMEDANDDANGEROUS", "#WinterSoldier"],
+          tags: [],
           title: "",
           caption: "sometimes i just wonder how's it like being a metal arm...",
           images: ["resources/metal-arm.jpg"],
@@ -45,7 +45,7 @@ function loadUserComments() {
 
      if (!userComments || userComments.length === 0) {
           container.innerHTML = `
-               <p class="no-post-msg">No likes yet. Go interact with others...</p>
+               <p class="no-post-msg">No comments yet. Go interact with others...</p>
                <a id="create-first-link" href="homePage.html">
                     <p id="create-first" class="no-post-msg">Go back to home page</p>
                </a>

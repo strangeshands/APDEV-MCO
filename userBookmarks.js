@@ -63,7 +63,7 @@ function loadUserBookmarks() {
 
      if (!userBookmarks || userBookmarks.length === 0) {
           container.innerHTML = `
-               <p class="no-post-msg">No likes yet. Go interact with others...</p>
+               <p class="no-post-msg">No bookmarks yet. Go interact with others...</p>
                <a id="create-first-link" href="homePage.html">
                     <p id="create-first" class="no-post-msg">Go back to home page</p>
                </a>
