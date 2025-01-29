@@ -36,11 +36,13 @@ header {
     justify-content: space-between;
     align-items: center;
 
+    background-color: black;
+
     padding: 0 32px;
     gap: 79px;
     height: 88px;
 
-    border-bottom: 1px solid #FFFFFF1A;
+    border-bottom: 1px solid #49454F;
 }
 
 #logo {
@@ -89,9 +91,18 @@ input[type="text"] {
 
 /* ---------- BODY ---------- */
 
-main {
-    background-color: #030909;
-    
+html, body {
+    height: 100%; /* Ensure both html and body elements cover the full height of the viewport */
+    margin: 0; /* Remove default margin */
+}
+
+body {
+    background-color: #030909; /* Change to your desired background color */
+    font-family: "Inter";
+    min-height: 100%; /* Ensure body fills the entire height */
+}
+
+main {    
     max-width: 800px;
     margin: 0 auto;
     padding: 24px;
