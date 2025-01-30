@@ -22,7 +22,7 @@
 
 
         <main>
-            <div class="goBackLink">
+            <div class="goBackLink" onclick="window.location.href='homePage.html'">
                 <span class="arrow">&#8604;</span>
                 <span class="back">Back</span>
             </div>
@@ -41,9 +41,6 @@
                     </div>
                     <div class="postText">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac tortor sed velit luctus malesuada. Aenean suscipit, arcu et pulvinar tincidunt, lorem felis tempor quam, sed euismod turpis neque et lorem. Fusce id libero ut nulla fringilla interdum. Curabitur posuere metus non nibh.
-                    </div>
-                    <div class="postContent">
-                        <div class="placeholderContent"></div>
                     </div>
                 </div>
 
@@ -66,18 +63,120 @@
                                 maxlength="300"
                             ></textarea>
                         </div>
-                        <div class="postContent">
-                            <div class="placeholderContent"></div>
-                        </div>
+                        <div class="postContent" id="postContentContainer"></div>
                         <div class="charLim">0/300</div>
                     </div>
                 </div>  
 
                 <div class="horizontalBar"></div>
                 <div class="postActions">
-                    <button class="actionButton"><img src="resources/ImageAdd.svg" alt="Like"></button>
+                    <!-- Hidden file input for image upload -->
+                    <input 
+                        type="file" 
+                        id="imageUploadInput" 
+                        accept="image/*" 
+                        multiple 
+                        style="display: none;"
+                    />
+                
+                    <!-- Add Image Button -->
+                    <button id="addImageButton" class="actionButton">
+                        <img src="resources/ImageAdd.svg" alt="Add Image">
+                    </button>
+                    
                     <button class="commentButton">Comment</button>
                 </div>
             </div>
+
+        <script>
+
+             /********************************
+             * Real-time Character Limit
+             ********************************/
+             const postTextInput = document.getElementById("postTextInput");
+            const charLim = document.querySelector(".charLim");
+            
+            postTextInput.addEventListener("input", function() {
+                const currentLength = postTextInput.value.length;
+                charLim.textContent = `${currentLength}/300`;
+            });
+
+            /********************************
+             * Image Upload (Up to 4 images)
+             ********************************/
+             const imageUploadInput = document.getElementById("imageUploadInput");
+            const postContentContainer = document.getElementById("postContentContainer");
+            const addImageBtn = document.getElementById("addImageButton");
+            
+            // We'll store the preview image URLs in this array
+            let images = [];
+            
+            // Trigger the hidden file input when "Add Image" is clicked
+            addImageBtn.addEventListener("click", () => {
+                imageUploadInput.click();
+            });
+            
+            // Handle file selection
+            imageUploadInput.addEventListener("change", handleImageUpload);
+            
+            function handleImageUpload(event) {
+                const selectedFiles = Array.from(event.target.files);
+            
+                // Limit total images to 4
+                selectedFiles.forEach((file) => {
+                    if (images.length < 4) {
+                        const imageURL = URL.createObjectURL(file);
+                        images.push(imageURL);
+                    }
+                });
+            
+                renderImages();
+            }
+            
+            // NEW: function to remove an image from the array
+            function removeImage(index) {
+                images.splice(index, 1);
+                renderImages();
+            }
+            
+            // Render images in the container
+            function renderImages() {
+                // Clear previous previews
+                postContentContainer.innerHTML = "";
+            
+                // Decide layout based on image count
+                if (images.length === 1) {
+                    postContentContainer.classList.add("single-image");
+                    postContentContainer.classList.remove("multi-images");
+                } else if (images.length > 1) {
+                    postContentContainer.classList.remove("single-image");
+                    postContentContainer.classList.add("multi-images");
+                } else {
+                    // No images
+                    postContentContainer.classList.remove("single-image", "multi-images");
+                }
+            
+                // Create an element for each image with a remove icon
+                images.forEach((url, index) => {
+                    // Wrap each image + remove icon in a container
+                    const imgWrapper = document.createElement("div");
+                    imgWrapper.classList.add("imageWrapper");
+                    
+                    const img = document.createElement("img");
+                    img.src = url;
+            
+                    // Create a remove icon for each image
+                    const removeIcon = document.createElement("span");
+                    removeIcon.classList.add("remove-image-icon");
+                    removeIcon.innerHTML = "&times;";
+                    removeIcon.addEventListener("click", () => removeImage(index));
+            
+                    // Append them together
+                    imgWrapper.appendChild(img);
+                    imgWrapper.appendChild(removeIcon);
+                    postContentContainer.appendChild(imgWrapper);
+                });
+            }
+        </script>        
     </body>
 </html>
