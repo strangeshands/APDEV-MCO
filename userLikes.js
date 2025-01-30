@@ -15,6 +15,7 @@ const userLikes = [
           dislikes: 0,
 
           liked: true,
+          disliked: false,
           bookmark: true,
           own: false
      },
@@ -33,6 +34,7 @@ const userLikes = [
           dislikes: 0,
 
           liked: true,
+          disliked: false,
           bookmark: true,
           own: false
      },
@@ -51,7 +53,8 @@ const userLikes = [
           dislikes: 0,
 
           liked: true,
-          bookmark: null,
+          disliked: false,
+          bookmark: false,
           own: true
      },
 ];
@@ -143,7 +146,7 @@ function loadUserLikes() {
 
                     <img src="resources/Line.svg" alt="Line">
                     <button class="postoptionbutton actionButton" id="heartCrack" onclick="iconClicked(this, 'heartCrack')">
-                         <img src="resources/HeartCrack.svg"/>
+                         <img src="${post.disliked ? 'resources/HeartCrack-Clicked.svg' : 'resources/HeartCrack.svg'}"/>
                          <span class="counter">${post.dislikes}</span>
                     </button>
 
@@ -164,104 +167,3 @@ function loadUserLikes() {
           container.appendChild(postElement);
      });
 }
-
-/* ---- BUTTON ACTIONS ---- */
-function iconClicked(button, iconType) {
-     // Get the image within the button
-     const img = button.querySelector('img');
- 
-     // Get the counter element if it exists
-     const counter = button.querySelector('.counter');
- 
-     // Find the parent post or comment
-     const post = button.closest('.comment, .post');
-     
-     // Path for different icon types
-     const iconPaths = {
-         'heart': {
-             default: 'resources/Heart.svg',
-             clicked: 'resources/Heart-Clicked.svg'
-         },
-         'heartCrack': {
-             default: 'resources/HeartCrack.svg',
-             clicked: 'resources/HeartCrack-Clicked.svg'
-         },
-         'bookmark': {
-             default: 'resources/Bookmark.svg',
-             clicked: 'resources/Bookmark-Clicked.svg'
-         }
-     };
- 
-     if (iconType === 'heart' || iconType === 'heartCrack') {
-         // Find like and dislike buttons
-         const likeButton = post.querySelector('#heart');
-         const dislikeButton = post.querySelector('#heartCrack');
-         
-         // Get like and dislike counters
-         const likeCounter = likeButton.querySelector('.counter');
-         const dislikeCounter = dislikeButton.querySelector('.counter');
- 
-         // Determine current button details
-         const currentButton = iconType === 'heart' ? likeButton : dislikeButton;
-         const otherButton = iconType === 'heart' ? dislikeButton : likeButton;
-         const currentImg = currentButton.querySelector('img');
-         const otherImg = otherButton.querySelector('img');
-         const currentCounter = iconType === 'heart' ? likeCounter : dislikeCounter;
-         const otherCounter = iconType === 'heart' ? dislikeCounter : likeCounter;
- 
-         // Toggle current button state
-         const currentSrc = currentImg.src.split('/').pop(); // Extract only the filename
-         const isCurrentlyClicked = currentSrc === iconPaths[iconType].clicked.split('/').pop();
- 
-         // Check the other button's state
-         const otherSrc = otherImg.src.split('/').pop();
-         const isOtherClicked = otherSrc === iconPaths[iconType === 'heart' ? 'heartCrack' : 'heart'].clicked.split('/').pop();
- 
-         // Toggle current button state
-         if (isCurrentlyClicked) {
-             currentImg.src = iconPaths[iconType].default;
-             currentCounter.textContent = Math.max(0, parseInt(currentCounter.textContent) - 1);
-         } else {
-             currentImg.src = iconPaths[iconType].clicked;
-             currentCounter.textContent = parseInt(currentCounter.textContent) + 1;
- 
-             // If the other button was clicked, reset it
-             if (isOtherClicked) {
-                 otherImg.src = iconPaths[iconType === 'heart' ? 'heartCrack' : 'heart'].default;
-                 otherCounter.textContent = Math.max(0, parseInt(otherCounter.textContent) - 1);
-             }
-         }
-     } else if (iconType === 'bookmark') {
-         // Bookmark button logic
-         const currentSrc = img.src.split('/').pop(); // Extract only the filename
-         const isCurrentlyBookmarked = currentSrc === iconPaths.bookmark.clicked.split('/').pop();
- 
-         // Toggle bookmark state
-         if (isCurrentlyBookmarked) {
-             img.src = iconPaths.bookmark.default;
-         } else {
-             img.src = iconPaths.bookmark.clicked;
-         }
-     }
-}
- 
- document.addEventListener('DOMContentLoaded', () => {
-     document.querySelectorAll('.actionButton').forEach(button => {
-          button.addEventListener('click', function () {
-               const id = this.id; 
-               iconClicked(this, id);
-          });
-
-          /*HEART FEATURE: RED IF BOOKMARKED */
-          const heartButton = post.querySelector('#heart img');
-          if (post.liked) {
-               heartButton.src = 'resources/Heart-Clicked.svg'; 
-          }
-
-          /* BOOKMARK FEATURE: YELLOW IF BOOKMARKED */
-          const bookmarkButton = post.querySelector('#bookmark img');
-          if (post.bookmark) {
-              bookmarkButton.src = 'resources/Bookmark-Clicked.svg'; 
-          }
-     });
-}); 

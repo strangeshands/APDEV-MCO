@@ -5,8 +5,9 @@
           <link rel="stylesheet" type="text/css" href="profilePage.css">
           <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
 
-          <!-- PROFILE DATA -->
+          <!-- SCRIPTS -->
           <script src="profile1-data.js"></script>
+          <script src="actionButton.js"></script>
      </head>
 
      <body>
@@ -118,8 +119,8 @@
                               <div id="poststab" class="tab-content">
 
                                    <!-- LOAD POST DATA -->
-                                   <div id="userPostContainer"></div>
-                                   <script src="userPost.js"></script>
+                                   <div id="userPostsContainer"></div>
+                                   <script src="userPosts.js"></script>
                                    <script>
                                         document.addEventListener("DOMContentLoaded", loadUserPosts);
                                    </script>
@@ -158,6 +159,7 @@
                                        document.addEventListener("DOMContentLoaded", loadUserLikes);
                                   </script>
                               </div>
+
                          </div>
                     </div>
                </div>

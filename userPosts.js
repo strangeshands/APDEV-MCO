@@ -1,63 +1,82 @@
-/* ----- HARD CODE DATA -----*/
-const userComments = [
+/* ---- HARD CODED DATA ---- */
+const userPosts = [
      {
-          replyTo: "@TheDarkKnight",
+          replyTo: "",
 
           displayName: "DARNA",
           username: "@AkoSiDarna",
           pfp: "resources/pfpSample.jpg",
-          tags: ["#Batman", "#Gotham", "#Savior"],
-          caption: "I SAW U EARLIER HOLY MACARONI he's hot irl",
-          images: ["resources/batman.jpg"],
-          title: "",
+          tags: ["#AnotherTagHere", "#TagHere", "#ProbablyAnotherTagHere"],
+          caption: "Life is a journey, and every step we take brings us closer...",
+          images: ["resources/hamster.jpg", "resources/monkey.jpg"],
+          title: "JOURNEY",
 
-          likes: 100,
-          dislikes: 3,
-
-          liked: false,
-          disliked: true,
-          bookmark: true,
-          own: true
-     },
-
-     {
-          replyTo: "@BuckBarnes",
-
-          displayName: "DARNA",
-          username: "@AkoSiDarna",
-          pfp: "resources/pfpSample.jpg",
-          tags: [],
-          title: "",
-          caption: "sometimes i just wonder how's it like being a metal arm...",
-          images: ["resources/metal-arm.jpg"],
-
-          likes: 1000,
+          likes: 3,
           dislikes: 0,
 
-          liked: true,
+          liked: false,
           disliked: false,
           bookmark: false,
           own: true
      },
+     {
+          replyTo: "",
+
+          displayName: "DARNA",
+          username: "@AkoSiDarna",
+          pfp: "resources/pfpSample.jpg",
+          tags: ["#Movies"],
+          caption: "I am vengeance. I am the night. I am Batman!",
+          images: [],
+          title: "THE NIGHT",
+
+          likes: 3,
+          dislikes: 0,
+
+          liked: false,
+          disliked: false,
+          bookmark: false,
+          own: true
+     },
+     {
+          replyTo: "",
+
+          displayName: "DARNA",
+          username: "@AkoSiDarna",
+          pfp: "resources/pfpSample.jpg",
+          tags: ["#TagHere"],
+          caption: "sorry guys i don't have a photo but guess who just got a new iphone 16 pro max 256g " +
+                    "fully paid no installment (not me)",
+          images: [],
+          title: "iPhone 16",
+
+          likes: 3,
+          dislikes: 0,
+
+          liked: false,
+          disliked: false,
+          bookmark: false,
+          own: true
+     }
 ];
 
 /* ---- CODE FUNCTION ---- */
-function loadUserComments() {
-     const container = document.getElementById("userCommentContainer");
+function loadUserPosts() {
+     const container = document.getElementById("userPostsContainer");
 
-     if (!userComments || userComments.length === 0) {
+     if (!userPosts || userPosts.length === 0) {
           container.innerHTML = `
-               <p class="no-post-msg">No comments yet. Go interact with others...</p>
+               <p class="no-post-msg">Boohoo! No posts yet</p>
                <a id="create-first-link" href="homePage.html">
-                    <p id="create-first" class="no-post-msg">Go back to home page</p>
+                    <p id="create-first" class="no-post-msg">Create your first post</p>
                </a>
           `;
           return;
      }
 
-     userComments.forEach(post => {
+     userPosts.forEach(post => {
           const postElement = document.createElement("div");
-          postElement.classList.add("comment");
+          postElement.classList.add(post.replyTo.length > 0 ? "comment" : "post");
           let postContent = "";
 
           if (post.replyTo.length > 0) {
