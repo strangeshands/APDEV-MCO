@@ -103,9 +103,13 @@ function loadUserPosts() {
                     </div>
                     
                     ${post.own ? `
-                         <button class="smallbutton">
+                         <button class="smallbutton" onclick="toggleMenu(event, this)">
                               <img src="resources/Options Button.svg"/>
                          </button>
+                         <div class="options-menu hidden">
+                              <button class="edit-post">Edit Post</button>
+                              <button class="delete-post">Delete Post</button>
+                         </div>
                     ` : "" }
                </div>
 
@@ -168,3 +172,42 @@ function loadUserPosts() {
           container.appendChild(postElement);
      });
 }
+
+function toggleMenu(event, button) {
+     event.stopPropagation(); // Prevent click from bubbling up
+ 
+     const menu = button.nextElementSibling; // The div with class "options-menu"
+     console.log("Button clicked, toggling menu.");
+ 
+     if (menu) {
+         // Toggle the visibility of the menu
+         if (!menu.classList.contains("hidden")) {
+               // Instead of toggling hidden, directly set display
+               menu.style.display = 'block'; // Show the menu
+          } else {
+               menu.style.display = 'none'; // Hide the menu
+          }
+         
+         if (!menu.classList.contains("hidden")) {
+             // Menu is visible, position it near the button
+             const buttonRect = button.getBoundingClientRect();
+             console.log("Menu position: ", buttonRect.left, buttonRect.top);
+             menu.style.left = `${buttonRect.left - menu.offsetWidth}px`; // Align left of the button
+             menu.style.top = `${buttonRect.top + buttonRect.height}px`; // Align below the button
+             console.log("Menu visible and positioned.");
+         } else {
+             console.log("Menu hidden.");
+         }
+     } else {
+         console.log("No menu found!");
+     }
+ 
+     // Close the menu if clicked outside
+     document.addEventListener("click", function (e) {
+         if (!button.contains(e.target) && !menu.contains(e.target)) {
+             menu.classList.add("hidden");
+             console.log("Menu closed from outside click.");
+         }
+     }, { once: true });
+ }
+ 

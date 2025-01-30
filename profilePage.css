@@ -391,7 +391,32 @@ h3 {
      color: white;
      background-color: inherit;
 }
+ 
+ .options-menu {
+     position: absolute;
+     z-index: 10;
+     background-color: black;
+     color: white;
+     border-radius: 8px;
+     padding: 10px;
+     display: none;
+ }
 
+ .hidden {
+     display: none;
+ }
+ 
+ .options-menu button {
+     padding: 5px 10px;
+     border: none;
+     background: none;
+     cursor: pointer;
+ }
+ 
+ .options-menu button:hover {
+     background-color: #7FB8C8;
+ }
+ 
 .pfpusername {
      font-size: 13px;
      opacity: 80%;
