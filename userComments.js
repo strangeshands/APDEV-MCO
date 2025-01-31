@@ -11,6 +11,8 @@ const userComments = [
           images: ["resources/batman.jpg"],
           title: "",
 
+          time: "4 minutes ago",
+
           likes: 100,
           dislikes: 3,
 
@@ -30,6 +32,8 @@ const userComments = [
           title: "",
           caption: "sometimes i just wonder how's it like being a metal arm...",
           images: ["resources/metal-arm.jpg"],
+
+          time: "4 minutes ago",
 
           likes: 1000,
           dislikes: 0,
@@ -79,7 +83,7 @@ function loadUserComments() {
                          </div>
                          <div id="pfpnames">
                          <span class="pfpdisplayname">${post.displayName}</span>
-                         <span class="pfpusername">${post.username}</span>
+                         <span class="pfpusername">${post.username} | ${post.time}</span>
                          </div>
                     </div>
                     
