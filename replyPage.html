@@ -60,11 +60,26 @@
                             <textarea
                                 id="postTextInput"
                                 placeholder="What's on your mind?"
-                                maxlength="300"
-                            ></textarea>
+                                maxlength="300">
+                            </textarea>
                         </div>
-                        <div class="postContent" id="postContentContainer"></div>
-                        <div class="charLim">0/300</div>
+
+                        <!-- ORIGINAL: -->
+                        <!--<div class="postContent" id="postContentContainer"></div>-->
+
+                        <!-- HEP FIX (please remove comments if approved)-->
+                        <div class="charLim"> <span id="char-counter">0/300</span> </div>
+
+                        <div id="userphotocontainer"></div>
+                        <div id="imageModal" class="modal">
+                            <span class="close">&times;</span>
+                            <div id="userphotocontainer-modal"> 
+                                 <img class="modal-content" id="modalImage">
+                            </div>
+                            <div id="caption"></div>
+                       </div>
+                       <!-- HEP FIX (please remove comments if approved)-->
+
                     </div>
                 </div>  
 
@@ -90,15 +105,25 @@
 
         <script>
 
-             /********************************
+            /********************************
              * Real-time Character Limit
-             ********************************/
-             const postTextInput = document.getElementById("postTextInput");
-            const charLim = document.querySelector(".charLim");
-            
+            ********************************/
+            // Select elements
+            const postTextInput = document.getElementById("postTextInput");
+            const feedback = document.getElementById("char-counter");
+
             postTextInput.addEventListener("input", function() {
                 const currentLength = postTextInput.value.length;
-                charLim.textContent = `${currentLength}/300`;
+                
+                feedback.textContent = `${currentLength}/300`;
+
+                /* HEP FIX (please remove comments if approved) */
+                if (currentLength >= 300) {
+                    feedback.style.color = "red";
+                } else {
+                    feedback.style.color = "white";
+                }
+                /* HEP FIX (please remove comments if approved) */
             });
 
             document.addEventListener("DOMContentLoaded", () => {
@@ -107,9 +132,9 @@
 
             /********************************
              * Image Upload (Up to 4 images)
-             ********************************/
+            ********************************/
              const imageUploadInput = document.getElementById("imageUploadInput");
-            const postContentContainer = document.getElementById("postContentContainer");
+            const postContentContainer = document.getElementById("userphotocontainer");
             const addImageBtn = document.getElementById("addImageButton");
             
             // We'll store the preview image URLs in this array
@@ -149,7 +174,7 @@
                 postContentContainer.innerHTML = "";
             
                 // Decide layout based on image count
-                if (images.length === 1) {
+                /*if (images.length === 1) {
                     postContentContainer.classList.add("single-image");
                     postContentContainer.classList.remove("multi-images");
                 } else if (images.length > 1) {
@@ -158,7 +183,7 @@
                 } else {
                     // No images
                     postContentContainer.classList.remove("single-image", "multi-images");
-                }
+                }*/
             
                 // Create an element for each image with a remove icon
                 images.forEach((url, index) => {
@@ -168,6 +193,11 @@
                     
                     const img = document.createElement("img");
                     img.src = url;
+
+                    /* HEP FIX (please remove comments if approved) */
+                    img.classList.add("clickable-image");
+                    img.setAttribute("onclick", "openModal(this)");
+                    /* HEP FIX (please remove comments if approved) */
             
                     // Create a remove icon for each image
                     const removeIcon = document.createElement("span");
@@ -181,6 +211,21 @@
                     postContentContainer.appendChild(imgWrapper);
                 });
             }
+
+            /* HEP FIX (please remove comments if approved) */
+            function openModal(image) {
+               const modal = document.getElementById("imageModal");
+               const modalImg = document.getElementById("modalImage");
+               const captionText = document.getElementById("caption");
+          
+               modal.style.display = "block";
+               modalImg.src = image.src;
+          
+               modal.onclick = function () {
+               modal.style.display = "none";
+               };
+            }
+            /* HEP FIX (please remove comments if approved) */
         </script>        
     </body>
 </html>

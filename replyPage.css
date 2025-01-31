@@ -9,18 +9,12 @@
     src: url('resources/InterFont.ttf');
 }
 
-*, *::before, *::after {
-    box-sizing: inherit;
-}
-
 body {
     background-color: black;
     color: white;
     font-family: "Inter";
-    margin: 0;
-    min-height: 100vh;
-}
 
+}
 
 /* ---------- HEADER ---------- */
 #appName {
@@ -42,6 +36,7 @@ header {
     height: 88px;
 
     border-bottom: 1px solid #49454F;
+    margin-top: -8px;
 }
 
 #logo {
@@ -84,17 +79,13 @@ input[type="text"] {
     color: #49454F;
     font-size: 13px;
     outline: none;
+
+    font-family: "Inter";
 }
 
 
 
 /* ---------- BODY ---------- */
-
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
 body {
     background-color: #030909;
     font-family: "Inter";
@@ -141,7 +132,8 @@ main {
     padding-left: 32px;
     margin-left: 30px;
     margin-top: 30px;
-    border-left: 2px solid #FFFFFF33;
+
+    overflow: hidden;
 }
 
 .space {
@@ -232,35 +224,38 @@ main {
     justify-content: flex-end;
     color: white;
     font-size: 16px;
+
+    margin-bottom: 10px;
 }
 
-
+/* HEP FIX (please remove this if approved) */
 /* Container for images */
-#postContentContainer {
+/*#postContentContainer {
     margin: 16px 0;
-}
+}*/
 
 /* Single-image layout */
-#postContentContainer.single-image img {
+/*#postContentContainer.single-image img {
     width: 100%;
     border-radius: 8px;
     display: block;
     margin: 0 auto;
-}
+}*/
 
 /* Multi-image layout (grid) */
-#postContentContainer.multi-images {
+/*#postContentContainer.multi-images {
     display: grid;
     gap: 8px;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-}
+}*/
 
-#postContentContainer.multi-images img {
+/*#postContentContainer.multi-images img {
     width: 100%;
     height: auto;
     object-fit: cover;
     border-radius: 8px;
-}
+}*/
+/* HEP FIX (please remove this if approved) */
 
 /* Wrapper for each image + remove icon */
 .imageWrapper {
@@ -333,4 +328,87 @@ main {
     cursor: pointer;
     white-space: nowrap; 
     flex-shrink: 0; 
+}
+
+/* HEP FIX (please remove this if approved) */
+/* ---  IMAGE MODAL --- */
+#userphotocontainer {
+    width: 100%;
+    height: auto;
+
+    max-height: 200px;
+    max-width: inherit;
+
+    display: flex;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+.clickable-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border-radius: 15px;
+}
+
+.clickable-image:hover {
+    transform: scale(1.008);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close:hover {
+    transform: scale(1.05);
+    color: #7FB8C8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+    display: none;
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8); 
+}
+
+#userphotocontainer-modal {
+    position: absolute; 
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    width: 90%;
+    height: 90%; 
+
+    max-width: 90vh;
+    max-height: 90vh; 
+
+    object-fit: contain;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
