@@ -6,7 +6,8 @@ if (contentData) {
      document.getElementById('postText').innerText = `${contentData.postText}`;
 
      if (contentData.postImage) {
-          document.getElementById('postImageContainer').innerHTML = `<img src="${contentData.postImage}" id="postImage">`;
+          document.getElementById('postImageContainer').innerHTML = 
+          `<img src="${contentData.postImage}" onclick="openModal(this)">`;
      }
 
      if (contentData.userProfilePic) {

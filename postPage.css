@@ -301,24 +301,6 @@ main {
     width: 100%;
 }
 
-#postImageContainer {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 16px 0;
-    padding: 20px;
-    background-color: #030909;
-}
-
-#postImage {
-    width: 100%;       
-    max-width: 904px;  
-    height: auto;       
-    max-height: 390px;  
-    border-radius: 8px; 
-    object-fit: contain;
-}
-
 .postActions, .commentActions {
     display: flex;
     justify-content: flex-end;
@@ -437,4 +419,131 @@ main {
 
 .commentActions.nested {
     margin-left: 52px;
+}
+
+
+#postImageContainer {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 12px;
+    gap: 8px;
+    max-height: 400px;        
+    overflow: hidden;     
+}
+
+/* Images: Fill Their Grid Cell, Cropping If Needed */
+#postImageContainer img {
+    width: 100%;
+    height: 100%;
+    max-height: 200px;
+    object-fit: cover;    
+    border-radius: 12px;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* Hover Effect */
+#postImageContainer img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* 1 IMAGE: Single Row*/
+#postImageContainer:has(img:only-child) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr; 
+}
+
+/* 2 IMAGES: Side by side in a single row (400px total) */
+#postImageContainer:has(img:nth-child(2):nth-last-child(1)) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr; 
+}
+
+/* 3 IMAGES: 
+   Top row: 1 image spanning 2 columns 
+   Bottom row: 2 images side by side  */
+#postImageContainer:has(img:nth-child(3):nth-last-child(1)) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr); 
+}
+
+#postImageContainer:has(img:nth-child(3):nth-last-child(1)) img:first-child {
+    grid-column: span 2; 
+}
+
+/* 4 IMAGES: 2x2 grid 
+   => 2 rows, each row is half of 400px (200px each) */
+#postImageContainer:has(img:nth-child(4):nth-last-child(1)) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+/* Clickable Image */
+.clickable-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    border-radius: 12px;
+}
+
+/* Clickable Image Hover */
+.clickable-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Centered Modal Image */
+#postImageContainer-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Modal Content */
+.modal-content {
+    width: 90%;
+    height: 90%;
+    max-width: 90vh;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+/* Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.close:hover {
+    transform: scale(1.05);
+    color: #7FB8C8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
