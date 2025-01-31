@@ -14,7 +14,6 @@
 }
 
 html, body {
-     min-width: 1000px; 
      overflow-x: auto;
 }
 
@@ -198,7 +197,6 @@ main {
     border-radius: 16px;
     padding: 24px;
     margin-bottom: 24px;
-
     width: 100%;
 }
 
@@ -303,17 +301,22 @@ main {
     width: 100%;
 }
 
-#placeholderContent {
+#postImageContainer {
     width: 100%;
     height: auto;
     border-radius: 8px;
     margin: 16px 0;
+    padding: 20px;
+    background-color: #030909;
 }
 
 #postImage {
-     width: 100%;
-     height: 100%;
-     border-radius: 8px;
+    width: 100%;       
+    max-width: 904px;  
+    height: auto;       
+    max-height: 390px;  
+    border-radius: 8px; 
+    object-fit: contain;
 }
 
 .postActions, .commentActions {
