@@ -420,52 +420,61 @@ main {
 .commentActions.nested {
     margin-left: 52px;
 }
-/* Post Image Container (Responsive Grid) */
+
+
 #postImageContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;  
+    display: grid;
+    width: 100%;
     max-width: 100%;
-    height: auto;  
-    aspect-ratio: 16 / 9; 
-    border-radius: 12px; 
-    overflow: hidden; 
+    border-radius: 12px;
+    gap: 8px;
+    max-height: 400px;        
+    overflow: hidden;     
 }
 
-/* Default Image Styling */
+/* Images: Fill Their Grid Cell, Cropping If Needed */
 #postImageContainer img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
-    border-radius: 12px; 
+    max-height: 200px;
+    object-fit: cover;    
+    border-radius: 12px;
+    transition: transform 0.2s ease-in-out;
 }
 
 /* Hover Effect */
 #postImageContainer img:hover {
     transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
-/* Grid Layout for Different Image Counts */
+/* 1 IMAGE: Single Row*/
 #postImageContainer:has(img:only-child) {
     grid-template-columns: 1fr;
-    grid-auto-rows: auto;
+    grid-template-rows: 1fr; 
 }
 
+/* 2 IMAGES: Side by side in a single row (400px total) */
 #postImageContainer:has(img:nth-child(2):nth-last-child(1)) {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr; 
 }
 
+/* 3 IMAGES: 
+   Top row: 1 image spanning 2 columns 
+   Bottom row: 2 images side by side  */
 #postImageContainer:has(img:nth-child(3):nth-last-child(1)) {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto;
+    grid-template-rows: repeat(2, 1fr); 
 }
 
 #postImageContainer:has(img:nth-child(3):nth-last-child(1)) img:first-child {
-    grid-column: span 2;
-    grid-row: span 2;
+    grid-column: span 2; 
 }
 
+/* 4 IMAGES: 2x2 grid 
+   => 2 rows, each row is half of 400px (200px each) */
 #postImageContainer:has(img:nth-child(4):nth-last-child(1)) {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
