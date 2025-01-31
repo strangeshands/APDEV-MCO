@@ -52,7 +52,16 @@ postLinks.forEach( link => {
      const postId = link.getAttribute('data-post-id');
 
      // Add an event listener to each link
-     link.addEventListener('click', function () {
-          storePostData(postId);
+     link.addEventListener('click', function (event) {
+
+          const target = event.target;
+        
+          if (!target.closest('.actionButton')) {
+               storePostData(postId);
+               window.location.href = "postPage.html";
+          } else if (target.closest('.commentButton')) {
+               storePostData(postId);
+          }
+
      });
 });
