@@ -7,7 +7,10 @@ if (contentData) {
 
      if (contentData.postImage) {
           document.getElementById('postImageContainer').innerHTML = 
-          `<img src="${contentData.postImage}" onclick="openModal(this)">`;
+          `<img src="${contentData.postImage}" onclick="openModal(this)">
+          <img src="${contentData.postImage}" onclick="openModal(this)">
+          <img src="${contentData.postImage}" onclick="openModal(this)">
+          <img src="${contentData.postImage}" onclick="openModal(this)">`;
      }
 
      if (contentData.userProfilePic) {
