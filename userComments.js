@@ -6,7 +6,7 @@ const userComments = [
           displayName: "DARNA",
           username: "@AkoSiDarna",
           pfp: "resources/pfpSample.jpg",
-          tags: ["#Batman", "#Gotham", "#Savior"],
+          tags: [],
           caption: "I SAW U EARLIER HOLY MACARONI he's hot irl",
           images: ["resources/batman.jpg"],
           title: "",
