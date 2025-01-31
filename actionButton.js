@@ -17,7 +17,7 @@ function iconClicked(button, iconType) {
      const counter = button.querySelector('.counter');
 
      // Find the parent post or comment
-     const post = button.closest('.postActions, .nestedComments, .comment');
+     const post = button.closest('.post, .postActions, .nestedComments, .comment');
      
      // Path for different icon types
      const iconPaths = {

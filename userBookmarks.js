@@ -12,6 +12,8 @@ const userBookmarks = [
           caption: "joker if i catch u joker",
           images: [],
 
+          time: "4 minutes ago",
+
           likes: 3,
           dislikes: 0,
 
@@ -30,6 +32,8 @@ const userBookmarks = [
           caption: "",
           images: ["resources/macncheese.jpg"],
 
+          time: "4 minutes ago",
+
           likes: 3,
           dislikes: 0,
 
@@ -47,6 +51,8 @@ const userBookmarks = [
           caption: "I SAW U EARLIER HOLY MACARONI he's hot irl",
           images: ["resources/batman.jpg"],
           title: "",
+
+          time: "4 minutes ago",
 
           likes: 100,
           dislikes: 3,
@@ -95,7 +101,7 @@ function loadUserBookmarks() {
                          </div>
                          <div id="pfpnames">
                          <span class="pfpdisplayname">${post.displayName}</span>
-                         <span class="pfpusername">${post.username}</span>
+                         <span class="pfpusername">${post.username} | ${post.time}</span>
                          </div>
                     </div>
                     
