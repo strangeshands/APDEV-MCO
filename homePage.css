@@ -593,13 +593,14 @@ input[type="text"] {
 .postUser {    
      display: flex;
      justify-content: center;
-     align-items: center;
+     align-items: flex-start;
 
      gap: 12px;
      padding: 0px 10px;
 
      width: 100%;
      box-sizing: border-box;
+     position: relative;
 }
 
 .profilePic {
@@ -653,7 +654,6 @@ input[type="text"] {
 
 .optionsButton {
      background-color: #030909;
-     color: #E4F3F6;
 
      display: flex;
      justify-content: center;
@@ -661,7 +661,7 @@ input[type="text"] {
 
      padding: 2px 0px;
 
-     width: 5px;
+     width: 20px;
      height: 20px;
 }
 
@@ -673,6 +673,76 @@ input[type="text"] {
 .optionsButton:active {
      transform: scale(0.95); 
 }
+
+.popUpOptions {
+     display: none;
+     position: absolute; 
+     top: -20px; 
+     right: 0px;
+     width: auto; 
+     z-index: 1;
+}
+
+.popUpOptions.show {
+     display: block; 
+}
+
+.postOptionsContent {
+     background-color: #1D1E1F;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     align-items: flex-end;
+
+     padding: 20px 10px 10px 10px;
+     gap: 20px;
+     border-radius: 12px;
+
+     width: 200px;
+} 
+
+.activeOptionsButton {
+     background-color: #1D1E1F;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 2px 0px;
+
+     width: 20px;
+     height: 20px;
+}
+
+
+.viewButton, .editButton, .deleteButton{
+     font-family: "Inter";
+     font-size: 16px;
+     font-weight: Bold;
+     color: #E4F3F6;
+     background-color: #1D1E1F;
+
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+
+     gap: 10px;
+     padding: 10px;
+
+     width: 100%;
+}
+
+.viewButton:hover, .editButton:hover, .deleteButton:hover {
+     background-color: #7FB8C8;
+     color: #16133B;
+     transform: scale(1.02);
+}
+
+.viewButton:active, .editButton:active, .deleteButton:active {
+     transform: scale(0.95); 
+}
+
 
 .postContent {
      display: flex;

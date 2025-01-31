@@ -273,7 +273,17 @@
 
                                    <!-- IF USER IS LOGGED IN -->
                                    <!-- POST OPTIONS -->
-                                   <button class="optionsButton">
+                                   <div class="popUpOptions" id="popUp2">
+                                        <div class="postOptionsContent">
+                                             <button class="activeOptionsButton" post-options-id="popUp2">
+                                                  <img src="resources/Options Button.svg" alt="">
+                                             </button>
+                                             <button class="viewButton">View Post</button>
+                                             <button class="editButton">Edit Post</button>
+                                             <button class="deleteButton">Delete Post</button>
+                                         </div>
+                                   </div>
+                                   <button class="optionsButton" post-options-id="popUp2">
                                         <img src="resources/Options Button.svg" alt="">
                                    </button>
                               </div>
@@ -394,6 +404,8 @@
                     <script src="actionButton.js"></script>
 
                     <script src="sendingPostData.js"></script>
+
+                    <script src="displayPostOptions.js"></script>
                
                </div>
 
