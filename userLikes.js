@@ -150,7 +150,7 @@ function loadUserLikes() {
                          <span class="counter">${post.dislikes}</span>
                     </button>
 
-                    <button class="postoptionbutton actionButton">
+                    <button class="postoptionbutton actionButton" onclick="window.location.href='replyPage.html'">
                               <img src="resources/Comments.svg"/>
                     </button>
 
