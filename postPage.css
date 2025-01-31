@@ -296,8 +296,7 @@ main {
     font-size: 24px;
     font-weight: Bold;
     color: #E4F3F6;
-    padding-bottom: 30px;
-
+    padding-bottom: 25px;
     width: 100%;
 }
 
@@ -440,6 +439,7 @@ main {
     object-fit: cover;    
     border-radius: 12px;
     transition: transform 0.2s ease-in-out;
+    margin-top: 10px;
 }
 
 /* Hover Effect */
