@@ -1,12 +1,3 @@
-<!-- HEP NOTES
- > i did modifications on the buttons, specifically added ID since important siya sa js 
- > i also made major changes sa js
- > there is a segment called "HEP FIX (commentActions)"
-    > yung ibang comments at nested comments ay hindi talaga gagana kasi hindi ko ginamit yung fix ko dun sa part na yun
-    > i was thinking na if okay muna tong fix na to bago ipalit sa lahat 
-    
-> GENERAL: i made a lot of major changes, so hindi ko muna siya inapply sa lahat -->
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -66,23 +57,6 @@
                     <div id="placeholderContent"></div>
                 </div>
 
-                <!--<div class="postActions">
-                    <button id="heart" class="actionButton">
-                         <img src="resources/Heart.svg" alt="Like">
-                         <span class="counter" id="postLikeCounter">42</span>
-                     </button>
-                     <div class="separator"></div>
-                     <button id="heartCrack" class="actionButton">
-                         <img src="resources/HeartCrack.svg" alt="Dislike">
-                         <span class="counter" id="postDislikeCounter">8</span>
-                     </button>
-                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='commentPage.html'"></button>
-                    <button id="bookmark" class="actionButton">
-                        <img src="resources/Bookmark.svg" alt="Bookmark">
-                    </button>
-                </div>-->
-
-                <!-- HEP FIX -->
                  <div class="postActions">
                         <button id="heart" class="actionButton">
                             <img src="resources/Heart.svg"/>
@@ -124,21 +98,6 @@
                             Main comment text goes here
                         </div>
 
-                        <!--<div class="commentActions">
-                            <button id="heart" class="actionButton">
-                                <img src="resources/Heart.svg" alt="Like">
-                                <span class="counter">42</span>
-                            </button>
-                            <div class="separator"></div>
-                            <button class="actionButton">
-                                <img src="resources/HeartCrack.svg" alt="Dislike">
-                                <span class="counter">7</span>
-                            </button>
-                            <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'" onclick="window.location.href='replyPage.html'"></button>
-                            <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
-                        </div>-->
-
-                        <!-- HEP FIX (commentActions)-->
                         <div class="commentActions">
                                 <button id="heart" class="actionButton">
                                     <img src="resources/Heart.svg"/>
@@ -185,21 +144,6 @@
                                         First nested reply text
                                     </div>
 
-                                    <!--<div class="commentActions">
-                                        <button class="actionButton">
-                                            <img src="resources/Heart.svg" alt="Like">
-                                            <span class="counter">42</span>
-                                        </button>
-                                        <div class="separator"></div>
-                                        <button class="actionButton">
-                                            <img src="resources/HeartCrack.svg" alt="Dislike">
-                                            <span class="counter">7</span>
-                                        </button>
-                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
-                                        <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
-                                    </div>-->
-
-                                    <!-- HEP FIX -->
                                     <div class="commentActions">
                                             <button id="heart" class="actionButton">
                                                 <img src="resources/Heart.svg"/>
@@ -245,7 +189,6 @@
                                                 <div class="commentText">
                                                     Second level nested reply
                                                 </div>
-                                                <!-- HEP FIX -->
                                                 <div class="commentActions">
                                                     <button id="heart" class="actionButton">
                                                         <img src="resources/Heart.svg"/>
@@ -622,16 +565,11 @@
         </main>
 
         <script src="nestedComments.js"></script>
-
-        <!-- HEP FIX // used my own actions for buttons-->
-        <!--<script src="actionButton.js"></script>-->
-
         <script src="receivingPostData.js"></script>
         <script src="sendingPostData.js"></script>
     </body>
 </html>
 
-<!-- HEP FIX (also what i used for my profilePage)-->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
           document.querySelectorAll('.actionButton').forEach(button => {
