@@ -288,19 +288,22 @@
                                         First nested reply text
                                     </div>
                                     <div class="commentActions">
-                                        <button class="actionButton">
-                                            <img src="resources/Heart.svg" alt="Like">
+                                        <button id="heart" class="actionButton">
+                                            <img src="resources/Heart.svg"/>
                                             <span class="counter">42</span>
                                         </button>
-                                        <div class="separator"></div>
-                                        <button class="actionButton">
-                                            <img src="resources/HeartCrack.svg" alt="Dislike">
-                                            <span class="counter">7</span>
+                                        <img src="resources/Line.svg" alt="Line">
+                                        <button id="heartCrack" class="actionButton">
+                                            <img src="resources/HeartCrack.svg"/>
+                                            <span class="counter">42</span>
                                         </button>
-                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
-                                        <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
-                                    </div>
-            
+                                        <button class="actionButton"onclick="window.location.href='replyPage.html'">
+                                             <img src="resources/Comments.svg"/>
+                                        </button>
+                                        <button id="bookmark" class="actionButton">
+                                            <img src="resources/bookmark.svg"/>
+                                        </button>
+                                   </div>
                                     <div class="nestedCommentsContainer">
                                         <div class="nestedCommentTrigger">
                                             <div class="nestedCommentLine"></div>
@@ -329,18 +332,22 @@
                                                     Second level nested reply
                                                 </div>
                                                 <div class="commentActions">
-                                                    <button class="actionButton">
-                                                        <img src="resources/Heart.svg" alt="Like">
-                                                        <span class="counter">42</span>
-                                                    </button>
-                                                    <div class="separator"></div>
-                                                    <button class="actionButton">
-                                                        <img src="resources/HeartCrack.svg" alt="Dislike">
-                                                        <span class="counter">7</span>
-                                                    </button>
-                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
-                                                    <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
-                                                </div>
+                                                       <button id="heart" class="actionButton">
+                                                            <img src="resources/Heart.svg"/>
+                                                            <span class="counter">42</span>
+                                                       </button>
+                                                       <img src="resources/Line.svg" alt="Line">
+                                                       <button id="heartCrack" class="actionButton">
+                                                            <img src="resources/HeartCrack.svg"/>
+                                                            <span class="counter">42</span>
+                                                       </button>
+                                                       <button class="actionButton"onclick="window.location.href='replyPage.html'">
+                                                            <img src="resources/Comments.svg"/>
+                                                       </button>
+                                                       <button id="bookmark" class="actionButton">
+                                                            <img src="resources/bookmark.svg"/>
+                                                       </button>
+                                                  </div>
                                             </div>
                                         </div>
                                     </div>
@@ -366,137 +373,22 @@
                             Main comment text goes here
                         </div>
                         <div class="commentActions">
-                            <button class="actionButton">
-                                <img src="resources/Heart.svg" alt="Like">
-                                <span class="counter">42</span>
-                            </button>
-                            <div class="separator"></div>
-                            <button class="actionButton">
-                                <img src="resources/HeartCrack.svg" alt="Dislike">
-                                <span class="counter">7</span>
-                            </button>
-                            <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
-                            <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
-                        </div>
-            
-                        <div class="nestedCommentsContainer">
-                            <div class="nestedCommentTrigger">
-                                <div class="nestedCommentLine"></div>
-                                <button class="viewRepliesButton">View Replies (1)</button>
-                            </div>
-            
-                            <div class="nestedComments">
-                                <div class="comment nested-level-1">
-                                    <div class="postHeader">
-                                        <div class="userInfo">
-                                            <div class="avatar">B</div>
-                                            <div class="username-and-time">
-                                                <div class="usernames">
-                                                    <span class="username">Replier Name</span>
-                                                    <span class="replyTo">in reply to @Username</span>
-                                                </div>
-                                                <div class="time">3 hours ago</div>
-                                            </div>
-                                        </div>
-                                        <!-- IF COMMENT BELONGS TO USER
-                                        <button class="optionsButton">
-                                             <img src="resources/Options Button.svg" alt="Options">
-                                        </button> -->
-                                    </div>
-                                    <div class="commentText">
-                                        First nested reply text
-                                    </div>
-                                    <div class="commentActions">
-                                        <button class="actionButton">
-                                            <img src="resources/Heart.svg" alt="Like">
-                                            <span class="counter">42</span>
-                                        </button>
-                                        <div class="separator"></div>
-                                        <button class="actionButton">
-                                            <img src="resources/HeartCrack.svg" alt="Dislike">
-                                            <span class="counter">7</span>
-                                        </button>
-                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
-                                        <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
-                                    </div>
-            
-                                    <div class="nestedCommentsContainer">
-                                        <div class="nestedCommentTrigger">
-                                            <div class="nestedCommentLine"></div>
-                                            <button class="viewRepliesButton">View Replies (1)</button>
-                                        </div>
-            
-                                        <div class="nestedComments">
-                                            <div class="comment nested-level-2">
-                                                <div class="postHeader">
-                                                    <div class="userInfo">
-                                                        <div class="avatar">C</div>
-                                                        <div class="username-and-time">
-                                                            <div class="usernames">
-                                                                <span class="username">Another Replier</span>
-                                                                <span class="replyTo">in reply to @Replier Name</span>
-                                                            </div>
-                                                            <div class="time">2 hours ago</div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- IF COMMENT BELONGS TO USER
-                                                       <button class="optionsButton">
-                                                            <img src="resources/Options Button.svg" alt="Options">
-                                                       </button> -->
-                                                </div>
-                                                <div class="commentText">
-                                                    Second level nested reply
-                                                </div>
-                                                <div class="commentActions">
-                                                    <button class="actionButton">
-                                                        <img src="resources/Heart.svg" alt="Like">
-                                                        <span class="counter">42</span>
-                                                    </button>
-                                                    <div class="separator"></div>
-                                                    <button class="actionButton">
-                                                        <img src="resources/HeartCrack.svg" alt="Dislike">
-                                                        <span class="counter">7</span>
-                                                    </button>
-                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
-                                                    <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>
-                    <div class="comment">
-                        <div class="postHeader">
-                            <div class="userInfo">
-                                <div class="avatar">A</div>
-                                <div class="username-and-time">
-                                    <div class="username">Username</div>
-                                    <div class="time">4 hours ago</div>
-                                </div>
-                            </div>
-                            <!-- IF COMMENT BELONGS TO USER
-                            <button class="optionsButton">
-                                <img src="resources/Options Button.svg" alt="Options">
-                            </button> -->
-                        </div>
-                        <div class="commentText">
-                            Main comment text goes here
-                        </div>
-                        <div class="commentActions">
-                            <button class="actionButton">
-                                <img src="resources/Heart.svg" alt="Like">
-                                <span class="counter">42</span>
-                            </button>
-                            <div class="separator"></div>
-                            <button class="actionButton">
-                                <img src="resources/HeartCrack.svg" alt="Dislike">
-                                <span class="counter">7</span>
-                            </button>
-                            <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
-                            <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
-                        </div>
+                              <button id="heart" class="actionButton">
+                                   <img src="resources/Heart.svg"/>
+                                   <span class="counter">42</span>
+                              </button>
+                              <img src="resources/Line.svg" alt="Line">
+                              <button id="heartCrack" class="actionButton">
+                                   <img src="resources/HeartCrack.svg"/>
+                                   <span class="counter">42</span>
+                              </button>
+                              <button class="actionButton"onclick="window.location.href='replyPage.html'">
+                                   <img src="resources/Comments.svg"/>
+                              </button>
+                              <button id="bookmark" class="actionButton">
+                                   <img src="resources/bookmark.svg"/>
+                              </button>
+                         </div>
             
                         <div class="nestedCommentsContainer">
                             <div class="nestedCommentTrigger">
@@ -527,19 +419,21 @@
                                     </div>
                                     <div class="commentActions">
                                         <button id="heart" class="actionButton">
-                                            <img src="resources/Heart.svg" alt="Like">
+                                            <img src="resources/Heart.svg"/>
                                             <span class="counter">42</span>
                                         </button>
-                                        <div class="separator"></div>
+                                        <img src="resources/Line.svg" alt="Line">
                                         <button id="heartCrack" class="actionButton">
-                                            <img src="resources/HeartCrack.svg" alt="Dislike">
-                                            <span class="counter">7</span>
+                                             <img src="resources/HeartCrack.svg"/>
+                                             <span class="counter">42</span>
                                         </button>
-                                        <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
+                                        <button class="actionButton"onclick="window.location.href='replyPage.html'">
+                                             <img src="resources/Comments.svg"/>
+                                        </button>
                                         <button id="bookmark" class="actionButton">
-                                            <img src="resources/Bookmark.svg" alt="Bookmark">
+                                             <img src="resources/bookmark.svg"/>
                                         </button>
-                                    </div>
+                                   </div>
             
                                     <div class="nestedCommentsContainer">
                                         <div class="nestedCommentTrigger">
@@ -569,18 +463,153 @@
                                                     Second level nested reply
                                                 </div>
                                                 <div class="commentActions">
-                                                    <button class="actionButton">
-                                                        <img src="resources/Heart.svg" alt="Like">
-                                                        <span class="counter">42</span>
-                                                    </button>
-                                                    <div class="separator"></div>
-                                                    <button class="actionButton">
-                                                        <img src="resources/HeartCrack.svg" alt="Dislike">
-                                                        <span class="counter">7</span>
-                                                    </button>
-                                                    <button class="actionButton"><img src="resources/Comments.svg" alt="Comment" onclick="window.location.href='replyPage.html'"></button>
-                                                    <button class="actionButton"><img src="resources/Bookmark.svg" alt="Bookmark"></button>
+                                                  <button id="heart" class="actionButton">
+                                                      <img src="resources/Heart.svg"/>
+                                                      <span class="counter">42</span>
+                                                  </button>
+                                                  <img src="resources/Line.svg" alt="Line">
+                                                  <button id="heartCrack" class="actionButton">
+                                                       <img src="resources/HeartCrack.svg"/>
+                                                       <span class="counter">42</span>
+                                                  </button>
+                                                  <button class="actionButton"onclick="window.location.href='replyPage.html'">
+                                                       <img src="resources/Comments.svg"/>
+                                                  </button>
+                                                  <button id="bookmark" class="actionButton">
+                                                       <img src="resources/bookmark.svg"/>
+                                                  </button>
+                                             </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="comment">
+                        <div class="postHeader">
+                            <div class="userInfo">
+                                <div class="avatar">A</div>
+                                <div class="username-and-time">
+                                    <div class="username">Username</div>
+                                    <div class="time">4 hours ago</div>
+                                </div>
+                            </div>
+                            <!-- IF COMMENT BELONGS TO USER
+                            <button class="optionsButton">
+                                <img src="resources/Options Button.svg" alt="Options">
+                            </button> -->
+                        </div>
+                        <div class="commentText">
+                            Main comment text goes here
+                        </div>
+                        <div class="commentActions">
+                              <button id="heart" class="actionButton">
+                                   <img src="resources/Heart.svg"/>
+                                   <span class="counter">42</span>
+                              </button>
+                              <img src="resources/Line.svg" alt="Line">
+                              <button id="heartCrack" class="actionButton">
+                                   <img src="resources/HeartCrack.svg"/>
+                                   <span class="counter">42</span>
+                              </button>
+                              <button class="actionButton"onclick="window.location.href='replyPage.html'">
+                                   <img src="resources/Comments.svg"/>
+                              </button>
+                              <button id="bookmark" class="actionButton">
+                                   <img src="resources/bookmark.svg"/>
+                              </button>
+                         </div>
+            
+                        <div class="nestedCommentsContainer">
+                            <div class="nestedCommentTrigger">
+                                <div class="nestedCommentLine"></div>
+                                <button class="viewRepliesButton">View Replies (1)</button>
+                            </div>
+            
+                            <div class="nestedComments">
+                                <div class="comment nested-level-1">
+                                    <div class="postHeader">
+                                        <div class="userInfo">
+                                            <div class="avatar">B</div>
+                                            <div class="username-and-time">
+                                                <div class="usernames">
+                                                    <span class="username">Replier Name</span>
+                                                    <span class="replyTo">in reply to @Username</span>
                                                 </div>
+                                                <div class="time">3 hours ago</div>
+                                            </div>
+                                        </div>
+                                        <!-- IF COMMENT BELONGS TO USER
+                                        <button class="optionsButton">
+                                             <img src="resources/Options Button.svg" alt="Options">
+                                        </button> -->
+                                    </div>
+                                    <div class="commentText">
+                                        First nested reply text
+                                    </div>
+                                    <div class="commentActions">
+                                        <button id="heart" class="actionButton">
+                                            <img src="resources/Heart.svg"/>
+                                            <span class="counter">42</span>
+                                        </button>
+                                        <img src="resources/Line.svg" alt="Line">
+                                        <button id="heartCrack" class="actionButton">
+                                             <img src="resources/HeartCrack.svg"/>
+                                             <span class="counter">42</span>
+                                        </button>
+                                        <button class="actionButton"onclick="window.location.href='replyPage.html'">
+                                             <img src="resources/Comments.svg"/>
+                                        </button>
+                                        <button id="bookmark" class="actionButton">
+                                             <img src="resources/bookmark.svg"/>
+                                        </button>
+                                   </div>
+            
+                                    <div class="nestedCommentsContainer">
+                                        <div class="nestedCommentTrigger">
+                                            <div class="nestedCommentLine"></div>
+                                            <button class="viewRepliesButton">View Replies (1)</button>
+                                        </div>
+            
+                                        <div class="nestedComments">
+                                            <div class="comment nested-level-2">
+                                                <div class="postHeader">
+                                                    <div class="userInfo">
+                                                        <div class="avatar">C</div>
+                                                        <div class="username-and-time">
+                                                            <div class="usernames">
+                                                                <span class="username">Another Replier</span>
+                                                                <span class="replyTo">in reply to @Replier Name</span>
+                                                            </div>
+                                                            <div class="time">2 hours ago</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- IF COMMENT BELONGS TO USER
+                                                       <button class="optionsButton">
+                                                            <img src="resources/Options Button.svg" alt="Options">
+                                                       </button> -->
+                                                </div>
+                                                <div class="commentText">
+                                                    Second level nested reply
+                                                </div>
+                                                  <div class="commentActions">
+                                                       <button id="heart" class="actionButton">
+                                                            <img src="resources/Heart.svg"/>
+                                                            <span class="counter">42</span>
+                                                       </button>
+                                                       <img src="resources/Line.svg" alt="Line">
+                                                       <button id="heartCrack" class="actionButton">
+                                                            <img src="resources/HeartCrack.svg"/>
+                                                            <span class="counter">42</span>
+                                                       </button>
+                                                       <button class="actionButton"onclick="window.location.href='replyPage.html'">
+                                                            <img src="resources/Comments.svg"/>
+                                                       </button>
+                                                       <button id="bookmark" class="actionButton">
+                                                            <img src="resources/bookmark.svg"/>
+                                                       </button>
+                                                  </div>
                                             </div>
                                         </div>
                                     </div>
