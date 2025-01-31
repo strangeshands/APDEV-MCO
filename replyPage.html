@@ -101,6 +101,10 @@
                 charLim.textContent = `${currentLength}/300`;
             });
 
+            document.addEventListener("DOMContentLoaded", () => {
+                document.getElementById("postTextInput").value = "";
+            });
+
             /********************************
              * Image Upload (Up to 4 images)
              ********************************/
