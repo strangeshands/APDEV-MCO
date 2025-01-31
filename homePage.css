@@ -702,6 +702,11 @@ input[type="text"] {
      width: 200px;
 } 
 
+.postOptionsButton {
+     text-decoration: none;
+     width: 100%
+}
+
 .activeOptionsButton {
      background-color: #1D1E1F;
 
@@ -733,10 +738,18 @@ input[type="text"] {
      width: 100%;
 }
 
+.deleteButton {
+     color: #DF0606;
+}
+
 .viewButton:hover, .editButton:hover, .deleteButton:hover {
      background-color: #7FB8C8;
      color: #16133B;
      transform: scale(1.02);
+}
+
+.deleteButton:hover {
+     color: #DF0606;
 }
 
 .viewButton:active, .editButton:active, .deleteButton:active {
