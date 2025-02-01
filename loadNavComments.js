@@ -59,7 +59,7 @@ function loadNavComments() {
 
     let postCounter = 1;
 
-    userPosts.forEach(post => {
+    userComments.forEach(post => {
          const postElement = document.createElement("a");
          postElement.classList.add("postLink");
          postElement.classList.add("userPostLink");
@@ -77,7 +77,7 @@ function loadNavComments() {
 
          postElement.innerHTML = postContent;
          container.appendChild(postElement);
+         postCounter += 1;
     });
 
-    
 }

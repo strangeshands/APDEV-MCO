@@ -9,17 +9,21 @@ if (contentData) {
           const container = document.getElementById('photo-container');
           container.id = "userphotocontainer";
           container.innerHTML = 
-          `<img class="clickable-image" src="${contentData.postImage}" onclick="openModal(this)">
-          <img class="clickable-image" src="${contentData.postImage}" onclick="openModal(this)">
-          <img class="clickable-image" src="${contentData.postImage}" onclick="openModal(this)">`;
+            contentData.postImage.length > 0 ? 
+            `
+                ${contentData.postImage.map(function(img) { 
+                    return '<img class="clickable-image" src="' + img + '" onclick="openModal(this)">';
+                }).join("")}
+            `
+            : "";
      }
 
      if (contentData.userProfilePic) {
           document.getElementById('postAvatar').innerHTML = `<img src="${contentData.userProfilePic}" id="postProfilePic">`;
      }
 
-     document.getElementById('postUsername').innerText = `${contentData.username}`;
-     document.getElementById('postTime').innerText = `${contentData.timePosted}`;
+     document.getElementById('postDisplayName').innerText = `${contentData.displayName}`;
+     document.getElementById('postTime').innerText = `${contentData.username} | ${contentData.timePosted}`;
 
      document.getElementById('postLikeCounter').innerText = `${contentData.postLikeCounter}`;
      document.getElementById('postDislikeCounter').innerText = `${contentData.postDislikeCounter}`;
@@ -29,9 +33,9 @@ if (contentData) {
           const tagsContainer = document.getElementById('tags');
           contentData.postTags.forEach(tag => {
                const tagElement = document.createElement('a');
-               tagElement.href = `${tag}`;  // Set href (you can change this to a proper URL if needed)
-               tagElement.innerText = `${tag}`;  // Display the tag with a '#' symbol
-               tagsContainer.appendChild(tagElement);  // Append each tag as an individual <a> tag
+               tagElement.href = `${tag}`;  
+               tagElement.innerText = `${tag}`;  
+               tagsContainer.appendChild(tagElement);  
           });
      }
 

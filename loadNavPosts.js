@@ -104,7 +104,7 @@ function loadNavPosts() {
 
          postElement.innerHTML = postContent;
          container.appendChild(postElement);
+         postCounter += 1;
     });
 
-    
 }

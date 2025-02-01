@@ -1,6 +1,7 @@
 /* ---- HARD CODED DATA ---- */
 
 /* ---- USER POSTS ---- */
+/*
 const userPosts = [
     {
          replyTo: "",
@@ -69,9 +70,10 @@ const userPosts = [
          bookmark: false,
          own: true
     }
-];
+]; */
 
 /* ---- USER COMMENTS ---- */
+/*
 const userComments = [
     {
          replyTo: "@TheDarkKnight",
@@ -116,10 +118,10 @@ const userComments = [
          bookmark: false,
          own: true
     },
-];
+];*/
 
 /* ---- TIMELINE POSTS ---- */
-const timelinePosts = [
+/*const timelinePosts = [
     {
          displayName: "bartholomewThe5th",
          username: "@catlover420",
@@ -177,7 +179,7 @@ const timelinePosts = [
          bookmark: true,
          own: false
     }
-];
+];*/
 
 function storePostData(postId) {
 
@@ -201,33 +203,21 @@ function storePostData(postId) {
         
     }
 
-    const postTitle = document.getElementById(postId).querySelector('.postTitle, .userPostTitle').innerText;
-     
-     const postTextElement = document.getElementById(postId).querySelector('.postText');
-     const postText = postTextElement ? postTextElement.innerText : '';
-     
-     // Get all the tags and join them as a string (or an array if preferred)
-     const postTagsElements = document.getElementById(postId).querySelectorAll('.posttags a');
-     const postTags = Array.from(postTagsElements).map(tag => tag.innerText);  // Join tags as a comma-separated string
+    index = index - 1;
 
-     // Check if there's an image in the post
-     const postImageElement = document.getElementById(postId).querySelector('.postImageContainer img, .userPost img');
-     const postImage = postImageElement && postImageElement.getAttribute('src') !== "resources/Image Holder.svg" ? postImageElement.getAttribute('src') : ''; // If no image, set empty string
-     
-     // Check if there's an image in the profile pic
-     const userProfilePicElement = document.getElementById(postId).querySelector('.profilePic img, #userAvatar img');
-     const userProfilePic = userProfilePicElement ? userProfilePicElement.getAttribute('src') : document.getElementById('userAvatar').querySelector('img').getAttribute('src'); // If no image, set as user avatar
-     
-     // Get the username and time posted, with fallbacks in case not found
-     const usernameElement = document.getElementById(postId).querySelector('.username');
-     const username = usernameElement ? usernameElement.innerText : document.getElementById('profileUsername').innerText;
-     const timePostedElement = document.getElementById(postId).querySelector('.timePosted');
-     const timePosted = timePostedElement ? timePostedElement.innerText : '1 minute ago';
+     const postTitle = postReference[index].title;
+     const postText = postReference[index].caption;
 
-     const postLikeCounterElement = document.getElementById(postId).querySelector('.postLikeCounter');
-     const postLikeCounter = postLikeCounterElement ? postLikeCounterElement.innerText : '0'; // Default to 0 if not found
-     const postDislikeCounterElement = document.getElementById(postId).querySelector('.postDislikeCounter');
-     const postDislikeCounter = postDislikeCounterElement ? postDislikeCounterElement.innerText : '0'; // Default to 0 if not found
+     const postTags = postReference[index].tags.length > 0 ? postReference[index].tags : '';
+     const postImage = postReference[index].images.length > 0 ? postReference[index].images : '';
+
+     const userProfilePic = postReference[index].pfp;
+     const displayName = postReference[index].displayName;
+     const username = postReference[index].username;
+     const timePosted = postReference[index].time;
+
+     const postLikeCounter = postReference[index].likes;
+     const postDislikeCounter = postReference[index].dislikes;
 
      // Create an object to hold all the content
      const contentObj = {
@@ -236,6 +226,7 @@ function storePostData(postId) {
           postTags: postTags,
           postImage: postImage,
           userProfilePic: userProfilePic,
+          displayName: displayName,
           username: username,
           timePosted: timePosted,
           postLikeCounter: postLikeCounter,

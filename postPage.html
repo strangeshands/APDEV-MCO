@@ -33,8 +33,8 @@
                     <div class="userInfo">
                         <div class="avatar" id="postAvatar"></div>
                         <div class="username-and-time">
-                            <div class="username" id="postUsername">Username</div>
-                            <div class="time" id="postTime">4 hours ago</div>
+                            <div class="displayName" id="postDisplayName"></div>
+                            <div class="time" id="postTime"></div>
                         </div>
                     </div>
                     <!-- IF POST BELONGS TO USER
@@ -43,14 +43,10 @@
                     </button> -->
                 </div>
                 <div id="tags">
-                    <a href="">#funny</a>
-                    <a href="">#life</a>
                 </div>
                 <div id="postTitle">
-                    This is a title
                 </div>
                 <div id="postText">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac tortor sed velit luctus malesuada. Aenean suscipit, arcu et pulvinar tincidunt, lorem felis tempor quam, sed euismod turpis neque et lorem. Fusce id libero ut nulla fringilla interdum. Curabitur posuere metus non nibh.
                 </div>
 
 
@@ -60,12 +56,12 @@
                  <div class="postActions">
                         <button id="heart" class="actionButton">
                             <img src="resources/Heart.svg"/>
-                            <span class="counter">1500</span>
+                            <span class="counter" id="postLikeCounter"></span>
                     </button>
                     <img src="resources/Line.svg" alt="Line">
                     <button id="heartCrack" class="actionButton">
                             <img src="resources/HeartCrack.svg"/>
-                            <span class="counter">21</span>
+                            <span class="counter" id="postDislikeCounter"></span>
                     </button>
                     <button class="actionButton"onclick="window.location.href='replyPage.html'">
                             <img src="resources/Comments.svg"/>
