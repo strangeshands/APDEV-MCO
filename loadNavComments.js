@@ -1,3 +1,4 @@
+/* ---- HARD CODED DATA ---- */
 const userComments = [
     {
          replyTo: "@TheDarkKnight",

@@ -1,3 +1,4 @@
+/* ---- HARD CODED DATA ---- */
 const userPosts = [
     {
          replyTo: "",
