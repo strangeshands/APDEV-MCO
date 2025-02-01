@@ -1,6 +1,8 @@
 /* ---- HARD CODED DATA ---- */
 const timelinePosts = [
     {
+         replyTo: "",
+
          displayName: "bartholomewThe5th",
          username: "@catlover420",
          pfp: "resources/cat.jpg",
@@ -20,6 +22,7 @@ const timelinePosts = [
          own: false
     },
     {
+         replyTo: "",
          displayName: "slaysianDivaOfLA",
          username: "@dontforgettheella",
          pfp: "resources/joella.jpg",
@@ -39,6 +42,7 @@ const timelinePosts = [
          own: false
     },
     {
+         replyTo: "",
          displayName: "carbonaraEater",
          username: "@jabeedabee",
          pfp: "resources/jabee.jpg",

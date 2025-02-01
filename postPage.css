@@ -202,6 +202,25 @@ main {
     width: 100%;
 }
 
+#replyToContainer {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+}
+
+#reply-to-msg {
+    margin-bottom: 25px;
+    padding: 10px;
+    background-color: #7FB8C8;
+    color: #1D1E1F;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .postHeader {
     display: flex;
     justify-content: space-between;
@@ -293,6 +312,13 @@ main {
 #tags a {
     color: white;
     text-decoration: none;
+}
+
+#postTitleContainer {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
 }
 
 #postTitle {
