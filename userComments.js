@@ -46,7 +46,7 @@ const userComments = [
 ];
 
 /* ---- CODE FUNCTION ---- */
-function loadUserComments() {
+function loadUserComments(type) {
      const container = document.getElementById("userCommentContainer");
 
      if (!userComments || userComments.length === 0) {
@@ -61,8 +61,7 @@ function loadUserComments() {
 
      userComments.forEach((post, index) => {
           const postElement = document.createElement("div");
-          postElement.classList.add(post.replyTo.length > 0 ? "comment" : "post");
-
+          postElement.classList.add("comment");
           let postContent = "";
 
           if (post.replyTo.length > 0) {
@@ -77,7 +76,7 @@ function loadUserComments() {
 
           postContent += `
                <!-- USER DETAILS -->
-               <div class="pfpuserrow" id="pfpuserrow-${index}">
+               <div class="pfpuserrow" id="${type}-pfpuserrow-${index}">
                     <div id="userandpfp">
                          <div class="pfpPost">
                          <img src="${post.pfp}" />
@@ -89,14 +88,12 @@ function loadUserComments() {
                     </div>
                     
                     ${post.own ? `
-                         <!-- POST OPTIONS -->
-                         <button class="optionsButton" onclick="togglePopupComment(this, '${index}')">
-                              <img src="resources/Options Button.svg" alt="">
+                         <button class="optionsButton" onclick="togglePopup('${type}', '${index}', '${container.id}')">
+                              <img src="resources/Options Button.svg"/>
                          </button>
 
-
                          <!-- POST OPTIONS POPUP -->
-                         <div class="popUpOptions" id="comment-popup-${index}">
+                         <div class="popUpOptions" id="${type}-popup-${index}">
                               <div class="postOptionsContent">
                                    <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
                                    <button class="editButton" onclick="window.location.href = 'newPostPage.html';">Edit Post</button>
@@ -165,42 +162,4 @@ function loadUserComments() {
           postElement.innerHTML = postContent;
           container.appendChild(postElement);
      });
-}
-
-/* --- OPTION POP UP --- */
-let activePopup = null;
-
-function togglePopupComment(button, postId) {
-    console.log(`Menu clicked on post ${postId}`);
-    
-    const popup = document.getElementById(`comment-popup-${postId}`);
-    
-    if (activePopup && activePopup !== popup) {
-        activePopup.classList.remove('show');
-    }
-    
-    popup.classList.toggle('show');
-    
-    if (popup.classList.contains('show')) {
-        activePopup = popup;
-    } else {
-        activePopup = null;
-    }
-}
-
-document.addEventListener('click', (e) => {
-     const optionsButtons = document.querySelectorAll('.optionsButton');
-     const popups = document.querySelectorAll('.popUpOptions');
-  
-     if (![...optionsButtons].includes(e.target) && !e.target.closest('.popUpOptions') && !e.target.closest('.optionsButton')) {
-         popups.forEach(popup => {
-             popup.classList.remove('show');
-         });
-     }
-}); 
-
-/* --- GO TO POST --- */
-function goToPost(title, postId) {
-     console.log(`Going to post ${postId} -- ${title}`);
-     /*window.location.href = 'postPage.html';*/
 }

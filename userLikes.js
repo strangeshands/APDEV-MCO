@@ -66,7 +66,7 @@ const userLikes = [
 ];
 
 /* ---- CODE FUNCTION ---- */
-function loadUserLikes() {
+function loadUserLikes(type) {
      const container = document.getElementById("userLikesContainer");
 
      if (!userLikes || userLikes.length === 0) {
@@ -79,7 +79,7 @@ function loadUserLikes() {
           return;
      }
 
-     userLikes.forEach(post => {
+     userLikes.forEach((post, index) => {
           const postElement = document.createElement("div");
           postElement.classList.add(post.replyTo.length > 0 ? "comment" : "post");
           let postContent = "";
@@ -96,7 +96,7 @@ function loadUserLikes() {
 
           postContent += `
                <!-- USER DETAILS -->
-               <div id="pfpuserrow">
+               <div class="pfpuserrow" id="${type}-pfpuserrow-${index}">
                     <div id="userandpfp">
                          <div class="pfpPost">
                          <img src="${post.pfp}" />
@@ -106,11 +106,21 @@ function loadUserLikes() {
                          <span class="pfpusername">${post.username} | ${post.time}</span>
                          </div>
                     </div>
-
+                    
                     ${post.own ? `
-                         <button class="smallbutton">
+                         <button class="optionsButton" onclick="togglePopup('${type}', '${index}', '${container.id}')">
                               <img src="resources/Options Button.svg"/>
                          </button>
+
+                         <!-- POST OPTIONS POPUP -->
+                         <div class="popUpOptions" id="${type}-popup-${index}">
+                              <div class="postOptionsContent">
+                                   <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
+                                   <button class="editButton" onclick="window.location.href = 'newPostPage.html';">Edit Post</button>
+                                   <button class="editButton">Copy Link</button>
+                                   <button class="deleteButton">Delete Post</button>
+                              </div>
+                         </div>
                     ` : "" }
                </div>
 
@@ -173,3 +183,4 @@ function loadUserLikes() {
           container.appendChild(postElement);
      });
 }
+

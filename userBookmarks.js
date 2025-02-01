@@ -18,6 +18,7 @@ const userBookmarks = [
           dislikes: 0,
 
           liked: true,
+          disliked: false,
           bookmark: true,
           own: false
      },
@@ -38,6 +39,7 @@ const userBookmarks = [
           dislikes: 0,
 
           liked: true,
+          disliked: false,
           bookmark: true,
           own: false
      },
@@ -58,13 +60,14 @@ const userBookmarks = [
           dislikes: 3,
 
           liked: false,
+          disliked: false,
           bookmark: true,
           own: true
      },
 ];
 
 /* ---- CODE FUNCTION ---- */
-function loadUserBookmarks() {
+function loadUserBookmarks(type) {
      const container = document.getElementById("userBookmarksContainer");
 
      if (!userBookmarks || userBookmarks.length === 0) {
@@ -77,7 +80,7 @@ function loadUserBookmarks() {
           return;
      }
 
-     userBookmarks.forEach(post => {
+     userBookmarks.forEach((post, index) => {
           const postElement = document.createElement("div");
           postElement.classList.add(post.replyTo.length > 0 ? "comment" : "post");
           let postContent = "";
@@ -94,7 +97,7 @@ function loadUserBookmarks() {
 
           postContent += `
                <!-- USER DETAILS -->
-               <div id="pfpuserrow">
+               <div class="pfpuserrow" id="${type}-pfpuserrow-${index}">
                     <div id="userandpfp">
                          <div class="pfpPost">
                          <img src="${post.pfp}" />
@@ -106,9 +109,19 @@ function loadUserBookmarks() {
                     </div>
                     
                     ${post.own ? `
-                         <button class="smallbutton">
+                         <button class="optionsButton" onclick="togglePopup('${type}', '${index}', '${container.id}')">
                               <img src="resources/Options Button.svg"/>
                          </button>
+
+                         <!-- POST OPTIONS POPUP -->
+                         <div class="popUpOptions" id="${type}-popup-${index}">
+                              <div class="postOptionsContent">
+                                   <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
+                                   <button class="editButton" onclick="window.location.href = 'newPostPage.html';">Edit Post</button>
+                                   <button class="editButton">Copy Link</button>
+                                   <button class="deleteButton">Delete Post</button>
+                              </div>
+                         </div>
                     ` : "" }
                </div>
 
