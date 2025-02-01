@@ -1,17 +1,15 @@
-html {
-    box-sizing: border-box;
-}
-*, *::before, *::after {
-    box-sizing: inherit;
-}
+/*
+     This is a CSS file used in homePage.html
+*/
 
-/* Optional Fonts */
+/* ---------- GENERAL ---------- */
 @font-face {
-    font-family: 'Inter';
+    font-family: 'Inter'; 
     src: url('resources/InterFont.ttf');
 }
+
 @font-face {
-    font-family: 'JostBold';
+    font-family: 'JostBold'; 
     src: url('resources/Jost-Bold.ttf');
 }
 
@@ -20,15 +18,34 @@ html {
     font-family: "Inter"; 
 }
 
-/* Global Styles */
+html, body {
+    min-width: 1000px; 
+    overflow-x: auto;
+}
+
+.inviBrk {
+    height: 20px;
+}
+
+/* ---------- GENERAL ---------- */
+
 body {
-    background-color: black;
+    background-color: #030909;
     color: white;
     font-family: "Inter";
     margin: 0;
     min-height: 100vh;
 }
 
+button {
+    border: none; 
+    cursor: pointer;
+
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* ---------- HEADER ---------- */
 #appName {
     font-family: "JostBold";
     color: #98D5DC;
@@ -93,19 +110,7 @@ input[type="text"] {
 }
 
 
-/* ---------- BODY ---------- */
-
-html, body {
-    height: 100%; /* Ensure both html and body elements cover the full height of the viewport */
-    margin: 0; /* Remove default margin */
-}
-
-body {
-    background-color: #030909; /* Change to your desired background color */
-    font-family: "Inter";
-    min-height: 100%; /* Ensure body fills the entire height */
-}
-
+/* ---------- BACK BUTTON ---------- */
 main {
     max-width: 800px;
     margin: 0 auto;
@@ -133,7 +138,9 @@ main {
     font-size: 16px;
     font-weight: bold;
 }
+/* ---------- BACK BUTTON ---------- */
 
+/* ---------- MAIN ---------- */
 /* Post Container */
 .post {
     background-color: #1A1A1A;
@@ -361,3 +368,4 @@ button img {
 .postButton:active {
     transform: scale(0.95);
 }
+/* ---------- MAIN ---------- */

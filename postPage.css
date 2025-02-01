@@ -1,3 +1,9 @@
+/*
+     This is a CSS file used in postPage.html
+*/
+
+/* ---------- GENERAL ---------- */
+
 @font-face {
     font-family: 'Inter';
     src: url('resources/InterFont.ttf');
@@ -14,24 +20,34 @@
 }
 
 html, body {
-     overflow-x: auto;
+    min-width: 1000px; 
+    overflow-x: auto;
 }
 
 .inviBrk {
      height: 20px;
 }
 
+/* ---------- GENERAL ---------- */
+
+
 body {
     background-color: #030909;
     color: white;
     font-family: "Inter";
-
-     display: flex;
-     flex-direction: column;
-     justify-content: flex-start;
-     align-items: flex-start;
+    margin: 0;
+    min-height: 100vh;
 }
 
+button {
+    border: none; 
+    cursor: pointer;
+
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* ---------- HEADER ---------- */
 #appName {
      font-family: "JostBold";
      color: #98D5DC;
@@ -40,20 +56,17 @@ body {
 }
 
 header {
-     position: sticky;
-     top: 0;
-     background-color: black;
-     height: 80px;
-     width: 100%;
-     margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     gap: 79px;
-     padding: 0 32px;
+    background-color: black;
 
-     border-bottom: 1px solid #49454F;
+    padding: 0 32px;
+    gap: 79px;
+    height: 88px;
+
+    border-bottom: 1px solid #49454F;
 }
 
 #logo {
@@ -67,12 +80,12 @@ header {
 }
 
 #headercol2 {
-     display: flex;
-     justify-content: flex-end; 
-     align-items: center;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
 
-     /* IF USER IS NOT LOGGED IN */
-     gap: 12px;
+    /* IF USER IS NOT LOGGED IN */
+    gap: 12px;
 }
 
 .searchBar {
@@ -124,13 +137,7 @@ input[type="text"] {
 #logInButton:active {
      transform: scale(0.95); 
 }
-
-button {
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s, transform 0.2s;
-}
+/* ---------- HEADER ---------- */
 
 main {
     max-width: 1000px;
@@ -140,36 +147,7 @@ main {
     width: 100%;
 }
 
-.logoAndBrandName {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0; 
-}
-
-.brandName {
-    font-family: "JostBold";
-    color: #98D5DC;
-    font-size: 20px;
-    font-weight: 400;
-}
-
-.searchBar img {
-    margin-right: 8px;
-}
-
-.logInButton {
-    background-color: #98D5DC;
-    color: #030909;
-    padding: 8px 24px;
-    border: none;
-    border-radius: 100px;
-    font-weight: bold;
-    cursor: pointer;
-    white-space: nowrap; 
-    flex-shrink: 0; 
-}
-
+/* ---------- BACK BUTTON ---------- */
 .goBackLink {
     display: flex;
     align-items: center;
@@ -191,7 +169,9 @@ main {
     font-size: 16px;
     font-weight: bold;
 }
+/* ---------- BACK BUTTON ---------- */
 
+/* ---------- POST INPUTS ---------- */
 #post {
     background-color: #1A1A1A;
     border-radius: 16px;
@@ -303,7 +283,9 @@ main {
 #postText {
     margin-bottom: 15px;
 }
+/* ---------- POST INPUTS ---------- */
 
+/* ---------- COMMENTS ---------- */
 .postActions, .commentActions {
     display: flex;
     justify-content: flex-end;
@@ -331,7 +313,6 @@ main {
 .actionButton:hover {
     transform: scale(1.05);
 }
-
 
 .actionButton:active {
     transform: scale(0.95); 
@@ -374,8 +355,9 @@ main {
     margin-left: 52px;
     display: flex;
 }
+/* ---------- POST INPUTS ---------- */
 
-
+/* ---------- NESTED REPLIES ---------- */
 .viewRepliesButton {
     background: none;
     color: rgba(255, 255, 255, 0.6);
@@ -542,3 +524,4 @@ main {
 .viewRepliesLink:hover .replyLine {
     background-color: #98D5DC;
 }
+/* ---------- NESTED REPLIES ---------- */
