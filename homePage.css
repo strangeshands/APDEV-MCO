@@ -84,6 +84,8 @@ header {
      display: flex; 
      justify-content: flex-start; 
      align-items: center;
+
+     cursor: pointer;
 }
 
 #headercol2 {
@@ -563,6 +565,17 @@ input[type="text"] {
      transform: scale(0.95); 
 }
 
+#postFeed {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 20px;
+
+    width: 100%;
+}
+
 .post {     
      display: flex;
      flex-direction: column;
@@ -644,8 +657,8 @@ input[type="text"] {
 
 .timePosted {
      font-size: 14px;
-     font-style: italic;
      color: #E4F3F6;
+     opacity: 80%;
 
      margin: 0px;
 

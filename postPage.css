@@ -64,6 +64,8 @@ header {
      display: flex; 
      justify-content: flex-start; 
      align-items: center;
+
+     cursor: pointer;
 }
 
 #headercol2 {
@@ -250,14 +252,15 @@ main {
     gap: 4px;
 }
 
-.username {
+.displayName {
     font-weight: bold;
     line-height: 25px;
 }
 
 .time {
-    font-size: 12px;
-    font-style: italic;
+    font-size: 14px;
+    color: #E4F3F6;
+    opacity: 80%;
 }
 
 .optionsButton {

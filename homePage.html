@@ -4,6 +4,9 @@
           <title> Connectify - Home </title>
           <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
           <link rel="stylesheet" type="text/css" href="homePage.css">
+
+          <!-- SCRIPTS -->
+           <script src="actionButton.js"></script>
      </head>
 
      <body>
@@ -79,43 +82,11 @@
                               <a class="userNavMore" href="profilePage.html">More ></a>
                          </div>
 
-                         <!-- IF USER HAS NOT MADE ANY POSTS YET -->
-                         <!--
-                         <div class="noPostsOrComments">No Posts Available</div>
-                         --> 
-
-                         <div class="userPostsAndCommentsContent">
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost1">
-                                   <button class="userPost" id="userPost1">
-                                        <img class="userPostImage" src="resources/sad-hamster.jpg" alt="User Post Image">
-                                        <p class="userPostTitle">good morning</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost2">
-                                   <button class="userPost" id="userPost2">
-                                        <img class="userPostImage" src="resources/Image Holder.svg" alt="User Post Image">
-                                        <p class="userPostTitle">how are you</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost3">
-                                   <button class="userPost" id="userPost3">
-                                        <img class="userPostImage" src="resources/Image Holder.svg" alt="User Post Image">
-                                        <p class="userPostTitle">wake me up</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost4">
-                                   <button class="userPost" id="userPost4">
-                                        <img class="userPostImage" src="resources/monkey.jpg" alt="User Post Image">
-                                        <p class="userPostTitle">titleeeeee</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost5">
-                                   <button class="userPost" id="userPost5">
-                                        <img class="userPostImage" src="resources/hamster.jpg" alt="User Post Image">
-                                        <p class="userPostTitle">where am i</p>
-                                   </button>
-                              </a>
-                         </div>
+                         <div class="userPostsAndCommentsContent" id="userPostsContent"></div>
+                         <script src="loadNavPosts.js"></script>
+                         <script>
+                            document.addEventListener("DOMContentLoaded", loadNavPosts());
+                         </script>
                     </div>
                     
                     <!-- COMMENTS -->
@@ -126,286 +97,31 @@
                               <a class="userNavMore" href="profilePage.html">More ></a>
                          </div>
 
-                         <!-- IF USER HAS NOT MADE ANY COMMENTS YET -->
-                         <!--     
-                         <div class="noPostsOrComments">No Comments Available</div>
-                         -->
-
-                         <div class="userPostsAndCommentsContent">
-
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment1">
-                                   <button class="userPost" id="userComment1">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">funny reply</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment2">
-                                   <button class="userPost" id="userComment2">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">long ass commmmeeennntttuhhhhhhhhhhh</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment3">
-                                   <button class="userPost" id="userComment3">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">random meme</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment4">
-                                   <button class="userPost" id="userComment4">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">existential dread</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment5">
-                                   <button class="userPost" id="userComment5">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">:DDDDD</p>
-                                   </button>
-                              </a>
-                         </div>
+                         <div class="userPostsAndCommentsContent" id="userCommentsContent"></div>
+                         <script src="loadNavComments.js"></script>
+                         <script>
+                            document.addEventListener("DOMContentLoaded", loadNavComments());
+                         </script>
                     </div>
 
                </div> 
                
                <!-- TIMELINE -->
-               <div class="timeline">
+               <div class="timeline" id="postsTimeline">
                     <!-- NEW POST BUTTON -->
                     <div class="newPost">
                          <button class="newPostButton" onclick="window.location.href='newPostPage.html'">+ New Post</button>
                     </div>
 
                     <div class="postDivider"></div>
-
-                    <!-- IF POST FEED IS EMPTY-->
-                    <!--
-                    <div class="emptyTimeline">
-                         <p id="emptyFeed">Wow, such empty</p>
-                     </div> 
-                    -->
                     
                     <!-- POST FEED -->
 
-                    <!-- POST -->
-                    <div class="post postLink" id="post1" data-post-id="post1">
-
-                         <div class="mainPost">
-                              <!-- POST USER -->
-                              <div class="postUser">
-                                   <div class="profilePic">
-                                        <img src="resources/cat.jpg" alt="userProfilePicture" class="userProfilePic">
-                                   </div>
-                                   <div class="usernameAndTime">
-                                        <p class="username">bartholomewThe5th</p>
-                                        <p class="timePosted">4 minutes ago</p>
-                                   </div>
-
-                                   <!-- IF USER IS LOGGED IN -->
-                                   <!-- POST OPTIONS 
-                                   <button class="optionsButton">
-                                        <img src="resources/Options Button.svg" alt="Options">
-                                   </button> -->
-                              </div>
-
-                              <!-- POST CONTENT -->
-                              <div class="postContent">
-
-                                   <!-- TAGS -->
-                                   <div class="posttags">
-                                        <a href="">#funny</a>
-                                        <a href="">#life</a>
-                                        <a href="">#school</a>
-                                        <a href="">#dolphin</a>
-                                        <a href="">#rainbow</a>
-                                        <a href="">#ocean</a>
-                                        <a href="">#morning</a>
-                                        <a href="">#depression</a>
-                                        <a href=""></a>
-                                   </div>
-
-                                   <p class="postTitle">good morning</p>
-                                   <p class="postText">text text text text text text text text text text text text text text text text text text text text text text text </p>
-                                   <div class="postImageContainer">
-                                        <img class="postImage" src="resources/loginbg.png" alt="Post Image">
-                                   </div>
-                              </div>
-
-                         </div>
-                         
-                         <!-- ACTION BUTTONS -->
-                         <div class="postActions">
-                              <button id="heart" class="actionButton">
-                                  <img src="resources/Heart.svg"/>
-                                  <span class="counter">42</span>
-                              </button>
-                              <img src="resources/Line.svg" alt="Line">
-                              <button id="heartCrack" class="actionButton">
-                                   <img src="resources/HeartCrack.svg"/>
-                                   <span class="counter">42</span>
-                              </button>
-                              <a href="replyPage.html" class="postLink" data-post-id="post1">
-                                   <button class="actionButton commentButton">
-                                        <img src="resources/Comments.svg"/>
-                                   </button>
-                              </a>
-                              <button id="bookmark" class="actionButton">
-                                   <img src="resources/bookmark.svg"/>
-                              </button>
-                         </div>
-
-                    </div>
-
-                    <div class="postDivider"></div>
-
-                    <!-- POST -->
-                    <div class="post postLink" id="post2" data-post-id="post2">
-
-                         <div class="mainPost">
-                              <!-- POST USER -->
-                              <div class="postUser">
-                                   <div class="profilePic">
-                                        <img src="resources/joella.jpg" alt="userProfilePicture" class="userProfilePic">
-                                   </div>
-                                   <div class="usernameAndTime">
-                                        <p class="username">slaysianDivaOfLA</p>
-                                        <p class="timePosted">7 hours ago</p>
-                                   </div>
-
-                                   <!-- IF USER IS LOGGED IN -->
-                                   <!-- POST OPTIONS -->
-                                   <div class="popUpOptions" id="popUp2">
-                                        <div class="postOptionsContent">
-                                             <button class="activeOptionsButton" post-options-id="popUp2">
-                                                  <img src="resources/Options Button.svg" alt="">
-                                             </button>
-                                             <a href="postPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="viewButton">View Post</button></a>
-                                             <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Edit Post</button></a>
-                                             <a href="" class="postLink postOptionsButton" data-post-id="post2"><button class="deleteButton">Delete Post</button></a>
-                                         </div>
-                                   </div>
-                                   <button class="optionsButton" post-options-id="popUp2">
-                                        <img src="resources/Options Button.svg" alt="">
-                                   </button>
-                              </div>
-
-                              <!-- POST CONTENT -->
-                              <div class="postContent">
-
-                                   <!-- TAGS -->
-                                   <div class="posttags">
-                                        <a href="">#mug</a>
-                                        <a href="">#life</a>
-                                        <a href="">#stuff</a>
-                                        <a href="">#comedy</a>
-                                        <a href="">#hell</a>
-                                   </div>
-
-                                   <p class="postTitle">fix ur mug</p>
-                                   <p class="postText">- Joella</p>
-                                   <div class="postImageContainer"></div>
-                              </div>
-
-                              <div class="postImageContainer">
-                                   
-                              </div>
-                         </div>
-                         
-                         <!-- ACTION BUTTONS -->
-                         <div class="postActions">
-                              <button id="heart" class="actionButton">
-                                  <img src="resources/Heart.svg"/>
-                                  <span class="counter">42</span>
-                              </button>
-                              <img src="resources/Line.svg" alt="Line">
-                              <button id="heartCrack" class="actionButton">
-                                   <img src="resources/HeartCrack.svg"/>
-                                   <span class="counter">42</span>
-                              </button>
-                              <a href="replyPage.html" class="postLink" data-post-id="post2">
-                                   <button class="actionButton commentButton">
-                                        <img src="resources/Comments.svg"/>
-                                   </button>
-                              </a>
-                              <button id="bookmark" class="actionButton">
-                                   <img src="resources/bookmark.svg"/>
-                              </button>
-                         </div>
-                         
-                    </div>
-
-                    <div class="postDivider"></div>
-
-                    <!-- POST -->
-                    <div class="post postLink" id="post3" data-post-id="post3">
-
-                         <div class="mainPost">
-                              <!-- POST USER -->
-                              <div class="postUser">
-                                   <div class="profilePic">
-                                        <img src="resources/jabee.jpg" alt="userProfilePicture" class="userProfilePic">
-                                   </div>
-                                   <div class="usernameAndTime">
-                                        <p class="username">carbonaraEater</p>
-                                        <p class="timePosted">5 days ago</p>
-                                   </div>
-
-                                   <!-- IF USER IS LOGGED IN -->
-                                   <!-- POST OPTIONS 
-                                   <button class="optionsButton">
-                                        <img src="resources/Options Button.svg" alt="">
-                                   </button> -->
-                              </div>
-
-                              <!-- POST CONTENT -->
-                              <div class="postContent">
-
-                                   <!-- TAGS-->
-                                   <div class="posttags">
-                                        <a href="">#coding</a>
-                                        <a href="">#spiders</a>
-                                        <a href="">#web</a>
-                                        <a href="">#human</a>
-                                        <a href="">#confusion</a>
-                                        <a href="">#guy</a>
-                                        <a href="">#bugs</a>
-                                   </div>
-
-                                   <p class="postTitle">hehe</p>
-                                   <p class="postText">hamster</p>
-                                   <div class="postImageContainer">
-                                        <img class="postImage" src="resources/hamster.jpg" alt="Hamster">
-                                   </div>
-                              </div>
-
-                         </div>
-                          
-                         <!-- ACTION BUTTONS -->
-                         <div class="postActions">
-                              <button id="heart" class="actionButton">
-                                   <img src="resources/Heart.svg"/>
-                                   <span class="counter">42</span>
-                              </button>
-                              <img src="resources/Line.svg" alt="Line">
-                              <button id="heartCrack" class="actionButton">
-                                   <img src="resources/HeartCrack.svg"/>
-                                   <span class="counter">42</span>
-                              </button>
-                              <a href="replyPage.html" class="postLink" data-post-id="post3">
-                                   <button class="actionButton commentButton">
-                                        <img src="resources/Comments.svg"/>
-                                   </button>
-                              </a>
-                              <button id="bookmark" class="actionButton">
-                                   <img src="resources/bookmark.svg"/>
-                              </button>
-                         </div>
-                    </div>
-
-                    <script src="actionButton.js"></script>
-
-                    <script src="sendingPostData.js"></script>
-
-                    <script src="displayPostOptions.js"></script>
+                    <div id="postFeed"></div>
+                    <script src="loadPostFeed.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", loadTimelinePosts());
+                    </script>
                
                </div>
 

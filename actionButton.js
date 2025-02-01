@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function iconClicked(button, iconType) {
+    
+    console.log("button clicked");
      // Get the image within the button
      const img = button.querySelector('img');
 
