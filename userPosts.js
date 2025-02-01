@@ -180,10 +180,13 @@ function loadUserPosts() {
                
                <div class="post-break"></div>
 
-               <script src="displayPostOptions.js"></script>
           `;
 
           postElement.innerHTML = postContent;
           container.appendChild(postElement);
+
+          const script = document.createElement("script");
+          script.src = "displayPostOptions.js";
+          document.body.appendChild(script);
      });
 }
