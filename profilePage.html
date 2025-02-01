@@ -8,7 +8,7 @@
           <!-- SCRIPTS -->
           <script src="profile1-data.js"></script>
           <script src="actionButton.js"></script>
-          <script src="userContent.js"></script>
+          <script src="togglePopup.js"></script>
      </head>
 
      <body>
@@ -108,10 +108,10 @@
                     <div id="col2">
                          <!-- TAB SELECTION ROW -->
                          <div id="tabrow"> 
-                              <button class="tab active" onclick="showContent('poststab', this, 'posts-list')">Posts</button>
-                              <button class="tab" onclick="showContent('commentstab', this, 'comments-list')">Comments</button>
-                              <button class="tab" onclick="showContent('bookmarkstab', this, 'bookmarks-list')">Bookmarks</button>
-                              <button class="tab" onclick="showContent('likestab', this, 'likes-list')">Likes</button>
+                              <button class="tab active" onclick="showContent('poststab', this)">Posts</button>
+                              <button class="tab" onclick="showContent('commentstab', this)">Comments</button>
+                              <button class="tab" onclick="showContent('bookmarkstab', this)">Bookmarks</button>
+                              <button class="tab" onclick="showContent('likestab', this)">Likes</button>
                          </div>
 
                          <!-- SPECIFIC TAB -->
@@ -121,21 +121,22 @@
 
                                    <!-- LOAD POST DATA -->
                                    <div id="userPostsContainer"></div>
-                                   <!--<script src="userPosts.js"></script>
+                                   <script src="userPosts.js"></script>
                                    <script>
-                                        document.addEventListener("DOMContentLoaded", loadUserPosts);
-                                   </script>-->
+                                        document.addEventListener("DOMContentLoaded", loadUserPosts("posts"));
+                                   </script>
+
                               </div>
 
                               <!-- COMMENTS TAB -->
                               <div id="commentstab" class="tab-content">
 
                                    <!-- LOAD COMMENT DATA -->
-                                   <div id="userCommentContainer">
-                                   <!--<script src="userComments.js"></script>
+                                   <div id="userCommentContainer"></div>
+                                   <script src="userComments.js"></script>
                                    <script>
-                                        document.addEventListener("DOMContentLoaded", loadUserComments);
-                                   </script>-->
+                                        document.addEventListener("DOMContentLoaded", loadUserComments("comments"));
+                                   </script>
                               </div>
 
                               <!-- BOOKMARKS TAB -->
@@ -143,10 +144,10 @@
 
                                    <!-- LOAD BOOKMARK DATA -->
                                    <div id="userBookmarksContainer"></div>
-                                   <!--<script src="userBookmarks.js"></script>
+                                   <script src="userBookmarks.js"></script>
                                    <script>
-                                        document.addEventListener("DOMContentLoaded", loadUserBookmarks);
-                                   </script>-->
+                                        document.addEventListener("DOMContentLoaded", loadUserBookmarks("bookmarks"));
+                                   </script>
                               </div>
 
                               <!-- LIKES TAB -->
@@ -154,10 +155,10 @@
 
                                   <!-- LOAD LIKES DATA -->
                                   <div id="userLikesContainer"></div>
-                                  <!--<script src="userLikes.js"></script>
+                                  <script src="userLikes.js"></script>
                                   <script>
-                                       document.addEventListener("DOMContentLoaded", loadUserLikes);
-                                  </script>-->
+                                       document.addEventListener("DOMContentLoaded", loadUserLikes("likes"));
+                                  </script>
                               </div>
 
                          </div>
@@ -237,7 +238,7 @@
           };
      }
 
-     function showContent(tabId, button, contentType) {
+     function showContent(tabId, button) {
           const tabContents = document.querySelectorAll('.tab-content');
           tabContents.forEach(content => {
                content.style.display = 'none';
@@ -254,11 +255,15 @@
           }
 
           button.classList.add('active');
-
-          loadContent(contentType);
      }
 
-     document.addEventListener("DOMContentLoaded", function() {
-          loadContent("posts-list");
+     document.addEventListener('DOMContentLoaded', (type) => {
+          document.querySelectorAll('.actionButton').forEach(button => {
+               button.addEventListener('click', function () {
+                    const id = this.id; 
+                    iconClicked(this, id);
+                    console.log(id);
+               });
+          });
      });
 </script>
