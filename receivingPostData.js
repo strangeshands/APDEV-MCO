@@ -55,13 +55,19 @@ if (contentData) {
 
      // Display tags as individual <a> elements
      if (contentData.postTags && contentData.postTags.length > 0) {
-          const tagsContainer = document.getElementById('tags');
+          const container = document.getElementById('tagContainer');
+          const postElement = document.createElement("div");
+          postElement.id = "tags";
+          
           contentData.postTags.forEach(tag => {
                const tagElement = document.createElement('a');
                tagElement.href = `${tag}`;  
                tagElement.innerText = `${tag}`;  
-               tagsContainer.appendChild(tagElement);  
+
+               postElement.appendChild(tagElement);
           });
+
+          container.appendChild(postElement);
      }
 
 } else {

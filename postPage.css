@@ -277,6 +277,13 @@ main {
     background-color: #1A1A1A;
 }
 
+#tagContainer {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+}
+
 #tags {
     display: flex;
     flex-wrap: wrap;
