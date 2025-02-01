@@ -375,24 +375,6 @@ main {
     display: flex;
 }
 
-.nestedCommentsContainer {
-    position: relative;
-    margin-left: 52px;
-}
-
-.nestedCommentTrigger {
-    display: flex;
-    align-items: center;
-    margin: 12px 0;
-    cursor: pointer;
-}
-
-.nestedCommentLine {
-    width: 24px;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.3);
-    margin-right: 12px;
-}
 
 .viewRepliesButton {
     background: none;
@@ -526,4 +508,37 @@ main {
     font-weight: bold;
     cursor: pointer;
     transition: transform 0.2s;
+}
+
+.viewRepliesLink {
+    text-decoration: none;
+    display: block;
+    margin: 12px 0 12px 52px;
+}
+
+.replyIndicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.2s ease;
+}
+
+.replyLine {
+    width: 24px;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: background-color 0.2s ease;
+}
+
+.replyCount {
+    font-size: 14px;
+}
+
+.viewRepliesLink:hover .replyIndicator {
+    color: #98D5DC;
+}
+
+.viewRepliesLink:hover .replyLine {
+    background-color: #98D5DC;
 }
