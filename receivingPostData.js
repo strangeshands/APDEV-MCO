@@ -6,7 +6,9 @@ if (contentData) {
      document.getElementById('postText').innerText = `${contentData.postText}`;
 
      if (contentData.postImage) {
-          document.getElementById('postImageContainer').innerHTML = 
+          const container = document.getElementById('photo-container');
+          container.id = "userphotocontainer";
+          container.innerHTML = 
           `<img class="clickable-image" src="${contentData.postImage}" onclick="openModal(this)">
           <img class="clickable-image" src="${contentData.postImage}" onclick="openModal(this)">
           <img class="clickable-image" src="${contentData.postImage}" onclick="openModal(this)">`;
