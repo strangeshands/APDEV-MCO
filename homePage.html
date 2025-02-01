@@ -23,9 +23,8 @@
                     </div>
 
                     <!-- IF USER IS NOT LOGGED IN -->
-                    <!--
                     <button id="logInButton" onclick="window.location.href='loginPage.html'">Log In</button>
-                    -->
+                    
                </div>
           </header>
           <!-- HEADER -->
@@ -126,5 +125,30 @@
                </div>
 
           </div>
+
+          <!-- IMAGE MODAL -->
+          <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <div id="userphotocontainer-modal"> 
+                 <img class="modal-content" id="modalImage">
+            </div>
+            <div id="caption"></div>
+       </div>
+
+       <script>
+            function openModal(image) {
+                const modal = document.getElementById("imageModal");
+                const modalImg = document.getElementById("modalImage");
+                const captionText = document.getElementById("caption");
+            
+                console.log("Image source:", image.src);
+                modal.style.display = "block";
+                modalImg.src = image.src;
+            
+                modal.onclick = function () {
+                    modal.style.display = "none";
+                };
+            }
+       </script>
      </body>
 </html>

@@ -1,12 +1,14 @@
 /* ---- HARD CODED DATA ---- */
 const timelinePosts = [
     {
+         replyTo: "",
+
          displayName: "bartholomewThe5th",
          username: "@catlover420",
          pfp: "resources/cat.jpg",
          tags: ["#funny", "#life", "#school", "#dolphin", "#rainbow", "#ocean", "#morning", "#depression"],
-         caption: "philippines, gising na",
-         images: ["resources/dolphin.jpg"],
+         caption: "everything is ok",
+         images: ["resources/dolphin.jpg", "resources/sad-hamster.jpg", "resources/dog.jpg"],
          title: "good morning",
 
          time: "4 minutes ago",
@@ -20,6 +22,7 @@ const timelinePosts = [
          own: false
     },
     {
+         replyTo: "",
          displayName: "slaysianDivaOfLA",
          username: "@dontforgettheella",
          pfp: "resources/joella.jpg",
@@ -39,6 +42,7 @@ const timelinePosts = [
          own: false
     },
     {
+         replyTo: "",
          displayName: "carbonaraEater",
          username: "@jabeedabee",
          pfp: "resources/jabee.jpg",
@@ -124,9 +128,13 @@ function loadTimelinePosts() {
                         <p class="postText">${post.caption}</p>
 
                         ${post.images.length > 0 ? `
-                        <div class="postImageContainer">
-                            <img class="postImage" src="${post.images}" alt="Post Image">
+                        
+                        <div id="userphotocontainer">
+                            ${post.images.map(function(img) { 
+                                return `<img src="${img}" class="clickable-image" onclick="openModal(this)">`;
+                            }).join("")}
                         </div>
+                        
                         ` : ""}
                     </div>
                 </div>

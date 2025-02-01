@@ -2,7 +2,32 @@
 const contentData = JSON.parse(localStorage.getItem('postData'));
 
 if (contentData) {
-     document.getElementById('postTitle').innerText = `${contentData.postTitle}`;
+
+     if (contentData.replyTo) {
+        const container = document.getElementById("replyToContainer");
+        const postElement = document.createElement("div");
+
+        postContent = `
+            <!-- REPLY USER -->
+            <!-- TO CHANGE: href link -->
+            <div id="reply-to-msg" onclick="window.location.href='postPage.html';">
+                Replied to ${contentData.replyTo}
+            </div>
+        `
+        postElement.innerHTML = postContent;
+          container.appendChild(postElement);
+     }
+
+     if (contentData.postTitle) {
+        const container = document.getElementById("postTitleContainer");
+        const postElement = document.createElement("div");
+        postElement.id = "postTitle";
+
+        postElement.innerHTML = `${contentData.postTitle}`;
+
+        container.appendChild(postElement);
+     }
+
      document.getElementById('postText').innerText = `${contentData.postText}`;
 
      if (contentData.postImage) {
