@@ -381,35 +381,108 @@ h3 {
      font-size: 20px;
 }
 
-.smallbutton {
-     color: white;
-     background-color: inherit;
-}
- 
- .options-menu {
-     position: absolute;
-     z-index: 10;
-     background-color: black;
-     color: white;
-     border-radius: 8px;
-     padding: 10px;
-     display: none;
- }
+.optionsButton {
+     background-color: #1D1E1F;
 
- .hidden {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 2px 0px;
+
+     width: 20px;
+     height: 20px;
+}
+
+.optionsButton:hover {
+     background-color: #1D1E1F;
+     transform: scale(1.05);
+}
+
+.optionsButton:active {
+     transform: scale(0.95); 
+}
+
+.popUpOptions {
      display: none;
- }
- 
- .options-menu button {
-     padding: 5px 10px;
-     border: none;
-     background: none;
-     cursor: pointer;
- }
- 
- .options-menu button:hover {
+     position: absolute; 
+     top: -20px; 
+     right: 0px;
+     width: auto; 
+     z-index: 1;
+}
+
+.popUpOptions.show {
+     display: block; 
+}
+
+.postOptionsContent {
+     background-color: #1D1E1F;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     align-items: flex-end;
+
+     padding: 20px 10px 10px 10px;
+     gap: 20px;
+     border-radius: 12px;
+
+     width: 200px;
+} 
+
+.postOptionsButton {
+     text-decoration: none;
+     width: 100%
+}
+
+.activeOptionsButton {
+     background-color: #1D1E1F;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 2px 0px;
+
+     width: 20px;
+     height: 20px;
+}
+
+.viewButton, .editButton, .deleteButton{
+     font-family: "Inter";
+     font-size: 16px;
+     font-weight: Bold;
+     color: #E4F3F6;
+     background-color: #1D1E1F;
+
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+
+     gap: 10px;
+     padding: 10px;
+
+     width: 100%;
+}
+
+.deleteButton {
+     color: #DF0606;
+}
+
+.viewButton:hover, .editButton:hover, .deleteButton:hover {
      background-color: #7FB8C8;
- }
+     color: #16133B;
+     transform: scale(1.02);
+}
+
+.deleteButton:hover {
+     color: #DF0606;
+}
+
+.viewButton:active, .editButton:active, .deleteButton:active {
+     transform: scale(0.95); 
+}
  
 .pfpusername {
      font-size: 13px;
