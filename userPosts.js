@@ -13,6 +13,7 @@ const userPosts = [
 
           time: "4 minutes ago",
 
+          popUpCount: 0,
           likes: 3,
           dislikes: 0,
 
@@ -34,6 +35,7 @@ const userPosts = [
 
           time: "10 hours ago",
 
+          popUpCount: 0,
           likes: 3,
           dislikes: 0,
 
@@ -56,6 +58,7 @@ const userPosts = [
 
           time: "4 minutes ago",
 
+          popUpCount: 0,
           likes: 3,
           dislikes: 0,
 
@@ -110,18 +113,18 @@ function loadUserPosts() {
                     </div>
                     
                     <!-- POST OPTIONS -->
-                    <div class="popUpOptions" id="popUp2">
+                    <div class="popUpOptions" id=${post.popUpCount}>
                     <div class="postOptionsContent">
-                              <button class="activeOptionsButton" post-options-id="popUp2">
+                              <button class="activeOptionsButton" post-options-id=${post.popUpCount}>
                                    <img src="resources/Options Button.svg" alt="">
                               </button>
                               <a href="postPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="viewButton">View Post</button></a>
-                              <a href="" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Edit Post</button></a>
+                              <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Edit Post</button></a>
                               <a href="" class="postLink postOptionsButton" data-post-id="post2"><button class="deleteButton">Delete Post</button></a>
                          </div>
                     </div>
 
-                    <button class="optionsButton" post-options-id="popUp2">
+                    <button class="optionsButton" post-options-id=${post.popUpCount}>
                     <img src="resources/Options Button.svg" alt="">
                     </button>
                </div>
