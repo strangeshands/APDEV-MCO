@@ -162,10 +162,6 @@ function loadTimelinePosts() {
          postCounter += 1;
         });
 
-    const actionButtonScript = document.createElement("script");
-    actionButtonScript.src = "actionButton.js";
-    document.body.appendChild(actionButtonScript);
-
     const sendingPostsDataScript = document.createElement("script");
     sendingPostsDataScript.src = "sendingPostData.js";
     document.body.appendChild(sendingPostsDataScript);
