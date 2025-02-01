@@ -21,13 +21,16 @@ html, body {
 
 body {
      background-color: #030909;
+     color: white;
      font-family: "Inter";
-     min-height: 100%;
- }
+     margin: 0;
+     min-height: 100vh;
+}
 
 .inviBrk {
      height: 5px;
 }
+/* ---------- GENERAL ---------- */
 
 .column-brk {
      width: 2px;
@@ -103,7 +106,7 @@ header {
      border-radius: 30px;
 }
 
-#search-bar input {
+input[type="text"] {
      background: none;
      border: none;
      width: 100%;

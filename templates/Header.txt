@@ -1,16 +1,28 @@
 /* ---------- HTML SEGMENT ---------- */
-<header>
-     <div id="headercol1">
-          <img id="logo" src="resources/Logo.svg" />
-          <p id="appName"> Connectify </p>
-     </div>
-     <div id="headercol2">
-          <div class="searchBar">
-               <img src="resources/Trailing-Elements.svg" alt="Search Icon">
-               <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+<head>
+     <title> Connectify - Home </title>
+     <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
+     <link rel="stylesheet" type="text/css" href="homePage.css">
+</head>
+
+<body>
+     <header>
+          <div id="headercol1" onclick="window.location.href='homePage.html'">
+               <img id="logo" src="resources/Logo.svg" />
+               <p id="appName"> Connectify </p>
           </div>
-     </div>
-</header>
+          <div id="headercol2">
+               <div class="searchBar">
+                    <img src="resources/Trailing-Elements.svg" alt="Search Icon">
+                    <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+               </div>
+          </div>
+     </header>
+
+     <div class="break"> </div>
+
+</body>
+
 /* ---------- HTML SEGMENT ---------- */
 
 /* ---------- HEADER ---------- */
@@ -25,15 +37,14 @@ header {
      display: flex;
      justify-content: space-between;
      align-items: center;
-
+ 
      background-color: black;
-
-     margin-top: -7px;
+ 
      padding: 0 32px;
      gap: 79px;
      height: 88px;
-
-     border-bottom: 1px solid #FFFFFF1A;
+ 
+     border-bottom: 1px solid #49454F;
 }
 
 #logo {
@@ -83,7 +94,7 @@ input[type="text"] {
 
 /* ---------- HTML SEGMENT ---------- */
 <header>
-     <div id="headercol1">
+     <div id="headercol1" onclick="window.location.href='homePage.html'">
           <img id="logo" src="resources/Logo.svg" />
           <p id="appName"> Connectify </p>
      </div>
@@ -135,3 +146,56 @@ input[type="text"] {
 /* ---------- CSS ---------- */
 
 /* ---------- LOGGED OUT USER ---------- */
+
+/* ---------- GENERAL CSS ---------- */
+
+@font-face {
+     font-family: 'Inter'; 
+     src: url('resources/InterFont.ttf');
+}
+
+@font-face {
+     font-family: 'JostBold'; 
+     src: url('resources/Jost-Bold.ttf');
+}
+
+* {
+     box-sizing: border-box;
+     font-family: "Inter"; 
+}
+
+html, body {
+     min-width: 1000px; 
+     overflow-x: auto;
+}
+
+.inviBrk {
+     height: 20px;
+}
+/* ---------- GENERAL ---------- */
+
+body {
+     background-color: #030909;
+     color: white;
+     font-family: "Inter";
+     margin: 0;
+     min-height: 100vh;
+}
+
+button {
+     border: none; 
+     cursor: pointer;
+
+     border-radius: 8px;
+     transition: background-color 0.3s, transform 0.2s;
+}
+
+/* button:hover {
+     background-color: #7FB8C8;
+     transform: scale(1.02);
+}
+ 
+
+button:active {
+     transform: scale(0.95); 
+} */
