@@ -111,6 +111,7 @@ function loadTimelinePosts() {
                                     </button>
                                     <a href="postPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="viewButton">View Post</button></a>
                                     <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Edit Post</button></a>
+                                    <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Copy Link</button></a>
                                     <a href="" class="postLink postOptionsButton" data-post-id="post2"><button class="deleteButton">Delete Post</button></a>
                                 </div>
                         </div>
