@@ -248,12 +248,12 @@ postLinks.forEach( link => {
 
           const target = event.target;
         
-          if (!target.closest('.actionButton') && !target.closest('.optionsButton') && !target.closest('.activeOptionsButton')) {
+          if (!target.closest('.actionButton') && !target.closest('.clickable-image') && !target.closest('.optionsButton') && !target.closest('.activeOptionsButton')) {
                storePostData(postId);
                window.location.href = "postPage.html";
           } else if (target.closest('.commentButton')) {
                storePostData(postId);
-          }
+          } 
 
      });
 });

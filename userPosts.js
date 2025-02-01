@@ -151,7 +151,7 @@ function loadUserPosts() {
                     <div id="userphoto">
                         <div id="userphotocontainer">
                             ${post.images.map(function(img) { 
-                                return '<img src="${img}" class="clickable-image" onclick="openModal(this)">';
+                                return `<img src="${img}" class="clickable-image" onclick="openModal(this)">`;
                             }).join("")}
                         </div>
                     </div>
