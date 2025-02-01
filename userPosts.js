@@ -13,7 +13,6 @@ const userPosts = [
 
           time: "4 minutes ago",
 
-          popUpCount: 0,
           likes: 3,
           dislikes: 0,
 
@@ -35,7 +34,6 @@ const userPosts = [
 
           time: "10 hours ago",
 
-          popUpCount: 0,
           likes: 3,
           dislikes: 0,
 
@@ -58,7 +56,6 @@ const userPosts = [
 
           time: "4 minutes ago",
 
-          popUpCount: 0,
           likes: 3,
           dislikes: 0,
 
@@ -70,7 +67,7 @@ const userPosts = [
 ];
 
 /* ---- CODE FUNCTION ---- */
-function loadUserPosts() {
+function loadUserPosts(type) {
      const container = document.getElementById("userPostsContainer");
 
      if (!userPosts || userPosts.length === 0) {
@@ -86,7 +83,6 @@ function loadUserPosts() {
      userPosts.forEach((post, index) => {
           const postElement = document.createElement("div");
           postElement.classList.add(post.replyTo.length > 0 ? "comment" : "post");
-          
           let postContent = "";
 
           if (post.replyTo.length > 0) {
@@ -101,7 +97,7 @@ function loadUserPosts() {
 
           postContent += `
                <!-- USER DETAILS -->
-               <div class="pfpuserrow" id="pfpuserrow-${index}">
+               <div class="pfpuserrow" id="${type}-pfpuserrow-${index}">
                     <div id="userandpfp">
                          <div class="pfpPost">
                          <img src="${post.pfp}" />
@@ -113,14 +109,12 @@ function loadUserPosts() {
                     </div>
                     
                     ${post.own ? `
-                         <!-- POST OPTIONS -->
-                         <button class="optionsButton" onclick="togglePopup(this, '${index}')">
-                              <img src="resources/Options Button.svg" alt="">
+                         <button class="optionsButton" onclick="togglePopup('${type}', '${index}', '${container.id}')">
+                              <img src="resources/Options Button.svg"/>
                          </button>
 
-
                          <!-- POST OPTIONS POPUP -->
-                         <div class="popUpOptions" id="popup-${index}">
+                         <div class="popUpOptions" id="${type}-popup-${index}">
                               <div class="postOptionsContent">
                                    <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
                                    <button class="editButton" onclick="window.location.href = 'newPostPage.html';">Edit Post</button>
@@ -153,7 +147,7 @@ function loadUserPosts() {
                     <div id="userphoto">
                         <div id="userphotocontainer">
                             ${post.images.map(function(img) { 
-                                return `<img src="${img}" class="clickable-image" onclick="openModal(this)">`;
+                                return '<img src="' + img + '" class="clickable-image" onclick="openModal(this)">';
                             }).join("")}
                         </div>
                     </div>
@@ -182,9 +176,8 @@ function loadUserPosts() {
                          <img src="${post.bookmark ? 'resources/Bookmark-Clicked.svg' : 'resources/bookmark.svg'}"/>
                     </button>
                </div>
-               
-               <div class="post-break"></div>
 
+               <div class="post-break"></div>
           `;
 
           postElement.innerHTML = postContent;
