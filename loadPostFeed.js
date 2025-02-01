@@ -93,16 +93,21 @@ function loadTimelinePosts() {
          postContent += `
             
                 <div class="mainPost">
+
                     <!-- POST USER -->
                     <div class="postUser">
+
                         <div class="profilePic">
                             <img src="${post.pfp}" alt="userProfilePicture" class="userProfilePic">
                         </div>
+
                         <div class="usernameAndTime">
                             <p class="username">${post.displayName}</p>
                             <p class="timePosted">${post.username} | ${post.time}</p>
                         </div>
+
                         <!-- IF USER IS LOGGED IN -->
+
                         <!-- POST OPTIONS -->
                         <div class="popUpOptions" id="popUp${postCounter}">
                             <div class="postOptionsContent">
@@ -115,12 +120,17 @@ function loadTimelinePosts() {
                                     <a href="" class="postLink postOptionsButton" data-post-id="post2"><button class="deleteButton">Delete Post</button></a>
                                 </div>
                         </div>
+
                         <button class="optionsButton" post-options-id="popUp${postCounter}">
                             <img src="resources/Options Button.svg" alt="">
                         </button>
+
                     </div>
+
                     <!-- POST CONTENT -->
+        
                     <div class="postContent">
+                    
                         <!-- TAGS -->
                         <div class="posttags">
                             ${post.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
