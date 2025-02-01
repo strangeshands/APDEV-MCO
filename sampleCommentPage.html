@@ -23,7 +23,7 @@
           </header>
         
         <main>
-            <div class="goBackLink" onclick="window.location.href='homePage.html'">
+            <div class="goBackLink" onclick="window.location.href='postPage.html'">
                 <span class="arrow">&#8604;</span>
                 <span class="back">Back</span>
             </div>
@@ -42,20 +42,10 @@
                         <img src="resources/Options Button.svg" alt="Options">
                     </button> -->
                 </div>
-                <div id="tags">
-                    <a href="">#funny</a>
-                    <a href="">#life</a>
-                </div>
-                <div id="postTitle">
-                    This is a title
-                </div>
+
                 <div id="postText">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac tortor sed velit luctus malesuada. Aenean suscipit, arcu et pulvinar tincidunt, lorem felis tempor quam, sed euismod turpis neque et lorem. Fusce id libero ut nulla fringilla interdum. Curabitur posuere metus non nibh.
+                    Good morning!
                 </div>
-
-
-                <!-- COMMENT OUT IF NO IMAGE -->
-                <div id="photo-container"></div>
 
                  <div class="postActions">
                         <button id="heart" class="actionButton">
@@ -95,7 +85,7 @@
                             </button> -->
                         </div>
                         <div class="commentText">
-                            Good morning!
+                            Hello!
                         </div>
 
                         <div class="commentActions">
@@ -116,7 +106,7 @@
                             </button>
                         </div>
             
-                        <a href="sampleCommentPage.html" class="viewRepliesLink">
+                        <a href="postPage.html" class="viewRepliesLink">
                             <div class="replyIndicator">
                                 <div class="replyLine"></div>
                                 <span class="replyCount">View replies (2)</span>
@@ -139,7 +129,7 @@
                             </button> -->
                         </div>
                         <div class="commentText">
-                            I love this
+                            &#9788;
                         </div>
                         <div class="commentActions">
                               <button id="heart" class="actionButton">
@@ -159,7 +149,7 @@
                               </button>
                          </div>
             
-                         <a href="sampleCommentPage.html" class="viewRepliesLink">
+                         <a href="postPage.html" class="viewRepliesLink">
                             <div class="replyIndicator">
                                 <div class="replyLine"></div>
                                 <span class="replyCount">View replies (1)</span>
@@ -182,7 +172,7 @@
                             </button> -->
                         </div>
                         <div class="commentText">
-                            Not connected but I have an exam today...
+                            Not connected but I have an exam today again.....
                         </div>
                         <div class="commentActions">
                               <button id="heart" class="actionButton">
@@ -205,19 +195,6 @@
                 </div>
             </div>
         </main>
-
-        <!-- IMAGE MODAL -->
-        <div id="imageModal" class="modal">
-            <span class="close">&times;</span>
-            <div id="postImageContainer-modal"> 
-                <img class="modal-content" id="modalImage">
-            </div>
-            <div id="caption"></div>
-        </div>
-
-        <script src="nestedComments.js"></script>
-        <script src="receivingPostData.js"></script>
-        <script src="sendingPostData.js"></script>
     </body>
 </html>
 
@@ -342,6 +319,17 @@
     document.addEventListener('keydown', function(event) {
         if (event.key === "Escape" && modal.style.display === "block") {
             modal.style.display = "none";
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const storedReply = localStorage.getItem('selectedReply');
+        if (storedReply) {
+        const replyContentDiv = document.getElementById('textContent');
+        if (replyContentDiv) {
+            replyContentDiv.textContent = storedReply;
+        }
+        localStorage.removeItem('selectedReply');
         }
     });
 </script>
