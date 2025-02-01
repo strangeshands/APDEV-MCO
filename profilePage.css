@@ -368,9 +368,11 @@ h3 {
      object-position: center;
 }
 
-#pfpuserrow, #userandpfp {
+.pfpuserrow, #userandpfp {
      display: flex;
      align-items: center;
+
+     position: relative;
 
      justify-content: space-between;
      gap: 15px;
@@ -403,14 +405,14 @@ h3 {
      transform: scale(0.95); 
 }
 
+/* --- Pop Up --- */
 .popUpOptions {
+     position: absolute;
+     top: 0;
+     right: 0;
+     z-index: 1000;
      display: none;
-     position: absolute; 
-     top: -20px; 
-     right: 0px;
-     width: auto; 
-     z-index: 1;
-}
+ }
 
 .popUpOptions.show {
      display: block; 
@@ -425,15 +427,17 @@ h3 {
      align-items: flex-end;
 
      padding: 20px 10px 10px 10px;
-     gap: 20px;
+     gap: 5px;
      border-radius: 12px;
 
      width: 200px;
+
+     border: 2px solid rgba(255, 255, 255, 0.1);
 } 
 
 .postOptionsButton {
      text-decoration: none;
-     width: 100%
+     width: 100%;
 }
 
 .activeOptionsButton {
@@ -483,6 +487,7 @@ h3 {
 .viewButton:active, .editButton:active, .deleteButton:active {
      transform: scale(0.95); 
 }
+/* --- Pop Up Tab Specific --- */
  
 .pfpusername {
      font-size: 13px;
@@ -514,11 +519,6 @@ h3 {
 
      max-height: 200px;
      max-width: inherit;
-
-     /* display: grid;
-     align-items: center;
-     justify-content: center;
-     grid: 200px / auto auto auto auto; */
 
      display: flex;
      justify-content: space-between;
@@ -673,6 +673,7 @@ h3 {
      padding-right: 10px;
 }
 
-#usercaption, #posttile {
+#usercaption, .posttile {
      cursor: pointer
 }
+/* --- COMMENTS TAB SPECIFIC --- */

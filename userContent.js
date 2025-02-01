@@ -69,11 +69,206 @@ const userPosts = [
      }
 ];
 
-/* ---- CODE FUNCTION ---- */
-function loadUserPosts() {
-     const container = document.getElementById("userPostsContainer");
+const userComments = [
+     {
+          replyTo: "@TheDarkKnight",
 
-     if (!userPosts || userPosts.length === 0) {
+          displayName: "DARNA",
+          username: "@AkoSiDarna",
+          pfp: "resources/pfpSample.jpg",
+          tags: [],
+          caption: "I SAW U EARLIER HOLY MACARONI he's hot irl",
+          images: ["resources/batman.jpg"],
+          title: "",
+
+          time: "4 minutes ago",
+
+          likes: 100,
+          dislikes: 3,
+
+          liked: false,
+          disliked: true,
+          bookmark: true,
+          own: true
+     },
+
+     {
+          replyTo: "@BuckBarnes",
+
+          displayName: "DARNA",
+          username: "@AkoSiDarna",
+          pfp: "resources/pfpSample.jpg",
+          tags: [],
+          title: "",
+          caption: "sometimes i just wonder how's it like being a metal arm...",
+          images: ["resources/metal-arm.jpg"],
+
+          time: "4 minutes ago",
+
+          likes: 1000,
+          dislikes: 0,
+
+          liked: true,
+          disliked: false,
+          bookmark: false,
+          own: true
+     },
+];
+
+const userBookmarks = [
+     {
+          replyTo: "",
+
+          displayName: "BATMAN",
+          username: "@TheDarkKnight",
+          pfp: "resources/batman2.jpg",
+          tags: ["#AnotherTagHere", "#TagHere", "#ProbablyAnotherTagHere"],
+          title: "Vengeance",
+          caption: "joker if i catch u joker",
+          images: [],
+
+          time: "4 minutes ago",
+
+          likes: 3,
+          dislikes: 0,
+
+          liked: true,
+          disliked: false,
+          bookmark: true,
+          own: false
+     },
+     {
+          replyTo: "",
+
+          displayName: "Mac&Cheese",
+          username: "@MacaroniLover",
+          pfp: "resources/hamster.jpg",
+          tags: ["#Food"],
+          title: "MacNCheese",
+          caption: "",
+          images: ["resources/macncheese.jpg"],
+
+          time: "4 minutes ago",
+
+          likes: 3,
+          dislikes: 0,
+
+          liked: true,
+          disliked: false,
+          bookmark: true,
+          own: false
+     },
+     {
+          replyTo: "@TheDarkKnight",
+
+          displayName: "DARNA",
+          username: "@AkoSiDarna",
+          pfp: "resources/pfpSample.jpg",
+          tags: [],
+          caption: "I SAW U EARLIER HOLY MACARONI he's hot irl",
+          images: ["resources/batman.jpg"],
+          title: "",
+
+          time: "4 minutes ago",
+
+          likes: 100,
+          dislikes: 3,
+
+          liked: false,
+          disliked: true,
+          bookmark: true,
+          own: true
+     },
+];
+
+const userLikes = [
+     {
+          replyTo: "",
+
+          displayName: "BATMAN",
+          username: "@TheDarkKnight",
+          pfp: "resources/batman2.jpg",
+          tags: ["#AnotherTagHere", "#TagHere", "#ProbablyAnotherTagHere"],
+          title: "Vengeance",
+          caption: "joker if i catch u joker",
+          images: [],
+
+          time: "4 minutes ago",
+
+          likes: 3,
+          dislikes: 0,
+
+          liked: true,
+          disliked: false,
+          bookmark: true,
+          own: false
+     },
+     {
+          replyTo: "",
+
+          displayName: "Mac&Cheese",
+          username: "@MacaroniLover",
+          pfp: "resources/hamster.jpg",
+          tags: ["#Food"],
+          title: "MacNCheese",
+          caption: "",
+          images: ["resources/macncheese.jpg"],
+
+          time: "4 minutes ago",
+
+          likes: 3,
+          dislikes: 0,
+
+          liked: true,
+          disliked: false,
+          bookmark: true,
+          own: false
+     },
+     {
+          replyTo: "@BuckBarnes",
+
+          displayName: "DARNA",
+          username: "@AkoSiDarna",
+          pfp: "resources/pfpSample.jpg",
+          tags: ["#Bucky", "#ARMEDANDDANGEROUS", "#WinterSoldier"],
+          title: "",
+          caption: "sometimes i just wonder how's it like being a metal arm...",
+          images: ["resources/metal-arm.jpg"],
+
+          time: "4 minutes ago",
+
+          likes: 1000,
+          dislikes: 0,
+
+          liked: true,
+          disliked: false,
+          bookmark: false,
+          own: true
+     },
+];
+
+/* ---- CODE FUNCTION ---- */
+function loadContent(contentType) {
+     let contentData;
+     let container;
+
+     if (contentType == "posts-list") {
+          contentData = userPosts;
+          container = document.getElementById("userPostsContainer");
+     } else if (contentType == "comments-list") {
+          contentData = userComments;
+          container = document.getElementById("userCommentContainer");
+     } else if (contentType == "bookmarks-list") {
+          contentData = userBookmarks;
+          container = document.getElementById("userBookmarksContainer");
+     } else if (contentType == "likes-list") {
+          contentData = userLikes;
+          container = document.getElementById("userLikesContainer");
+     }
+
+     let containerId = container.id;
+
+     if (contentData.length === 0) {
           container.innerHTML = `
                <p class="no-post-msg">Boohoo! No posts yet</p>
                <a id="create-first-link" href="homePage.html">
@@ -83,7 +278,7 @@ function loadUserPosts() {
           return;
      }
 
-     userPosts.forEach((post, index) => {
+     contentData.forEach((post, index) => {
           const postElement = document.createElement("div");
           postElement.classList.add(post.replyTo.length > 0 ? "comment" : "post");
           
@@ -101,7 +296,7 @@ function loadUserPosts() {
 
           postContent += `
                <!-- USER DETAILS -->
-               <div class="pfpuserrow" id="pfpuserrow-${index}">
+               <div class="pfpuserrow" id="${contentType}-pfpuserrow-${index}">
                     <div id="userandpfp">
                          <div class="pfpPost">
                          <img src="${post.pfp}" />
@@ -114,13 +309,13 @@ function loadUserPosts() {
                     
                     ${post.own ? `
                          <!-- POST OPTIONS -->
-                         <button class="optionsButton" onclick="togglePopup(this, '${index}')">
+                         <button class="optionsButton" onclick="togglePopup('${contentType}', '${index}', '${containerId}')">
                               <img src="resources/Options Button.svg" alt="">
                          </button>
 
 
                          <!-- POST OPTIONS POPUP -->
-                         <div class="popUpOptions" id="popup-${index}">
+                         <div class="popUpOptions" id="${contentType}-popup-${index}">
                               <div class="postOptionsContent">
                                    <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
                                    <button class="editButton" onclick="window.location.href = 'newPostPage.html';">Edit Post</button>
@@ -139,7 +334,7 @@ function loadUserPosts() {
 
                <!-- POST TITLE HERE -->
                ${post.title.length > 0 ? `
-                    <div id="posttile" onclick="window.location.href='postPage.html';">
+                    <div class="posttile" id="${contentType}-posttile" onclick="window.location.href='postPage.html';">
                         <h2>${post.title}</h2>
                     </div>
                 ` : "" }
@@ -190,4 +385,48 @@ function loadUserPosts() {
           postElement.innerHTML = postContent;
           container.appendChild(postElement);
      });
+}
+
+/* --- OPTION POP UP --- */
+let activePopup = null;
+
+function togglePopup(contentType, postId, containerId) {
+     console.log(`Menu clicked on post ${postId} in ${containerId}`);
+     
+     const popup = document.getElementById(`${contentType}-popup-${postId}`);
+     const container = document.getElementById(containerId); 
+ 
+     if (!popup.parentElement === container) {
+         container.appendChild(popup);
+     }
+ 
+     popup.style.zIndex = 9999; 
+ 
+     if (activePopup && activePopup !== popup) {
+         activePopup.classList.remove('show');
+     }
+ 
+     popup.classList.toggle('show');
+     if (popup.classList.contains('show')) {
+         activePopup = popup;
+     } else {
+         activePopup = null;
+     }
+ }
+
+document.addEventListener('click', (e) => {
+     const optionsButtons = document.querySelectorAll('.optionsButton');
+     const popups = document.querySelectorAll('.popUpOptions');
+  
+     if (![...optionsButtons].includes(e.target) && !e.target.closest('.popUpOptions') && !e.target.closest('.optionsButton')) {
+         popups.forEach(popup => {
+             popup.classList.remove('show');
+         });
+     }
+}); 
+
+/* --- GO TO POST --- */
+function goToPost(title, postId) {
+     console.log(`Going to post ${postId} -- ${title}`);
+     /*window.location.href = 'postPage.html';*/
 }
