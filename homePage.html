@@ -82,43 +82,11 @@
                               <a class="userNavMore" href="profilePage.html">More ></a>
                          </div>
 
-                         <!-- IF USER HAS NOT MADE ANY POSTS YET -->
-                         <!--
-                         <div class="noPostsOrComments">No Posts Available</div>
-                         --> 
-
-                         <div class="userPostsAndCommentsContent">
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost1">
-                                   <button class="userPost" id="userPost1">
-                                        <img class="userPostImage" src="resources/sad-hamster.jpg" alt="User Post Image">
-                                        <p class="userPostTitle">good morning</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost2">
-                                   <button class="userPost" id="userPost2">
-                                        <img class="userPostImage" src="resources/Image Holder.svg" alt="User Post Image">
-                                        <p class="userPostTitle">how are you</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost3">
-                                   <button class="userPost" id="userPost3">
-                                        <img class="userPostImage" src="resources/Image Holder.svg" alt="User Post Image">
-                                        <p class="userPostTitle">wake me up</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost4">
-                                   <button class="userPost" id="userPost4">
-                                        <img class="userPostImage" src="resources/monkey.jpg" alt="User Post Image">
-                                        <p class="userPostTitle">titleeeeee</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userPost5">
-                                   <button class="userPost" id="userPost5">
-                                        <img class="userPostImage" src="resources/hamster.jpg" alt="User Post Image">
-                                        <p class="userPostTitle">where am i</p>
-                                   </button>
-                              </a>
-                         </div>
+                         <div class="userPostsAndCommentsContent" id="userPostsContent"></div>
+                         <script src="loadNavPosts.js"></script>
+                         <script>
+                            document.addEventListener("DOMContentLoaded", loadNavPosts());
+                         </script>
                     </div>
                     
                     <!-- COMMENTS -->
@@ -129,44 +97,11 @@
                               <a class="userNavMore" href="profilePage.html">More ></a>
                          </div>
 
-                         <!-- IF USER HAS NOT MADE ANY COMMENTS YET -->
-                         <!--     
-                         <div class="noPostsOrComments">No Comments Available</div>
-                         -->
-
-                         <div class="userPostsAndCommentsContent">
-
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment1">
-                                   <button class="userPost" id="userComment1">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">funny reply</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment2">
-                                   <button class="userPost" id="userComment2">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">long ass commmmeeennntttuhhhhhhhhhhh</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment3">
-                                   <button class="userPost" id="userComment3">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">random meme</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment4">
-                                   <button class="userPost" id="userComment4">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">existential dread</p>
-                                   </button>
-                              </a>
-                              <a href="postPage.html" class="postLink userPostLink" data-post-id="userComment5">
-                                   <button class="userPost" id="userComment5">
-                                        <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
-                                        <p class="userComment">:DDDDD</p>
-                                   </button>
-                              </a>
-                         </div>
+                         <div class="userPostsAndCommentsContent" id="userCommentsContent"></div>
+                         <script src="loadNavComments.js"></script>
+                         <script>
+                            document.addEventListener("DOMContentLoaded", loadNavComments());
+                         </script>
                     </div>
 
                </div> 

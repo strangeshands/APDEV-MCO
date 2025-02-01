@@ -21,7 +21,7 @@ function storePostData(postId) {
      const usernameElement = document.getElementById(postId).querySelector('.username');
      const username = usernameElement ? usernameElement.innerText : document.getElementById('profileUsername').innerText;
      const timePostedElement = document.getElementById(postId).querySelector('.timePosted');
-     const timePosted = timePostedElement ? timePostedElement.innerText : 'time posted';
+     const timePosted = timePostedElement ? timePostedElement.innerText : '1 minute ago';
 
      const postLikeCounterElement = document.getElementById(postId).querySelector('.postLikeCounter');
      const postLikeCounter = postLikeCounterElement ? postLikeCounterElement.innerText : '0'; // Default to 0 if not found
