@@ -83,7 +83,7 @@ function loadUserPosts() {
           return;
      }
 
-     userPosts.forEach(post => {
+     userPosts.forEach((post, index) => {
           const postElement = document.createElement("div");
           postElement.classList.add(post.replyTo.length > 0 ? "comment" : "post");
           
@@ -101,7 +101,7 @@ function loadUserPosts() {
 
           postContent += `
                <!-- USER DETAILS -->
-               <div id="pfpuserrow">
+               <div class="pfpuserrow" id="pfpuserrow-${index}">
                     <div id="userandpfp">
                          <div class="pfpPost">
                          <img src="${post.pfp}" />
@@ -112,21 +112,23 @@ function loadUserPosts() {
                          </div>
                     </div>
                     
-                    <!-- POST OPTIONS -->
-                    <div class="popUpOptions" id=${post.popUpCount}>
-                    <div class="postOptionsContent">
-                              <button class="activeOptionsButton" post-options-id=${post.popUpCount}>
-                                   <img src="resources/Options Button.svg" alt="">
-                              </button>
-                              <a href="postPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="viewButton">View Post</button></a>
-                              <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Edit Post</button></a>
-                              <a href="" class="postLink postOptionsButton" data-post-id="post2"><button class="deleteButton">Delete Post</button></a>
-                         </div>
-                    </div>
+                    ${post.own ? `
+                         <!-- POST OPTIONS -->
+                         <button class="optionsButton" onclick="togglePopup(this, '${index}')">
+                              <img src="resources/Options Button.svg" alt="">
+                         </button>
 
-                    <button class="optionsButton" post-options-id=${post.popUpCount}>
-                    <img src="resources/Options Button.svg" alt="">
-                    </button>
+
+                         <!-- POST OPTIONS POPUP -->
+                         <div class="popUpOptions" id="popup-${index}">
+                              <div class="postOptionsContent">
+                                   <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
+                                   <button class="editButton" onclick="window.location.href = 'newPostPage.html';">Edit Post</button>
+                                   <button class="editButton">Copy Link</button>
+                                   <button class="deleteButton">Delete Post</button>
+                              </div>
+                         </div>
+                    ` : "" }
                </div>
 
                <!-- POST TAGS HERE -->
@@ -187,9 +189,5 @@ function loadUserPosts() {
 
           postElement.innerHTML = postContent;
           container.appendChild(postElement);
-
-          const script = document.createElement("script");
-          script.src = "displayPostOptions.js";
-          document.body.appendChild(script);
      });
 }
