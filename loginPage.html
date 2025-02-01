@@ -3,6 +3,7 @@
      <header>
           <title> Connectify - Log In </title>
           <link rel="stylesheet" type="text/css" href="starterPage.css">
+          <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
      </header>
 
      <body>
@@ -24,11 +25,16 @@
                     </div>
                </div>
 
+               <div id="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember Me</label>
+               </div>
+
                <p class="subText">
                     New to <span class=app>Connectify</span>? <a href="signupPage.html">Sign Up</a>
                </p>
 
-               <button id="buttons" type="button">Log In</button>
+               <button id="buttons" type="button" onclick="window.location.href='homePage.html'">Log In</button>
 
           </div>
      </body>
