@@ -6,11 +6,14 @@
      font-family: 'Inter'; 
      src: url('resources/InterFont.ttf');
 }
+
+* {
+     font-family: 'Inter'; 
+}
  
 body {
      background-image: url("resources/loginbg.png");
      background-repeat: repeat;
-     font-family: "Inter";
 
      display: flex;
      justify-content: center;
@@ -26,7 +29,6 @@ a {
 
 .title {
      color: #D4DADA; 
-     font-family: "Inter"; 
 
      font-size: 38px; 
      font-weight: 700; 
@@ -126,4 +128,23 @@ input[type="text"],  input[type="password"], input[type="email"] {
      font-size: 15px; 
      font-weight: 500; 
      margin-bottom: 10px;
+}
+
+#remember-me {
+     display: flex;
+     align-items: center;
+     justify-content: start;
+     gap: 5px;
+
+     width: 153%;
+
+     margin-top: 15px;
+     margin-bottom: -5px;
+
+     color: white;
+     font-size: 13px;
+}
+
+#remember-me input {
+     transform: scale(1.5);
 }

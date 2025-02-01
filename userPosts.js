@@ -11,6 +11,8 @@ const userPosts = [
           images: ["resources/hamster.jpg", "resources/monkey.jpg"],
           title: "JOURNEY",
 
+          time: "4 minutes ago",
+
           likes: 3,
           dislikes: 0,
 
@@ -29,6 +31,8 @@ const userPosts = [
           caption: "I am vengeance. I am the night. I am Batman!",
           images: [],
           title: "THE NIGHT",
+
+          time: "10 hours ago",
 
           likes: 3,
           dislikes: 0,
@@ -49,6 +53,8 @@ const userPosts = [
                     "fully paid no installment (not me)",
           images: [],
           title: "iPhone 16",
+
+          time: "4 minutes ago",
 
           likes: 3,
           dislikes: 0,
@@ -99,7 +105,7 @@ function loadUserPosts() {
                          </div>
                          <div id="pfpnames">
                          <span class="pfpdisplayname">${post.displayName}</span>
-                         <span class="pfpusername">${post.username}</span>
+                         <span class="pfpusername">${post.username} | ${post.time}</span>
                          </div>
                     </div>
                     
