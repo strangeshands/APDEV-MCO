@@ -300,6 +300,10 @@ main {
     width: 100%;
 }
 
+#postText {
+    margin-bottom: 15px;
+}
+
 .postActions, .commentActions {
     display: flex;
     justify-content: flex-end;
@@ -420,7 +424,7 @@ main {
     margin-left: 52px;
 }
 
-#postImageContainer {
+/*#postImageContainer {
     display: flex;
     justify-content: space-between;
     gap: 10px;
@@ -444,9 +448,21 @@ main {
 
 #postImageContainer img:hover {
     transform: scale(1.02);
+}*/
+
+#postImageContainer {
+    width: 100%;
+    height: 200px;
+
+    max-height: 200px;
+    max-width: inherit;
+
+    display: flex;
+    justify-content: space-between;
+
+    gap: 10px;
 }
   
-
 .clickable-image {
     width: 100%;
     height: 100%;
