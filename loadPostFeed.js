@@ -56,7 +56,7 @@ const timelinePosts = [
          disliked: false,
          bookmark: true,
          own: false
-    },
+    }
 ];
 
 /* ---- CODE FUNCTION ---- */
