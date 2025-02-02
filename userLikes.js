@@ -153,7 +153,7 @@ function loadUserLikes(type) {
                ` : ""}
 
                <!-- POST OPTIONS -->
-               <div id="postoptionrow">
+               <div class="postActions" id="postoptionrow">
                     <!-- HEART FEATURE: RED IF BOOKMARKED -->
                     <button class="postoptionbutton actionButton" id="heart" onclick="iconClicked(this, 'heart')">
                          <img src="${post.liked ? 'resources/Heart-Clicked.svg' : 'resources/Heart.svg'}"/>

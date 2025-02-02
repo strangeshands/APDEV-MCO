@@ -127,7 +127,7 @@ function loadUserPosts(type) {
 
                <!-- POST TAGS HERE -->
                <!-- TO CHANGE: href link -->
-               <div id="posttags">
+               <div class="tagContainer" id="posttags">
                     ${post.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
                </div>
 
@@ -154,7 +154,7 @@ function loadUserPosts(type) {
                ` : ""}
 
                <!-- POST OPTIONS -->
-               <div id="postoptionrow">
+               <div class="postActions" id="postoptionrow">
                     <!-- HEART FEATURE: RED IF BOOKMARKED -->
                     <button class="postoptionbutton actionButton" id="heart" onclick="iconClicked(this, 'heart')">
                          <img src="${post.liked ? 'resources/Heart-Clicked.svg' : 'resources/Heart.svg'}"/>

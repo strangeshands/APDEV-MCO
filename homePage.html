@@ -3,14 +3,17 @@
      <head>
           <title> Connectify - Home </title>
           <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
-          <link rel="stylesheet" type="text/css" href="homePage.css">
+
+          <!-- CSS -->
+          <link rel="stylesheet" type="text/css" href="/css/homePage.css">
+          <link rel="stylesheet" type="text/css" href="/css/generalStyle.css">
 
           <!-- SCRIPTS -->
            <script src="actionButton.js"></script>
      </head>
 
      <body>
-          <!-- HEADER -->
+          <!-- HEADER PORTION -->
           <header>
                <div id="headercol1" onclick="window.location.href='homePage.html'">
                     <img id="logo" src="resources/Logo.svg" />
@@ -21,13 +24,13 @@
                          <img src="resources/Trailing-Elements.svg" alt="Search Icon">
                          <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
                     </div>
-
+               
                     <!-- IF USER IS NOT LOGGED IN -->
-                    <button id="logInButton" onclick="window.location.href='loginPage.html'">Log In</button>
-                    
+                    <div class="logIn">
+                         <button id="logInButton" onclick="window.location.href='loginPage.html'">Log In</button>
+                    </div>
                </div>
           </header>
-          <!-- HEADER -->
 
           <div class="break"> </div>
 
