@@ -95,6 +95,9 @@ function loadUserComments(type) {
                          <!-- POST OPTIONS POPUP -->
                          <div class="popUpOptions" id="${type}-popup-${index}">
                               <div class="postOptionsContent">
+                                   <button class="optionsButton option-exit" onclick="togglePopup('${type}', '${index}', '${container.id}')">
+                                        <img src="resources/Options Button.svg"/>
+                                   </button>
                                    <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
                                    <button class="editButton" onclick="window.location.href = 'newPostPage.html';">Edit Post</button>
                                    <button class="editButton">Copy Link</button>
