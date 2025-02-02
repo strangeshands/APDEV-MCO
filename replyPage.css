@@ -145,13 +145,28 @@ main {
     margin-bottom: 24px;
 }
 
+.replySpace {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.replyLine {
+    background-color: #49454F;
+
+    margin: 0px 10px;
+
+    width: 1px;
+    box-sizing: border-box;
+}
+
 .replyThread {
     position: relative;
     padding-left: 32px;
-    margin-left: 30px;
     margin-top: 30px;
 
     overflow: hidden;
+
+    width: 100%;
 }
 
 .replyPost {
@@ -448,7 +463,7 @@ main {
 
 .horizontalBar {
     height: 1px;
-    background-color: #FFFFFF1A;
+    background-color: #49454F;
     margin: 16px 0;
 }
 
