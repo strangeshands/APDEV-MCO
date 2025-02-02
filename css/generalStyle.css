@@ -215,7 +215,7 @@ input[type="text"] {
     background-color: rgba(0, 0, 0, 0.8); 
 }
 
-#userphotocontainer-modal {
+#userphotocontainer-modal, #postImageContainer-modal {
     position: absolute; 
     top: 50%;
     left: 50%; 
