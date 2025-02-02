@@ -29,32 +29,65 @@
 
             <div class="postSpace">
             
-                <div class="origPost">
+                <div id="post">
+                    <div id="replyToContainer"></div>
                     <div class="postHeader">
                         <div class="userInfo">
-                            <div class="avatar">C</div>
-                                <div class="userDetails">
-                                    <div class="OGusername">Username</div>
-                                    <div class="datePosted">2 weeks ago</div>
-                                </div>
+                            <div class="avatar" id="postAvatar"></div>
+                            <div class="username-and-time">
+                                <div class="displayName" id="postDisplayName"></div>
+                                <div class="time" id="postTime"></div>
+                            </div>
                         </div>
+                        <!-- IF POST BELONGS TO USER
+                        <button class="optionsButton" id="postOptions">
+                            <img src="resources/Options Button.svg" alt="Options">
+                        </button> -->
                     </div>
-                    <div class="postText">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac tortor sed velit luctus malesuada. Aenean suscipit, arcu et pulvinar tincidunt, lorem felis tempor quam, sed euismod turpis neque et lorem. Fusce id libero ut nulla fringilla interdum. Curabitur posuere metus non nibh.
+                    <div id="tagContainer">
                     </div>
+                    <div id="postTitleContainer">
+                    </div>
+                    <div id="postText">
+                    </div>
+    
+    
+                    <!-- COMMENT OUT IF NO IMAGE -->
+                    <div id="photo-container"></div>
+    
+                     <div class="postActions">
+                            <button id="heart" class="actionButton">
+                                <img src="resources/Heart.svg"/>
+                                <span class="counter" id="postLikeCounter"></span>
+                        </button>
+                        <img src="resources/Line.svg" alt="Line">
+                        <button id="heartCrack" class="actionButton">
+                                <img src="resources/HeartCrack.svg"/>
+                                <span class="counter" id="postDislikeCounter"></span>
+                        </button>
+                        <button class="actionButton"onclick="window.location.href='replyPage.html'">
+                                <img src="resources/Comments.svg"/>
+                        </button>
+                        <button id="bookmark" class="actionButton">
+                                <img src="resources/bookmark.svg"/>
+                        </button>
+                     </div>
                 </div>
 
                 <div class="replyThread">
                     <div class="replyPost">
                         <div class="postHeader">
                             <div class="userInfo">
-                                <div class="avatar">C</div>
-                                <div class="REPusername">Username</div>
+                                <div class="avatar" id="REPavatar"></div>
+                                <div class="username-and-time">
+                                    <div class="REPusername" id="REPusername"></div>
+                                    <div class="currentUsername" id="currentUsername"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="replyPrompt">
                             <div class="prompt">replying to</div>
-                            <div class="repliedUser">@username</div>
+                            <div class="repliedUser" id="repliedUser"></div>
                         </div>
                         <div class="postText">
                             <textarea
@@ -84,7 +117,7 @@
                 </div>  
 
                 <div class="horizontalBar"></div>
-                <div class="postActions">
+                <div class="postAction">
                     <!-- Hidden file input for image upload -->
                     <input 
                         type="file" 
@@ -95,9 +128,18 @@
                     />
                 
                     <!-- Add Image Button -->
-                    <button id="addImageButton" class="actionButton">
+                    <button id="addImageButton" class="imageActionButton">
                         <img src="resources/ImageAdd.svg" alt="Add Image">
                     </button>
+
+                    <script>
+                        const addImageButton = document.getElementById('addImageButton');
+                        const imageContainer = document.getElementById('userphotocontainer');
+
+                        addImageButton.addEventListener('click', function() {
+                            imageContainer.style.display = 'flex';
+                        });
+                    </script>
                     
                     <button class="commentButton">Comment</button>
                 </div>
@@ -204,7 +246,13 @@
                     const removeIcon = document.createElement("span");
                     removeIcon.classList.add("remove-image-icon");
                     removeIcon.innerHTML = "&times;";
-                    removeIcon.addEventListener("click", () => removeImage(index));
+                    removeIcon.addEventListener("click", function() {
+                        
+                        removeImage(index);
+                        if (imageContainer.children.length === 0) {
+                            imageContainer.style.display = 'none';
+                        }
+                    });
             
                     // Append them together
                     imgWrapper.appendChild(img);
@@ -227,6 +275,10 @@
                };
             }
             /* HEP FIX (please remove comments if approved) */
-        </script>        
+        </script>       
+        
+        <script src="receivingPostData.js"></script>
+        <script src="actionButton.js"></script>
+        <script src="profile1-data.js"></script>
     </body>
 </html>

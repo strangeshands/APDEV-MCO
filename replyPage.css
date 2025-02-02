@@ -154,8 +154,37 @@ main {
     overflow: hidden;
 }
 
+.replyPost {
+    height: auto;
+}
+
 .space {
     margin-top: 50px;
+}
+
+#post {
+    background-color: #1A1A1A;
+    border-radius: 16px;
+    width: 100%;
+}
+
+#replyToContainer {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+}
+
+#reply-to-msg {
+    margin-bottom: 25px;
+    padding: 10px;
+    background-color: #7FB8C8;
+    color: #1D1E1F;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .postHeader {
@@ -167,43 +196,169 @@ main {
 
 .userInfo {
     display: flex;
-    align-items: center;
     gap: 12px;
+    align-items: center;
 }
 
 .avatar {
-    width: 40px;
-    height: 40px;
-    background-color: #2E7D32;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    min-width: 40px;
+     background-color: #D9D9D9;
+     border-radius: 50%;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     width: 40px;
+     height: 40px;
+     overflow: hidden;
+}
+
+#postAvatar {
+     background-color: #D9D9D9;
+     border-radius: 50%;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     width: 40px;
+     height: 40px;
+     overflow: hidden;
+}
+
+#postProfilePic {
+     width: 100%;
+     height: 100%;
+}
+
+#currentUserProfilePic {
+    width: 100%;
+    height: 100%;
 }
 
 .userDetails {
     display: flex;
     flex-direction: column;
+    gap: 4px;
+}
+
+.displayName {
+    font-weight: bold;
+    line-height: 25px;
+}
+
+.REPusername {
+    font-weight: bold;
+    line-height: 25px;
+}
+
+.time {
+    font-size: 14px;
+    color: #E4F3F6;
+    opacity: 80%;
+}
+
+.currentUsername {
+    font-size: 14px;
+    color: #E4F3F6;
+    opacity: 80%;
+}
+
+.optionsButton {
+    background-color: #030909;
+    color: #E4F3F6;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 20px 0px;
+    width: 5px;
+    height: 20px;
+}
+
+#postOptions {
+    background-color: #1A1A1A;
+}
+
+#tagContainer {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+}
+
+#tags {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: flex-start;
-    gap: -2px;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+    opacity: 50%;
+    padding: 10px 0 20px;
 }
 
-.OGusername, .REPusername {
-    font-weight: 500;
-    line-height: 40px;
-    margin-top: -10px;
-    margin-bottom: -10px;
+#tags a {
     color: white;
+    text-decoration: none;
 }
 
-.datePosted {
-    font-size: 12px;
-    font-style: italic;
-    color: #9FA1A1;
-    margin-left: -6px;
+#postTitleContainer {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+}
+
+#postTitle {
+    font-size: 24px;
+    font-weight: Bold;
+    color: #E4F3F6;
+    padding-bottom: 25px;
+    width: 100%;
+}
+
+#postText {
+    margin-bottom: 15px;
+}
+
+.postActions, .commentActions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.separator {
+    border-left: 2px solid white;
+    height: 35px;
+}
+
+.actionButton {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.actionButton:hover {
+    transform: scale(1.05);
+}
+
+.actionButton:active {
+    transform: scale(0.95); 
+}
+
+.actionButton .counter {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 0;
 }
 
 #postTextInput {
@@ -297,7 +452,7 @@ main {
     margin: 16px 0;
 }
 
-.postActions{
+.postAction{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -305,7 +460,7 @@ main {
     margin-top: 16px;
 }
 
-.actionButton {
+.imageActionButton {
     background: none;
     border: none;
     padding: 8px;
@@ -314,7 +469,7 @@ main {
     transition: opacity 0.2s;
 }
 
-.actionButton:hover {
+.imageActionButton:hover {
     opacity: 1;
 }
 
@@ -334,12 +489,12 @@ main {
 
 #userphotocontainer {
     width: 100%;
-    height: auto;
+    height: 200px;
 
     max-height: 200px;
     max-width: inherit;
 
-    display: flex;
+    display: none;
     justify-content: space-between;
 
     gap: 10px;

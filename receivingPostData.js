@@ -52,6 +52,16 @@ if (contentData) {
 
      document.getElementById('postLikeCounter').innerText = `${contentData.postLikeCounter}`;
      document.getElementById('postDislikeCounter').innerText = `${contentData.postDislikeCounter}`;
+     
+     document.getElementById('repliedUser').innerText = `${contentData.username}`;
+
+     document.getElementById('REPusername').innerText = `${contentData.currentUserDisplayName}`;
+     document.getElementById('currentUsername').innerText = `${contentData.currentUserUsername}`;
+
+     if (contentData.currentUserProfilePic) {
+        document.getElementById('REPavatar').innerHTML = `<img src="${contentData.currentUserProfilePic}" id="currentUserProfilePic">`;
+     }
+     
 
      // Display tags as individual <a> elements
      if (contentData.postTags && contentData.postTags.length > 0) {
