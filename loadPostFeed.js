@@ -46,7 +46,7 @@ const timelinePosts = [
          displayName: "carbonaraEater",
          username: "@jabeedabee",
          pfp: "resources/jabee.jpg",
-         tags: ["#TagHere"],
+         tags: ["#hamster", "#glasses"],
          caption: "hamster",
          images: ["resources/hamster.jpg"],
          title: "hehe",
