@@ -130,7 +130,7 @@ function loadTimelinePosts() {
                     <!-- POST CONTENT -->
         
                     <div class="postContent">
-                    
+
                         <!-- TAGS -->
                         <div class="posttags">
                             ${post.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
@@ -154,12 +154,12 @@ function loadTimelinePosts() {
                 <div class="postActions">
                     <button id="heart" class="actionButton">
                         <img src="resources/Heart.svg"/>
-                        <span class="counter">42</span>
+                        <span class="counter">${post.likes}</span>
                     </button>
                     <img src="resources/Line.svg" alt="Line">
                     <button id="heartCrack" class="actionButton">
                         <img src="resources/HeartCrack.svg"/>
-                        <span class="counter">42</span>
+                        <span class="counter">${post.dislikes}</span>
                     </button>
                     <a href="replyPage.html" class="postLink" data-post-id="post${postCounter}">
                         <button class="actionButton commentButton">
