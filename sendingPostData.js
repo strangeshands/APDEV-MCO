@@ -38,6 +38,10 @@ function storePostData(postId) {
      const postLikeCounter = postReference[index].likes;
      const postDislikeCounter = postReference[index].dislikes;
 
+     const currentUserDisplayName = userPosts[index].displayName;
+     const currentUserUsername = userPosts[index].username;
+     const currentUserProfilePic = userPosts[index].pfp;
+
      // Create an object to hold all the content
      const contentObj = {
           replyTo: replyTo,
@@ -50,7 +54,10 @@ function storePostData(postId) {
           username: username,
           timePosted: timePosted,
           postLikeCounter: postLikeCounter,
-          postDislikeCounter: postDislikeCounter
+          postDislikeCounter: postDislikeCounter,
+          currentUserDisplayName: currentUserDisplayName,
+          currentUserUsername: currentUserUsername,
+          currentUserProfilePic: currentUserProfilePic
      };
 
      // Save the object as a JSON string in localStorage
