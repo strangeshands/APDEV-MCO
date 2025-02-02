@@ -509,6 +509,19 @@ main {
     max-height: 200px;
     max-width: inherit;
 
+    display: flex;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+#replyphotocontainer {
+    width: 100%;
+    height: 200px;
+
+    max-height: 200px;
+    max-width: inherit;
+
     display: none;
     justify-content: space-between;
 

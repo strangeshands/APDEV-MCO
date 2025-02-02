@@ -102,7 +102,7 @@
                             <!--<div class="postContent" id="postContentContainer"></div>-->
                             <!-- HEP FIX (please remove comments if approved)-->
                             <div class="charLim"> <span id="char-counter">0/300</span> </div>
-                            <div id="userphotocontainer"></div>
+                            <div id="replyphotocontainer"></div>
                             <div id="imageModal" class="modal">
                                 <span class="close">&times;</span>
                                 <div id="userphotocontainer-modal">
@@ -133,7 +133,7 @@
 
                     <script>
                         const addImageButton = document.getElementById('addImageButton');
-                        const imageContainer = document.getElementById('userphotocontainer');
+                        const imageContainer = document.getElementById('replyphotocontainer');
 
                         addImageButton.addEventListener('click', function() {
                             imageContainer.style.display = 'flex';
@@ -176,7 +176,7 @@
              * Image Upload (Up to 4 images)
             ********************************/
              const imageUploadInput = document.getElementById("imageUploadInput");
-            const postContentContainer = document.getElementById("userphotocontainer");
+            const postContentContainer = document.getElementById("replyphotocontainer");
             const addImageBtn = document.getElementById("addImageButton");
             
             // We'll store the preview image URLs in this array
