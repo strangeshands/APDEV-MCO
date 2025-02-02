@@ -56,7 +56,7 @@ if (contentData) {
      const repliedUser = document.getElementById('repliedUser');
      const REPusername = document.getElementById('REPusername');
      const currentUsername = document.getElementById('currentUsername');
-     const REPavatar = document.getElementById('REPavatar');
+     const REPavatar = document.getElementById('REPavatar'); 
 
      if (repliedUser) {
         document.getElementById('repliedUser').innerText = `${contentData.username}`;
