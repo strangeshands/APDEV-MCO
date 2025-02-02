@@ -53,12 +53,25 @@ if (contentData) {
      document.getElementById('postLikeCounter').innerText = `${contentData.postLikeCounter}`;
      document.getElementById('postDislikeCounter').innerText = `${contentData.postDislikeCounter}`;
      
-     document.getElementById('repliedUser').innerText = `${contentData.username}`;
+     const repliedUser = document.getElementById('repliedUser');
+     const REPusername = document.getElementById('REPusername');
+     const currentUsername = document.getElementById('currentUsername');
+     const REPavatar = document.getElementById('REPavatar');
 
-     document.getElementById('REPusername').innerText = `${contentData.currentUserDisplayName}`;
-     document.getElementById('currentUsername').innerText = `${contentData.currentUserUsername}`;
+     if (repliedUser) {
+        document.getElementById('repliedUser').innerText = `${contentData.username}`;
+     }
 
-     if (contentData.currentUserProfilePic) {
+     if (REPusername) {
+        document.getElementById('REPusername').innerText = `${contentData.currentUserDisplayName}`;
+     }
+
+     if (currentUsername) {
+        document.getElementById('currentUsername').innerText = `${contentData.currentUserUsername}`;
+
+     }
+
+     if (contentData.currentUserProfilePic && REPavatar) {
         document.getElementById('REPavatar').innerHTML = `<img src="${contentData.currentUserProfilePic}" id="currentUserProfilePic">`;
      }
      
