@@ -82,84 +82,85 @@ function loadTimelinePosts() {
 
     timelinePosts.forEach(post => {
 
-         const postElement = document.createElement("div");
-         postElement.classList.add("post");
-         postElement.classList.add("postLink");
-         postElement.id = `post${postCounter}`;
-         postElement.setAttribute("data-post-id", `post${postCounter}`);
-         
-         let postContent = "";
+        const postElement = document.createElement("div");
+        postElement.classList.add("post");
+        postElement.classList.add("postLink");
+        postElement.id = `post${postCounter}`;
+        postElement.setAttribute("data-post-id", `post${postCounter}`);
+        
+        let postContent = "";
 
-         postContent += `
-            
-                <div class="mainPost">
+        postContent += `
+            <!-- POST USER -->
+            <div class="postUser">
 
-                    <!-- POST USER -->
-                    <div class="postUser">
+                <div class="profilePic">
+                    <img src="${post.pfp}" alt="userProfilePicture" class="userProfilePic">
+                </div>
 
-                        <div class="profilePic">
-                            <img src="${post.pfp}" alt="userProfilePicture" class="userProfilePic">
+                <div class="usernameAndTime">
+                    <p class="username">${post.displayName}</p>
+                    <p class="timePosted">${post.username} | ${post.time}</p>
+                </div>
+
+                <!-- IF USER IS LOGGED IN -->
+
+                <!-- POST OPTIONS -->
+                <div class="popUpOptions" id="popUp${postCounter}">
+                    <div class="postOptionsContent">
+                            <button class="activeOptionsButton" post-options-id="popUp${postCounter}">
+                                <img src="resources/Options Button.svg" alt="">
+                            </button>
+                            <a href="postPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="viewButton">View Post</button></a>
+                            <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Edit Post</button></a>
+                            <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Copy Link</button></a>
+                            <a href="" class="postLink postOptionsButton" data-post-id="post2"><button class="deleteButton">Delete Post</button></a>
                         </div>
+                </div>
 
-                        <div class="usernameAndTime">
-                            <p class="username">${post.displayName}</p>
-                            <p class="timePosted">${post.username} | ${post.time}</p>
-                        </div>
+                <button class="optionsButton" post-options-id="popUp${postCounter}">
+                    <img src="resources/Options Button.svg" alt="">
+                </button>
 
-                        <!-- IF USER IS LOGGED IN -->
+            </div>
 
-                        <!-- POST OPTIONS -->
-                        <div class="popUpOptions" id="popUp${postCounter}">
-                            <div class="postOptionsContent">
-                                    <button class="activeOptionsButton" post-options-id="popUp${postCounter}">
-                                        <img src="resources/Options Button.svg" alt="">
-                                    </button>
-                                    <a href="postPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="viewButton">View Post</button></a>
-                                    <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Edit Post</button></a>
-                                    <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Copy Link</button></a>
-                                    <a href="" class="postLink postOptionsButton" data-post-id="post2"><button class="deleteButton">Delete Post</button></a>
-                                </div>
-                        </div>
+            <!-- POST CONTENT -->
+            <div class="postContent">
 
-                        <button class="optionsButton" post-options-id="popUp${postCounter}">
-                            <img src="resources/Options Button.svg" alt="">
-                        </button>
+                    <!-- TAGS -->
+                    <div class="posttags">
+                        ${post.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
+                    </div>
+                    <!--<p class="postTitle">${post.title}</p>-->
 
+                    <div id="posttile" onclick="window.location.href='postPage.html';">
+                        <h2>${post.title}</h2>
                     </div>
 
-                    <!-- POST CONTENT -->
-        
-                    <div class="postContent">
+                    <!-- POST CAPTION HERE -->
+                    <!-- TO CHANGE: href link -->
+                    <div id="usercaption" onclick="window.location.href='postPage.html';">${post.caption}</div>
 
-                        <!-- TAGS -->
-                        <div class="posttags">
-                            ${post.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
-                        </div>
-                        <p class="postTitle">${post.title}</p>
-                        <p class="postText">${post.caption}</p>
-
-                        ${post.images.length > 0 ? `
-                        
+                    ${post.images.length > 0 ? `
                         <div id="userphotocontainer">
                             ${post.images.map(function(img) { 
                                 return `<img src="${img}" class="clickable-image" onclick="openModal(this)">`;
                             }).join("")}
                         </div>
-                        
-                        ` : ""}
-                    </div>
+                    ` : ""}
                 </div>
+            </div>
         
                 <!-- ACTION BUTTONS -->
                 <div class="postActions">
                     <button id="heart" class="actionButton">
-                        <img src="resources/Heart.svg"/>
-                        <span class="counter">${post.likes}</span>
+                        <img src="${post.liked ? 'resources/Heart-Clicked.svg' : 'resources/Heart.svg'}"/>
+                         <span class="counter">${post.likes}</span>
                     </button>
                     <img src="resources/Line.svg" alt="Line">
                     <button id="heartCrack" class="actionButton">
-                        <img src="resources/HeartCrack.svg"/>
-                        <span class="counter">${post.dislikes}</span>
+                        <img src="${post.disliked ? 'resources/HeartCrack-Clicked.svg' : 'resources/HeartCrack.svg'}"/>
+                         <span class="counter">${post.dislikes}</span>
                     </button>
                     <a href="replyPage.html" class="postLink" data-post-id="post${postCounter}">
                         <button class="actionButton commentButton">
@@ -167,18 +168,17 @@ function loadTimelinePosts() {
                         </button>
                     </a>
                     <button id="bookmark" class="actionButton">
-                        <img src="resources/bookmark.svg"/>
+                        <img src="${post.bookmark ? 'resources/Bookmark-Clicked.svg' : 'resources/bookmark.svg'}"/>
                     </button>
                 </div>
 
                 <div class="postDivider"></div>
-        
-        `;
+            `;
 
-         postElement.innerHTML += postContent;
-         container.appendChild(postElement);
-         
-         postCounter += 1;
+            postElement.innerHTML += postContent;
+            container.appendChild(postElement);
+            
+            postCounter += 1;
         });
 
     const sendingPostsDataScript = document.createElement("script");
@@ -188,5 +188,4 @@ function loadTimelinePosts() {
     const displayOptionsScript = document.createElement("script");
     displayOptionsScript.src = "displayPostOptions.js";
     document.body.appendChild(displayOptionsScript);
-
 }

@@ -3,10 +3,14 @@
     <head>
         <title>Connectify - Post</title>
         <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
+
+        <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="postPage.css">
+        <link rel="stylesheet" type="text/css" href="/css/generalStyle.css">
     </head>
 
     <body>
+        <!-- HEADER PORTION -->
         <header>
             <div id="headercol1" onclick="window.location.href='homePage.html'">
                 <img id="logo" src="resources/Logo.svg" />
@@ -14,12 +18,14 @@
             </div>
             <div id="headercol2">
                 <div class="searchBar">
-                        <img src="resources/Trailing-Elements.svg" alt="Search Icon">
-                        <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+                    <img src="resources/Trailing-Elements.svg" alt="Search Icon">
+                    <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
                 </div>
         
                 <!-- IF USER IS NOT LOGGED IN -->
-                <button id="logInButton" onclick="window.location.href='loginPage.html'">Log In</button>
+                <div class="logIn">
+                    <button id="logInButton" onclick="window.location.href='loginPage.html'">Log In</button>
+                </div>
             </div>
         </header>
 
@@ -46,18 +52,17 @@
                         <img src="resources/Options Button.svg" alt="Options">
                     </button> -->
                 </div>
-                <div id="tagContainer">
-                </div>
-                <div id="postTitleContainer">
-                </div>
-                <div id="postText">
-                </div>
 
-
-                <!-- COMMENT OUT IF NO IMAGE -->
+                <!-- TAGS PORTION -->
+                <div id="tagContainer"></div>
+                <!-- TITLE PORTION -->
+                <div id="postTitleContainer"></div>
+                <!-- CAPTION PORTION -->
+                <div id="postText"></div>
+                <!-- IMAGE PORTION -->
                 <div id="photo-container"></div>
 
-                 <div class="postActions">
+                <div class="postActions">
                         <button id="heart" class="actionButton">
                             <img src="resources/Heart.svg"/>
                             <span class="counter" id="postLikeCounter"></span>
@@ -73,7 +78,7 @@
                     <button id="bookmark" class="actionButton">
                             <img src="resources/bookmark.svg"/>
                     </button>
-                 </div>
+                </div>
             </div>
 
             <div id="comments">

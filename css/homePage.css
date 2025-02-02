@@ -1,35 +1,6 @@
-/* ---------- GENERAL ---------- */
-@font-face {
-     font-family: 'Inter'; 
-     src: url('resources/InterFont.ttf');
-}
-
-@font-face {
-     font-family: 'JostBold'; 
-     src: url('resources/Jost-Bold.ttf');
-}
-
-* {
-     box-sizing: border-box;
-     font-family: "Inter"; 
-}
-
-html, body {
-     min-width: 1000px; 
-     overflow-x: auto;
-}
-
-.inviBrk {
-     height: 20px;
-}
-/* ---------- GENERAL ---------- */
-
-body {
-     background-color: #030909;
-     color: white;
-     font-family: "Inter";
-     margin: 0;
-     min-height: 100vh;
+/* ----- Override General Style ----- */
+#usercaption {
+     margin-bottom: 15px;
 }
 
 button {
@@ -49,100 +20,6 @@ button {
 button:active {
      transform: scale(0.95); 
 } */
-
-/* ---------- HEADER ---------- */
-#appName {
-     font-family: "JostBold";
-     color: #98D5DC;
-     font-size: 20px;
-     font-weight: 400;
-}
-
-header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
- 
-     background-color: black;
- 
-     padding: 0 32px;
-     gap: 79px;
-     height: 88px;
- 
-     border-bottom: 1px solid #49454F;
-}
-
-#logo {
-     margin-right: 15px;
-}
-
-#headercol1 {
-     display: flex; 
-     justify-content: flex-start; 
-     align-items: center;
-
-     cursor: pointer;
-}
-
-#headercol2 {
-     display: flex;
-     justify-content: flex-end; 
-     align-items: center;
-
-     /* IF USER IS NOT LOGGED IN */
-     gap: 12px;
-}
-
-.searchBar {
-     background-color: #ECE6F0;
-     color: #49454F;
-     
-     display: flex;
-     justify-content: flex-start;
-     align-items: center;
-
-     height: 35px;
-     width: 400px;
-     max-width: 800px;
-
-     border-radius: 30px;
-}
-
-input[type="text"] {
-     background: none;
-     border: none;
-     width: 100%;
-     height: 100%;
-
-     color: #49454F;
-     font-size: 13px;
-     outline: none;
-}
-
-#logInButton {
-     background-color: #98D5DC;
-     font-size: 16px;
-     font-weight: Bold;
-     
-     display: flex;
-     justify-content: center;
-     align-items: center;
-
-     padding: 8px 24px;
-
-     width: auto;
-     height: auto;
-}
-
-#logInButton:hover {
-     background-color: #7FB8C8;
-     transform: scale(1.02);
-}
-
-#logInButton:active {
-     transform: scale(0.95); 
-}
-/* ---------- HEADER ---------- */
 
 .content {
      display: flex;
@@ -275,7 +152,6 @@ input[type="text"] {
      justify-content: center;
      align-items: center;
 
-     gap: 4px;
 
      width: 100%;
 }
@@ -595,7 +471,6 @@ input[type="text"] {
      align-items: center;
 
      gap: 0px;
-
      width: 100%;
 }
 
@@ -807,101 +682,14 @@ input[type="text"] {
      border-radius: 12px;
 }
 
-#userphotocontainer {
-    width: 100%;
-    height: 200px;
-
-    max-height: 200px;
-    max-width: inherit;
-
-    /* display: grid;
-    align-items: center;
-    justify-content: center;
-    grid: 200px / auto auto auto auto; */
-
-    display: flex;
-    justify-content: space-between;
-
-    gap: 10px;
-}
-
-.clickable-image {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s;
-    border-radius: 12px;
-}
-
-.clickable-image:hover {
-    transform: scale(1.008);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.close:hover {
-    transform: scale(1.05);
-    color: #7FB8C8;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.modal {
-    display: none;
-    position: fixed; 
-    z-index: 1000; 
-    left: 0;
-    top: 0;
-
-    width: 100%;
-    height: 100%;
-
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8); 
-}
-
-#userphotocontainer-modal {
-    position: absolute; 
-    top: 50%;
-    left: 50%; 
-    transform: translate(-50%, -50%);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    width: 90%;
-    height: 90%; 
-
-    max-width: 90vh;
-    max-height: 90vh; 
-
-    object-fit: contain;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    color: white;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
 .posttags {
-
      display: flex;
      flex-wrap: wrap;
      justify-content: flex-start;
      align-items: flex-start;
 
-     padding: 12px 0px;
-     gap: 12px;
+     padding: 10px 0 0 0;
+     gap: 10px;
 
      width: 100%;
      height: auto;
@@ -915,11 +703,6 @@ input[type="text"] {
 }
 
 .postActions, .commentActions {
-     display: flex;
-     justify-content: flex-end;
-     align-items: center;
-
-     gap: 8px;
      width: 100%;
 }
 
@@ -928,36 +711,9 @@ input[type="text"] {
      height: 24px;
 }
 
-.actionButton {
-     background: none;
-     border: none;
-     padding: 0px 8px;
-     cursor: pointer;
-     transition: background-color 0.3s, transform 0.2s;
-     display: flex;
-     align-items: center;
-     gap: 6px;
-}
- 
-.actionButton:hover {
-     transform: scale(1.05);
-}
-
-.actionButton:active {
-     transform: scale(0.75); 
-}
- 
-.actionButton .counter {
-     color: rgba(255, 255, 255, 0.7);
-     font-size: 15px;
-     font-weight: bold;
-     margin-left: 0;
-}
-
 .postDivider {
      background-color: #49454F;
 
-     margin: 10px;
 
      width: 100%;
      box-sizing: border-box;
