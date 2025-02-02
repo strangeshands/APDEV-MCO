@@ -8,16 +8,16 @@ function renderComments(comments, container) {
         commentDiv.innerHTML = `
             <div class="postHeader">
                 <div class="userInfo">
-                    <div class="avatar">
+                    <div class="avatar" id="postAvatar">
                         <img src="${comment.pfp}" alt="${comment.displayName}">
                     </div>
                     <div class="username-and-time">
-                        <div class="username">${comment.username}</div>
-                        <div class="time">${comment.time}</div>
+                        <div class="displayName" id="postDisplayName">${comment.displayName}</div>
+                        <div class="time" id="postTime">${comment.username} | ${comment.time}</div>
                     </div>
                 </div>
-                <!-- IF COMMENT BELONGS TO USER
-                <button class="optionsButton">
+                <!-- IF POST BELONGS TO USER
+                <button class="optionsButton" id="postOptions">
                     <img src="resources/Options Button.svg" alt="Options">
                 </button> -->
             </div>
