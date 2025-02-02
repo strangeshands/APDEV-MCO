@@ -67,6 +67,7 @@ button:active {
      display: flex;
      justify-content: flex-start;
      align-items: center;
+     text-align: left;
 
      gap: 10px;
      width: 100%;
