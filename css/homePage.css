@@ -558,6 +558,7 @@ button:active {
      transform: scale(0.95); 
 }
 
+/* --- Pop Up Tab Specific --- */
 .popUpOptions {
      display: none;
      position: absolute; 
@@ -580,10 +581,11 @@ button:active {
      align-items: flex-end;
 
      padding: 20px 10px 10px 10px;
-     gap: 20px;
+     gap: 5px;
      border-radius: 12px;
 
      width: 200px;
+     border: 2px solid rgba(255, 255, 255, 0.1);
 } 
 
 .postOptionsButton {
@@ -638,6 +640,7 @@ button:active {
 .viewButton:active, .editButton:active, .deleteButton:active {
      transform: scale(0.95); 
 }
+/* --- Pop Up Tab Specific --- */
 
 .postContent {
      display: flex;

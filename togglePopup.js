@@ -23,22 +23,6 @@ function togglePopup(contentType, postId, containerId) {
     }
 }
 
-function togglePopup(postId) {
-    const popup = document.getElementById(`popUp${postId}`);
-    console.log(`Menu clicked on post ${postId}`);
-
-    if (activePopup && activePopup !== popup) {
-        activePopup.classList.remove('show');
-    }
-
-    popup.classList.toggle('show');
-    if (popup.classList.contains('show')) {
-        activePopup = popup;
-    } else {
-        activePopup = null;
-    }
-}
-
 document.addEventListener('click', (e) => {
     const optionsButtons = document.querySelectorAll('.optionsButton');
     const popups = document.querySelectorAll('.popUpOptions');
