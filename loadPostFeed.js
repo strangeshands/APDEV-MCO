@@ -63,24 +63,46 @@ const timelinePosts = [
     },
     {
         replyTo: "",
-        displayName: "slaysianDivaOfLA",
-        username: "@dontforgettheella",
-        pfp: "resources/joella.jpg",
-        tags: ["#mug", "#drag", "#lanaSucks", "#joellaDynasty"],
-        caption: "- Joella",
-        images: [],
-        title: "fix ur mug",
 
-        time: "7 hours ago",
+        displayName: "DARNA",
+        username: "@AkoSiDarna",
+        pfp: "resources/pfpSample.jpg",
+        tags: ["#AnotherTagHere", "#TagHere", "#ProbablyAnotherTagHere"],
+        caption: "Life is a journey, and every step we take brings us closer...",
+        images: ["resources/hamster.jpg", "resources/monkey.jpg"],
+        title: "JOURNEY",
 
-        likes: 2,
-        dislikes: 75,
+        time: "4 minutes ago",
+
+        likes: 3,
+        dislikes: 0,
 
         liked: false,
-        disliked: true,
+        disliked: false,
         bookmark: false,
-        own: false
+        own: true
    },
+   {
+        replyTo: "",
+
+        displayName: "DARNA",
+        username: "@AkoSiDarna",
+        pfp: "resources/pfpSample.jpg",
+        tags: ["#Movies"],
+        caption: "I am vengeance. I am the night. I am Batman!",
+        images: [],
+        title: "THE NIGHT",
+
+        time: "10 hours ago",
+
+        likes: 3,
+        dislikes: 0,
+
+        liked: false,
+        disliked: false,
+        bookmark: false,
+        own: true
+   }
 ];
 
 /* ---- CODE FUNCTION ---- */
