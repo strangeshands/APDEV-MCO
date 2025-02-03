@@ -3,8 +3,13 @@ let activePopup = null;
 
 function togglePopup(contentType, postId, containerId) {
     console.log(`Menu clicked on post ${postId} in ${containerId}`);
+    let popup = null;
      
-    const popup = document.getElementById(`${contentType}-popup-${postId}`);
+    if (contentType != "none") {
+        popup = document.getElementById(`${contentType}-popup-${postId}`);
+    } else {
+        popup = document.getElementById(`popUp${postId}`);
+    }
     const container = document.getElementById(containerId); 
  
     if (!popup.parentElement === container) {
