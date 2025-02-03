@@ -3,50 +3,44 @@ const contentData = JSON.parse(localStorage.getItem('postData'));
 
 if (contentData) {
 
-     // If there is replyTo info, display it 
      if (contentData.replyTo) {
-          const container = document.getElementById("replyToContainer");
-          const postElement = document.createElement("div");
-  
-          postContent = `
-              <!-- REPLY USER -->
-              <!-- TO CHANGE: href link -->
-              <div id="reply-to-msg" onclick="window.location.href='postPage.html';">
-                  Replied to ${contentData.replyTo}
-              </div>
-          `
-          postElement.innerHTML = postContent;
-            container.appendChild(postElement);
+        const container = document.getElementById("replyToContainer");
+        const postElement = document.createElement("div");
+
+        postContent = `
+            <!-- REPLY USER -->
+            <!-- TO CHANGE: href link -->
+            <div id="reply-to-msg" onclick="window.location.href='postPage.html';">
+                Replied to ${contentData.replyTo}
+            </div>
+        `
+        postElement.innerHTML = postContent;
+          container.appendChild(postElement);
      }
 
-     // Only add the title if one exists (for posts, not for replies)
-     if (contentData.postTitle && contentData.postTitle.trim() !== "") {
+     if (contentData.postTitle) {
         const container = document.getElementById("postTitleContainer");
         const postElement = document.createElement("div");
         postElement.id = "postTitle";
 
-        postElement.innerHTML = contentData.postTitle;
+        postElement.innerHTML = `${contentData.postTitle}`;
 
         container.appendChild(postElement);
-     } else {
-        // Hide or remove the title container if no title exists
-        document.getElementById("postTitleContainer").style.display = "none";
      }
 
-     document.getElementById('postText').innerText = contentData.postText;
+     document.getElementById('postText').innerText = `${contentData.postText}`;
 
-     // Display images, if any
      if (contentData.postImage) {
           const container = document.getElementById('photo-container');
           container.id = "userphotocontainer";
           container.innerHTML = 
-               contentData.postImage.length > 0 ? 
-               `
-                    ${contentData.postImage.map(function(img) { 
-                         return '<img class="clickable-image" src="' + img + '" onclick="openModal(this)">';
-                    }).join("")}
-               `
-               : "";
+            contentData.postImage.length > 0 ? 
+            `
+                ${contentData.postImage.map(function(img) { 
+                    return '<img class="clickable-image" src="' + img + '" onclick="openModal(this)">';
+                }).join("")}
+            `
+            : "";
      }
 
      if (contentData.userProfilePic) {
@@ -98,9 +92,8 @@ if (contentData) {
 
           container.appendChild(postElement);
      }
+
 } else {
      document.getElementById('post').innerText = "Post Not Found";
      document.getElementById('comments').innerText = " ";
 }
-
-
