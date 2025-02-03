@@ -3,7 +3,10 @@
     <head>
         <title>Connectify - Reply</title>
         <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
+
+        <!-- CSS -->
         <link rel="stylesheet" type="text/css" href="replyPage.css">
+        <link rel="stylesheet" type="text/css" href="css\generalStyle.css">
     </head>
 
     <body>
@@ -19,7 +22,6 @@
                  </div>
             </div>
        </header>
-
 
         <main>
             <div class="goBackLink" onclick="window.location.href='postPage.html'">
@@ -50,7 +52,6 @@
                     </div>
                     <div id="postText">
                     </div>
-    
     
                     <!-- COMMENT OUT IF NO IMAGE -->
                     <div id="photo-container"></div>
@@ -175,7 +176,7 @@
             /********************************
              * Image Upload (Up to 4 images)
             ********************************/
-             const imageUploadInput = document.getElementById("imageUploadInput");
+            const imageUploadInput = document.getElementById("imageUploadInput");
             const postContentContainer = document.getElementById("replyphotocontainer");
             const addImageBtn = document.getElementById("addImageButton");
             
