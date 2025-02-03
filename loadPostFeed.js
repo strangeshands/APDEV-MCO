@@ -60,7 +60,27 @@ const timelinePosts = [
          disliked: false,
          bookmark: true,
          own: false
-    }
+    },
+    {
+        replyTo: "",
+        displayName: "slaysianDivaOfLA",
+        username: "@dontforgettheella",
+        pfp: "resources/joella.jpg",
+        tags: ["#mug", "#drag", "#lanaSucks", "#joellaDynasty"],
+        caption: "- Joella",
+        images: [],
+        title: "fix ur mug",
+
+        time: "7 hours ago",
+
+        likes: 2,
+        dislikes: 75,
+
+        liked: false,
+        disliked: true,
+        bookmark: false,
+        own: false
+   },
 ];
 
 /* ---- CODE FUNCTION ---- */
