@@ -97,38 +97,36 @@ function storeReplyData(replyId) {
           index = parseInt(replyId.replace("sampleComment", ""));
           replyReference = sampleComments;  
      }
+
      index = index - 1;
+
+     // make sure index is valid
+     if (index < 0 || index >= replyReference.length) {
+          console.error("Invalid reply ID:", replyId);
+          return;
+     }
      
-     // For a reply, we do not want to show a title or tags.
-     const replyTo = replyReference[index].replyTo.length > 0 ? replyReference[index].replyTo : '';
-     const postTitle = "";  
-     const postText = replyReference[index].caption;
-     const postTags = "";   
-     const postImage = replyReference[index].images.length > 0 ? replyReference[index].images : '';
-     const userProfilePic = replyReference[index].pfp;
-     const displayName = replyReference[index].displayName;
-     const username = replyReference[index].username;
-     const timePosted = replyReference[index].time;
-     const postLikeCounter = replyReference[index].likes;
-     const postDislikeCounter = replyReference[index].dislikes;
-     
-     // Create the content object for the reply
-     const contentObj = {
-          replyTo: replyTo,
-          postTitle: postTitle,
-          postText: postText,
-          postTags: postTags,
-          postImage: postImage,
-          userProfilePic: userProfilePic,
-          displayName: displayName,
-          username: username,
-          timePosted: timePosted,
-          postLikeCounter: postLikeCounter,
-          postDislikeCounter: postDislikeCounter
-     };
-     
-     // Overwrite the "postData" key with reply data
-     localStorage.setItem('postData', JSON.stringify(contentObj));
+     const selectedComment = replyReference[index];
+
+    // Store the reply ID separately in localStorage
+    localStorage.setItem('replyId', replyId);
+
+    // Store the comment's data
+    const contentObj = {
+        replyTo: selectedComment.replyTo || '',
+        postTitle: '',
+        postText: selectedComment.caption,
+        postTags: '',
+        postImage: selectedComment.images.length > 0 ? selectedComment.images : '',
+        userProfilePic: selectedComment.pfp,
+        displayName: selectedComment.displayName,
+        username: selectedComment.username,
+        timePosted: selectedComment.time,
+        postLikeCounter: selectedComment.likes,
+        postDislikeCounter: selectedComment.dislikes,
+    };
+
+    localStorage.setItem('postData', JSON.stringify(contentObj));
  }
  
 

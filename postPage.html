@@ -97,18 +97,14 @@
             <div id="caption"></div>
         </div>
 
-        <script src="receivingPostData.js"></script>
-        <script src="sendingPostData.js"></script>
         <script src="sampleComments.js"></script>
         <script src="commentsRenderer.js"></script>
+        <script src="sendingPostData.js"></script>
+        <script src="receivingPostData.js"></script>
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                // Render the comments into the .comment-thread container
-                const commentThread = document.querySelector('.comment-thread');
-                renderComments(sampleComments, commentThread);
-                
-                // Now attach event listeners to the newly created viewRepliesLink elements
+                // Event Delegation for "View Replies" buttons
                 document.querySelectorAll('.viewRepliesLink').forEach(link => {
                     link.addEventListener('click', function(e) {
                         e.preventDefault(); // Prevent the default link behavior

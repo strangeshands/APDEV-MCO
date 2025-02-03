@@ -1,5 +1,6 @@
 // Get content from localStorage and display it
 const contentData = JSON.parse(localStorage.getItem('postData'));
+const replyId = localStorage.getItem('replyId'); // Retrieve stored reply ID
 
 if (contentData) {
 
@@ -74,7 +75,6 @@ if (contentData) {
      if (contentData.currentUserProfilePic && REPavatar) {
         document.getElementById('REPavatar').innerHTML = `<img src="${contentData.currentUserProfilePic}" id="currentUserProfilePic">`;
      }
-     
 
      // Display tags as individual <a> elements
      if (contentData.postTags && contentData.postTags.length > 0) {
@@ -92,6 +92,37 @@ if (contentData) {
 
           container.appendChild(postElement);
      }
+
+          // If contentData.replyTo is empty, it's a post, so clear replyId
+     if (!contentData.replyTo || contentData.replyTo.length === 0) {
+               console.log("Detected a post. Clearing replyId.");
+               localStorage.removeItem('replyId');
+          }
+
+          // Determine whether to show main comments or replies
+          const commentThread = document.querySelector('.comment-thread');
+
+          if (replyId && contentData.replyTo && contentData.replyTo.length > 0) {
+               // If a reply was clicked, find the correct comment and show its replies
+               const commentIndex = parseInt(replyId.replace("sampleComment", ""), 10) - 1;
+
+               if (commentIndex >= 0 && commentIndex < sampleComments.length) {
+               const selectedComment = sampleComments[commentIndex];
+
+               if (selectedComment.comments.length > 0) {
+                    console.log("Rendering replies for:", selectedComment);
+                    renderComments(selectedComment.comments, commentThread);
+               } else {
+                    console.log("No replies available for this comment.");
+               }
+               } else {
+               console.error("Invalid comment index:", commentIndex);
+               }
+          } else {
+               // Default case: Render all top-level comments (meaning it's a post)
+               console.log("Rendering top-level comments as this is a post.");
+               renderComments(sampleComments, commentThread);
+          }
 
 } else {
      document.getElementById('post').innerText = "Post Not Found";
