@@ -5,8 +5,8 @@
         <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="css\replyPage.css">
-        <link rel="stylesheet" type="text/css" href="css\generalStyle.css">
+        <link rel="stylesheet" type="text/css" href="css/replyPage.css">
+        <link rel="stylesheet" type="text/css" href="css/generalStyle.css">
     
         <!-- CROPPER -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
@@ -15,9 +15,9 @@
 
     <body>
         
-        <!-- COMMON HEADER -->
+        <!-- HEADER PORTION -->
         <header>
-            <div id="headercol1" onclick="window.location.href='html\homePage.html'">
+            <div id="headercol1" onclick="window.location.href='homePage.html'">
                  <img id="logo" src="resources/Logo.svg" />
                  <p id="appName"> Connectify </p>
             </div>
@@ -33,7 +33,7 @@
         <main>
 
             <!-- BACK BUTTON -->
-            <div class="goBackLink" onclick="window.location.href='html\postPage.html'">
+            <div class="goBackLink" onclick="window.location.href='postPage.html'">
                 <span class="arrow">&#8604;</span>
                 <span class="back">Back</span>
             </div>
@@ -73,7 +73,7 @@
                                 <img src="resources/HeartCrack.svg"/>
                                 <span class="counter" id="postDislikeCounter"></span>
                         </button>
-                        <button class="actionButton"onclick="window.location.href='html\replyPage.html'">
+                        <button class="actionButton"onclick="window.location.href='replyPage.html'">
                                 <img src="resources/Comments.svg"/>
                         </button>
                         <button id="bookmark" class="actionButton">
@@ -152,132 +152,12 @@
                 </div>
             </div>
         </main>
-
-    
-        <script>
-
-            /* Real-time Character Limit */
-            // Select elements
-            const postTextInput = document.getElementById("postTextInput");
-            const feedback = document.getElementById("char-counter");
-
-            postTextInput.addEventListener("input", function() {
-                const currentLength = postTextInput.value.length;
-                
-                feedback.textContent = `${currentLength}/300`;
-
-                if (currentLength >= 300) {
-                    feedback.style.color = "red";
-                } else {
-                    feedback.style.color = "white";
-                }
-            });
-
-            document.addEventListener("DOMContentLoaded", () => {
-                document.getElementById("postTextInput").value = "";
-            });
-
-            /* Image Upload (Up to 4 images) */
-            const imageUploadInput = document.getElementById("imageUploadInput");
-            const postContentContainer = document.getElementById("replyphotocontainer");
-            const addImageBtn = document.getElementById("addImageButton");
-            
-            // We'll store the preview image URLs in this array
-            let images = [];
-            
-            // Trigger the hidden file input when "Add Image" is clicked
-            addImageBtn.addEventListener("click", () => {
-                imageUploadInput.click();
-            });
-            
-            // Handle file selection
-            imageUploadInput.addEventListener("change", handleImageUpload);
-            
-            function handleImageUpload(event) {
-                const selectedFiles = Array.from(event.target.files);
-            
-                // Limit total images to 4
-                selectedFiles.forEach((file) => {
-                    if (images.length < 4) {
-                        const imageURL = URL.createObjectURL(file);
-                        images.push(imageURL);
-                    }
-                });
-            
-                renderImages();
-            }
-            
-            function removeImage(index) {
-                images.splice(index, 1);
-                renderImages();
-            }
-            
-            // Render images in the container
-            function renderImages() {
-                // Clear previous previews
-                postContentContainer.innerHTML = "";
-            
-                // Decide layout based on image count
-                if (images.length === 1) {
-                    postContentContainer.classList.add("single-image");
-                    postContentContainer.classList.remove("multi-images");
-                } else if (images.length > 1) {
-                    postContentContainer.classList.remove("single-image");
-                    postContentContainer.classList.add("multi-images");
-                } else {
-                    // No images
-                    postContentContainer.classList.remove("single-image", "multi-images");
-                }
-            
-                // Create an element for each image with a remove icon
-                images.forEach((url, index) => {
-                    // Wrap each image + remove icon in a container
-                    const imgWrapper = document.createElement("div");
-                    imgWrapper.classList.add("imageWrapper");
-                    
-                    const img = document.createElement("img");
-                    img.src = url;
-
-                 
-                    img.classList.add("clickable-image");
-                    img.setAttribute("onclick", "openModal(this)");
-                 
-            
-                    // Create a remove icon for each image
-                    const removeIcon = document.createElement("span");
-                    removeIcon.classList.add("remove-image-icon");
-                    removeIcon.innerHTML = "&times;";
-                    removeIcon.addEventListener("click", function() {
-                        
-                        removeImage(index);
-                        if (imageContainer.children.length === 0) {
-                            imageContainer.style.display = 'none';
-                        }
-                    });
-            
-                    // Append them together
-                    imgWrapper.appendChild(img);
-                    imgWrapper.appendChild(removeIcon);
-                    postContentContainer.appendChild(imgWrapper);
-                });
-            }
-
-            function openModal(image) {
-               const modal = document.getElementById("imageModal");
-               const modalImg = document.getElementById("modalImage");
-               const captionText = document.getElementById("caption");
-          
-               modal.style.display = "block";
-               modalImg.src = image.src;
-          
-               modal.onclick = function () {
-               modal.style.display = "none";
-               };
-            }
-        </script>       
         
-        <script src="js\receivingPostData.js"></script>
-        <script src="js\actionButton.js"></script>
-        <script src="js\profile1-data.js"></script>
+        <script src="js/receivingPostData.js"></script>
+        <script src="js/actionButton.js"></script>
+        <script src="js/profile1-data.js"></script>
     </body>
 </html>
+
+<!-- PAGE JAVASCRIPT -->
+<script src="js/replyPage.js"></script>

@@ -9,7 +9,7 @@
           <link rel="stylesheet" type="text/css" href="css/generalStyle.css">
 
           <!-- SCRIPTS -->
-           <script src="actionButton.js"></script>
+           <script src="js/actionButton.js"></script>
      </head>
 
      <body>
@@ -85,7 +85,7 @@
                          </div>
 
                          <div class="userPostsAndCommentsContent" id="userPostsContent"></div>
-                         <script src="loadNavPosts.js"></script>
+                         <script src="js/loadNavPosts.js"></script>
                          <script>
                             document.addEventListener("DOMContentLoaded", loadNavPosts());
                          </script>
@@ -100,7 +100,7 @@
                          </div>
 
                          <div class="userPostsAndCommentsContent" id="userCommentsContent"></div>
-                         <script src="loadNavComments.js"></script>
+                         <script src="js/loadNavComments.js"></script>
                          <script>
                             document.addEventListener("DOMContentLoaded", loadNavComments());
                          </script>
@@ -120,7 +120,7 @@
                     <!-- POST FEED -->
 
                     <div id="postFeed"></div>
-                    <script src="loadPostFeed.js"></script>
+                    <script src="js/loadPostFeed.js"></script>
                     <script>
                         document.addEventListener("DOMContentLoaded", loadTimelinePosts());
                     </script>
@@ -136,22 +136,9 @@
                  <img class="modal-content" id="modalImage">
             </div>
             <div id="caption"></div>
-       </div>
-
-       <script>
-            function openModal(image) {
-                const modal = document.getElementById("imageModal");
-                const modalImg = document.getElementById("modalImage");
-                const captionText = document.getElementById("caption");
-            
-                console.log("Image source:", image.src);
-                modal.style.display = "block";
-                modalImg.src = image.src;
-            
-                modal.onclick = function () {
-                    modal.style.display = "none";
-                };
-            }
-       </script>
+          </div>
      </body>
 </html>
+
+<!-- PAGE JAVASCRIPT -->
+<script src="js/homePage.js"></script>

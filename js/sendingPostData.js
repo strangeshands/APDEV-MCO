@@ -42,7 +42,7 @@ function storePostData(postId) {
      const currentUserUsername = userPosts[index].username;
      const currentUserProfilePic = userPosts[index].pfp;
 
-     // NEW: Get the comments for this post (or an empty array if none)
+     // Get the comments for this post (or an empty array if none)
      const comments = postReference[index].comments ? postReference[index].comments : [];
 
 
