@@ -563,7 +563,7 @@ button:active {
      display: none;
      position: absolute; 
      top: -20px; 
-     right: 0px;
+     right: -2px;
      width: auto; 
      z-index: 1;
 }

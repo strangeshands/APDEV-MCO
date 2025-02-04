@@ -105,6 +105,19 @@ const timelinePosts = [
    }
 ];
 
+/**
+ * FOR APPROVAL --
+ * Changes made:
+ *      > tried to use togglePopUp function to avoid function redundancy
+ *          > difference: togglePopup retrieves the post based on the post count instead
+ *            of the closest button
+ *          > check console for a log -- button clicked must match the post number
+ *          > only one pop up will open at a time
+ *          > pop up closes when clicked outside the pop up
+ *      > added two own post for sample
+ *      > edit and delete button only appears when own post
+ */
+
 /* ---- CODE FUNCTION ---- */
 function loadTimelinePosts() {
 
@@ -146,23 +159,25 @@ function loadTimelinePosts() {
                 </div>
 
                 <!-- IF USER IS LOGGED IN -->
+                <button class="optionsButton" post-options-id="popUp${postCounter}" onclick="togglePopup('none', '${postCounter}', '${container.id}')">
+                    <img src="resources/Options Button.svg" alt="">
+                </button>
 
                 <!-- POST OPTIONS -->
                 <div class="popUpOptions" id="popUp${postCounter}">
                     <div class="postOptionsContent">
-                            <button class="activeOptionsButton" post-options-id="popUp${postCounter}">
-                                <img src="resources/Options Button.svg" alt="">
-                            </button>
-                            <a href="postPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="viewButton">View Post</button></a>
-                            <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Edit Post</button></a>
-                            <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post2"><button class="editButton">Copy Link</button></a>
-                            <a href="" class="postLink postOptionsButton" data-post-id="post2"><button class="deleteButton">Delete Post</button></a>
-                        </div>
-                </div>
+                        <button class="activeOptionsButton" post-options-id="popUp${postCounter}" onclick="togglePopup('none', '${postCounter}', '${container.id}')">
+                            <img src="resources/Options Button.svg" alt="">
+                        </button>
+                            <a href="postPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="viewButton">View Post</button></a>
+                            <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Copy Link</button></a>
 
-                <button class="optionsButton" post-options-id="popUp${postCounter}">
-                    <img src="resources/Options Button.svg" alt="">
-                </button>
+                        ${post.own ? `
+                            <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Edit Post</button></a>
+                            <a href="" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="deleteButton">Delete Post</button></a>
+                        ` : ""}
+                    </div>
+                </div>
 
             </div>
 
@@ -227,7 +242,7 @@ function loadTimelinePosts() {
     sendingPostsDataScript.src = "js/sendingPostData.js";
     document.body.appendChild(sendingPostsDataScript);
 
-    const displayOptionsScript = document.createElement("script");
+    /*const displayOptionsScript = document.createElement("script");
     displayOptionsScript.src = "displayPostOptions.js";
-    document.body.appendChild(displayOptionsScript);
+    document.body.appendChild(displayOptionsScript);*/
 }
