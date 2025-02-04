@@ -38,9 +38,9 @@ function storePostData(postId) {
      const postLikeCounter = postReference[index].likes;
      const postDislikeCounter = postReference[index].dislikes;
 
-     const currentUserDisplayName = userPosts[index].displayName;
-     const currentUserUsername = userPosts[index].username;
-     const currentUserProfilePic = userPosts[index].pfp;
+     const currentUserDisplayName = userPosts[0].displayName;
+     const currentUserUsername = userPosts[0].username;
+     const currentUserProfilePic = userPosts[0].pfp;
 
      // Get the comments for this post (or an empty array if none)
      const comments = postReference[index].comments ? postReference[index].comments : [];
