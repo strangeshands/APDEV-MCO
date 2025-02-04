@@ -4,7 +4,7 @@
 
 @font-face {
      font-family: 'Inter'; 
-     src: url('resources/InterFont.ttf');
+     src: url('../resources/InterFont.ttf');
 }
 
 * {
@@ -12,7 +12,7 @@
 }
  
 body {
-     background-image: url("resources/loginbg.png");
+     background-image: url("../resources/loginbg.png");
      background-repeat: repeat;
 
      display: flex;
