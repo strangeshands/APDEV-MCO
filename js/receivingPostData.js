@@ -11,7 +11,7 @@ if (contentData) {
         postContent = `
             <!-- REPLY USER -->
             <!-- TO CHANGE: href link -->
-            <div id="reply-to-msg" onclick="window.location.href='postPage.html';">
+            <div id="reply-to-msg" onclick="window.location.href='../html/postPage.html';">
                 Replied to ${contentData.replyTo}
             </div>
         `

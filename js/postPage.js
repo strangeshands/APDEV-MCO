@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const replyId = this.getAttribute('data-post-id');
             storeReplyData(replyId);
             // Redirect to postPage.html which will read the new reply data from localStorage
-            window.location.href = "postPage.html";
+            window.location.href = "../html/postPage.html";
         });
     });
 });
@@ -34,16 +34,16 @@ function iconClicked(button, iconType) {
       // Path for different icon types
       const iconPaths = {
            'heart': {
-           default: 'resources/Heart.svg',
-           clicked: 'resources/Heart-Clicked.svg'
+           default: '../resources/Heart.svg',
+           clicked: '../resources/Heart-Clicked.svg'
            },
            'heartCrack': {
-           default: 'resources/HeartCrack.svg',
-           clicked: 'resources/HeartCrack-Clicked.svg'
+           default: '../resources/HeartCrack.svg',
+           clicked: '../resources/HeartCrack-Clicked.svg'
            },
            'bookmark': {
-           default: 'resources/Bookmark.svg',
-           clicked: 'resources/Bookmark-Clicked.svg'
+           default: '../resources/Bookmark.svg',
+           clicked: '../resources/Bookmark-Clicked.svg'
            }
       };
 

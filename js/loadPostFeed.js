@@ -5,10 +5,10 @@ const timelinePosts = [
 
          displayName: "bartholomewThe5th",
          username: "@catlover420",
-         pfp: "resources/cat.jpg",
+         pfp: "../resources/cat.jpg",
          tags: ["#funny", "#life", "#school", "#dolphin", "#rainbow", "#ocean", "#morning", "#depression"],
          caption: "everything is ok",
-         images: ["resources/dolphin.jpg", "resources/sad-hamster.jpg", "resources/dog.jpg"],
+         images: ["../resources/dolphin.jpg", "../resources/sad-hamster.jpg", "../resources/dog.jpg"],
          title: "good morning",
 
          time: "4 minutes ago",
@@ -25,7 +25,7 @@ const timelinePosts = [
          replyTo: "",
          displayName: "slaysianDivaOfLA",
          username: "@dontforgettheella",
-         pfp: "resources/joella.jpg",
+         pfp: "../resources/joella.jpg",
          tags: ["#mug", "#drag", "#lanaSucks", "#joellaDynasty"],
          caption: "- Joella",
          images: [],
@@ -45,10 +45,10 @@ const timelinePosts = [
          replyTo: "",
          displayName: "carbonaraEater",
          username: "@jabeedabee",
-         pfp: "resources/jabee.jpg",
+         pfp: "../resources/jabee.jpg",
          tags: ["#hamster", "#glasses"],
          caption: "hamster",
-         images: ["resources/hamster.jpg"],
+         images: ["../resources/hamster.jpg"],
          title: "hehe",
 
          time: "5 days ago",
@@ -66,10 +66,10 @@ const timelinePosts = [
 
         displayName: "DARNA",
         username: "@AkoSiDarna",
-        pfp: "resources/pfpSample.jpg",
+        pfp: "../resources/pfpSample.jpg",
         tags: ["#AnotherTagHere", "#TagHere", "#ProbablyAnotherTagHere"],
         caption: "Life is a journey, and every step we take brings us closer...",
-        images: ["resources/hamster.jpg", "resources/monkey.jpg"],
+        images: ["../resources/hamster.jpg", "../resources/monkey.jpg"],
         title: "JOURNEY",
 
         time: "4 minutes ago",
@@ -87,7 +87,7 @@ const timelinePosts = [
 
         displayName: "DARNA",
         username: "@AkoSiDarna",
-        pfp: "resources/pfpSample.jpg",
+        pfp: "../resources/pfpSample.jpg",
         tags: ["#Movies"],
         caption: "I am vengeance. I am the night. I am Batman!",
         images: [],
@@ -160,20 +160,20 @@ function loadTimelinePosts() {
 
                 <!-- IF USER IS LOGGED IN -->
                 <button class="optionsButton" post-options-id="popUp${postCounter}" onclick="togglePopup('none', '${postCounter}', '${container.id}')">
-                    <img src="resources/Options Button.svg" alt="">
+                    <img src="../resources/Options Button.svg" alt="">
                 </button>
 
                 <!-- POST OPTIONS -->
                 <div class="popUpOptions" id="popUp${postCounter}">
                     <div class="postOptionsContent">
                         <button class="activeOptionsButton" post-options-id="popUp${postCounter}" onclick="togglePopup('none', '${postCounter}', '${container.id}')">
-                            <img src="resources/Options Button.svg" alt="">
+                            <img src="../resources/Options Button.svg" alt="">
                         </button>
-                            <a href="postPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="viewButton">View Post</button></a>
-                            <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Copy Link</button></a>
+                            <a href="../html/postPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="viewButton">View Post</button></a>
+                            <a href="../html/newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Copy Link</button></a>
 
                         ${post.own ? `
-                            <a href="newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Edit Post</button></a>
+                            <a href="../html/newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Edit Post</button></a>
                             <a href="" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="deleteButton">Delete Post</button></a>
                         ` : ""}
                     </div>
@@ -190,13 +190,13 @@ function loadTimelinePosts() {
                     </div>
                     <!--<p class="postTitle">${post.title}</p>-->
 
-                    <div id="posttile" onclick="window.location.href='postPage.html';">
+                    <div id="posttile" onclick="window.location.href='../html/postPage.html';">
                         <h2>${post.title}</h2>
                     </div>
 
                     <!-- POST CAPTION HERE -->
                     <!-- TO CHANGE: href link -->
-                    <div id="usercaption" onclick="window.location.href='postPage.html';">${post.caption}</div>
+                    <div id="usercaption" onclick="window.location.href='../html/postPage.html';">${post.caption}</div>
 
                     ${post.images.length > 0 ? `
                         <div id="userphotocontainer">
@@ -211,21 +211,21 @@ function loadTimelinePosts() {
                 <!-- ACTION BUTTONS -->
                 <div class="postActions">
                     <button id="heart" class="actionButton">
-                        <img src="${post.liked ? 'resources/Heart-Clicked.svg' : 'resources/Heart.svg'}"/>
+                        <img src="${post.liked ? '../resources/Heart-Clicked.svg' : '../resources/Heart.svg'}"/>
                          <span class="counter">${post.likes}</span>
                     </button>
-                    <img src="resources/Line.svg" alt="Line">
+                    <img src="../resources/Line.svg" alt="Line">
                     <button id="heartCrack" class="actionButton">
-                        <img src="${post.disliked ? 'resources/HeartCrack-Clicked.svg' : 'resources/HeartCrack.svg'}"/>
+                        <img src="${post.disliked ? '../resources/HeartCrack-Clicked.svg' : '../resources/HeartCrack.svg'}"/>
                          <span class="counter">${post.dislikes}</span>
                     </button>
-                    <a href="replyPage.html" class="postLink" data-post-id="post${postCounter}">
+                    <a href="../html/replyPage.html" class="postLink" data-post-id="post${postCounter}">
                         <button class="actionButton commentButton">
-                            <img src="resources/Comments.svg"/>
+                            <img src="../resources/Comments.svg"/>
                         </button>
                     </a>
                     <button id="bookmark" class="actionButton">
-                        <img src="${post.bookmark ? 'resources/Bookmark-Clicked.svg' : 'resources/bookmark.svg'}"/>
+                        <img src="${post.bookmark ? '../resources/Bookmark-Clicked.svg' : '../resources/bookmark.svg'}"/>
                     </button>
                 </div>
 
@@ -239,10 +239,10 @@ function loadTimelinePosts() {
         });
 
     const sendingPostsDataScript = document.createElement("script");
-    sendingPostsDataScript.src = "js/sendingPostData.js";
+    sendingPostsDataScript.src = "../js/sendingPostData.js";
     document.body.appendChild(sendingPostsDataScript);
 
     /*const displayOptionsScript = document.createElement("script");
-    displayOptionsScript.src = "displayPostOptions.js";
+    displayOptionsScript.src = "../js/displayPostOptions.js";
     document.body.appendChild(displayOptionsScript);*/
 }

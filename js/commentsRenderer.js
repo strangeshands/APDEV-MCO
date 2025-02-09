@@ -18,7 +18,7 @@ function renderComments(comments, container) {
                 </div>
                 <!-- IF POST BELONGS TO USER
                 <button class="optionsButton" id="postOptions">
-                    <img src="resources/Options Button.svg" alt="Options">
+                    <img src="../resources/Options Button.svg" alt="Options">
                 </button> -->
             </div>
             <div class="commentText">
@@ -26,19 +26,19 @@ function renderComments(comments, container) {
             </div>
             <div class="commentActions">
                 <button class="actionButton" id="heart">
-                    <img src="resources/Heart.svg"/>
+                    <img src="../resources/Heart.svg"/>
                     <span class="counter">${comment.likes}</span>
                 </button>
-                <img src="resources/Line.svg" alt="Line">
+                <img src="../resources/Line.svg" alt="Line">
                 <button class="actionButton" id="heartCrack">
-                    <img src="resources/HeartCrack.svg"/>
+                    <img src="../resources/HeartCrack.svg"/>
                     <span class="counter">${comment.dislikes}</span>
                 </button>
-                <button class="actionButton" onclick="window.location.href='replyPage.html'">
-                    <img src="resources/Comments.svg"/>
+                <button class="actionButton" onclick="window.location.href='../html/replyPage.html'">
+                    <img src="../resources/Comments.svg"/>
                 </button>
                 <button class="actionButton" id="bookmark">
-                    <img src="resources/bookmark.svg"/>
+                    <img src="../resources/bookmark.svg"/>
                 </button>
             </div>
             ${ comment.comments && comment.comments.length > 0 ? `

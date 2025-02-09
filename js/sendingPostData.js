@@ -81,7 +81,7 @@ postLinks.forEach( link => {
         
           if (!target.closest('.actionButton') && !target.closest('.clickable-image') && !target.closest('.optionsButton') && !target.closest('.activeOptionsButton')) {
                storePostData(postId);
-               window.location.href = "postPage.html";
+               window.location.href = "../html/postPage.html";
           } else if (target.closest('.commentButton')) {
                storePostData(postId);
           } 
@@ -138,6 +138,6 @@ viewRepliesLinks.forEach(link => {
         const replyId = this.getAttribute('data-post-id');
         storeReplyData(replyId);
         // Now redirect to the post page which reads localStorage
-        window.location.href = "postPage.html";
+        window.location.href = "../html/postPage.html";
     });
 });

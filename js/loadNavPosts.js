@@ -5,10 +5,10 @@ const userPosts = [
 
          displayName: "DARNA",
          username: "@AkoSiDarna",
-         pfp: "resources/pfpSample.jpg",
+         pfp: "../resources/pfpSample.jpg",
          tags: ["#AnotherTagHere", "#TagHere", "#ProbablyAnotherTagHere"],
          caption: "Life is a journey, and every step we take brings us closer...",
-         images: ["resources/hamster.jpg", "resources/monkey.jpg"],
+         images: ["../resources/hamster.jpg", "../resources/monkey.jpg"],
          title: "JOURNEY",
 
          time: "4 minutes ago",
@@ -27,7 +27,7 @@ const userPosts = [
 
          displayName: "DARNA",
          username: "@AkoSiDarna",
-         pfp: "resources/pfpSample.jpg",
+         pfp: "../resources/pfpSample.jpg",
          tags: ["#Movies"],
          caption: "I am vengeance. I am the night. I am Batman!",
          images: [],
@@ -49,7 +49,7 @@ const userPosts = [
 
          displayName: "DARNA",
          username: "@AkoSiDarna",
-         pfp: "resources/pfpSample.jpg",
+         pfp: "../resources/pfpSample.jpg",
          tags: ["#TagHere"],
          caption: "sorry guys i don't have a photo but guess who just got a new iphone 16 pro max 256g " +
                    "fully paid no installment (not me)",
@@ -88,7 +88,7 @@ function loadNavPosts() {
          postElement.classList.add("postLink");
          postElement.classList.add("userPostLink");
          postElement.setAttribute("data-post-id", `userPost${postCounter}`);
-         postElement.setAttribute("href", "postpage.html");
+         postElement.setAttribute("href", "../html/postpage.html");
          
          let postContent = "";
 
@@ -96,7 +96,7 @@ function loadNavPosts() {
             <button class="userPost" id="userPost${postCounter}">
                 ${post.images.length > 0 ? `
                     <img class="userPostImage" src="${post.images[0]}" alt="User Post Image">
-                ` : `<img class="userPostImage" src="resources/Image Holder.svg" alt="User Post Image">`}
+                ` : `<img class="userPostImage" src="../resources/Image Holder.svg" alt="User Post Image">`}
                 <p class="userPostTitle">${post.title}</p>
             </button>
             

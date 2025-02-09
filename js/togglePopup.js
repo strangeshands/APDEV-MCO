@@ -42,5 +42,5 @@ document.addEventListener('click', (e) => {
 /* --- GO TO POST --- */
 function goToPost(title, postId) {
     console.log(`Going to post ${postId} -- ${title}`);
-    /*window.location.href = 'postPage.html';*/
+    /*window.location.href = '../html/postPage.html';*/
 }

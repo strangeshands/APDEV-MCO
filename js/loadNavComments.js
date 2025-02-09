@@ -5,10 +5,10 @@ const userComments = [
 
          displayName: "DARNA",
          username: "@AkoSiDarna",
-         pfp: "resources/pfpSample.jpg",
+         pfp: "../resources/pfpSample.jpg",
          tags: [],
          caption: "I SAW U EARLIER HOLY MACARONI he's hot irl",
-         images: ["resources/batman.jpg"],
+         images: ["../resources/batman.jpg"],
          title: "",
 
          time: "4 minutes ago",
@@ -27,11 +27,11 @@ const userComments = [
 
          displayName: "DARNA",
          username: "@AkoSiDarna",
-         pfp: "resources/pfpSample.jpg",
+         pfp: "../resources/pfpSample.jpg",
          tags: [],
          title: "",
          caption: "sometimes i just wonder how's it like being a metal arm...",
-         images: ["resources/metal-arm.jpg"],
+         images: ["../resources/metal-arm.jpg"],
 
          time: "4 minutes ago",
 
@@ -64,13 +64,13 @@ function loadNavComments() {
          postElement.classList.add("postLink");
          postElement.classList.add("userPostLink");
          postElement.setAttribute("data-post-id", `userComment${postCounter}`);
-         postElement.setAttribute("href", "postpage.html");
+         postElement.setAttribute("href", "../html/postpage.html");
          
          let postContent = "";
 
          postContent += `
             <button class="userPost" id="userComment${postCounter}">
-                <img class="userPostImage" src="resources/Arrow Curve Up Right.svg" alt="User Post Image">
+                <img class="userPostImage" src="../resources/Arrow Curve Up Right.svg" alt="User Post Image">
                 <p class="userComment">${post.caption}</p>
             </button>
          `;

@@ -11,8 +11,8 @@ var profile1 = {
 
      email: "darna@gmail.com",
      password: "akosidarna",
-     header: "resources/headerSample.jpg",
-     pfp: "resources/pfpSample.jpg"
+     header: "../resources/headerSample.jpg",
+     pfp: "../resources/pfpSample.jpg"
 };
 
 const post1 = {

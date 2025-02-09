@@ -2,41 +2,41 @@
 <html>
      <head>
           <title> Connectify - [username] </title>
-          <link rel="icon" href="resources/Logo.svg" type="image/svg+xml">
+          <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
 
           <!-- CSS -->
-          <link rel="stylesheet" type="text/css" href="css/profilePage.css">
-          <link rel="stylesheet" type="text/css" href="css/generalStyle.css">
+          <link rel="stylesheet" type="text/css" href="../css/profilePage.css">
+          <link rel="stylesheet" type="text/css" href="../css/generalStyle.css">
 
           <!-- SCRIPTS -->
-          <script src="js/profile1-data.js"></script>
-          <script src="js/actionButton.js"></script>
-          <script src="js/togglePopup.js"></script>
+          <script src="../js/profile1-data.js"></script>
+          <script src="../js/actionButton.js"></script>
+          <script src="../js/togglePopup.js"></script>
      </head>
 
      <body>
           <!-- HEADER PORTION -->
           <header>
-               <div id="headercol1" onclick="window.location.href='homePage.html'">
-                    <img id="logo" src="resources/Logo.svg" />
+               <div id="headercol1" onclick="window.location.href='../html/homePage.html'">
+                    <img id="logo" src="../resources/Logo.svg" />
                     <p id="appName"> Connectify </p>
                </div>
                <div id="headercol2">
                     <div class="searchBar">
-                         <img src="resources/Trailing-Elements.svg" alt="Search Icon">
+                         <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
                          <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
                     </div>
                
                     <!-- IF USER IS NOT LOGGED IN -->
                     <!--<div class="logIn">
-                         <button id="logInButton" onclick="window.location.href='loginPage.html'">Log In</button>
+                         <button id="logInButton" onclick="window.location.href='../html/loginPage.html'">Log In</button>
                     </div>-->
                </div>
           </header>
 
           <div id="content">
                <div id="profileHeader">
-                    <img src="resources/headerSample.jpg" onclick="openModal(this)" />
+                    <img src="../resources/headerSample.jpg" onclick="openModal(this)" />
                </div>
                
                <div id="sub-container">
@@ -47,7 +47,7 @@
                               <!-- PFP and USERNAME -->
                               <div id="pfpcontainer">
                                    <div id="pfpPic">
-                                        <img src="resources/pfpSample.jpg" onclick="openModal(this)" />
+                                        <img src="../resources/pfpSample.jpg" onclick="openModal(this)" />
                                    </div>
 
                                    <p class="maintext" id="display_name"></p>
@@ -101,12 +101,12 @@
 
                          <!-- SETTINGS -->
                          <div class="col1-sub-container"> 
-                              <button class="editProfile" onclick="window.location.href='editProfilePage.html'">
-                                   <img src="resources/Edit Icon.svg" alt="">
+                              <button class="editProfile" onclick="window.location.href='../html/editProfilePage.html'">
+                                   <img src="../resources/Edit Icon.svg" alt="">
                                    Account Settings
                               </button>
-                              <button class="logOut" onclick="window.location.href='loginPage.html'">
-                                   <img src="resources/Log Out Icon.svg" alt="">
+                              <button class="logOut" onclick="window.location.href='../html/loginPage.html'">
+                                   <img src="../resources/Log Out Icon.svg" alt="">
                                    Log Out
                               </button>
                          </div>
@@ -129,7 +129,7 @@
 
                                    <!-- LOAD POST DATA -->
                                    <div id="userPostsContainer"></div>
-                                   <script src="js/userPosts.js"></script>
+                                   <script src="../js/userPosts.js"></script>
                                    <script>
                                         document.addEventListener("DOMContentLoaded", loadUserPosts("posts"));
                                    </script>
@@ -141,7 +141,7 @@
 
                                    <!-- LOAD COMMENT DATA -->
                                    <div id="userCommentContainer"></div>
-                                   <script src="js/userComments.js"></script>
+                                   <script src="../js/userComments.js"></script>
                                    <script>
                                         document.addEventListener("DOMContentLoaded", loadUserComments("comments"));
                                    </script>
@@ -152,7 +152,7 @@
 
                                    <!-- LOAD BOOKMARK DATA -->
                                    <div id="userBookmarksContainer"></div>
-                                   <script src="js/userBookmarks.js"></script>
+                                   <script src="../js/userBookmarks.js"></script>
                                    <script>
                                         document.addEventListener("DOMContentLoaded", loadUserBookmarks("bookmarks"));
                                    </script>
@@ -163,7 +163,7 @@
 
                                   <!-- LOAD LIKES DATA -->
                                   <div id="userLikesContainer"></div>
-                                  <script src="js/userLikes.js"></script>
+                                  <script src="../js/userLikes.js"></script>
                                   <script>
                                        document.addEventListener("DOMContentLoaded", loadUserLikes("likes"));
                                   </script>
@@ -186,4 +186,4 @@
 </html>
 
 <!-- PAGE JAVASCRIPT -->
-<script src="js/profilePage.js"></script>
+<script src="../js/profilePage.js"></script>
