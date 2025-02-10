@@ -4,10 +4,10 @@ const userPosts = [
 
          displayName: "DARNA",
          username: "@AkoSiDarna",
-         pfp: "resources/pfpSample.jpg",
+         pfp: "../resources/pfpSample.jpg",
          tags: ["#AnotherTagHere", "#TagHere", "#ProbablyAnotherTagHere"],
          caption: "Life is a journey, and every step we take brings us closer...",
-         images: ["resources/hamster.jpg", "resources/monkey.jpg"],
+         images: ["../resources/hamster.jpg", "../resources/monkey.jpg"],
          title: "JOURNEY",
 
          time: "4 minutes ago",
@@ -25,7 +25,7 @@ const userPosts = [
 
          displayName: "DARNA",
          username: "@AkoSiDarna",
-         pfp: "resources/pfpSample.jpg",
+         pfp: "../resources/pfpSample.jpg",
          tags: ["#Movies"],
          caption: "I am vengeance. I am the night. I am Batman!",
          images: [],
@@ -46,7 +46,7 @@ const userPosts = [
 
          displayName: "DARNA",
          username: "@AkoSiDarna",
-         pfp: "resources/pfpSample.jpg",
+         pfp: "../resources/pfpSample.jpg",
          tags: ["#TagHere"],
          caption: "sorry guys i don't have a photo but guess who just got a new iphone 16 pro max 256g " +
                    "fully paid no installment (not me)",
