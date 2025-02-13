@@ -144,6 +144,9 @@ function renderImages() {
         const img = document.createElement("img");
         img.src = url;
 
+        img.classList.add("clickable-image");
+        img.setAttribute("onclick", "openModal(this)");
+
         // Create a remove icon for each image
         const removeIcon = document.createElement("span");
         removeIcon.classList.add("remove-image-icon");
@@ -155,4 +158,18 @@ function renderImages() {
         imgWrapper.appendChild(removeIcon);
         postContentContainer.appendChild(imgWrapper);
     });
+}
+
+/* ---- OPEN MODAL ---- */
+function openModal(image) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const captionText = document.getElementById("caption");
+
+    modal.style.display = "block";
+    modalImg.src = image.src;
+
+    modal.onclick = function () {
+    modal.style.display = "none";
+    };
 }
