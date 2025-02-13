@@ -397,7 +397,7 @@ main {
     padding: 8px 24px;
     border: none;
     border-radius: 100px;
-    font-weight: 500;
+    font-weight: bold;
     cursor: pointer;
     white-space: nowrap; 
     flex-shrink: 0; 
