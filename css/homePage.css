@@ -430,11 +430,11 @@ button:active {
 
 .newPostButton:hover {
      background-color: #7FB8C8;
-     transform: scale(1.02);
+     transform: scale(1.01);
 }
 
 .newPostButton:active {
-     transform: scale(0.95); 
+     transform: scale(0.99); 
 }
 
 #postFeed {

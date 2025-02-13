@@ -105,18 +105,6 @@ const timelinePosts = [
    }
 ];
 
-/**
- * FOR APPROVAL --
- * Changes made:
- *      > tried to use togglePopUp function to avoid function redundancy
- *          > difference: togglePopup retrieves the post based on the post count instead
- *            of the closest button
- *          > check console for a log -- button clicked must match the post number
- *          > only one pop up will open at a time
- *          > pop up closes when clicked outside the pop up
- *      > added two own post for sample
- *      > edit and delete button only appears when own post
- */
 
 /* ---- CODE FUNCTION ---- */
 function loadTimelinePosts() {
@@ -241,8 +229,4 @@ function loadTimelinePosts() {
     const sendingPostsDataScript = document.createElement("script");
     sendingPostsDataScript.src = "../js/sendingPostData.js";
     document.body.appendChild(sendingPostsDataScript);
-
-    /*const displayOptionsScript = document.createElement("script");
-    displayOptionsScript.src = "../js/displayPostOptions.js";
-    document.body.appendChild(displayOptionsScript);*/
 }
