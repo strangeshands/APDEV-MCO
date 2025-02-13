@@ -10,6 +10,7 @@ var profile1 = {
      tags: ["#Movies", "#TVSeries", "#IndieFilms", "#SZA"],
 
      email: "darna@gmail.com",
+     number: "0123 456 7890",
      password: "akosidarna",
      header: "../resources/headerSample.jpg",
      pfp: "../resources/pfpSample.jpg"

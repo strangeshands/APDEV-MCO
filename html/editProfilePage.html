@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
      <head>
-          <title> [username] - Edit Profile </title>
+          <title> [usernmae] - Connectify </title>
           <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
 
           <!-- CSS -->
@@ -12,7 +12,7 @@
           <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
           <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
 
-          <!-- PROFILE DATA -->
+          <!-- JavaScript -->
           <script src="../js/profile1-data.js"></script>
      </head>
      <body>
@@ -60,7 +60,7 @@
                               </div>
 
                               <!-- CHANGE PROFILE PICTURE -->
-                              <button id="change-pfp" class ="change-photo">
+                              <button id="change-pfp" class ="change-photo" onclick="imageChange(this)">
                                    Change Profile Photo
                               </button>
                          </div>
@@ -70,7 +70,7 @@
                               <div id="profileHeader">
                                    <img src="" />
                               </div>
-                              <button id="change-header" class="change-photo">
+                              <button id="change-header" class="change-photo" onclick="imageChange(this)">
                                    Change Header
                               </button>
                          </div>
@@ -193,5 +193,5 @@
      </body>
 </html>
 
-<!-- PAGE JAVASCRIPT -->
+<!-- ADDITIONAL JS FILE: CONTAINS CROPPER -->
 <script src="../js/editProfilePage.js"></script>
