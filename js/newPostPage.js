@@ -5,6 +5,12 @@ const charLim = document.querySelector(".charLim");
 postTextInput.addEventListener("input", function() {
     const currentLength = postTextInput.value.length;
     charLim.textContent = `${currentLength}/300`;
+
+    if (currentLength >= 300) {
+        feedback.style.color = "red";
+    } else {
+        feedback.style.color = "white";
+    }
 });
 
 /* ---- TOGGLE TAG INPUT VISIBILITY ---- */
