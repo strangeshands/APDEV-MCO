@@ -73,6 +73,8 @@ main {
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    margin-top: -10px;
 }
 
 /* Tag Chips Container */
@@ -124,6 +126,8 @@ main {
     font-size: 16px;
     outline: none;
     margin-bottom: 16px;
+
+    font-weight: bold;
 }
 
 .postText textarea {
@@ -140,31 +144,31 @@ main {
 }
 
 /* Container for images */
-#postContentContainer {
-    margin: 16px 0;
-}
+/*#postContentContainer {
+    margin: 0;
+}*/
 
 /* Single-image layout */
-#postContentContainer.single-image img {
+/*#postContentContainer.single-image img {
     width: 100%;
     border-radius: 8px;
     display: block;
     margin: 0 auto;
-}
+}*/
 
 /* Multi-image layout (grid) */
-#postContentContainer.multi-images {
+/*#postContentContainer.multi-images {
     display: grid;
     gap: 8px;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-}
+}*/
 
-#postContentContainer.multi-images img {
+/*#postContentContainer.multi-images img {
     width: 100%;
     height: auto;
     object-fit: cover;
     border-radius: 8px;
-}
+}*/
 
 /* Wrapper for each image + remove icon */
 .imageWrapper {
@@ -194,8 +198,8 @@ main {
 /* Character limit display and separator */
 .charLim {
     text-align: right;
-    font-size: 14px;
-    margin-top: 4px;
+    font-size: 12px;
+    margin-top: 2px;
 }
 
 .horizontalBar {
@@ -257,3 +261,20 @@ button img {
     transform: scale(0.95);
 }
 /* ---------- MAIN ---------- */
+
+#break {
+    height: 12px;
+}
+
+#postContentContainer {
+    height: auto;
+    width: 100%;
+
+    max-height: 200px;
+    max-width: inherit;
+
+    display: none;
+    justify-content: space-between;
+
+    gap: 10px;
+}

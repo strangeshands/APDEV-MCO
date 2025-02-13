@@ -54,7 +54,7 @@
                     <input 
                         type="text" 
                         id="postTitleInput" 
-                        placeholder="Enter your title"
+                        placeholder="Your thoughts need title..."
                     />
                 </div>
 
@@ -76,19 +76,39 @@
                     style="display: none;"
                 />
 
+                <!-- CHARACTER LIMIT DISPLAY -->
+                <div id="feedback" class="charLim">0/300</div>
+                <div id="break"></div>
+
                 <!-- UPLOADED IMAGES CONTAINER -->
                 <div class="postContent" id="postContentContainer"></div>
 
-                <!-- CHARACTER LIMIT DISPLAY -->
-                <div class="charLim">0/300</div>
                 <div class="horizontalBar"></div>
-
                 <!-- POST ACTIONS -->
                 <div class="postActions">
                     <div class="actionButtonsLeft">
                         <button class="actionButton" id="addImageButton">
                             <img src="../resources/ImageAdd.svg" alt="Upload">
                         </button>
+
+                        <!-- Image Modal -->
+                        <div id="imageModal" class="modal">
+                            <span class="close">&times;</span>
+                            <div id="userphotocontainer-modal">
+                                <img class="modal-content" id="modalImage">
+                            </div>
+                            <div id="caption"></div>
+                        </div>
+
+                        <script>
+                            const addImageButton = document.getElementById('addImageButton');
+                            const imageContainer = document.getElementById('postContentContainer');
+
+                            addImageButton.addEventListener('click', function() {
+                                imageContainer.style.display = 'flex';
+                            });
+                        </script>
+
                         <button class="actionButton" id="addTagButton">
                             <img src="../resources/Hash.svg" alt="Add Tag">
                         </button>

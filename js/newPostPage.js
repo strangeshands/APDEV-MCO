@@ -130,7 +130,7 @@ function renderImages() {
     postContentContainer.innerHTML = "";
 
     // Decide layout based on image count
-    if (images.length === 1) {
+    /*if (images.length === 1) {
         postContentContainer.classList.add("single-image");
         postContentContainer.classList.remove("multi-images");
     } else if (images.length > 1) {
@@ -139,7 +139,7 @@ function renderImages() {
     } else {
         // No images
         postContentContainer.classList.remove("single-image", "multi-images");
-    }
+    }*/
 
     // Create an element for each image with a remove icon
     images.forEach((url, index) => {
