@@ -36,7 +36,7 @@
 
           <div id="content">
                <div id="profileHeader">
-                    <img src="../resources/headerSample.jpg" onclick="openModal(this)" />
+                    <img id="header-img" src="" onclick="openModal(this)" />
                </div>
                
                <div id="sub-container">
@@ -47,7 +47,7 @@
                               <!-- PFP and USERNAME -->
                               <div id="pfpcontainer">
                                    <div id="pfpPic">
-                                        <img src="../resources/pfpSample.jpg" onclick="openModal(this)" />
+                                        <img id="pfp-img" src="" onclick="openModal(this)" />
                                    </div>
 
                                    <p class="maintext" id="display_name"></p>
@@ -82,21 +82,8 @@
                          <div class="col1-sub-container"> 
                               <h3> TAGS </h3>
 
-                              <!-- IF NO TAGS AVAILABLE -->
-                              <!--<p class="regulartext" style="opacity: 80%;"> No tags available</p>-->
-
                               <!-- TAGS AVAILABLE -->
-                              <div id="taglist">
-                                   <!--<button class="usertags"> 
-                                        #TagHere
-                                   </button>
-                                   <button class="usertags"> 
-                                        #AnotherTagHere
-                                   </button>
-                                   <button class="usertags"> 
-                                        #ProbablyAnotherTagHere
-                                   </button>-->
-                              </div>
+                              <div id="taglist"></div>
                          </div>
 
                          <!-- SETTINGS -->

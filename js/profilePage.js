@@ -1,20 +1,23 @@
 /* ----- HARD CODED DATA ----- */
 document.addEventListener("DOMContentLoaded", () => {
-    const displayNameElement = document.getElementById('display_name');
-    const usernameElement = document.getElementById('username');
-    const likesCountElement = document.getElementById('num_likes');
-    const postsCountElement = document.getElementById('num_posts');
+     const displayNameElement = document.getElementById('display_name');
+     const usernameElement = document.getElementById('username');
+     const likesCountElement = document.getElementById('num_likes');
+     const postsCountElement = document.getElementById('num_posts');
+     const headerElement = document.getElementById('header-img');
+     const pfpElement = document.getElementById('pfp-img');
 
-    var profile = profile1
+     var profile = profile1
 
-    // Populate the DOM elements with data from profile1
-    displayNameElement.textContent = profile.display_name;
-    usernameElement.textContent = profile.username;
-    likesCountElement.textContent = profile.likes;
-    postsCountElement.textContent = profile.posts;
+     displayNameElement.textContent = profile.display_name;
+     usernameElement.textContent = profile.username;
+     likesCountElement.textContent = profile.likes;
+     postsCountElement.textContent = profile.posts;
+     headerElement.src = profile1.header;
+     pfpElement.src = profile1.pfp;
 
-    printBio(profile1.bio);
-    printTags(profile1.tags);
+     printBio(profile1.bio);
+     printTags(profile1.tags);
 });
 
 
@@ -81,7 +84,6 @@ document.addEventListener('DOMContentLoaded', (type) => {
          button.addEventListener('click', function () {
               const id = this.id; 
               iconClicked(this, id);
-              console.log(id);
          });
     });
 });
