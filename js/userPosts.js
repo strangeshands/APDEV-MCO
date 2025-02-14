@@ -108,24 +108,25 @@ function loadUserPosts(type) {
                          </div>
                     </div>
                     
-                    ${post.own ? `
-                         <button class="optionsButton" onclick="togglePopup('${type}', '${index}', '${container.id}')">
-                              <img src="../resources/Options Button.svg"/>
-                         </button>
+                    <button class="optionsButton" onclick="togglePopup('${type}', '${index}', '${container.id}')">
+                         <img src="../resources/Options Button.svg"/>
+                    </button>
 
-                         <!-- POST OPTIONS POPUP -->
-                         <div class="popUpOptions" id="${type}-popup-${index}">
-                              <div class="postOptionsContent">
-                                   <button class="optionsButton option-exit" onclick="togglePopup('${type}', '${index}', '${container.id}')">
-                                        <img src="../resources/Options Button.svg"/>
-                                   </button>
-                                   <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
+                    <!-- POST OPTIONS POPUP -->
+                    <div class="popUpOptions" id="${type}-popup-${index}">
+                         <div class="postOptionsContent">
+                              <button class="optionsButton option-exit" onclick="togglePopup('${type}', '${index}', '${container.id}')">
+                                   <img src="../resources/Options Button.svg"/>
+                              </button>
+                              <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
+                              <button class="editButton">Copy Link</button>
+
+                              ${post.own ? `
                                    <button class="editButton" onclick="window.location.href = '../html/newPostPage.html';">Edit Post</button>
-                                   <button class="editButton">Copy Link</button>
                                    <button class="deleteButton">Delete Post</button>
-                              </div>
+                              ` : ""}
                          </div>
-                    ` : "" }
+                    </div>
                </div>
 
                <!-- POST TAGS HERE -->
