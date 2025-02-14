@@ -171,7 +171,7 @@ function loadUserLikes(type) {
                     </button>
 
                     <button class="postoptionbutton actionButton" onclick="window.location.href='../html/replyPage.html'">
-                              <img src="../../resources/Comments.svg"/>
+                              <img src="../resources/Comments.svg"/>
                     </button>
 
                     <!-- BOOKMARK FEATURE: YELLOW IF BOOKMARKED -->
