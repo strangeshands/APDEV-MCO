@@ -6,3 +6,9 @@
 #### FOR MCO Phase 1
 + **js/profile1-data.js** : includes multiple profiles; modify comments to test
 + **index.html** : load this file to start the app
+
+##### Submitted By:
++ CHUA, Hanielle
++ KELSEY, Gabrielle
++ SANTOS, Francine
++ TOLENTINO, Hephzi
