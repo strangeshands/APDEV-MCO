@@ -4,5 +4,5 @@
 **/templates** : includes template files for specific sections, items, etc.
 
 #### FOR MCO Phase 1
-+ **js/profile1-data.js** : includes multiple profiles; remove comment format to test
++ **js/profile1-data.js** : includes multiple profiles; modify comments to test
 + **index.html** : load this file to start the app
