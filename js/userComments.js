@@ -3,9 +3,9 @@ const userComments = [
      {
           replyTo: "@TheDarkKnight",
 
-          displayName: "DARNA",
-          username: "@AkoSiDarna",
-          pfp: "../resources/pfpSample.jpg",
+          displayName: profile1.display_name,
+          username: profile1.username,
+          pfp: profile1.pfp,
           tags: [],
           caption: "I SAW U EARLIER HOLY MACARONI he's hot irl",
           images: ["../resources/batman.jpg"],
@@ -25,9 +25,9 @@ const userComments = [
      {
           replyTo: "@BuckBarnes",
 
-          displayName: "DARNA",
-          username: "@AkoSiDarna",
-          pfp: "../resources/pfpSample.jpg",
+          displayName: profile1.display_name,
+          username: profile1.username,
+          pfp: profile1.pfp,
           tags: [],
           title: "",
           caption: "sometimes i just wonder how's it like being a metal arm...",

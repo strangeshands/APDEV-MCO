@@ -1,4 +1,3 @@
-
 /* ----- HARD CODE DATA -----*/
 const userBookmarks = [
      {
@@ -46,9 +45,9 @@ const userBookmarks = [
      {
           replyTo: "@TheDarkKnight",
 
-          displayName: "DARNA",
-          username: "@AkoSiDarna",
-          pfp: "../resources/pfpSample.jpg",
+          displayName: profile1.display_name,
+          username: profile1.username,
+          pfp: profile1.pfp,
           tags: ["#Batman", "#Gotham", "#Savior"],
           caption: "I SAW U EARLIER HOLY MACARONI he's hot irl",
           images: ["../resources/batman.jpg"],

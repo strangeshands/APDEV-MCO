@@ -45,9 +45,9 @@ const userLikes = [
      {
           replyTo: "@BuckBarnes",
 
-          displayName: "DARNA",
-          username: "@AkoSiDarna",
-          pfp: "../resources/pfpSample.jpg",
+          displayName: profile1.display_name,
+          username: profile1.username,
+          pfp: profile1.pfp,
           tags: ["#Bucky", "#ARMEDANDDANGEROUS", "#WinterSoldier"],
           title: "",
           caption: "sometimes i just wonder how's it like being a metal arm...",
