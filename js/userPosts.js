@@ -3,9 +3,9 @@ const userPosts = [
      {
           replyTo: "",
 
-          displayName: "DARNA",
-          username: "@AkoSiDarna",
-          pfp: "../resources/pfpSample.jpg",
+          displayName: profile1.display_name,
+          username: profile1.username,
+          pfp: profile1.pfp,
           tags: ["#AnotherTagHere", "#TagHere", "#ProbablyAnotherTagHere"],
           caption: "Life is a journey, and every step we take brings us closer...",
           images: ["../resources/hamster.jpg", "../resources/monkey.jpg"],
@@ -24,9 +24,9 @@ const userPosts = [
      {
           replyTo: "",
 
-          displayName: "DARNA",
-          username: "@AkoSiDarna",
-          pfp: "../resources/pfpSample.jpg",
+          displayName: profile1.display_name,
+          username: profile1.username,
+          pfp: profile1.pfp,
           tags: ["#Movies"],
           caption: "I am vengeance. I am the night. I am Batman!",
           images: [],
@@ -45,9 +45,9 @@ const userPosts = [
      {
           replyTo: "",
 
-          displayName: "DARNA",
-          username: "@AkoSiDarna",
-          pfp: "../resources/pfpSample.jpg",
+          displayName: profile1.display_name,
+          username: profile1.username,
+          pfp: profile1.pfp,
           tags: ["#TagHere"],
           caption: "sorry guys i don't have a photo but guess who just got a new iphone 16 pro max 256g " +
                     "fully paid no installment (not me)",
