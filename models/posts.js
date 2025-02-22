@@ -6,7 +6,7 @@ const postSchema = new Schema({
         type: String,
         required: false
     },
-    user: {
+    author: {
         type: String,   // user id
         required: true
     },
