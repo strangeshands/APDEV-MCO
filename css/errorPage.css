@@ -1,0 +1,25 @@
+.main-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 100px;
+}
+
+.main-image img {
+    width: 20vw;
+    max-width: 100vw;
+    height: auto;
+}
+
+.main-prompt {
+    max-width: 400px;
+}
+
+.connectify-link {
+    color: #7FB8C8;
+}
+
+.connectify-link:hover{
+    color: #49454F;
+}
