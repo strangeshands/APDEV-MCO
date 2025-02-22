@@ -19,15 +19,15 @@ const postSchema = new Schema({
         required: true
     },
     images: {
-        type: img,
+        type: img,  // change
         required: false
     },
     likeCount: {
-        type: Integer,
+        type: Number,
         required: true
     },
     dislikeCount: {
-        type: Integer,
+        type: Number,
         required: true
     },
 
