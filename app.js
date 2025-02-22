@@ -1,10 +1,10 @@
 const express = require('express');
 const morgan = require('morgan');
-const mongoose = require('mongoose');
 
-const app = express();
+const app = new express();
 
 // connect to mongoDB
+const mongoose = require('mongoose');
 const dbURI = 'mongodb+srv://<username>:<password>@connectify.2pt1b.mongodb.net/'
 mongoose.connect(dbURI) // allows us to communicate with mongoDB
 .then((result) => app.listen(3000))   // if successful, we listen for requests
@@ -12,7 +12,8 @@ mongoose.connect(dbURI) // allows us to communicate with mongoDB
 
 
 // register view engine
-app.set('view engine', 'hbs');
+var hbs = require('hbs')
+app.set('view engine','hbs');
 
 
 // ----- Middleware & Static Files ----- //
@@ -20,6 +21,7 @@ app.set('view engine', 'hbs');
 app.use(express.static('public'));  // everything in the given dir is accessible (great for css and images)
 app.use(express.urlencoded({ extended: true }));    // parses the url to an object to be used in te req obj // needed or else obj is undefined
 app.use(morgan('dev'));     // used for automatic logging of http request details (method, url, status, ...)
+
 
 // ----- Routes ----- //
 
@@ -30,5 +32,5 @@ app.get('/', (req, res) => {
 
 // 404 Page
 app.use((req, res) => {     
-    res.status(404).render('404', { title: '404' });  
+    res.status(404).render('errorPage');  
 });
