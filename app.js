@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 // connect to mongoDB
-const dbURI = 'mongodb+srv://ConnectifyKelsey:apdevgorlz@connectify.2pt1b.mongodb.net/'
+const dbURI = 'mongodb+srv://<username>:<password>@connectify.2pt1b.mongodb.net/'
 mongoose.connect(dbURI) // allows us to communicate with mongoDB
 .then((result) => app.listen(3000))   // if successful, we listen for requests
 .catch((err) => console.log(err));    // else
