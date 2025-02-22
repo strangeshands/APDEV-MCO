@@ -5,11 +5,13 @@ const userSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        maxlength: [30, "Username must be at most 30 characters long."]
     },
     displayname: {
         type: String,
-        required: true
+        required: true,
+        maxlength: [30, "Display name must be at most 30 characters long."]
     },
     email: {
         type: String,
@@ -18,7 +20,7 @@ const userSchema = new Schema({
         match: [/.+\@.+\..+/, "Please enter a valid email address"] // Optional email validation
     },
     phone: {
-        type: Number,
+        type: String, // stored as string to retain leading zeroes
         required: true,
         unique: true
     },
@@ -39,11 +41,13 @@ const userSchema = new Schema({
     },
     profilepic: {
         type: String,      // image url is stored here
-        required: true
+        required: true,
+        default: "../resources/default-pfp.png"
     },
     headerpic: {
         type: String,      // image url is stored here
-        required: true
+        required: true,
+        default: "../resources/default-headerpic.png"
     },
     tags: {
         type: [String],
