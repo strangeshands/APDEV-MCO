@@ -37,6 +37,7 @@ const userSchema = new Schema({
     bio: {
         type: String,
         required: true,
+        default: "Let's connect!",
         maxlength: [100, "Bio must be at most 100 characters long."]
     },
     profilepic: {
