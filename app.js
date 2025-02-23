@@ -15,7 +15,7 @@ const hbs = require('hbs')
 const app = new express();
 
 // connect to mongoDB
-const dbURI = 'mongodb+srv://<username>:<password>@connectify.2pt1b.mongodb.net/'
+const dbURI = 'mongodb+srv://<username>:<password>@connectify.2pt1b.mongodb.net/connectify-db'
 mongoose.connect(dbURI) // allows us to communicate with mongoDB
 .then((result) => app.listen(3000))   // if successful, we listen for requests
 .catch((err) => console.log(err));    // else
@@ -31,7 +31,7 @@ hbs.registerHelper("json", function (context) {
 
 // to connect controllers
 const path = require("path");
-const controllerPack = require("./controllers/controllerPack");
+const userController = require("./controllers/userController");
 
 
 // ----- Middleware & Static Files ----- //
@@ -47,6 +47,13 @@ app.get('/', (req, res) => {
     
     // to be filled
 });
+
+/**
+ *  [PROFILE PAGE]
+ *  TO DO:
+ *      > update to "/profile/<username>" so <username> dynamically changes depending on the selected profile
+ */
+app.get("/profile", userController.loadUserProfile);
 
 // 404 Page
 app.use((req, res) => {     
