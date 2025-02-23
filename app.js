@@ -1,19 +1,33 @@
+/**
+ *  to install (npm install):
+ *      > express
+ *      > morgan
+ *      > mongoose
+ *      > hbs
+ */
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const hbs = require('hbs')
+
+/* --------------------- */
 
 const app = new express();
 
 // connect to mongoDB
-const mongoose = require('mongoose');
 const dbURI = 'mongodb+srv://<username>:<password>@connectify.2pt1b.mongodb.net/'
 mongoose.connect(dbURI) // allows us to communicate with mongoDB
 .then((result) => app.listen(3000))   // if successful, we listen for requests
 .catch((err) => console.log(err));    // else
 
-
 // register view engine
-var hbs = require('hbs')
 app.set('view engine','hbs');
+
+// to make data from DB usable in javascript files
+app.use(express.json());
+hbs.registerHelper("json", function (context) {
+    return JSON.stringify(context);
+});
 
 
 // ----- Middleware & Static Files ----- //
