@@ -33,12 +33,12 @@ const userSchema = new Schema({
     profilepic: {
         type: String,      // image url is stored here
         required: true,
-        default: "../resources/default-pfp.png"
+        default: "/resources/default-pfp.png"
     },
     headerpic: {
         type: String,      // image url is stored here
         required: true,
-        default: "../resources/default-headerpic.png"
+        default: "/resources/default-headerpic.png"
     },
     tags: {
         type: [String],
