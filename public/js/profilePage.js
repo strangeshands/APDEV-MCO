@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-     printBio(profileData.bio);
-     printTags(profileData.tags);
+     printBio(profileDetails.bio);
+     printTags(profileDetails.tags);
 });
 
 
