@@ -19,7 +19,7 @@ const postSchema = new Schema({
         required: true
     },
     images: {
-        type: img,  // change
+        type: String,  // change
         required: false
     },
     likeCount: {
