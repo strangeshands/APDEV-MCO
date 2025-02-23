@@ -21,15 +21,21 @@ const loadUserProfile = async (req,res) => {
     } else {
         // query post count and likes count
         const postCount = await posts.countDocuments({ author: user });
-        const likesCount = 0;
-
         console.log(`Post Count: ${postCount}`);
+        const likesCount = 0;
         console.log(`Likes Count: ${likesCount}`);
 
+        // query profile posts
+        const profilePosts = await posts.find({ author: user });
+        console.log(profilePosts);
+
+        // render profile page
         res.render('profilePage', {
-            profile: profileSelected,
+            profileDetails: profileSelected,
             postCount: postCount,
-            likesCount: likesCount
+            likesCount: likesCount,
+
+            profilePosts: profilePosts
         })
     }
 };
