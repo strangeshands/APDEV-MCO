@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title> [username] - Connectify </title>
+          <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
+
+          <!-- CSS -->
+          <link rel="stylesheet" type="text/css" href="../css/profilePage.css">
+          <link rel="stylesheet" type="text/css" href="../css/generalStyle.css">
+
+          <!-- SCRIPTS -->
+          <script src="../js/actionButton.js"></script>
+          <script src="../js/togglePopup.js"></script>
+     </head>
+
+     <body>
+          <!-- HEADER PORTION -->
+          <header>
+               <div id="headercol1" onclick="window.location.href='../html/homePage.html'">
+                    <img id="logo" src="../resources/Logo.svg" />
+                    <p id="appName"> Connectify </p>
+               </div>
+               <div id="headercol2">
+                    <div class="searchBar">
+                         <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
+                         <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+                    </div>
+               
+                    <!-- IF USER IS NOT LOGGED IN -->
+                    <!--<div class="logIn">
+                         <button id="logInButton" onclick="window.location.href='../html/loginPage.html'">Log In</button>
+                    </div>-->
+               </div>
+          </header>
+
+          <div id="content">
+               <div id="profileHeader">
+                    <img id="header-img" src="{{profile.headerpic}}" onclick="openModal(this)" />
+               </div>
+               
+               <div id="sub-container">
+                    <!-- USER STATS/OPTIONS COLUMN -->
+                    <div id="col1">
+                         <!-- USERNAME, PROFILE, FOLLOW/ER COUNT -->
+                         <div class="col1-sub-container"> 
+                              <!-- PFP and USERNAME -->
+                              <div id="pfpcontainer">
+                                   <div id="pfpPic">
+                                        <img id="pfp-img" src="{{profile.profilepic}}" onclick="openModal(this)" />
+                                   </div>
+
+                                   <p class="maintext" id="display_name">{{profile.displayname}}</p>
+                                   <p class="subtext" id="username">{{profile.username}}</p>
+                              </div>
+
+                              <div class="inviBrk"> </div>
+                              
+                              <!-- FOLLOW/ER COUNTS -->
+                              <div id="count">
+                                   <div id="followers">
+                                        <p class="maintext" id="num_likes">{{likesCount}}</p>
+                                        <p class="subtext"> Likes </p>
+                                   </div>
+
+                                   <div id="following">
+                                        <p class="maintext" id="num_posts">{{postCount}}</p>
+                                        <p class="subtext"> Posts </p>
+                                   </div>
+                              </div>
+                         </div>
+
+                         <!-- BIO -->
+                         <div class="col1-sub-container"> 
+                              <h3> BIO </h3>
+
+                              <!-- BIO PLACEHOLDER -->
+                              <p id="bio" class="regulartext"></p>
+                         </div>
+
+                         <!-- TAGS -->
+                         <div class="col1-sub-container"> 
+                              <h3> TAGS </h3>
+
+                              <!-- TAGS AVAILABLE -->
+                              <div id="taglist"></div>
+                         </div>
+
+                         <!-- SETTINGS -->
+                         <div class="col1-sub-container"> 
+                              <button class="editProfile" onclick="window.location.href='../html/editProfilePage.html'">
+                                   <img src="../resources/Edit Icon.svg" alt="">
+                                   Account Settings
+                              </button>
+                              <button class="logOut" onclick="window.location.href='../html/loginPage.html'">
+                                   <img src="../resources/Log Out Icon.svg" alt="">
+                                   Log Out
+                              </button>
+                         </div>
+                    </div>
+
+                    <!-- USER POSTS/COMMENTS COLUMN -->
+                    <div id="col2">
+                         <!-- TAB SELECTION ROW -->
+                         <div id="tabrow"> 
+                              <button class="tab active" onclick="showContent('poststab', this)">Posts</button>
+                              <button class="tab" onclick="showContent('commentstab', this)">Comments</button>
+                              <button class="tab" onclick="showContent('bookmarkstab', this)">Bookmarks</button>
+                              <button class="tab" onclick="showContent('likestab', this)">Likes</button>
+                         </div>
+
+                         <!-- SPECIFIC TAB -->
+                         <div class="col2-sub-container">
+                              <!-- POSTS TAB -->
+                              <div id="poststab" class="tab-content">
+
+                                   <!-- LOAD POST DATA -->
+                                   <div id="userPostsContainer"></div>
+                                   <script src="../js/userPosts.js"></script>
+                                   <script>
+                                        document.addEventListener("DOMContentLoaded", loadUserPosts("posts"));
+                                   </script>
+
+                              </div>
+
+                              <!-- COMMENTS TAB -->
+                              <div id="commentstab" class="tab-content">
+
+                                   <!-- LOAD COMMENT DATA -->
+                                   <div id="userCommentContainer"></div>
+                                   <script src="../js/userComments.js"></script>
+                                   <script>
+                                        document.addEventListener("DOMContentLoaded", loadUserComments("comments"));
+                                   </script>
+                              </div>
+
+                              <!-- BOOKMARKS TAB -->
+                              <div id="bookmarkstab" class="tab-content">
+
+                                   <!-- LOAD BOOKMARK DATA -->
+                                   <div id="userBookmarksContainer"></div>
+                                   <script src="../js/userBookmarks.js"></script>
+                                   <script>
+                                        document.addEventListener("DOMContentLoaded", loadUserBookmarks("bookmarks"));
+                                   </script>
+                              </div>
+
+                              <!-- LIKES TAB -->
+                              <div id="likestab" class="tab-content">
+
+                                  <!-- LOAD LIKES DATA -->
+                                  <div id="userLikesContainer"></div>
+                                  <script src="../js/userLikes.js"></script>
+                                  <script>
+                                       document.addEventListener("DOMContentLoaded", loadUserLikes("likes"));
+                                  </script>
+                              </div>
+
+                         </div>
+                    </div>
+               </div>
+          </div>
+
+          <!-- IMAGE MODAL -->
+          <div id="imageModal" class="modal">
+               <span class="close">&times;</span>
+               <div id="userphotocontainer-modal"> 
+                    <img class="modal-content" id="modalImage">
+               </div>
+               <div id="caption"></div>
+          </div>
+     </body>
+</html>
+
+<!-- PAGE JAVASCRIPT -->
+<script>
+    const profileData = {{{json profile}}};  
+</script>
+<script src="../js/profilePage.js"></script>
