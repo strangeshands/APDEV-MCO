@@ -1,0 +1,597 @@
+/* ----- Override General Style ----- */
+#postoptionrow {
+     margin: 10px 0;
+}
+/* ----- Override General Style ----- */
+
+.tab-content {
+     width:100%;
+     padding-right: 10px;
+}
+
+#commentstab, #bookmarkstab {
+     padding: 0px;
+}
+
+/* ---------- BUTTONS ---------- */
+button {
+     border: none; 
+     cursor: pointer;
+
+     border-radius: 8px;
+     transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+     background-color: #7FB8C8;
+     transform: scale(1.02);
+}
+ 
+
+button:active {
+     transform: scale(0.95); 
+}
+
+.editProfile, .logOut {
+     font-family: "Inter";
+     font-size: 20;
+     font-weight: Bold;
+     color: #E4F3F6;
+     background-color: #1D1E1F;
+
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+     text-align: left;
+
+     gap: 10px;
+     width: 100%;
+}
+
+.usertags {
+     display: inline-flex;
+     flex-wrap: wrap;
+     font-size: 12px;
+     opacity: 80%;
+     word-wrap: break-word;
+     overflow-wrap: break-word;
+     white-space: normal;
+ }
+ 
+
+.logOut img {
+     margin-right: 3px;
+}
+/* ---------- BUTTONS ---------- */
+
+/* ---------- HEADER ---------- */
+#appName {
+     font-family: "JostBold";
+     color: #98D5DC;
+     font-size: 20px;
+     font-weight: 400;
+}
+
+header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+
+     background-color: black;
+
+     padding: 0 32px;
+     gap: 79px;
+     height: 88px;
+
+     border-bottom: 1px solid #49454F;
+}
+
+#logo {
+     margin-right: 15px;
+}
+
+#headercol1 {
+     display: flex; 
+     justify-content: flex-start; 
+     align-items: center;
+
+     cursor: pointer;
+}
+
+#headercol2 {
+     display: flex;
+     justify-content: flex-end; 
+     align-items: center;
+
+     gap: 12px;
+}
+
+.searchBar {
+     background-color: #ECE6F0;
+     color: #49454F;
+     
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+
+     height: 35px;
+     width: 400px;
+     max-width: 800px;
+
+     border-radius: 30px;
+}
+
+input[type="text"] {
+     background: none;
+     border: none;
+     width: 100%;
+     height: 100%;
+
+     color: #49454F;
+     font-size: 13px;
+     outline: none;
+}
+
+#logInButton {
+     background-color: #98D5DC;
+     font-size: 16px;
+     font-weight: Bold;
+     
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 8px 24px;
+
+     width: auto;
+     height: auto;
+}
+
+#logInButton:hover {
+     background-color: #7FB8C8;
+     transform: scale(1.02);
+}
+
+#logInButton:active {
+     transform: scale(0.95); 
+}
+/* ---------- HEADER ---------- */
+
+#content {
+     margin: auto;
+     height: auto;
+     width: 80%;
+     padding: 32px;
+     
+     display: flex;
+     flex-direction: column;
+     gap: 15px;
+}
+
+#profileHeader {
+     width: 100%;
+     height: 20%;
+}
+
+#profileHeader img {
+     width: 100%;
+     height: auto;
+     border-radius: 35px;
+
+     aspect-ratio: 850 / 210;
+
+     object-fit: cover;
+     object-position: center;
+}
+
+#sub-container {
+     width: 100%;
+     height: auto;
+
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     gap: 15px;
+}
+
+#col1 {
+     width: 25%;
+     height: auto;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: start;
+     gap: 15px;
+
+     color: white;
+}
+
+#col2 {
+     width: 75%;
+     height: auto;
+
+     display: flex;
+     flex-direction: column;
+     gap: 15px;
+
+     padding: 20px;
+     border-radius: 15px;
+
+     background-color: #1D1E1F;
+}
+
+.col1-sub-container {
+     width: 100%;
+     height: auto;
+     
+     border-radius: 15px;
+     padding: 20px;
+
+     background-color: #1D1E1F;
+}
+
+#pfpcontainer {
+     width: 100%;
+     height: auto;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+
+#pfpPic {
+     width: 100px;
+     height: 100px;
+
+     overflow: visible;
+}
+
+#pfpPic img {
+     width: 100%;
+     height: 100%;
+     
+     aspect-ratio: 1/1;
+     border-radius: 100%;
+     
+     object-fit: cover;
+     object-position: center;
+}
+
+#count {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+
+     gap: 25%;
+     width: auto;
+     margin-top: 10px;
+}
+
+.maintext {
+     font-size: 16px;
+     font-weight: bold;
+
+     margin: 10px 0 0 0;
+}
+
+.subtext {
+     font-size: 14px;
+     opacity: 80%;
+
+     margin: 2px 0 0 0;
+}
+
+.regulartext {
+     font-size: 14px;
+     text-align: justify;
+
+     margin: 0;
+}
+
+h3 {
+     margin-top: 0;
+}
+
+#tabrow {
+     width: 100%;
+     height: auto;
+
+     display: flex;
+     justify-content: space-evenly;
+     align-items: center;
+
+     padding: 10px;
+
+     box-shadow: 0px 2px #49454F;
+}
+
+.tab {
+     font-size: 20px;
+     font-weight: bold;
+     color: white;
+
+     width: 100%;
+     background-color: inherit;
+     margin-bottom: 10px;
+}
+
+.tab.active {
+     background-color: #98D5DC;
+     color: #1D1E1F;
+}
+
+#taglist {
+     width: auto;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 5px;
+}
+
+#no-tag-msg, .no-bio-msg {
+     font-size: 13px;
+     opacity: 80%;
+}
+
+.col2-sub-container {
+     width: 100%;
+     height: auto;
+     
+     display: flex;
+
+     border-radius: 15px;
+     padding: 20px;
+
+     height: 100vh;      
+     overflow-y: scroll;
+     overflow-x: hidden;
+}
+
+/* ---------- POSTS ---------- */
+#poststab {
+     color: white;
+     display: block;
+}
+
+.pfpPost {
+     border-radius: 100px;
+     width: 45px;
+     height: 45px;
+}
+
+.pfpPost img {
+     width: 100%;
+     height: 100%;
+     
+     aspect-ratio: 1/1;
+     border-radius: 100%;
+     
+     object-fit: cover;
+     object-position: center;
+}
+
+.pfpuserrow, #userandpfp {
+     display: flex;
+     align-items: center;
+
+     position: relative;
+
+     justify-content: space-between;
+     gap: 15px;
+}
+
+.pfpdisplayname {
+     font-weight: bold;
+     font-size: 20px;
+}
+
+.optionsButton {
+     background-color: #1D1E1F;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 2px 0px;
+
+     width: 20px;
+     height: 20px;
+}
+
+.optionsButton:hover {
+     background-color: #1D1E1F;
+     transform: scale(1.05);
+}
+
+.optionsButton:active {
+     transform: scale(0.95); 
+}
+
+/* --- Pop Up Tab Specific --- */
+.popUpOptions {
+     position: absolute;
+     top: -8px;
+     right: 0;
+     z-index: 1000;
+     display: none;
+
+     margin-right: -10px;
+ }
+
+.popUpOptions.show {
+     display: block; 
+}
+
+.postOptionsContent {
+     background-color: #1D1E1F;
+
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     align-items: flex-end;
+
+     padding: 20px 10px 10px 10px;
+     gap: 5px;
+     border-radius: 12px;
+
+     width: 200px;
+
+     border: 2px solid rgba(255, 255, 255, 0.1);
+} 
+
+.postOptionsButton {
+     text-decoration: none;
+     width: 100%;
+}
+
+.activeOptionsButton {
+     background-color: #1D1E1F;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     padding: 2px 0px;
+
+     width: 20px;
+     height: 20px;
+}
+
+.editButton, .deleteButton{
+     font-family: "Inter";
+     font-size: 16px;
+     font-weight: Bold;
+     color: #E4F3F6;
+     background-color: #1D1E1F;
+
+     display: flex;
+     justify-content: flex-start;
+     align-items: center;
+
+     gap: 10px;
+     padding: 10px;
+
+     width: 100%;
+}
+
+.deleteButton {
+     color: #DF0606;
+}
+
+.editButton:hover, .deleteButton:hover {
+     background-color: #7FB8C8;
+     color: #16133B;
+     transform: scale(1.02);
+}
+
+.deleteButton:hover {
+     color: #DF0606;
+}
+
+.editButton:active, .deleteButton:active {
+     transform: scale(0.95); 
+}
+
+.option-exit {
+     position: relative;
+}
+/* --- Pop Up Tab Specific --- */
+ 
+.pfpusername {
+     font-size: 13px;
+     opacity: 80%;
+}
+
+#pfpnames {
+     display: grid;
+}
+
+#usercaption {
+     margin: 15px 0;
+}
+
+#posttags {
+     padding-top: 15px;
+     opacity: 50%;
+     font-size: 13px;
+}
+
+#posttags a {
+     color: white;
+     text-decoration: none;
+}
+
+.postoptionbutton {
+     background-color: transparent;
+
+     display: flex;
+     align-items: center;
+     gap: 6px;
+}
+
+.postoptionbutton:hover {
+     background-color: transparent;
+     opacity: 80%;
+     transform: scale(1.08);
+}
+
+.post-break {
+     background-color: #49454F;
+     height: 1px;
+     margin: 0 0 25px 0;
+}
+
+.tab-content {
+     display: none;
+}
+
+.counter {
+     color: white;
+     font-family: "Inter";
+}
+
+.no-post-msg {
+     text-align: center;
+     font-family: "Inter";
+
+     font-weight: bold;
+     opacity: 80%;
+}
+
+#create-first {
+     font-size: 15px;
+     color: #98D5DC;
+}
+
+#create-first-link {
+     text-decoration: none;
+}
+
+/* --- COMMENTS TAB SPECIFIC --- */
+#reply-to-msg {
+     margin-bottom: 25px;
+     margin-left: -30px;
+     padding: 10px;
+     background-color: #7FB8C8;
+     color: #1D1E1F;
+     border-radius: 5px;
+
+     font-size: 15px;
+     font-weight: bold;
+     cursor: pointer;
+}
+
+.comment {
+     margin-left: 30px;
+}
+
+#commentstab, #bookmarkstab {
+     padding-right: 10px;
+}
+
+#usercaption, .posttile {
+     cursor: pointer
+}
+/* --- COMMENTS TAB SPECIFIC --- */
+
