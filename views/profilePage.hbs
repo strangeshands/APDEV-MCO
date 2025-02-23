@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
      <head>
-          <title> [username] - Connectify </title>
+          <title> {{profileDetails.username}} - Connectify </title>
           <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
 
           <!-- CSS -->
@@ -35,7 +35,7 @@
 
           <div id="content">
                <div id="profileHeader">
-                    <img id="header-img" src="{{profile.headerpic}}" onclick="openModal(this)" />
+                    <img id="header-img" src="{{profileDetails.headerpic}}" onclick="openModal(this)" />
                </div>
                
                <div id="sub-container">
@@ -46,11 +46,11 @@
                               <!-- PFP and USERNAME -->
                               <div id="pfpcontainer">
                                    <div id="pfpPic">
-                                        <img id="pfp-img" src="{{profile.profilepic}}" onclick="openModal(this)" />
+                                        <img id="pfp-img" src="{{profileDetails.profilepic}}" onclick="openModal(this)" />
                                    </div>
 
-                                   <p class="maintext" id="display_name">{{profile.displayname}}</p>
-                                   <p class="subtext" id="username">{{profile.username}}</p>
+                                   <p class="maintext" id="display_name">{{profileDetails.displayname}}</p>
+                                   <p class="subtext" id="username">{{profileDetails.username}}</p>
                               </div>
 
                               <div class="inviBrk"> </div>
@@ -173,6 +173,7 @@
 
 <!-- PAGE JAVASCRIPT -->
 <script>
-    const profileData = {{{json profile}}};  
+    const profileDetails = {{{json profileDetails}}};  
+    const profilePosts = {{{json profilePosts}}};
 </script>
 <script src="../js/profilePage.js"></script>
