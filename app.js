@@ -29,6 +29,10 @@ hbs.registerHelper("json", function (context) {
     return JSON.stringify(context);
 });
 
+// to connect controllers
+const path = require("path");
+const controllerPack = require("./controllers/controllerPack");
+
 
 // ----- Middleware & Static Files ----- //
 
