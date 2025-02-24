@@ -7,12 +7,17 @@ const postSchema = new Schema({
         required: false
     },
     author: {
-        type: String,   // user id
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User',
+
         required: true
     },
     parentPost: {
-        type: String,   // parent post id
-        required: false
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Post',
+
+        required: false,
+        default: null
     },
     content: {
         type: String,
@@ -20,17 +25,22 @@ const postSchema = new Schema({
     },
     images: {
         type: String,  // change
-        required: false
+
+        required: false,
+        default: []
     },
     likeCount: {
         type: Number,
-        required: true
+
+        required: true,
+        default: 0,
     },
     dislikeCount: {
         type: Number,
-        required: true
+        
+        required: true,
+        default: 0,
     },
-
 }, { timestamps: true });   // includes both createdAt and updatedAt timestamps
 
 const Post = mongoose.model('Post', postSchema); // title name is singular because collection name is plural
