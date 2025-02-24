@@ -56,7 +56,7 @@ const userSchema = new Schema({
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Post',
 
-        required: false,
+        required: true,
         default: []
     },
 });
