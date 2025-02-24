@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/homePage.css">
+    <link rel="stylesheet" type="text/css" href="/css/generalStyle.css">
+
+    <!-- SCRIPTS -->
+    <script src="/js/actionButton.js"></script>
+    <script src="/js/togglePopup.js"></script>
+</head>
+<body>
+    <!-- HEADER PORTION -->
+    <header>
+        <div id="headercol1" onclick="window.location.href='/'">
+            <img id="logo" src="/resources/Logo.svg" />
+            <p id="appName">Connectify</p>
+        </div>
+        <div id="headercol2">
+            <div class="searchBar">
+                <img src="/resources/Trailing-Elements.svg" alt="Search Icon">
+                <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+            </div>
+            <div class="logIn">
+                <button id="logInButton" onclick="window.location.href='/login'">Log In</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="break"></div>
+
+    <div class="content">
+        <!-- Navigation Bar -->
+        <div class="navBar">
+            <div class="profileNav">
+                <div class="profile">
+                    <div id="userAvatar">
+                        <img src="/resources/pfpSample.jpg" class="userProfilePic" alt="User Profile Pic">
+                    </div>
+                    <div class="usernameAndhandle">
+                        <p id="profileUsername">DARNA</p>
+                        <p id="profileUserhandle">@AkoSiDarna</p>
+                    </div>
+                </div>
+
+                <div class="navBarDivider"></div>
+
+                <div class="navBarContent">
+                    <div class="registeredOptions">
+                        <button class="navBarButtons" onclick="window.location.href='/profile'">
+                            <img src="/resources/Profile Icon.svg" alt="View Profile Icon">
+                            View Profile
+                        </button>
+                        <button class="navBarButtons" onclick="window.location.href='/editProfile'">
+                            <img src="/resources/Edit Icon.svg" alt="Edit Profile Icon">
+                            Edit Profile
+                        </button>
+                        <button class="navBarButtons" onclick="window.location.href='/logout'">
+                            <img src="/resources/Log Out Icon.svg" alt="Log Out Icon">
+                            Log Out
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POSTS AND COMMENTS SECTION -->
+            <div class="userPostsAndComments">
+                <div class="userPostsAndCommentsHeader">
+                    <p class="userNavTitle">Posts</p>
+                    <a class="userNavMore" href="/profile">More ></a>
+                </div>
+                <div class="userPostsAndCommentsContent" id="userPostsContent"></div>
+                <script src="/js/loadNavPosts.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", loadNavPosts());
+                </script>
+            </div>
+
+            <div class="userPostsAndComments">
+                <div class="userPostsAndCommentsHeader">
+                    <p class="userNavTitle">Comments</p>
+                    <a class="userNavMore" href="/profile">More ></a>
+                </div>
+                <div class="userPostsAndCommentsContent" id="userCommentsContent"></div>
+                <script src="/js/loadNavComments.js"></script>
+                <script>
+                    document.addEventListener("DOMContentLoaded", loadNavComments());
+                </script>
+            </div>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="timeline" id="postsTimeline">
+            <div class="newPost">
+                <button class="newPostButton" onclick="window.location.href='/newPost'">+ New Post</button>
+            </div>
+            <div class="postDivider"></div>
+            <div id="postFeed"></div>
+            <script src="/js/loadPostFeed.js"></script>
+            <script>
+                document.addEventListener("DOMContentLoaded", loadTimelinePosts());
+            </script>
+        </div>
+    </div>
+
+    <!-- IMAGE MODAL -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div id="userphotocontainer-modal"> 
+            <img class="modal-content" id="modalImage">
+        </div>
+        <div id="caption"></div>
+    </div>
+</body>
+</html>
+
+<!-- PAGE JAVASCRIPT -->
+<script src="/js/homePage.js"></script>
