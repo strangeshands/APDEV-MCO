@@ -32,6 +32,10 @@ hbs.registerHelper("json", function (context) {
 // to connect controllers
 const path = require("path");
 const userController = require("./controllers/userController");
+const homeController = require("./controllers/homeController");
+
+// use controller
+app.use("/", homeController);
 
 
 // ----- Middleware & Static Files ----- //
