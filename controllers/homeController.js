@@ -8,4 +8,4 @@ router.get('/', (req, res) => {
 
 module.exports = router;
 
-// TODO: Add relevant js here
+// TODO: Add relevant js and business logic here (as endpoints)
