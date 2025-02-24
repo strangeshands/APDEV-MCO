@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
  */
 app.get("/profile", userController.loadUserProfile);
 
-// 404 Page
+// [404 PAGE]
 app.use((req, res) => {     
     res.status(404).render('errorPage');  
 });
