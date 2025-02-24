@@ -9,6 +9,7 @@ const posts = require('../models/posts');
  *          > (1) the profile clicked
  *          > (2) default is the user logged in
  */
+//const user = "@jabeedabee";
 const user = "@AkoSiDarna";
 
 const loadUserProfile = async (req,res) => {
@@ -30,8 +31,29 @@ const loadUserProfile = async (req,res) => {
         console.log(`Likes Count: ${likesCount}`);
 
         // query profile posts
-        const profilePosts = await posts.find({ author: profileSelected }).populate('author');
+        const profilePosts = await posts
+            .find({ author: profileSelected })
+            .populate('author')
+            .populate({
+                path: 'parentPost',
+                populate: { path: 'author' }
+            })
+            .sort({ createdAt: -1 });
         console.log(profilePosts);
+
+        // query profile comments
+        const profileComments = await posts
+            .find({ 
+                author: profileSelected, 
+                parentPost: { $ne: null }
+            })
+            .populate('author')
+            .populate({
+                path: 'parentPost',
+                populate: { path: 'author' }
+            })
+            .sort({ createdAt: -1 });
+        
 
         /**
          *  TO DO: query likes, replace null
@@ -44,7 +66,19 @@ const loadUserProfile = async (req,res) => {
          *  TO DO: query bookmars, replce null
          */
         // query profile bookmarks
-        const profileBookmarks = null;
+        const profileBookmarks = await users
+            .findOne({ username: user })
+            .populate({
+                path: 'bookmarks',
+                populate: [
+                    { path: 'author' },  
+                    { 
+                        path: 'parentPost', 
+                        populate: { path: 'author' } 
+                    }
+                ]
+            })
+            .select('bookmarks');
         console.log(profileBookmarks);
 
         // render profile page
@@ -54,6 +88,7 @@ const loadUserProfile = async (req,res) => {
             likesCount: likesCount,
 
             profilePosts: profilePosts,
+            profileComments: profileComments,
             profileLikes: profileLikes,
             profileBookmarks: profileBookmarks
         })
