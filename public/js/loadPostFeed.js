@@ -227,6 +227,6 @@ function loadTimelinePosts() {
         });
 
     const sendingPostsDataScript = document.createElement("script");
-    sendingPostsDataScript.src = "../public/js/sendingPostData.js";
+    sendingPostsDataScript.src = "/js/sendingPostData.js";
     document.body.appendChild(sendingPostsDataScript);
 }

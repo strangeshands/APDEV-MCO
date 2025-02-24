@@ -2,26 +2,26 @@
 <html>
 <head>
     <title>{{title}}</title>
-    <link rel="icon" href="../public/resources/Logo.svg" type="image/svg+xml">
+    <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
 
     <!-- CSS -->
-    <link rel="stylesheet" type="text/css" href="../public/css/homePage.css">
-    <link rel="stylesheet" type="text/css" href="../public/css/generalStyle.css">
+    <link rel="stylesheet" type="text/css" href="/css/homePage.css">
+    <link rel="stylesheet" type="text/css" href="/css/generalStyle.css">
 
     <!-- SCRIPTS -->
-    <script src="../public/js/actionButton.js"></script>
-    <script src="../public/js/togglePopup.js"></script>
+    <script src="/js/actionButton.js"></script>
+    <script src="/js/togglePopup.js"></script>
 </head>
 <body>
     <!-- HEADER PORTION -->
     <header>
         <div id="headercol1" onclick="window.location.href='/'">
-            <img id="logo" src="../public/resources/Logo.svg" />
+            <img id="logo" src="/resources/Logo.svg" />
             <p id="appName">Connectify</p>
         </div>
         <div id="headercol2">
             <div class="searchBar">
-                <img src="../public/resources/Trailing-Elements.svg" alt="Search Icon">
+                <img src="/resources/Trailing-Elements.svg" alt="Search Icon">
                 <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
             </div>
             <div class="logIn">
@@ -38,7 +38,7 @@
             <div class="profileNav">
                 <div class="profile">
                     <div id="userAvatar">
-                        <img src="../public/resources/pfpSample.jpg" class="userProfilePic" alt="User Profile Pic">
+                        <img src="/resources/pfpSample.jpg" class="userProfilePic" alt="User Profile Pic">
                     </div>
                     <div class="usernameAndhandle">
                         <p id="profileUsername">DARNA</p>
@@ -51,15 +51,15 @@
                 <div class="navBarContent">
                     <div class="registeredOptions">
                         <button class="navBarButtons" onclick="window.location.href='/profile'">
-                            <img src="../public/resources/Profile Icon.svg" alt="View Profile Icon">
+                            <img src="/resources/Profile Icon.svg" alt="View Profile Icon">
                             View Profile
                         </button>
                         <button class="navBarButtons" onclick="window.location.href='/editProfile'">
-                            <img src="../public/resources/Edit Icon.svg" alt="Edit Profile Icon">
+                            <img src="/resources/Edit Icon.svg" alt="Edit Profile Icon">
                             Edit Profile
                         </button>
                         <button class="navBarButtons" onclick="window.location.href='/logout'">
-                            <img src="../public/resources/Log Out Icon.svg" alt="Log Out Icon">
+                            <img src="/resources/Log Out Icon.svg" alt="Log Out Icon">
                             Log Out
                         </button>
                     </div>
@@ -73,7 +73,7 @@
                     <a class="userNavMore" href="/profile">More ></a>
                 </div>
                 <div class="userPostsAndCommentsContent" id="userPostsContent"></div>
-                <script src="../public/js/loadNavPosts.js"></script>
+                <script src="/js/loadNavPosts.js"></script>
                 <script>
                     document.addEventListener("DOMContentLoaded", loadNavPosts());
                 </script>
@@ -85,7 +85,7 @@
                     <a class="userNavMore" href="/profile">More ></a>
                 </div>
                 <div class="userPostsAndCommentsContent" id="userCommentsContent"></div>
-                <script src="../public/js/loadNavComments.js"></script>
+                <script src="/js/loadNavComments.js"></script>
                 <script>
                     document.addEventListener("DOMContentLoaded", loadNavComments());
                 </script>
@@ -99,7 +99,7 @@
             </div>
             <div class="postDivider"></div>
             <div id="postFeed"></div>
-            <script src="../public/js/loadPostFeed.js"></script>
+            <script src="/js/loadPostFeed.js"></script>
             <script>
                 document.addEventListener("DOMContentLoaded", loadTimelinePosts());
             </script>
@@ -118,4 +118,4 @@
 </html>
 
 <!-- PAGE JAVASCRIPT -->
-<script src="../public/js/homePage.js"></script>
+<script src="/js/homePage.js"></script>
