@@ -1,13 +1,24 @@
-/* ---- HARD CODED DATA ---- */
-const userPosts = profilePosts;
-
 /* ---- CODE FUNCTION ---- */
 function loadUserPosts(type) {
+     console.log(userPosts);
      const container = document.getElementById("userPostsContainer");
+
+     var own;
+     /**
+      *   TO DO: fix time and date depending on the discussed format
+      */
+     var date = {
+          month: 'short', 
+          day: '2-digit', 
+          year: 'numeric', 
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+     };
 
      if (!userPosts || userPosts.length === 0) {
           container.innerHTML = `
-               <p class="no-post-msg">Boohoo! No posts yet</p>
+               <p class="no-post-msg">Boohoo! No posts yet...</p>
                <a id="create-first-link" href="../html/homePage.html">
                     <p id="create-first" class="no-post-msg">Create your first post</p>
                </a>
@@ -15,17 +26,34 @@ function loadUserPosts(type) {
           return;
      }
 
+     /**
+      *   TO DO:
+      *        > fix time and date 
+      * 
+      *        > fix tags href
+      *        > fix reply to href
+      *        > fix go to href
+      *        > fix title href
+      *        > fix caption href
+      *        
+      *        > fix buttons
+      */
      userPosts.forEach((post, index) => {
+          // check if own post
+          own = post.author.username === profileDetails.username;
+          // set date
+          date = new Date(post.createdAt).toLocaleString();
+
           const postElement = document.createElement("div");
-          postElement.classList.add(post.replyTo.length > 0 ? "comment" : "post");
+          postElement.classList.add(post.parentPost != null ? "comment" : "post");
           let postContent = "";
 
-          if (post.replyTo.length > 0) {
+          if (post.parentPost != null) {
                postContent += `
                     <!-- REPLY USER -->
                     <!-- TO CHANGE: href link -->
                     <div id="reply-to-msg" onclick="window.location.href='../html/postPage.html';">
-                         Replied to ${post.replyTo}
+                         Replied to ${post.parentPost}
                     </div>
                `
           }
@@ -35,11 +63,11 @@ function loadUserPosts(type) {
                <div class="pfpuserrow" id="${type}-pfpuserrow-${index}">
                     <div id="userandpfp">
                          <div class="pfpPost">
-                         <img src="${post.pfp}" />
+                         <img src="${post.author.profilepic}" />
                          </div>
                          <div id="pfpnames">
-                         <span class="pfpdisplayname">${post.displayName}</span>
-                         <span class="pfpusername">${post.username} | ${post.time}</span>
+                         <span class="pfpdisplayname">${post.author.displayname}</span>
+                         <span class="pfpusername">${post.author.username} | ${date}</span>
                          </div>
                     </div>
                     
@@ -56,7 +84,7 @@ function loadUserPosts(type) {
                               <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
                               <button class="editButton">Copy Link</button>
 
-                              ${post.own ? `
+                              ${own ? `
                                    <button class="editButton" onclick="window.location.href = '../html/newPostPage.html';">Edit Post</button>
                                    <button class="deleteButton">Delete Post</button>
                               ` : ""}
@@ -79,10 +107,10 @@ function loadUserPosts(type) {
 
                <!-- POST CAPTION HERE -->
                <!-- TO CHANGE: href link -->
-               <div id="usercaption" onclick="window.location.href='../html/postPage.html';">${post.caption}</div>
+               <div id="usercaption" onclick="window.location.href='../html/postPage.html';">${post.content}</div>
 
                <!-- POST PHOTO/S HERE -->
-               ${post.images.length > 0 ? `
+               ${post.images != null ? `
                     <div id="userphoto">
                         <div id="userphotocontainer">
                             ${post.images.map(function(img) { 
@@ -97,13 +125,13 @@ function loadUserPosts(type) {
                     <!-- HEART FEATURE: RED IF BOOKMARKED -->
                     <button class="postoptionbutton actionButton" id="heart" onclick="iconClicked(this, 'heart')">
                          <img src="${post.liked ? '../resources/Heart-Clicked.svg' : '../resources/Heart.svg'}"/>
-                         <span class="counter">${post.likes}</span>
+                         <span class="counter">${post.likeCount}</span>
                     </button>
 
                     <img src="../resources/Line.svg" alt="Line">
                     <button class="postoptionbutton actionButton" id="heartCrack" onclick="iconClicked(this, 'heartCrack')">
                          <img src="${post.disliked ? '../resources/HeartCrack-Clicked.svg' : '../resources/HeartCrack.svg'}"/>
-                         <span class="counter">${post.dislikes}</span>
+                         <span class="counter">${post.dislikeCount}</span>
                     </button>
 
                     <button class="postoptionbutton actionButton" onclick="window.location.href='../html/replyPage.html'">
