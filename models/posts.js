@@ -24,7 +24,7 @@ const postSchema = new Schema({
         required: true
     },
     images: {
-        type: String,  // change
+        type: [String],  // change
 
         required: false,
         default: []

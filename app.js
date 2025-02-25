@@ -23,8 +23,10 @@ app.use(express.json());  // allows JSON parsing
 // to make data from DB usable in javascript files
 app.set('view engine','hbs'); // register view engine
 hbs.registerPartials(__dirname + "/views/partials");
+
+// custom function for hbs helper
 hbs.registerHelper("isEqual", (a, b) => a === b);
-hbs.registerHelper("json", function (context) { // register Handlebars Helper
+hbs.registerHelper("json", function (context) {
     return JSON.stringify(context);
 });
 
@@ -34,11 +36,6 @@ const homeController = require("./controllers/homeController");
 
 // ----- Use Controllers----- //
 app.use("/", homeController);
-
-// ----- 404 Page (Catch-All Route) ----- //
-app.use((req, res) => {     
-    res.status(404).render('errorPage');  
-});
 
 /*
 // ----- Routes ----- //
@@ -60,6 +57,11 @@ app.get("/profile/:tabId", userController.loadUserProfile);
  *  > allows updating of bookmarks
  */
 app.post("/update-bookmark", userController.updateBookmark);
+
+// ----- 404 Page (Catch-All Route) ----- //
+app.use((req, res) => {     
+    res.status(404).render('errorPage');  
+});
 
 // ----- MongoDB Connection ----- //
 const dbURI = 'mongodb+srv://ConnectifyAdmin:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db';
