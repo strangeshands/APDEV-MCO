@@ -59,6 +59,13 @@ const userSchema = new Schema({
         required: true,
         default: []
     },
+    dislikes: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Post',
+
+        required: true,
+        default: []
+    }
 });
 
 const User = mongoose.model('User', userSchema); // title name is singular because collection name is plural
