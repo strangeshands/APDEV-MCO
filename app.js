@@ -22,6 +22,8 @@ app.use(express.json());  // allows JSON parsing
 
 // to make data from DB usable in javascript files
 app.set('view engine','hbs'); // register view engine
+hbs.registerPartials(__dirname + "/views/partials");
+hbs.registerHelper("isEqual", (a, b) => a === b);
 hbs.registerHelper("json", function (context) { // register Handlebars Helper
     return JSON.stringify(context);
 });
@@ -32,7 +34,6 @@ const homeController = require("./controllers/homeController");
 
 // ----- Use Controllers----- //
 app.use("/", homeController);
-app.get("/profile", userController.loadUserProfile);
 
 // ----- 404 Page (Catch-All Route) ----- //
 app.use((req, res) => {     
@@ -45,15 +46,23 @@ app.get('/', (req, res) => {
     // to be filled
 });
 */
+
 /**
- *  [PROFILE PAGE]
+ *  [PROFILE PAGES]
  *  TO DO:
  *      > update to "/profile/<username>" so <username> dynamically changes depending on the selected profile
  */
 app.get("/profile", userController.loadUserProfile);
+app.get("/profile/:tabId", userController.loadUserProfile);
+
+/**
+ *  GHOST LINK - no dedicated page
+ *  > allows updating of bookmarks
+ */
+app.post("/update-bookmark", userController.updateBookmark);
 
 // ----- MongoDB Connection ----- //
-const dbURI = 'mongodb+srv://ConnectifyHanielle:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db';
+const dbURI = 'mongodb+srv://ConnectifyAdmin:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db';
 mongoose.connect(dbURI)
     .then(() => {
         console.log("MongoDB Connected");
