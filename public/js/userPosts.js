@@ -3,9 +3,8 @@ function loadUserPosts(type) {
      console.log(userPosts);
      const container = document.getElementById("userPostsContainer");
 
-     var own;
      /**
-      *   TO DO: fix time and date depending on the discussed format
+      *   TO DO: fix time and date
       */
      var date = {
           month: 'short', 
@@ -41,6 +40,13 @@ function loadUserPosts(type) {
      userPosts.forEach((post, index) => {
           // check if own post
           own = post.author.username === profileDetails.username;
+          // check if liked post
+          liked = !!checkLiked(post);
+          // check if bookmarked post
+          bookmarked = !!checkBookmarked(post);
+          // check if disliked post
+          disliked = !!checkDisliked(post);
+
           // set date
           date = new Date(post.createdAt).toLocaleString();
 
@@ -49,11 +55,12 @@ function loadUserPosts(type) {
           let postContent = "";
 
           if (post.parentPost != null) {
+               console.log(post.parentPost);
                postContent += `
                     <!-- REPLY USER -->
                     <!-- TO CHANGE: href link -->
                     <div id="reply-to-msg" onclick="window.location.href='../html/postPage.html';">
-                         Replied to ${post.parentPost}
+                         Replied to ${post.parentPost.author.username}
                     </div>
                `
           }
@@ -110,7 +117,7 @@ function loadUserPosts(type) {
                <div id="usercaption" onclick="window.location.href='../html/postPage.html';">${post.content}</div>
 
                <!-- POST PHOTO/S HERE -->
-               ${post.images != null ? `
+               ${post.images.length > 0 ? `
                     <div id="userphoto">
                         <div id="userphotocontainer">
                             ${post.images.map(function(img) { 
@@ -123,14 +130,14 @@ function loadUserPosts(type) {
                <!-- POST OPTIONS -->
                <div class="postActions" id="postoptionrow">
                     <!-- HEART FEATURE: RED IF BOOKMARKED -->
-                    <button class="postoptionbutton actionButton" id="heart" onclick="iconClicked(this, 'heart')">
-                         <img src="${post.liked ? '../resources/Heart-Clicked.svg' : '../resources/Heart.svg'}"/>
+                    <button class="postoptionbutton actionButton" id="heart" onclick="iconClicked(this, 'heart', '${post._id}')">
+                         <img src="${liked ? '../resources/Heart-Clicked.svg' : '../resources/Heart.svg'}"/>
                          <span class="counter">${post.likeCount}</span>
                     </button>
 
                     <img src="../resources/Line.svg" alt="Line">
-                    <button class="postoptionbutton actionButton" id="heartCrack" onclick="iconClicked(this, 'heartCrack')">
-                         <img src="${post.disliked ? '../resources/HeartCrack-Clicked.svg' : '../resources/HeartCrack.svg'}"/>
+                    <button class="postoptionbutton actionButton" id="heartCrack" onclick="iconClicked(this, 'heartCrack', '${post._id}')">
+                         <img src="${disliked ? '../resources/HeartCrack-Clicked.svg' : '../resources/HeartCrack.svg'}"/>
                          <span class="counter">${post.dislikeCount}</span>
                     </button>
 
@@ -139,8 +146,8 @@ function loadUserPosts(type) {
                     </button>
 
                     <!-- BOOKMARK FEATURE: YELLOW IF BOOKMARKED -->
-                    <button class="postoptionbutton actionButton" id="bookmark" onclick="iconClicked(this, 'bookmark')">
-                         <img src="${post.bookmark ? '../resources/Bookmark-Clicked.svg' : '../resources/bookmark.svg'}"/>
+                    <button class="postoptionbutton actionButton" id="bookmark" onclick="iconClicked(this, 'bookmark', '${post._id}')">
+                         <img src="${bookmarked ? '../resources/Bookmark-Clicked.svg' : '../resources/bookmark.svg'}"/>
                     </button>
                </div>
 
