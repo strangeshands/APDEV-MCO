@@ -14,7 +14,7 @@ const likesSchema = new Schema ({
 
         required: true,
     }
-});
+}, { timestamps: true });
 
 const LikedPost = mongoose.model('LikedPost', postSchema); // title name is singular because collection name is plural
 module.exports = LikedPost;

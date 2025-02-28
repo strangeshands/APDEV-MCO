@@ -59,6 +59,14 @@ app.get('/', (req, res) => {
  *      > update to "/profile/<username>" so <username> dynamically changes depending on the selected profile
  */
 app.get("/profile", userController.loadUserProfile);
+app.get("/profile/:tabId", userController.loadUserProfile);
+
+/**
+ *  GHOST LINK - no dedicated page
+ *  > allows updating of bookmarks
+ */
+app.post("/update-bookmark", userController.updateBookmark);
+app.post("/update-like", userController.updateLike);
 
 // [404 PAGE]
 app.use((req, res) => {     
