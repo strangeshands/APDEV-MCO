@@ -57,6 +57,7 @@ app.get("/profile/:tabId", userController.loadUserProfile);
  *  > allows updating of bookmarks
  */
 app.post("/update-bookmark", userController.updateBookmark);
+app.post("/update-like", userController.updateLike);
 
 // ----- 404 Page (Catch-All Route) ----- //
 app.use((req, res) => {     

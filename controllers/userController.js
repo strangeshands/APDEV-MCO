@@ -94,7 +94,8 @@ const loadUserProfile = async(req,res) => {
                     }
                 ]
             })
-            .select('likedPost')
+            .sort({ createdAt: -1, updatedAt: -1 })
+            .select('likedPost');
         const profileLikes = likesTemp.map(like => like.likedPost);
         console.log(profileLikes);
 
@@ -152,7 +153,66 @@ const updateBookmark = async(req,res) => {
     await profileDetails.save();
 }; 
 
+const updateLike = async(req,res) => {
+    let { postId, action } = req.body;
+    let selectedPost = await posts.findById(postId);
+    profileDetails = await users.findOne({ username: user });
+
+    if (selectedPost) {
+        switch (action) {
+            case 'unlike':
+                await   likes.deleteOne({ 
+                            likedPost: selectedPost._id, 
+                            likedBy: profileDetails._id 
+                        });
+            break;
+
+            case 'undislike':
+                await   users.updateOne(
+                            { _id: profileDetails._id },
+                            { $pull: { dislikes: selectedPost._id } }
+                        );
+            break;
+
+            case 'like':
+                await   likes.insertOne({
+                            likedPost: selectedPost._id, 
+                            likedBy: profileDetails._id ,
+                            createdAt: new Date()
+                        });
+            break;
+
+            case 'dislike':
+                profileDetails.dislikes.splice(0, 0, postId);
+            break;
+
+            case 'like+': 
+                await   likes.insertOne({
+                    likedPost: selectedPost._id, 
+                    likedBy: profileDetails._id 
+                });
+
+                await   users.updateOne(
+                    { _id: profileDetails._id },
+                    { $pull: { dislikes: selectedPost._id } }
+                );
+            break;
+
+            case 'dislike+':
+                profileDetails.dislikes.splice(0, 0, postId);
+
+                await   likes.deleteOne({ 
+                    likedPost: selectedPost._id, 
+                    likedBy: profileDetails._id,
+                });
+            break;
+        }
+        await profileDetails.save();
+    }
+};
+
 module.exports = { 
     loadUserProfile, 
-    updateBookmark
+    updateBookmark,
+    updateLike
 };

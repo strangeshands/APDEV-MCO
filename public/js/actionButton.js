@@ -61,9 +61,27 @@ function iconClicked(button, iconType, postId) {
 
           // Toggle current button state
           if (isCurrentlyClicked) {
+               // ----- Visual ----- //
                // If already clicked, reset (unlike/undislike)
                currentImg.src = iconPaths[iconType].default;
                currentCounter.textContent = Math.max(0, parseInt(currentCounter.textContent) - 1);
+
+               // ----- Connection to Node ----- //
+               let action;
+               if (iconType === 'heart')
+                    action = 'unlike';
+               else 
+                    action = 'undislike';
+
+               fetch('/update-like', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                         postId: postId,
+                         action: action
+                    })
+                    })
+               .then(response => response.json());
           } else {
                // If not clicked, set current button to clicked state
                currentImg.src = iconPaths[iconType].clicked;
@@ -74,6 +92,30 @@ function iconClicked(button, iconType, postId) {
                     otherImg.src = iconPaths[iconType === 'heart' ? 'heartCrack' : 'heart'].default;
                     otherCounter.textContent = Math.max(0, parseInt(otherCounter.textContent) - 1);
                }
+
+               let action;
+               if (iconType === 'heart') {
+                    action = 'like';
+                    
+                    if (isOtherClicked)
+                         action = 'like+'
+               }
+               else if (iconType === 'heartCrack') {
+                    action = 'dislike';
+
+                    if (isOtherClicked)
+                         action = 'dislike+'
+               }
+
+               fetch('/update-like', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                         postId: postId,
+                         action: action
+                    })
+                    })
+               .then(response => response.json());
           }
      } else if (iconType === 'bookmark') {
 
