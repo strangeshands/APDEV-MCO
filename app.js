@@ -41,17 +41,17 @@ const postRoutes = require('./routes/postRoutes');
 // ----- Home Page [TEST] ----- //
 
 // uncomment to test home page
+/*
 app.get('/', (req, res) => {
     
     res.redirect('/posts');    // temp
 });
+*/
 
 app.use('/posts', postRoutes);
 
-
-
 // ----- Use Controllers----- //
-//app.use("/", homeController);
+app.use("/", homeController);
 
 /*
 // ----- Routes ----- //
