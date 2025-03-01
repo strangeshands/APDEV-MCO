@@ -30,10 +30,12 @@ const post_details = (req, res) => {    // :id to search for actual id
         });
 };
 
+// NOT DONE
 const post_create_get = (req, res) => {
     res.render('create', { title: 'Create a new blog' });
 };
 
+// NOT DONE
 const post_create_post = (req, res) => {
     const blog = new Blog(req.body);
 
@@ -46,6 +48,7 @@ const post_create_post = (req, res) => {
     });
 };
 
+// NOT DONE
 const post_delete = (req, res) => {
     const id = req.params.id;
 
