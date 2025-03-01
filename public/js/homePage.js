@@ -1,4 +1,5 @@
 function openModal(image) {
+    event.stopPropagation();
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");
     const captionText = document.getElementById("caption");

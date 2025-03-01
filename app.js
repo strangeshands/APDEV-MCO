@@ -4,6 +4,7 @@
  *      > morgan
  *      > mongoose
  *      > hbs
+ *      > moment
  */
 const express = require('express');
 const morgan = require('morgan');
@@ -33,6 +34,21 @@ hbs.registerHelper("json", function (context) {
 // ----- Connect Controllers ----- //
 const userController = require("./controllers/userController");
 const homeController = require("./controllers/homeController");
+
+/* ---------- Routes ----------- */
+const postRoutes = require('./routes/postRoutes');
+
+// ----- Home Page [TEST] ----- //
+
+// uncomment to test home page
+/*
+app.get('/', (req, res) => {
+    
+    res.redirect('/posts');    // temp
+});
+*/
+
+app.use('/posts', postRoutes);
 
 // ----- Use Controllers----- //
 app.use("/", homeController);
