@@ -11,7 +11,7 @@ const likes = require('../models/likes');
  *          > (2) default is the user logged in
  */
 //const user = "@jabeedabee";
-const user = "@AkoSiDarna";
+var user = "@AkoSiDarna";
 
 // Initialize variables
 let profileDetails;
@@ -211,14 +211,126 @@ const updateLike = async(req,res) => {
     }
 };
 
+const editProfileLoad = async(req,res) => {
+    profileDetails = await users.findOne({ username: user });
+
+    res.render('editProfilePage', { 
+        profileDetails 
+    });
+};
+
 const updateProfile = async(req,res) => {
     profileDetails = await users.findOne({ username: user });
-    res.render('editProfilePage', { profileDetails } );
+
+    var { newUser, newDisplayName, newBio } = req.body;
+    var { newEmail, newNum } = req.body;
+    var { newPass } = req.body;
+
+    var errorMessageUser = '';
+    var errorMessageDN = '';
+    var errorMessageBio = '';
+    var errorMessageEmail = '';
+    var errorMessageNum = '';
+
+    if (newUser) {
+        if (!newUser.startsWith('@')) {
+            newUser = '@' + newUser;
+        }
+        const existingUser = await users.findOne({ username: newUser });
+
+        if (existingUser)
+            errorMessageUser = newUser + ' already exists!'
+        else {
+            await users.updateOne(
+                { _id: profileDetails._id }, 
+                { $set: { username: newUser } }
+            );
+
+            /**
+             *  TO DO:
+             *      > update 'user' depending on the user logged in
+             */
+            user = newUser;
+
+            errorMessageUser = newUser + ' is your new username!';
+            profileDetails.username = newUser;
+        }
+    }
+
+    if (newDisplayName) {
+        await users.updateOne(
+            { _id: profileDetails._id }, 
+            { $set: { displayname: newDisplayName } }
+        );
+
+        errorMessageDN = newDisplayName + " is your new display name."
+        profileDetails.displayname = newDisplayName;
+    }
+
+    if (newBio) {
+        await users.updateOne(
+            { _id: profileDetails._id }, 
+            { $set: { bio: newBio } }
+        );
+
+        errorMessageBio = "You have updated your bio."
+        profileDetails.bio = newBio;
+    }
+
+    if (newEmail) {
+        const existingUser = await users.findOne({ email: newEmail });
+
+        if (existingUser)
+            errorMessageEmail = newEmail + ' is already registered to another account.'
+        else {
+            await users.updateOne(
+                { _id: profileDetails._id }, 
+                { $set: { email: newEmail } }
+            );
+
+            errorMessageEmail = newEmail + ' is your new email!';
+            profileDetails.email = newEmail;
+        }
+    }
+
+    if (newNum) {
+        const existingUser = await users.findOne({ phone: newNum });
+
+        if (existingUser)
+            errorMessageNum = newNum + ' is already registered to another account.'
+        else {
+            await users.updateOne(
+                { _id: profileDetails._id }, 
+                { $set: { phone: newNum } }
+            );
+
+            errorMessageNum = newNum + ' is your new phone number!';
+            profileDetails.phone = newNum;
+        }
+    }
+
+    if (newPass) {
+        await users.updateOne(
+            { _id: profileDetails._id }, 
+            { $set: { password: newPass } }
+        );
+
+        profileDetails.password = newPass;
+    }
+
+    return res.json({ 
+        errorMessageUser,
+        errorMessageDN,
+        errorMessageBio,
+        errorMessageEmail,
+        errorMessageNum
+    });
 };
 
 module.exports = { 
     loadUserProfile, 
     updateBookmark,
     updateLike,
+    editProfileLoad,
     updateProfile
 };
