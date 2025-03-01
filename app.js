@@ -4,6 +4,11 @@
  *      > morgan
  *      > mongoose
  *      > hbs
+ * 
+ *  Alternative:
+ *  to install all dependencies at once:
+ *      > npm install
+ * 
  */
 const express = require('express');
 const morgan = require('morgan');
