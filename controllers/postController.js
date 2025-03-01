@@ -1,4 +1,5 @@
 const Post = require('../models/posts');
+const moment = require('moment');
 
 // TEMP, to be replaced with homepage code
 const post_index = (req, res) => {
@@ -20,7 +21,8 @@ const post_details = (req, res) => {    // :id to search for actual id
         .populate('author') // This will populate the 'author' field with user data
         .exec()
         .then((result) => {
-            res.render('postPage', { post: result, title: 'Post' });
+            const postDate = moment(result.createdAt).format('MMM DD, YYYY');
+            res.render('postPage', { post: result, title: 'Post', postDate: postDate });
         })
         .catch((err) => {
             res.status(404).render('404', { title: 'Post not found' });

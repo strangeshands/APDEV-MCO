@@ -48,7 +48,7 @@
                         </div>
                         <div class="username-and-time">
                             <div class="displayName" id="postDisplayName">{{post.author.displayname}}</div>
-                            <div class="time" id="postTime">{{post.author.username}} | {{post.createdAt}}</div>
+                            <div class="time" id="postTime">{{post.author.username}} | {{postDate}}</div>
                         </div>
                     </div>
                     <!-- IF POST BELONGS TO USER
@@ -60,7 +60,7 @@
                 <!-- TAGS PORTION -->
                 <div id="tagContainer">
                     {{#if post.tags}}
-                        <div class="tags">
+                        <div id="tags">
                             {{#each post.tags}}
                                 <a href="{{this}}">{{this}}</a>
                             {{/each}}
@@ -68,11 +68,19 @@
                     {{/if}}
                 </div>
                 <!-- TITLE PORTION -->
-                <div id="postTitleContainer"></div>
+                <div id="postTitleContainer">
+                    <div id="postTitle">{{post.title}}</div>
+                </div>
                 <!-- CAPTION PORTION -->
-                <div id="postText"></div>
+                <div id="postText">{{post.content}}</div>
                 <!-- IMAGE PORTION -->
-                <div id="photo-container"></div>
+                {{#if post.images}}
+                    <div id="userphotocontainer">
+                        {{#each post.images}}
+                            <img class="clickable-image" src="{{this}}" onclick="openModal(this)">
+                        {{/each}}
+                    </div>
+                {{/if}}
 
                 <!-- POST ACTIONS -->
                 <div class="postActions">
