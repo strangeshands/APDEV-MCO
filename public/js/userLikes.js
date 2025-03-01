@@ -1,43 +1,18 @@
 /* ---- CODE FUNCTION ---- */
-function loadUserPosts(type) {
-     console.log(userPosts);
-     const container = document.getElementById("userPostsContainer");
+function loadUserLikes(type) {
+     const container = document.getElementById("userLikesContainer");
 
-     /**
-      *   TO DO: fix time and date
-      */
-     var date = {
-          month: 'short', 
-          day: '2-digit', 
-          year: 'numeric', 
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true
-     };
-
-     if (!userPosts || userPosts.length === 0) {
+     if (!userLikes || userLikes.length === 0) {
           container.innerHTML = `
-               <p class="no-post-msg">Boohoo! No posts yet...</p>
+               <p class="no-post-msg">No likes yet. Go interact with others...</p>
                <a id="create-first-link" href="../html/homePage.html">
-                    <p id="create-first" class="no-post-msg">Create your first post</p>
+                    <p id="create-first" class="no-post-msg">Go back to home page</p>
                </a>
           `;
           return;
      }
 
-     /**
-      *   TO DO:
-      *        > fix time and date 
-      * 
-      *        > fix tags href
-      *        > fix reply to href
-      *        > fix go to href
-      *        > fix title href
-      *        > fix caption href
-      *        
-      *        > fix buttons
-      */
-     userPosts.forEach((post, index) => {
+     userLikes.forEach((post, index) => {
           // check if own post
           own = post.author.username === profileDetails.username;
           // check if liked post
@@ -49,6 +24,8 @@ function loadUserPosts(type) {
 
           // set date
           date = new Date(post.createdAt).toLocaleString();
+
+          console.log(post);
 
           const postElement = document.createElement("div");
           postElement.classList.add(post.parentPost != null ? "comment" : "post");
@@ -137,7 +114,7 @@ function loadUserPosts(type) {
 
                     <img src="../resources/Line.svg" alt="Line">
                     <button class="postoptionbutton actionButton" id="heartCrack" onclick="iconClicked(this, 'heartCrack', '${post._id}')">
-                         <img src="${disliked ? '../resources/HeartCrack-Clicked.svg' : '../resources/HeartCrack.svg'}"/>
+                         <img src="${post.disliked ? '../resources/HeartCrack-Clicked.svg' : '../resources/HeartCrack.svg'}"/>
                          <span class="counter">${post.dislikeCount}</span>
                     </button>
 

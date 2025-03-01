@@ -1,12 +1,18 @@
+/* ----- LISTENER ----- */
 document.addEventListener("DOMContentLoaded", () => {
      printBio(profileDetails.bio);
      printTags(profileDetails.tags);
-});
 
+     setButton(activeTab);
+});
 
 /* ----- NECESSARY FUNCTIONS ----- */
 /**
- *   TO DO: link tags --> edit onclick="" attribute
+ *   [TO DO]: link tags --> edit onclick="" attribute
+ * 
+ *   Prints the profile tags
+ * 
+ *   @param {*} tags The tags to print
  */
 function printTags (tags) {
     const tagListElement = document.getElementById("taglist");
@@ -20,6 +26,11 @@ function printTags (tags) {
     }
 }
 
+/**
+ *   Prints the profile bio
+ * 
+ *   @param {*} bio The bio to print
+ */
 function printBio (bio) {
     const bioElement = document.getElementById('bio');
 
@@ -32,6 +43,11 @@ function printBio (bio) {
     }
 }
 
+/**
+ *   Opens a modal whenever an image is clicked
+ * 
+ *   @param {*} image The image to open
+ */
 function openModal(image) {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");
@@ -46,30 +62,17 @@ function openModal(image) {
     };
 }
 
-function showContent(tabId, button) {
-    const tabContents = document.querySelectorAll('.tab-content');
-    tabContents.forEach(content => {
-         content.style.display = 'none';
-    });
-
-    const tabButtons = document.querySelectorAll('.tab');
-    tabButtons.forEach(tab => {
-         tab.classList.remove('active');
-    });
-
-    const selectedTabContent = document.getElementById(tabId);
-    if (selectedTabContent) {
-         selectedTabContent.style.display = 'block';
-    }
-
-    button.classList.add('active');
+/**
+ *   Updates the button depending on the active tab
+ * 
+ *   @param {*} activeId The active tab
+ */
+function setButton(activeId) {
+     document.querySelectorAll(".tab").forEach(button => {
+          if (button.dataset.id === activeId) {
+              button.classList.add("active"); 
+          } else {
+              button.classList.remove("active"); 
+          }
+      });
 }
-
-document.addEventListener('DOMContentLoaded', (type) => {
-    document.querySelectorAll('.actionButton').forEach(button => {
-         button.addEventListener('click', function () {
-              const id = this.id; 
-              iconClicked(this, id);
-         });
-    });
-});

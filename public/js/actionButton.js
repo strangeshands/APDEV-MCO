@@ -1,5 +1,12 @@
+/**
+ *   iconCliked manages the visuals and connection to backend whenever an action
+ *        button is cliked
+ * 
+ *   @param {*} button The button item clicked
+ *   @param {*} iconType The icon type (heart, hreat crack, bookmark)
+ *   @param {*} postId  The postId attached to the button
+ */
 function iconClicked(button, iconType, postId) {    
-     console.log("button clicked");
      console.log(postId);
 
      // Get the image within the button
@@ -135,4 +142,25 @@ function iconClicked(button, iconType, postId) {
            })
           .then(response => response.json());
      }
+}
+
+/**
+ *   Checks if a post is liked
+ */
+function checkLiked(check) {
+     return userLikes.find(post => post._id === check._id);
+}
+
+/**
+ *   Checks if a post is bookmarked
+ */
+function checkBookmarked(check) {
+     return userBookmarks.find(post => post._id === check._id);
+}
+
+/**
+ *   Checks if a post is disliked
+ */
+function checkDisliked(check) {
+     return userDislikes.find(post => post._id === check._id);
 }
