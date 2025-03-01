@@ -139,7 +139,7 @@ function iconClicked(button, iconType, postId) {
                    postId: postId,
                    action: isCurrentlyBookmarked ? 'remove' : 'add'
                })
-           })
+          })
           .then(response => response.json());
      }
 }
