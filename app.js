@@ -26,7 +26,7 @@ const app = new express();
 const dbURI = 'mongodb+srv://ConnectifyKelsey:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db'
 mongoose.connect(dbURI) // allows us to communicate with mongoDB
 .then((result) => app.listen(3000))   // if successful, we listen for requests
-.catch((err) => console.log(err));    // else
+.catch((err) => console.log(err, "address error"));    // else
 
 // register view engine
 app.set('view engine','hbs');
@@ -53,7 +53,7 @@ app.use(morgan('dev'));     // used for automatic logging of http request detail
 
 app.get('/', (req, res) => {
     
-    res.redirect('/posts');
+    res.redirect('/posts');    // temp
 });
 
 /**
