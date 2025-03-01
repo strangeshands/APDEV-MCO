@@ -21,6 +21,7 @@ const post_details = (req, res) => {    // :id to search for actual id
         .populate('author') // This will populate the 'author' field with user data
         .exec()
         .then((result) => {
+            //result.hasTags = result.tags.length > 0; // Add a flag to check if tags exist
             const postDate = moment(result.createdAt).format('MMM DD, YYYY');
             res.render('postPage', { post: result, title: 'Post', postDate: postDate });
         })
