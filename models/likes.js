@@ -8,7 +8,7 @@ const likesSchema = new Schema ({
 
         required: true
     },
-    post: {
+    likedPost: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Post',
 
@@ -16,5 +16,5 @@ const likesSchema = new Schema ({
     }
 }, { timestamps: true });
 
-const LikedPost = mongoose.model('LikedPost', postSchema); // title name is singular because collection name is plural
-module.exports = LikedPost;
+const Like = mongoose.model('Like', likesSchema); // title name is singular because collection name is plural
+module.exports = Like;

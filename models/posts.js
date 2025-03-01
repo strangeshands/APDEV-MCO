@@ -24,7 +24,7 @@ const postSchema = new Schema({
         required: true
     },
     images: {
-        type: String,  // change
+        type: [String],  // change
 
         required: false,
         default: []
@@ -41,6 +41,12 @@ const postSchema = new Schema({
         required: true,
         default: 0,
     },
+    tags: {
+        type:[String],
+
+        required: false,
+        default: []
+    }
 }, { timestamps: true });   // includes both createdAt and updatedAt timestamps
 
 const Post = mongoose.model('Post', postSchema); // title name is singular because collection name is plural
