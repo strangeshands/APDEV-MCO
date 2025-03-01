@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Connectify - Post</title>
+        <title>Connectify - {{title}}</title>
         <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
 
         <!-- CSS -->
@@ -48,7 +48,7 @@
                         </div>
                         <div class="username-and-time">
                             <div class="displayName" id="postDisplayName">{{post.author.displayname}}</div>
-                            <div class="time" id="postTime">{{post.author.username}} | {{post.}}</div>
+                            <div class="time" id="postTime">{{post.author.username}} | {{post.createdAt}}</div>
                         </div>
                     </div>
                     <!-- IF POST BELONGS TO USER
@@ -58,7 +58,15 @@
                 </div>
 
                 <!-- TAGS PORTION -->
-                <div id="tagContainer"></div>
+                <div id="tagContainer">
+                    {{#if post.tags}}
+                        <div class="tags">
+                            {{#each post.tags}}
+                                <a href="{{this}}">{{this}}</a>
+                            {{/each}}
+                        </div>
+                    {{/if}}
+                </div>
                 <!-- TITLE PORTION -->
                 <div id="postTitleContainer"></div>
                 <!-- CAPTION PORTION -->

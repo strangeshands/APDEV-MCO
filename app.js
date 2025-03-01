@@ -23,7 +23,9 @@ const postRoutes = require('./routes/postRoutes');
 const app = new express();
 
 // connect to mongoDB
-const dbURI = 'mongodb+srv://ConnectifyKelsey:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db'
+const dbUsername = 'ConnectifyKelsey';
+const dbPassword = 'apdevgorlz'
+const dbURI = `mongodb+srv://${dbUsername}:${dbPassword}@connectify.2pt1b.mongodb.net/connectify-db`
 mongoose.connect(dbURI) // allows us to communicate with mongoDB
 .then((result) => app.listen(3000))   // if successful, we listen for requests
 .catch((err) => console.log(err, "address error"));    // else
