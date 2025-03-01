@@ -44,10 +44,11 @@
                 <div class="postHeader">
                     <div class="userInfo">
                         <div class="avatar" id="postAvatar">
+                            <img src="{{post.author.profilepic}}" alt="" id="postProfilePic">
                         </div>
                         <div class="username-and-time">
-                            <div class="displayName" id="postDisplayName"></div>
-                            <div class="time" id="postTime"></div>
+                            <div class="displayName" id="postDisplayName">{{post.author.displayname}}</div>
+                            <div class="time" id="postTime">{{post.author.username}} | {{post.}}</div>
                         </div>
                     </div>
                     <!-- IF POST BELONGS TO USER

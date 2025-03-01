@@ -17,6 +17,18 @@ const post_index = (req, res) => {
 // Getting a specific post
 const post_details = (req, res) => {    // :id to search for actual id
     const id = req.params.id            // .id to match with url above
+    
+    Post.find(id)
+        .populate('author') // This will populate the 'author' field with user data
+        .exec()
+        .then((result) => {
+            res.render('postPage', { post: result, title: 'Post' });
+        })
+        .catch((err) => {
+            res.status(404).render('404', { title: 'Post not found' });
+        });
+    
+    /*
     Post.findById(id)
         .then((result) => {
             res.render('postPage', { post: result, title: 'Post' });
@@ -24,6 +36,7 @@ const post_details = (req, res) => {    // :id to search for actual id
         .catch((err) => {
             res.status(404).render('404', { title: 'Post not found' });
         });
+    */
 };
 
 const blog_create_get = (req, res) => {
