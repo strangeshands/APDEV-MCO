@@ -1,5 +1,6 @@
 const users = require('../models/users');
 const posts = require('../models/posts');
+const likes = require('../models/likes');
 
 /**
  *  > for testing only, will find for a specific hard coded user
@@ -12,27 +13,36 @@ const posts = require('../models/posts');
 //const user = "@jabeedabee";
 const user = "@AkoSiDarna";
 
-const loadUserProfile = async (req,res) => {
-    // query profile
-    const profileSelected = await users.findOne({ username: user });
-    console.log(profileSelected);
+// Initialize variables
+let profileDetails;
+let postCount;
+let likesCount;
 
-    if (!profileSelected) {
+const loadUserProfile = async(req,res) => {
+    let tabId = req.params.tabId;
+
+    // default is posts if tabId is null
+    if (!tabId) 
+        tabId = "posts"
+
+    // query profile
+    profileDetails = await users.findOne({ username: user });
+    console.log(profileDetails);
+
+    if (!profileDetails) {
         return res.status(404).render("errorPage");
     } else {
-        // query post count and likes count
-        const postCount = await posts.countDocuments({ author: profileSelected });
+        // query post count
+        postCount = await posts.countDocuments({ author: profileDetails });
         console.log(`Post Count: ${postCount}`);
 
-        /**
-         *  TO DO: query likes count properly
-         */
-        const likesCount = 0;
+        // query likes count
+        likesCount = await likes.countDocuments({ likedBy: profileDetails });
         console.log(`Likes Count: ${likesCount}`);
 
         // query profile posts
         const profilePosts = await posts
-            .find({ author: profileSelected })
+            .find({ author: profileDetails })
             .populate('author')
             .populate({
                 path: 'parentPost',
@@ -44,7 +54,7 @@ const loadUserProfile = async (req,res) => {
         // query profile comments
         const profileComments = await posts
             .find({ 
-                author: profileSelected, 
+                author: profileDetails, 
                 parentPost: { $ne: null }
             })
             .populate('author')
@@ -53,20 +63,9 @@ const loadUserProfile = async (req,res) => {
                 populate: { path: 'author' }
             })
             .sort({ createdAt: -1 });
-        
 
-        /**
-         *  TO DO: query likes, replace null
-         */
-        // query profile likes
-        const profileLikes = null;
-        console.log(profileLikes);
-
-        /**
-         *  TO DO: query bookmars, replce null
-         */
         // query profile bookmarks
-        const profileBookmarks = await users
+        const bookmarksTemp = await users
             .findOne({ username: user })
             .populate({
                 path: 'bookmarks',
@@ -79,6 +78,7 @@ const loadUserProfile = async (req,res) => {
                 ]
             })
             .select('bookmarks');
+        const profileBookmarks = bookmarksTemp.bookmarks.map(bookmark => bookmark);
         console.log(profileBookmarks);
 
         // query profile likes
@@ -213,5 +213,6 @@ const updateLike = async(req,res) => {
 
 module.exports = { 
     loadUserProfile, 
-    updateBookmark
+    updateBookmark,
+    updateLike
 };
