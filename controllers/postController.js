@@ -1,5 +1,5 @@
 const Post = require('../models/posts');
-const moment = require('moment');
+const moment = require('moment');   // For time display
 
 // TEMP, to be replaced with homepage code
 const post_index = (req, res) => {
