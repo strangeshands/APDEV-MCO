@@ -13,14 +13,17 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const hbs = require('hbs')
+const hbs = require('hbs');
+
+/* ---------- Routes ----------- */
+const postRoutes = require('./routes/postRoutes');
 
 /* --------------------- */
 
 const app = new express();
 
 // connect to mongoDB
-const dbURI = 'mongodb+srv://<username>:<password>@connectify.2pt1b.mongodb.net/connectify-db'
+const dbURI = 'mongodb+srv://ConnectifyKelsey:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db'
 mongoose.connect(dbURI) // allows us to communicate with mongoDB
 .then((result) => app.listen(3000))   // if successful, we listen for requests
 .catch((err) => console.log(err));    // else
@@ -50,7 +53,7 @@ app.use(morgan('dev'));     // used for automatic logging of http request detail
 
 app.get('/', (req, res) => {
     
-    // to be filled
+    res.redirect('/posts');
 });
 
 /**
@@ -59,6 +62,8 @@ app.get('/', (req, res) => {
  *      > update to "/profile/<username>" so <username> dynamically changes depending on the selected profile
  */
 app.get("/profile", userController.loadUserProfile);
+
+app.use('/posts', postRoutes);
 
 // [404 PAGE]
 app.use((req, res) => {     
