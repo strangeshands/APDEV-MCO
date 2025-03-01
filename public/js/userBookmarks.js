@@ -65,7 +65,7 @@ function loadUserBookmarks(type) {
                               <button class="optionsButton option-exit" onclick="togglePopup('${type}', '${index}', '${container.id}')">
                                    <img src="../resources/Options Button.svg"/>
                               </button>
-                              <button class="editButton" onclick="goToPost('${post.title}', ${index})">View Post</button>
+                              <button class="editButton" onclick="window.location.href='/posts/${post._id}';">View Post</button>
                               <button class="editButton">Copy Link</button>
 
                               ${own ? `
@@ -84,14 +84,14 @@ function loadUserBookmarks(type) {
 
                <!-- POST TITLE HERE -->
                ${post.title.length > 0 ? `
-                    <div id="posttile" onclick="window.location.href='../html/postPage.html';">
+                    <div id="posttile" onclick="window.location.href='/posts/${post._id}';">
                         <h2>${post.title}</h2>
                     </div>
                 ` : "" }
 
                <!-- POST CAPTION HERE -->
                <!-- TO CHANGE: href link -->
-               <div id="usercaption" onclick="window.location.href='../html/postPage.html';">${post.content}</div>
+               <div id="usercaption" onclick="window.location.href='/posts/${post._id}';">${post.content}</div>
 
                <!-- POST PHOTO/S HERE -->
                ${post.images.length > 0 ? `
