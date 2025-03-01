@@ -1,60 +1,51 @@
 /**
- *  to install (npm install):
+ *  Install dependencies: (npm install)
  *      > express
  *      > morgan
  *      > mongoose
  *      > hbs
- * 
- *  Alternative:
- *  to install all dependencies at once:
- *      > npm install
- * 
  */
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
-const hbs = require('hbs')
+const hbs = require('hbs');
 
 /* --------------------- */
 
-const app = new express();
+const app = express();
 
-// connect to mongoDB
-const dbURI = 'mongodb+srv://<username>:<password>@connectify.2pt1b.mongodb.net/connectify-db'
-mongoose.connect(dbURI) // allows us to communicate with mongoDB
-.then((result) => app.listen(3000))   // if successful, we listen for requests
-.catch((err) => console.log(err));    // else
-
-// register view engine
-app.set('view engine','hbs');
+// ----- Middleware & Static Files ----- //
+app.use(express.static('public'));  // everything in the given dir is accessible (great for css and images)
+app.use(express.urlencoded({ extended: true }));    // parses the url to an object to be used in te req obj // needed or else obj is undefined
+app.use(morgan('dev'));     // used for automatic logging of http request details (method, url, status, ...)
+app.use(express.json());  // allows JSON parsing
 
 // to make data from DB usable in javascript files
-app.use(express.json());
+app.set('view engine','hbs'); // register view engine
+hbs.registerPartials(__dirname + "/views/partials");
+
+// custom function for hbs helper
+hbs.registerHelper("isEqual", (a, b) => a === b);
 hbs.registerHelper("json", function (context) {
     return JSON.stringify(context);
 });
 
-// to connect controllers
-const path = require("path");
+// ----- Connect Controllers ----- //
 const userController = require("./controllers/userController");
+const homeController = require("./controllers/homeController");
 
+// ----- Use Controllers----- //
+app.use("/", homeController);
 
-// ----- Middleware & Static Files ----- //
-
-app.use(express.static('public'));  // everything in the given dir is accessible (great for css and images)
-app.use(express.urlencoded({ extended: true }));    // parses the url to an object to be used in te req obj // needed or else obj is undefined
-app.use(morgan('dev'));     // used for automatic logging of http request details (method, url, status, ...)
-
-
+/*
 // ----- Routes ----- //
-
 app.get('/', (req, res) => {
-    
     // to be filled
 });
+*/
 
 /**
- *  [PROFILE PAGE]
+ *  [PROFILE PAGES]
  *  TO DO:
  *      > update to "/profile/<username>" so <username> dynamically changes depending on the selected profile
  */
@@ -68,7 +59,19 @@ app.get("/profile/:tabId", userController.loadUserProfile);
 app.post("/update-bookmark", userController.updateBookmark);
 app.post("/update-like", userController.updateLike);
 
-// [404 PAGE]
+// ----- 404 Page (Catch-All Route) ----- //
 app.use((req, res) => {     
     res.status(404).render('errorPage');  
 });
+
+// ----- MongoDB Connection ----- //
+const dbURI = 'mongodb+srv://ConnectifyAdmin:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db';
+mongoose.connect(dbURI)
+    .then(() => {
+        console.log("MongoDB Connected");
+        app.listen(3000, () => console.log("Server running on http://localhost:3000"));
+    })
+    .catch((err) => {
+        console.log("MongoDB Connection Failed", err);
+        process.exit(1); // Exit the app if MongoDB fails
+    });
