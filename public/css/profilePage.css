@@ -334,6 +334,10 @@ h3 {
      opacity: 80%;
 }
 
+#bio {
+     text-align: left;
+}
+
 .col2-sub-container {
      width: 100%;
      height: auto;

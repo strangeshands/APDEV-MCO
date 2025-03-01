@@ -16,8 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
     displaynameholder.placeholder = profileDetails.displayname;
     bioholder.placeholder = profileDetails.bio;
     emailholder.placeholder = profileDetails.email;
-    numholder.placeholder = profileDetails.number;
+    numholder.placeholder = profileDetails.phone;
 });
+
+var change = true;
 
 /* ---- BIO COUNTER ---- */
 document.addEventListener("DOMContentLoaded", () => {
@@ -31,14 +33,19 @@ document.addEventListener("DOMContentLoaded", () => {
          if (currentText.length > maxCharacters) {
               bioTextarea.value = currentText.slice(0, maxCharacters);
          }
+
          if (currentText.length >= 100) {
               feedbackLabel.style.color = "red";
+              change = false;
          } else {
               feedbackLabel.style.color = "white";
+              change = true;
          }
 
          feedbackLabel.textContent = `${bioTextarea.value.length}/${maxCharacters}`;
     });
+
+    document.getElementById('save-changes-feedback').textContent = "FEEDBACK";
 });
 
 /* ---- CROPPER ---- */
@@ -127,3 +134,111 @@ cropCancelBtn.addEventListener("click", () => {
     cropper = null;
     imageInput.value = "";
 });
+
+function saveUserDetails() {
+    const newUser = document.getElementById('username').value;
+    const newDisplayName = document.getElementById('display-name').value;
+    const newBio = document.getElementById('bio').value;
+
+    if (newUser === profileDetails.username) {
+        document.getElementById('username-feedback').textContent = "This is already your username.";
+        change = false;
+    }
+    if (newDisplayName === profileDetails.displayname) {
+        document.getElementById('dn-feedback').textContent = "This is already your display name.";
+        change = false;
+    }
+    if (newBio === profileDetails.bio) {
+        document.getElementById('bio-feedback').textContent = "This is already your bio.";
+        change = false;
+    }
+
+    if (change) {
+        fetch('/edit-profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                newUser, 
+                newDisplayName,
+                newBio
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('username-feedback').textContent = data.errorMessageUser;
+            document.getElementById('dn-feedback').textContent = data.errorMessageDN;
+        });
+    }
+}
+
+function saveAccountInfo() {
+    var newEmail = document.getElementById('email').value;
+    var newNum = document.getElementById('tel-number').value;
+    newNum = newNum.replace(/\s+/g, '');
+
+    if (newEmail === profileDetails.email) {
+        document.getElementById('username-feedback').textContent = "This is already your registered email.";
+        change = false;
+    }
+    const phoneClean = profileDetails.displayname.replace(/\s+/g, '');
+    if (newNum === phoneClean) {
+        document.getElementById('dn-feedback').textContent = "This is already your registered phone number.";
+        change = false;
+    }
+
+    if (change) {
+        newNum = newNum.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3");
+
+        fetch('/edit-profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                newEmail, 
+                newNum
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('email-feedback').textContent = data.errorMessageEmail;
+            document.getElementById('tel-feedback').textContent = data.errorMessageNum;
+        });
+    }
+}
+
+function changePassword() {
+    var currentPass = document.getElementById('curr-password').value;
+    var newPass = document.getElementById('password').value;
+    var repeatPass = document.getElementById('confirm-password').value;
+
+    if (currentPass != profileDetails.password) {
+        console.log(profileDetails.password);
+        console.log(currentPass);
+        document.getElementById('update-pw-feedback').textContent = "Your entry does not match your current password.";
+        change = false;
+    }
+
+    if (newPass == profileDetails.password) {
+        console.log(profileDetails.password);
+        document.getElementById('update-pw-feedback').textContent = "Please choose a different password.";
+        change = false;
+    }
+
+    if (newPass == repeatPass) {
+        document.getElementById('cpw-feedback').textContent = "Your entries do not match.";
+        document.getElementById('update-pw-feedback').textContent = "";
+        change = false;
+    }
+
+    if (change) {
+        fetch('/edit-profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                newPass
+            })
+        })
+        .then(response => response.json());
+        
+        document.getElementById('update-pw-feedback').textContent = "Successfully changed password.";
+    }
+}

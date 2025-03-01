@@ -105,12 +105,12 @@
                                    <div id="change-username" class="input-fields">
                                         <p class="input-label"> Username </p>
                                         <input type="text" id="username" name="username" placeholder="New username">
-                                        <label id="username-feedback" class="input-feedback">insert feedback</label>
+                                        <label id="username-feedback" class="input-feedback"></label>
                                    </div>
                                    <div id="change-display-name" class="input-fields">
                                         <p class="input-label"> Display Name </p>
                                         <input type="text" id="display-name" name="display-name" placeholder="New display name">
-                                        <label id="dn-feedback" class="input-feedback">insert feedback</label>
+                                        <label id="dn-feedback" class="input-feedback"></label>
                                    </div>
                               </div>
 
@@ -125,8 +125,8 @@
 
                          <!-- SAVE USER DETAILS -->
                          <div id="save-changes-row" class="input-segment-rows button-row">
-                              <label id="save-changes-feedback" class="input-feedback">insert feedback</label>
-                              <button id="save-changes" class="save-buttons">
+                              <label id="save-changes-feedback" class="input-feedback"></label>
+                              <button id="save-changes" onclick="saveUserDetails();" class="save-buttons">
                                    Save Changes
                               </button>
                          </div>
@@ -141,18 +141,18 @@
                                    <div id="change-email" class="input-fields">
                                         <p class="input-label"> Email </p>
                                         <input type="email" id="email" name="email" placeholder="New email">
-                                        <label id="email-feedback" class="input-feedback">insert feedback</label>
+                                        <label id="email-feedback" class="input-feedback"></label>
                                    </div>
                                    <div id="change-ematelil" class="input-fields">
                                         <p class="input-label"> Phone Number </p>
                                         <input type="tel" id="tel-number" name="tel-number" placeholder="New number">
-                                        <label id="tel-feedback" class="input-feedback">insert feedback</label>
+                                        <label id="tel-feedback" class="input-feedback"></label>
                                    </div>
 
                                    <!-- SAVE ACCOUNT INFO -->
                                    <div class="button-row">
                                         <label id="update-acc-feedback" class="input-feedback">insert feedback</label>
-                                        <button id="update-acc" class="save-buttons">
+                                        <button id="update-acc" onclick="saveAccountInfo();" class="save-buttons">
                                              Update Account
                                         </button>
                                    </div>
@@ -164,7 +164,7 @@
                                    <div id="password-edit">
                                         <div id="current-password" class="input-fields password-edit">
                                              <p class="input-label"> Current Password </p>
-                                             <input type="password" id="current-password" name="password" placeholder="Current password">
+                                             <input type="password" id="curr-password" name="password" placeholder="Current password">
                                         </div>
                                         <div id="change-password" class="input-fields password-edit">
                                              <p class="input-label"> New Password </p>
@@ -180,8 +180,8 @@
 
                                    <!-- SAVE ACCOUNT PASSWORD -->
                                    <div class="button-row">
-                                        <label id="update-pw-feedback" class="input-feedback">insert feedback</label>
-                                        <button id="update-pw" class="save-buttons" style:>
+                                        <label id="update-pw-feedback" class="input-feedback"></label>
+                                        <button id="update-pw" onclick="changePassword();" class="save-buttons" style:>
                                              Update Password
                                         </button>
                                    </div>
