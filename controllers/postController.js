@@ -4,13 +4,15 @@ const moment = require('moment');   // For time display
 // TEMP, to be replaced with homepage code
 const post_index = (req, res) => {
     Post.find().sort({ createdAt: -1 }) // sorts to show latest entry
-    .then((result) => {
-        res.render('homeTemp', { title: 'Home', posts: result});  // sends db data to html file
-        
-    })
-    .catch((err) => {
-        console.log(err)
-    });
+        .populate('author') // This will populate the 'author' field with user data
+        .exec()
+        .then((result) => {
+            res.render('homeTemp', { title: 'Home', post: result});  // sends db data to html file
+            
+        })
+        .catch((err) => {
+            console.log(err)
+        });
 };
 
 // Getting a specific post

@@ -120,17 +120,113 @@
                     
                     <!-- POST FEED -->
 
-                    <div id="postFeed"></div>
-                        {{#if posts.length}}
-                            {{#each posts}}
-                                <a class="single" href="/posts/{{_id}}">
-                                    <h3 class="title">{{title}}</h3>
-                                </a>
+                    <div id="postFeed">
+
+                        {{#if post.length}}
+                            {{#each post}}
+                                {{#if title}}   <!-- Checks if the post is not a reply -->
+                                    <div class="post" onclick="window.location.href='/posts/{{_id}}';">
+                                        <!-- POST USER -->
+                                        <div class="postUser">
+
+                                            <div class="profilePic">
+                                                <img src="{{author.profilepic}}" alt="userProfilePicture" class="userProfilePic">
+                                            </div>
+
+                                            <div class="usernameAndTime">
+                                                <p class="username">{{author.displayname}}</p>
+                                                <p class="timePosted">{{author.username}} | {{createdAt}}</p>
+                                            </div>
+
+                                            <!-- NOT DONE -->
+                                            <!-- IF USER IS LOGGED IN -->
+                                            <!--
+                                            <button class="optionsButton" post-options-id="popUp${postCounter}" onclick="togglePopup('none', '${postCounter}', '${container.id}')">
+                                                <img src="../resources/Options Button.svg" alt="">
+                                            </button>
+                                            -->
+
+                                            <!-- NOT DONE -->
+                                            <!-- POST OPTIONS -->
+                                            <!--
+                                            <div class="popUpOptions" id="popUp${postCounter}">
+                                                <div class="postOptionsContent">
+                                                    <button class="activeOptionsButton" post-options-id="popUp${postCounter}" onclick="togglePopup('none', '${postCounter}', '${container.id}')">
+                                                        <img src="../resources/Options Button.svg" alt="">
+                                                    </button>
+                                                        <a href="../html/postPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="viewButton">View Post</button></a>
+                                                        <a href="../html/newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Copy Link</button></a>
+
+                                                    ${post.own ? `
+                                                        <a href="../html/newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Edit Post</button></a>
+                                                        <a href="" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="deleteButton">Delete Post</button></a>
+                                                    ` : ""}
+                                                </div>
+                                            </div>
+                                            -->
+
+                                        </div>
+
+                                        <!-- POST CONTENT -->
+                                        <div class="postContent">
+
+                                            <!-- TAGS -->
+                                            <div class="posttags">
+                                                {{#if tags}}
+                                                    {{#each tags}}
+                                                        <a href="{{this}}">{{this}}</a>
+                                                    {{/each}}
+                                                {{/if}}
+                                            </div>
+
+                                            <div id="posttile" onclick="window.location.href='/posts/{{_id}}';">
+                                                <h2>{{title}}</h2>
+                                            </div>
+
+                                            <!-- POST CAPTION HERE -->
+                                            <!-- TO CHANGE: href link -->
+                                            <div id="usercaption" onclick="window.location.href='/posts/{{_id}}';">{{content}}</div>
+
+                                            {{#if images}}
+                                                <div id="userphotocontainer">
+                                                    {{#each images}}
+                                                        <img class="clickable-image" src="{{this}}" onclick="openModal(this)">
+                                                    {{/each}}
+                                                </div>
+                                            {{/if}}
+                                        </div>
+                   
+                                        <!-- To Be Fixed -->
+                                        <!-- ACTION BUTTONS -->
+                                        <div class="postActions">
+                                            <button id="heart" class="actionButton">
+                                                <img src="../resources/Heart.svg"/>
+                                                <span class="counter">{{likeCount}}</span>
+                                            </button>
+                                            <img src="../resources/Line.svg" alt="Line">
+                                            <button id="heartCrack" class="actionButton">
+                                                <img src="../resources/HeartCrack.svg"/>
+                                                <span class="counter">{{dislikeCount}}</span>
+                                            </button>
+                                            <a href="../html/replyPage.html" class="postLink" onclick="window.location.href='/posts/{{_id}}';">
+                                                <button class="actionButton commentButton">
+                                                    <img src="../resources/Comments.svg"/>
+                                                </button>
+                                            </a>
+                                            <button id="bookmark" class="actionButton">
+                                                <img src="../resources/bookmark.svg"/>
+                                            </button>
+                                        </div>
+
+                                        <div class="postDivider"></div>
+                                    </div>
+                                {{/if}}
                             {{/each}}
                         {{else}}
                             <p>There are no posts to display</p>
                         {{/if}}
-                    </script>
+                    </div>
+                    
                
                </div>
 
