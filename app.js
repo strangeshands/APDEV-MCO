@@ -53,6 +53,13 @@ app.get("/profile", userController.loadUserProfile);
 app.get("/profile/:tabId", userController.loadUserProfile);
 
 /**
+ *  [EDIT PROFILE PAGE]
+ *  TO DO:
+ *      > update to "/edit-profile/<username>" so <username> dynamically changes depending on the selected profile
+ */
+app.get("/edit-profile", userController.updateProfile);
+
+/**
  *  GHOST LINK - no dedicated page
  *  > allows updating of bookmarks
  */

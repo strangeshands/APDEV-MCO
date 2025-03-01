@@ -211,8 +211,14 @@ const updateLike = async(req,res) => {
     }
 };
 
+const updateProfile = async(req,res) => {
+    profileDetails = await users.findOne({ username: user });
+    res.render('editProfilePage', { profileDetails } );
+};
+
 module.exports = { 
     loadUserProfile, 
     updateBookmark,
-    updateLike
+    updateLike,
+    updateProfile
 };
