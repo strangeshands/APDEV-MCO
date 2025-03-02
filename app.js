@@ -38,6 +38,7 @@ const homeController = require("./controllers/homeController");
 
 /* ---------- Routes ----------- */
 const postRoutes = require('./routes/postRoutes');
+const homeRoutes = require('./routes/homeRoutes');
 
 // ----- Home Page [TEST] ----- //
 
@@ -49,17 +50,12 @@ app.get('/', (req, res) => {
 });
 */
 
-app.use('/posts', postRoutes);
 
 // ----- Use Controllers----- //
-app.use("/", homeController);
+app.use("/", homeRoutes);
 
-/*
-// ----- Routes ----- //
-app.get('/', (req, res) => {
-    // to be filled
-});
-*/
+app.use('/posts', postRoutes);
+
 
 /**
  *  [PROFILE PAGES]

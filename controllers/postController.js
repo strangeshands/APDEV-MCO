@@ -1,20 +1,6 @@
 const Post = require('../models/posts');
 const moment = require('moment');   // For time display
 
-// TEMP, to be replaced with homepage code
-const post_index = (req, res) => {
-    Post.find().sort({ createdAt: -1 }) // sorts to show latest entry
-        .populate('author') // This will populate the 'author' field with user data
-        .exec()
-        .then((result) => {
-            res.render('homeTemp', { title: 'Home', post: result});  // sends db data to html file
-            
-        })
-        .catch((err) => {
-            console.log(err)
-        });
-};
-
 // Getting a specific post
 const post_details = (req, res) => {    // :id to search for actual id
     const id = req.params.id            // .id to match with url above
@@ -64,7 +50,6 @@ const post_delete = (req, res) => {
 }
 
 module.exports = {
-    post_index,
     post_details,
     post_create_get,
     post_create_post,
