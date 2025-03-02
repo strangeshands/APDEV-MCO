@@ -4,13 +4,14 @@ const moment = require('moment');   // For time display
 
 // ---- [START] TEST for Home with NavBar ---- //
 
-// Default user ID (will replace with actual logged-in user after login implementation)
-const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
-
 const homePage = async (req, res) => {
     try {
-        // Query the default user
-        const userPromise = User.findById(tempUserId).exec();
+        // Extract userId from query parameters
+        const loggedInUserId = req.query.userId;
+
+        if (!loggedInUserId) {
+            return res.redirect('/login'); // Redirect to login if no userId
+        };
 
         // All posts for the timeline
         const allPostsPromise = Post.find()
@@ -53,15 +54,18 @@ const homePage = async (req, res) => {
                     return { post, postDate };
                 });
             });
+
+        // Query logged-in user
+        const userPromise = User.findById(loggedInUserId).exec();
         
         // Default (logged-in) user's posts for navbar
-        const userPostsPromise = Post.find({ parentPost: null, author: tempUserId })
+        const userPostsPromise = Post.find({ parentPost: null, author: loggedInUserId })
             .sort({ createdAt: -1 })
             .populate('author')
             .exec()
 
         // Default (logged-in) user's comments for navbar
-        const userCommentsPromise = Post.find({ parentPost: { $ne: null }, author: tempUserId})
+        const userCommentsPromise = Post.find({ parentPost: { $ne: null }, author: loggedInUserId})
             .sort({ createdAt: -1 })
             .populate('author')
             .exec()

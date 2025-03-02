@@ -6,22 +6,25 @@
  *      > hbs
  *      > moment
  *      > body-parser
+ *      > bcrypt
+ *      > express-fileupload
  */
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
-
+const fileUpload = require('express-fileupload')
 /* --------------------- */
 
 const app = express();
 
 // ----- Middleware & Static Files ----- //
-app.use(express.static('public'));  // everything in the given dir is accessible (great for css and images)
+app.use(express.static('public'));                  // everything in the given dir is accessible (great for css and images)
 app.use(express.urlencoded({ extended: true }));    // parses the url to an object to be used in te req obj // needed or else obj is undefined
-app.use(morgan('dev'));     // used for automatic logging of http request details (method, url, status, ...)
-app.use(express.json());  // allows JSON parsing
+app.use(morgan('dev'));                             // used for automatic logging of http request details (method, url, status, ...)
+app.use(express.json());                            // allows JSON parsing
+app.use(fileUpload());                              // allows file uploading
 
 // to make data from DB usable in javascript files
 app.set('view engine','hbs'); // register view engine
@@ -40,13 +43,12 @@ const homeController = require("./controllers/homeController");
 /* ---------- Routes ----------- */
 const postRoutes = require('./routes/postRoutes');
 const homeRoutes = require('./routes/homeRoutes');
-
+const authRoutes = require('./routes/authRoutes')
 
 // ----- Use Controllers----- //
 app.use("/", homeRoutes);
-
 app.use('/posts', postRoutes);
-
+app.use("/", authRoutes); 
 
 /**
  *  [PROFILE PAGES]
