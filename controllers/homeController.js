@@ -19,7 +19,52 @@ const homePage = async (req, res) => {
             .exec()
             .then((result) => {
                 return result.map(post => {  // Gets formatted date
-                    const postDate = moment(post.createdAt).format('MMM DD, YYYY');
+                    
+                    var postDate;
+
+                    // Get the time the post was made
+                    const postTimeCreated = moment(post.createdAt);
+
+                    // Get the current time
+                    const now = moment();
+
+                    // Calculate the duration between the two dates
+                    const duration = moment.duration(now.diff(postTimeCreated));
+                    
+                    if (duration.months() > 0) {
+                        postDate = moment(post.createdAt).format('MMM DD, YYYY');
+                    } else if (duration.weeks() > 0) {
+                        if (duration.weeks() > 1) {
+                            postDate = `${duration.weeks()} weeks ago`;
+                        } else {
+                            postDate = `${duration.weeks()} week ago`;
+                        }
+                    } else if (duration.days() > 0) {
+                        if (duration.days() > 1) {
+                            postDate = `${duration.days()} days ago`;
+                        } else {
+                            postDate = `${duration.days()} day ago`;
+                        }
+                    } else if (duration.hours() > 0) {
+                        if (duration.hours() > 1) {
+                            postDate = `${duration.hours()} hours ago`;
+                        } else {
+                            postDate = `${duration.hours()} hour ago`;
+                        }
+                    } else if (duration.minutes() > 0) {
+                        if (duration.minutes() > 1) {
+                            postDate = `${duration.minutes()} minutes ago`;
+                        } else {
+                            postDate = `${duration.minutes()} minute ago`;
+                        }
+                    } else {
+                        if (duration.seconds() > 1) {
+                            postDate = `${duration.seconds()} seconds ago`;
+                        } else {
+                            postDate = `${duration.minutes()} second ago`;
+                        }
+                    }
+                    
                     return { post, postDate };
                 });
             });
