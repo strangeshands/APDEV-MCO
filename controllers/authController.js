@@ -3,6 +3,11 @@ const User = require('../models/users');
 
 // NOTE: bcrypt not used yet and no sessions implemented (user in url)
 
+// Render login page
+const renderLoginPage = (req, res) => {
+    res.render('loginPage', { title: "Log In" });
+};
+
 // Handle login authentication
 const loginUser = async (req, res) => {
     const { username, password } = req.body;
@@ -16,7 +21,7 @@ const loginUser = async (req, res) => {
         }
 
         // Redirect with userId in the URL
-        res.redirect(`/home?userId=${user._id}`);
+        res.redirect(`/?userId=${user._id}`);
     } catch (error) {
         console.error("Login error:", error);
         res.status(500).send("Server Error");
