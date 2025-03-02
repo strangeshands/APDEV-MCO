@@ -6,6 +6,7 @@
  *      > hbs
  *      > moment
  *      > body-parser
+ *      > bcrypt
  */
 const express = require('express');
 const morgan = require('morgan');
@@ -40,13 +41,12 @@ const homeController = require("./controllers/homeController");
 /* ---------- Routes ----------- */
 const postRoutes = require('./routes/postRoutes');
 const homeRoutes = require('./routes/homeRoutes');
-
+const authRoutes = require('./routes/authRoutes')
 
 // ----- Use Controllers----- //
 app.use("/", homeRoutes);
-
 app.use('/posts', postRoutes);
-
+app.use("/", authRoutes); 
 
 /**
  *  [PROFILE PAGES]

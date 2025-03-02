@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Connectify - Log In</title>
+    <link rel="stylesheet" type="text/css" href="/css/starterPage.css">
+    <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
+  </head>
+  <body>
+    <div class="frame">
+
+      <!-- LOGIN PROMPT -->
+      <div class="title">
+        LOG IN
+      </div>
+
+      <!-- ERROR MESSAGE (if login fails) -->
+      {{#if error}}
+        <p class="errorMessage">{{error}}</p>
+      {{/if}}
+
+      <!-- LOGIN FORM -->
+      <form action="/login" method="POST">
+        <div class="inputFields">
+          <div class="inputs">
+            <p class="inputLabel"> Username </p>
+            <input type="text" name="username" placeholder="Enter your username" required>
+          </div>
+
+          <div class="inputs">
+            <p class="inputLabel"> Password </p>
+            <input type="password" name="password" placeholder="Enter your password" required>
+          </div>
+        </div>
+
+        <div id="remember-me">
+          <input type="checkbox" id="rememberMe" name="rememberMe">
+          <label for="rememberMe">Remember Me</label>
+        </div>
+
+        <!-- REGISTER PROMPT -->
+        <p class="subText">
+          New to <span class="app">Connectify</span>? <a href="/signup">Sign Up</a>
+        </p>
+
+        <!-- LOGIN BUTTON -->
+        <button id="buttons" type="submit">Log In</button>
+      </form>
+
+    </div>
+  </body>
+</html>

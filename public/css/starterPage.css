@@ -1,0 +1,150 @@
+/*
+     This is a CSS file used in loginPage.html and signupPage.html.
+*/
+
+@font-face {
+     font-family: 'Inter'; 
+     src: url('../resources/InterFont.ttf');
+}
+
+* {
+     font-family: 'Inter'; 
+}
+ 
+body {
+     background-image: url("../resources/loginbg.png");
+     background-repeat: repeat;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     
+     height: 100vh;
+     margin: 32;
+}
+
+a {
+     color: #5CDAE8;
+}
+
+.title {
+     color: #D4DADA; 
+
+     font-size: 38px; 
+     font-weight: 700; 
+     margin-bottom: -5px;
+}
+
+.subText {
+     color: #D4DADA; 
+
+     font-size: 13px;
+     margin-top: 22px;
+     margin-bottom: 8px;
+     opacity: 80%;
+}
+
+.app {
+     font-weight: bold;
+     color: #98D5DC; 
+}
+
+#buttons {
+     background-color: #98D5DC;
+     color: black; 
+     border: none; 
+     cursor: pointer;
+     font-weight: bold;
+
+     padding: 5px 20px;
+     border-radius: 8px;
+     font-size: 15px;
+     transition: background-color 0.3s, transform 0.2s;
+}
+
+#buttons:hover {
+     background-color: #7FB8C8;
+     transform: scale(1.05);
+}
+ 
+
+#buttons:active {
+     transform: scale(0.95); 
+}
+
+.frame {
+     padding: 30px 150px;
+     gap: 10px; 
+
+     background: #1E1E1E; 
+     box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.25); 
+     border-radius: 28px; 
+
+     flex-direction: column; 
+     justify-content: center; 
+     align-items: center; 
+     display: flex;
+
+     width: auto;
+     height: auto;
+     margin: auto;
+}
+
+.inputFields {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     gap: 10px;
+     width: 150%;
+     
+}
+
+.inputs {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     width: 100%;
+}
+
+input[type="text"],  input[type="password"], input[type="email"] {
+     width: 93%;
+     padding: 10px;
+     margin-bottom: -10px;
+     
+     border: 1px solid #ccc;
+     border-radius: 4px;
+     font-size: 13px; 
+     font-family: "Inter";     
+}
+
+.inputLabel {
+     align-self: flex-start;
+     text-align: left; 
+     color: rgba(255, 255, 255, 0.80); 
+     font-size: 15px; 
+     font-weight: 500; 
+     margin-bottom: 10px;
+}
+
+#remember-me {
+     display: flex;
+     align-items: center;
+     justify-content: start;
+     gap: 5px;
+
+     width: 153%;
+
+     margin-top: 15px;
+     margin-bottom: -5px;
+
+     color: white;
+     font-size: 13px;
+}
+
+#remember-me input {
+     transform: scale(1.5);
+}
