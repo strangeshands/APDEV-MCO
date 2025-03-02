@@ -19,13 +19,13 @@ const homePage = async (req, res) => {
             .exec();
         
         // Default (logged-in) user's posts for navbar
-        const userPostsPromise = Post.find({ author: tempUserId })
+        const userPostsPromise = Post.find({ parentPost: null, author: tempUserId })
             .sort({ createdAt: -1 })
             .populate('author')
             .exec()
 
         // Default (logged-in) user's comments for navbar
-        const userCommentsPromse = Post.find({ parentPos: { $ne: null }, author: tempUserId})
+        const userCommentsPromise = Post.find({ parentPost: { $ne: null }, author: tempUserId})
             .sort({ createdAt: -1 })
             .populate('author')
             .exec()
@@ -52,7 +52,7 @@ const homePage = async (req, res) => {
             userComments
         });
     } catch(err) {
-        consoler.error(err);
+        console.error(err);
         res.status(500).send("Internal Server Error");
     }
 };

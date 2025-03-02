@@ -37,77 +37,90 @@
 
           <div class="content">
 
-               <!-- IF USER IS LOGGED IN -->
-               <!-- NAV BAR -->
-               <div class="navBar">
+                <!-- IF USER IS LOGGED IN -->
+                <!-- NAV BAR -->
+                <div class="navBar">
 
                     <!-- USER PROFILE -->
                     <div class="profileNav">
-                         <!-- PROFILE NAME, PIC, # OF LIKES/POSTS, BIO-->
-                         <div class="profile">
-                              <div id="userAvatar">
-                                   <img src="../resources/pfpSample.jpg" class="userProfilePic" alt="User Profile Pic">
-                              </div>
-                              <div class="usernameAndhandle">
-                                   <p id="profileUsername">DARNA</p>
-                                   <p id="profileUserhandle">@AkoSiDarna</p>
-                              </div>
-                         </div>
+                        <!-- PROFILE NAME, PIC, BIO -->
+                        <div class="profile">
+                            <div id="userAvatar">
+                                <img src="{{user.profilepic}}" class="userProfilePic" alt="User Profile Pic">
+                            </div>
+                            <div class="usernameAndhandle">
+                                <p id="profileUsername">{{user.displayname}}</p>
+                                <p id="profileUserhandle">{{user.username}}</p>
+                            </div>
+                        </div>
 
-                         <div class="navBarDivider"></div>
+                        <div class="navBarDivider"></div>
 
-                         <div class="navBarContent">
-                         
-                              <!-- NAV BAR OPTIONS -->
-                              <div class="registeredOptions">
-                                   <button class="navBarButtons" id="viewProfile" onclick="window.location.href='/profile'">
-                                        <img src="../resources/Profile Icon.svg" alt="View Profile Icon">
-                                        View Profile
-                                   </button>
-                                   <button class="navBarButtons" id="editProfile" onclick="window.location.href='/editProfile'">
-                                        <img src="../resources/Edit Icon.svg" alt="Edit Profile Icon">
-                                        Edit Profile
-                                   </button>
-                                   <button class="navBarButtons" id="logOut" onclick="window.location.href='logout'">
-                                        <img src="../resources/Log Out Icon.svg" alt="Log Out Icon">
-                                        Log Out
-                                   </button>
-                              </div>
-                         </div>
+                        <div class="navBarContent">
+                            <!-- NAV BAR OPTIONS -->
+                            <div class="registeredOptions">
+                                <button class="navBarButtons" id="viewProfile" onclick="window.location.href='/profile'">
+                                    <img src="../resources/Profile Icon.svg" alt="View Profile Icon">
+                                    View Profile
+                                </button>
+                                <button class="navBarButtons" id="editProfile" onclick="window.location.href='/editProfile'">
+                                    <img src="../resources/Edit Icon.svg" alt="Edit Profile Icon">
+                                    Edit Profile
+                                </button>
+                                <button class="navBarButtons" id="logOut" onclick="window.location.href='/logout'">
+                                    <img src="../resources/Log Out Icon.svg" alt="Log Out Icon">
+                                    Log Out
+                                </button>
+                            </div>
+                        </div>
                     </div>
-               
-                    <!-- POSTS AND COMMENTS SUBSECTION -->
+
+                    <!-- POSTS AND COMMENTS SECTION -->
                     <div class="userPostsAndComments">
+                        <!-- POSTS -->
+                        <div class="userPostsAndCommentsHeader">
+                            <p class="userNavTitle">Posts</p>
+                            <a class="userNavMore" href="/profile">More ></a>
+                        </div>
 
-                         <!-- POSTS -->
-                         <div class="userPostsAndCommentsHeader">
-                              <p class="userNavTitle">Posts</p>
-                              <a class="userNavMore" href="../html/profilePage.html">More ></a>
-                         </div>
-
-                         <div class="userPostsAndCommentsContent" id="userPostsContent"></div>
-                         <script src="../js/loadNavPosts.js"></script>
-                         <script>
-                            document.addEventListener("DOMContentLoaded", loadNavPosts());
-                         </script>
+                        <div class="userPostsAndCommentsContent" id="userPostsContent">
+                            {{#if userPosts.length}}
+                                {{#each userPosts}}
+                                    <a class="userPostLink" href="/posts/{{_id}}">
+                                        <div class="userPost">
+                                            <p class="userPostTitle">{{title}}</p>
+                                        </div>
+                                    </a>
+                                {{/each}}
+                            {{else}}
+                                <p class="noPostsOrComments">No posts yet.</p>
+                            {{/if}}
+                        </div>
                     </div>
-                    
+
                     <!-- COMMENTS -->
                     <div class="userPostsAndComments">
+                        <div class="userPostsAndCommentsHeader">
+                            <p class="userNavTitle">Comments</p>
+                            <a class="userNavMore" href="/profile">More ></a>
+                        </div>
 
-                         <div class="userPostsAndCommentsHeader">
-                              <p class="userNavTitle">Comments</p>
-                              <a class="userNavMore" href="../html/profilePage.html">More ></a>
-                         </div>
-
-                         <div class="userPostsAndCommentsContent" id="userCommentsContent"></div>
-                         <script src="../js/loadNavComments.js"></script>
-                         <script>
-                            document.addEventListener("DOMContentLoaded", loadNavComments());
-                         </script>
+                        <div class="userPostsAndCommentsContent" id="userCommentsContent">
+                            {{#if userComments.length}}
+                                {{#each userComments}}
+                                    <a class="userPostLink" href="/posts/{{parentPost}}">
+                                        <div class="userPost">
+                                            <p class="userComment">{{content}}</p>
+                                        </div>
+                                    </a>
+                                {{/each}}
+                            {{else}}
+                                <p class="noPostsOrComments">No comments yet.</p>
+                            {{/if}}
+                        </div>
                     </div>
+                </div>
 
-               </div> 
                
                <!-- TIMELINE -->
                <div class="timeline" id="postsTimeline">
