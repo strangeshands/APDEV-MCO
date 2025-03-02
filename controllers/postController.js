@@ -9,7 +9,36 @@ const post_details = (req, res) => {    // :id to search for actual id
         .populate('author') // This will populate the 'author' field with user data
         .exec()
         .then((result) => {
-            const postDate = moment(result.createdAt).format('MMM DD, YYYY');
+            var postDate;
+            
+            // Get the time the post was made
+            const postTimeCreated = moment(result.createdAt);
+
+            // Get the current time
+            const now = moment();
+
+            // Calculate the duration between the two dates
+            const duration = moment.duration(now.diff(postTimeCreated));
+
+            // Time Format
+            function formatDuration(unit, value) {
+                return value > 1 ? `${value} ${unit}s ago` : `${value} ${unit} ago`;
+            }
+            
+            if (duration.months() > 0) {
+                postDate = moment(post.createdAt).format('MMM DD, YYYY');
+            } else if (duration.weeks() > 0) {
+                postDate = formatDuration('week', duration.weeks());
+            } else if (duration.days() > 0) {
+                postDate = formatDuration('day', duration.days());
+            } else if (duration.hours() > 0) {
+                postDate = formatDuration('hour', duration.hours());
+            } else if (duration.minutes() > 0) {
+                postDate = formatDuration('minute', duration.minutes());
+            } else {
+                postDate = formatDuration('second', duration.seconds());
+            }
+
             res.render('postPage', { post: result, title: 'Post', postDate: postDate });
         })
         .catch((err) => {

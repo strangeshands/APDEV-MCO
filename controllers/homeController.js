@@ -30,39 +30,24 @@ const homePage = async (req, res) => {
 
                     // Calculate the duration between the two dates
                     const duration = moment.duration(now.diff(postTimeCreated));
+
+                    // Time Format
+                    function formatDuration(unit, value) {
+                        return value > 1 ? `${value} ${unit}s ago` : `${value} ${unit} ago`;
+                    }
                     
                     if (duration.months() > 0) {
                         postDate = moment(post.createdAt).format('MMM DD, YYYY');
                     } else if (duration.weeks() > 0) {
-                        if (duration.weeks() > 1) {
-                            postDate = `${duration.weeks()} weeks ago`;
-                        } else {
-                            postDate = `${duration.weeks()} week ago`;
-                        }
+                        postDate = formatDuration('week', duration.weeks());
                     } else if (duration.days() > 0) {
-                        if (duration.days() > 1) {
-                            postDate = `${duration.days()} days ago`;
-                        } else {
-                            postDate = `${duration.days()} day ago`;
-                        }
+                        postDate = formatDuration('day', duration.days());
                     } else if (duration.hours() > 0) {
-                        if (duration.hours() > 1) {
-                            postDate = `${duration.hours()} hours ago`;
-                        } else {
-                            postDate = `${duration.hours()} hour ago`;
-                        }
+                        postDate = formatDuration('hour', duration.hours());
                     } else if (duration.minutes() > 0) {
-                        if (duration.minutes() > 1) {
-                            postDate = `${duration.minutes()} minutes ago`;
-                        } else {
-                            postDate = `${duration.minutes()} minute ago`;
-                        }
+                        postDate = formatDuration('minute', duration.minutes());
                     } else {
-                        if (duration.seconds() > 1) {
-                            postDate = `${duration.seconds()} seconds ago`;
-                        } else {
-                            postDate = `${duration.minutes()} second ago`;
-                        }
+                        postDate = formatDuration('second', duration.seconds());
                     }
                     
                     return { post, postDate };
