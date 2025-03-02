@@ -106,13 +106,28 @@ imageUploadInput.addEventListener("change", handleImageUpload);
 
 function handleImageUpload(event) {
     const selectedFiles = Array.from(event.target.files);
+    const formData = new FormData();
 
     // Limit total images to 4
     selectedFiles.forEach((file) => {
         if (images.length < 4) {
             const imageURL = URL.createObjectURL(file);
             images.push(imageURL);
+
+            formData.append('images', file)
         }
+    });
+
+    fetch('/', {
+        method: 'POST',
+        body: formData,
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
     });
 
     renderImages();

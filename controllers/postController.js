@@ -67,16 +67,34 @@ const post_create_get = (req, res) => {
 };
 
 // NOT DONE
-const post_create_post = (req, res) => {
-    const blog = new Blog(req.body);
+const post_create_post = async (req, res) => {
+    const formData = req.body;
 
-    blog.save()
-    .then((result) => {
-        res.redirect('/blogs');
-    })
-    .catch((err) => {
-        console.log(err);
+    const postAuthor = await User.findById(tempUserId);
+
+    if (!postAuthor) {
+        return res.status(404).send("User not found");
+    }
+
+    /*
+    let formattedImages = formData.images;
+
+    formattedImages = formattedImages.map(img => {
+        return "/resources/" + img;
     });
+    */
+
+    const postData = { ...formData, author: postAuthor._id };
+    
+    const post = new Post(postData);
+
+    post.save()
+        .then((result) => {
+            res.redirect('/');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
 
 // NOT DONE
