@@ -41,10 +41,10 @@ const renderSignupPage = (req, res) => {
 // Handler user signup
 const signupUser = async (req, res) => {
     try {
-        const { email, username, displayName, password, passwordConf } = req.body;
+        const { email, phone, username, displayname, password, confirmpass } = req.body;
 
         // Verify if password and passwordConf are the same
-        if (password !== passwordConf) {
+        if (password !== confirmpass) {
             return res.render('signupPage', { error: "Password and confirm password input should be the same" });
         }
 
@@ -54,12 +54,24 @@ const signupUser = async (req, res) => {
             return res.render('signupPage', { error: "Username is already in use" });
         }
 
+        // Verify if email is in use
+        const existingEmail = await User.findOne({ email: email });
+        if (existingEmail) {
+            return res.render('signupPage', { error: "Email is already in use" });
+        }
+
+        // Verify if phone number is in use
+        const existingPhone = await User.findOne({ phone: phone });
+        if (existingPhone) {
+            return res.render('signupPage', { error: "Phone Number is already in use" });
+        }
+
         // Create a new user
-        const newUser = new User({ email, username, displayName, password });
+        const newUser = new User({ email, phone, username, displayname, password });
         await newUser.save();
 
-        res.status(201).json({ message: "User added successfully", user: newUser });
-    } catch (err) {
+        res.redirect('/login');
+    } catch (error) {
         console.error("Signup error:", error);
         res.status(500).send("Server Error");
     }

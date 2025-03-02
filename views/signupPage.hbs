@@ -15,12 +15,24 @@
                         SIGN UP
                 </div>
 
+                <!-- ERROR MESSAGE (if login fails) -->
+                {{#if error}}
+                    <div class="errorMessage">
+                    <p>{{error}}</p>
+                    </div>
+                {{/if}}
+                
                 <!-- SIGNUP FORM -->
                 <form action="/signup" method="POST">
                     <div class="inputFields">
                         <div class="inputs">
                             <p class="inputLabel"> Email </p>
                             <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="inputs">
+                            <p class="inputLabel"> Phone Number </p>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone no." required>
                         </div>
 
                         <div class="inputs">
@@ -43,17 +55,16 @@
                             <input type="password" id="confirmpass" name="confirmpass" placeholder="Confirm your password" required>
                         </div>
                     </div>
+        
+                    <!-- LOGIN PROMPT -->
+                    <p class="subText">
+                            Already have an account? <a href="/login">Log In</a>
+                    </p>
+
+                    <!-- CREATE ACCOUNT -->
+                    <button id="buttons" type="submit">Sign Up</button>
+
                 </form>
-               
-
-               <!-- LOGIN PROMPT -->
-               <p class="subText">
-                    Already have an account? <a href="/login">Log In</a>
-               </p>
-
-               <!-- CREATE ACCOUNT -->
-               <button id="buttons" type="button" onclick="window.location.href='../html/homePage.html'">Sign Up</button>
-
           </div>
      </body>
 </html>
