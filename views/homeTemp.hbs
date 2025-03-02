@@ -85,8 +85,7 @@
 
                         <div class="userPostsAndCommentsContent" id="userPostsContent">
                             {{#if userPosts.length}}
-                                {{#each userPosts}}
-                                    <!-- For each post, create a clickable link -->
+                                {{#each userPosts}}=
                                     <a class="userPostLink" href="/posts/{{this._id}}">
                                         <button class="userPost" id="userPost{{@index}}">
                                             {{#if this.images.length}}
