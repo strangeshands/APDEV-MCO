@@ -31,95 +31,89 @@
                 <span class="back">Back</span>
             </div>
 
-            <div class="post">
-                <div class="postHeader">
-                    <div class="userInfo">
-                        <div class="avatar">
-                            <img src="{{user.profilepic}}" alt="userProfilePicture" class="userProfilePic">
-                        </div>
-                        <div class="username">{{user.displayname}}</div>
-                    </div>
-                </div>
-
-                <!-- TAG INPUT CONTAINER (hidden by default) -->
-                <div id="tagsContainer" class="tags" style="display: none;">
-                    <div id="tagChips"></div>
-                    <input 
-                        type="text" 
-                        id="tagsInput" 
-                        placeholder="Type a tag, then press comma or enter"
-                    />
-                </div>
-
-                <!-- TITLE INPUT -->
-                <div class="postTitle">
-                    <input 
-                        type="text" 
-                        id="postTitleInput" 
-                        placeholder="Your thoughts need title..."
-                    />
-                </div>
-
-                <!-- TEXT AREA FOR MAIN POST CONTENT (up to 300 chars) -->
-                <div class="postText">
-                    <textarea
-                        id="postTextInput"
-                        placeholder="What's on your mind?"
-                        maxlength="300"
-                    ></textarea>
-                </div>
-
-                <!-- IMAGE INPUT (hidden by default) -->
-                <input 
-                    type="file" 
-                    id="imageUploadInput" 
-                    accept="image/*" 
-                    multiple 
-                    style="display: none;"
-                />
-
-                <!-- CHARACTER LIMIT DISPLAY -->
-                <div id="feedback" class="charLim">0/300</div>
-                <div id="break"></div>
-
-                <!-- UPLOADED IMAGES CONTAINER -->
-                <div class="postContent" id="postContentContainer"></div>
-
-                <div class="horizontalBar"></div>
-                <!-- POST ACTIONS -->
-                <div class="postActions">
-                    <div class="actionButtonsLeft">
-                        <button class="actionButton" id="addImageButton">
-                            <img src="../resources/ImageAdd.svg" alt="Upload">
-                        </button>
-
-                        <!-- Image Modal -->
-                        <div id="imageModal" class="modal">
-                            <span class="close">&times;</span>
-                            <div id="userphotocontainer-modal">
-                                <img class="modal-content" id="modalImage">
+            <form action="/posts" method="POST">
+                <div class="post">
+                    <div class="postHeader">
+                        <div class="userInfo">
+                            <div class="avatar">
+                                <img src="{{user.profilepic}}" alt="userProfilePicture" class="userProfilePic">
                             </div>
-                            <div id="caption"></div>
+                            <div class="username">{{user.displayname}}</div>
                         </div>
-
-                        <script>
-                            const addImageButton = document.getElementById('addImageButton');
-                            const imageContainer = document.getElementById('postContentContainer');
-
-                            addImageButton.addEventListener('click', function() {
-                                imageContainer.style.display = 'flex';
-                            });
-                        </script>
-
-                        <button class="actionButton" id="addTagButton">
-                            <img src="../resources/Hash.svg" alt="Add Tag">
-                        </button>
                     </div>
-
-                    <!-- POST BUTTON -->
-                    <button class="postButton">Post</button>
+                    <!-- TAG INPUT CONTAINER (hidden by default) -->
+                    <div id="tagsContainer" class="tags" style="display: none;">
+                        <div id="tagChips"></div>
+                        <input
+                            type="text"
+                            id="tagsInput"
+                            placeholder="Type a tag, then press comma or enter"
+                            name="tags[]"
+                        />
+                    </div>
+                    <!-- TITLE INPUT -->
+                    <div class="postTitle">
+                        <input
+                            type="text"
+                            id="postTitleInput"
+                            placeholder="Your thoughts need title..."
+                            name="title"
+                        />
+                    </div>
+                    <!-- TEXT AREA FOR MAIN POST CONTENT (up to 300 chars) -->
+                    <div class="postText">
+                        <textarea
+                            id="postTextInput"
+                            placeholder="What's on your mind?"
+                            maxlength="300"
+                            name="content"
+                        ></textarea>
+                    </div>
+                    <!-- IMAGE INPUT (hidden by default) -->
+                    <input
+                        type="file"
+                        id="imageUploadInput"
+                        accept="image/*"
+                        multiple
+                        style="display: none;"
+                        name="image"
+                    />
+                    <!-- CHARACTER LIMIT DISPLAY -->
+                    <div id="feedback" class="charLim">0/300</div>
+                    <div id="break"></div>
+                    <!-- UPLOADED IMAGES CONTAINER -->
+                    <div class="postContent" id="postContentContainer"></div>
+                    <div class="horizontalBar"></div>
+                    <!-- POST ACTIONS -->
+                    <div class="postActions">
+                        <div class="actionButtonsLeft">
+                            <button type="button" class="actionButton" id="addImageButton">
+                                <img src="../resources/ImageAdd.svg" alt="Upload">
+                            </button>
+                            <!-- Image Modal -->
+                            <div id="imageModal" class="modal">
+                                <span class="close">&times;</span>
+                                <div id="userphotocontainer-modal">
+                                    <img class="modal-content" id="modalImage">
+                                </div>
+                                <div id="caption"></div>
+                            </div>
+                            <script>
+                                const addImageButton = document.getElementById('addImageButton');
+                                const imageContainer = document.getElementById('postContentContainer');
+                                addImageButton.addEventListener('click', function() {
+                                    imageContainer.style.display = 'flex';
+                                });
+                            </script>
+                            <button type="button"class="actionButton" id="addTagButton">
+                                <img src="../resources/Hash.svg" alt="Add Tag">
+                            </button>
+                        </div>
+                        <!-- POST BUTTON -->
+                        <button type="submit" class="postButton">Post</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </main>
 
         <!-- PAGE JAVASCRIPT -->

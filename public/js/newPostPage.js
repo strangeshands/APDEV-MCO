@@ -106,6 +106,7 @@ imageUploadInput.addEventListener("change", handleImageUpload);
 
 function handleImageUpload(event) {
     const selectedFiles = Array.from(event.target.files);
+    const formData = new FormData();
 
     // Limit total images to 4
     selectedFiles.forEach((file) => {
