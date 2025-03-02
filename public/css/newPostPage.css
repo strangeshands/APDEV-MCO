@@ -1,0 +1,286 @@
+/* ---------- BACK BUTTON ---------- */
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.goBackLink {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+.goBackLink .arrow {
+    font-size: 40px; 
+    line-height: 0; 
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px; 
+}
+
+.goBackLink .back {
+    font-size: 16px;
+    font-weight: bold;
+}
+/* ---------- BACK BUTTON ---------- */
+
+/* ---------- MAIN ---------- */
+/* Post Container */
+.post {
+    background-color: #1A1A1A;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.userInfo {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.avatar {
+    background-color: #D9D9D9;
+     border-radius: 50%;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     width: 40px;
+     height: 40px;
+     overflow: hidden;
+}
+
+.userProfilePic {
+    width: 100%;
+    height: 100%;
+}
+
+.username {
+    font-weight: bold;
+    line-height: 25px;
+}
+
+/* Tags Container */
+.tags {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    margin-top: -10px;
+}
+
+/* Tag Chips Container */
+#tagChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+/* Individual Tag Chip */
+.tag-chip {
+    display: inline-flex;
+    align-items: center;
+    background-color: #333;
+    border-radius: 16px;
+    padding: 6px 10px;
+    font-size: 14px;
+    color: white;
+    position: relative;
+}
+
+/* Remove icon inside the chip */
+.remove-icon {
+    margin-left: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Tag text input */
+#tagsInput {
+    width: 100%;
+    padding: 8px;
+    background-color: #333;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+}
+
+/* Title and Text Inputs */
+.postTitle input {
+    width: 100%;
+    padding: 8px;
+    background-color: #333;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 16px;
+
+    font-weight: bold;
+}
+
+.postText textarea {
+    width: 100%;
+    height: 120px;
+    resize: none;
+    background-color: #333;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    padding: 8px;
+    outline: none;
+}
+
+/* Container for images */
+/*#postContentContainer {
+    margin: 0;
+}*/
+
+/* Single-image layout */
+/*#postContentContainer.single-image img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}*/
+
+/* Multi-image layout (grid) */
+/*#postContentContainer.multi-images {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}*/
+
+/*#postContentContainer.multi-images img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}*/
+
+/* Wrapper for each image + remove icon */
+.imageWrapper {
+    position: relative;
+    display: inline-block; /* or block if you prefer the entire width */
+}
+
+/* The remove icon (e.g., a small “×”) in the top-right corner */
+.remove-image-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* (Optional) Hover effect for remove icon */
+.remove-image-icon:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
+/* Character limit display and separator */
+.charLim {
+    text-align: right;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.horizontalBar {
+    height: 1px;
+    background-color: #444;
+    margin: 16px 0;
+}
+
+/* Post Actions */
+.postActions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Left group of action buttons */
+.actionButtonsLeft {
+    display: flex;
+    gap: 8px;
+}
+
+/* Buttons */
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+}
+
+button img {
+    height: 20px;
+    width: 20px;
+}
+
+.actionButton:hover {
+    transform: scale(1.05);
+}
+.actionButton:active {
+    transform: scale(0.95); 
+}
+
+.postButton {
+    background-color: #98D5DC;
+    color: #030909;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.postButton:hover {
+    transform: scale(1.05);
+}
+.postButton:active {
+    transform: scale(0.95);
+}
+/* ---------- MAIN ---------- */
+
+#break {
+    height: 12px;
+}
+
+#postContentContainer {
+    height: auto;
+    width: 100%;
+
+    max-height: 200px;
+    max-width: inherit;
+
+    display: none;
+    justify-content: space-between;
+
+    gap: 10px;
+}

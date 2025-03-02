@@ -1,5 +1,9 @@
 const Post = require('../models/posts');
+const User = require('../models/users');
 const moment = require('moment');   // For time display
+
+// Default user ID (will replace with actual logged-in user after login implementation)
+const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
 
 // Getting a specific post
 const post_details = (req, res) => {    // :id to search for actual id
@@ -42,13 +46,24 @@ const post_details = (req, res) => {    // :id to search for actual id
             res.render('postPage', { post: result, title: 'Post', postDate: postDate });
         })
         .catch((err) => {
-            res.status(404).render('404', { title: 'Post not found' });
+            res.status(404).render('errorPage');
         });
 };
 
 // NOT DONE
 const post_create_get = (req, res) => {
-    res.render('create', { title: 'Create a new blog' });
+
+    User.findById(tempUserId)
+        .exec()
+        .then((result) => {
+            user = result;
+
+            res.render('newPostPage', { user: user, title: 'New Post' });
+        })
+        .catch((err) => {
+            res.status(404).render('errorPage');
+        });
+
 };
 
 // NOT DONE
