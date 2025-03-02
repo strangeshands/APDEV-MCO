@@ -61,9 +61,12 @@
                               </div>
 
                               <!-- CHANGE PROFILE PICTURE -->
-                              <button id="change-pfp" class ="change-photo" onclick="imageChange(this)">
-                                   Change Profile Photo
-                              </button>
+                              <form action="/upload-profilepic" method="post">
+                                   <input type="file" name="profilePic" accept="image/*" />
+                                   <button id="change-pfp" class ="change-photo" onclick="imageChange(this)">
+                                        Change Profile Photo
+                                   </button>
+                              </form>
                          </div>
 
                          <!-- CHANGE PROFILE HEADER -->

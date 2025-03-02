@@ -165,12 +165,20 @@ const updateLike = async(req,res) => {
                             likedPost: selectedPost._id, 
                             likedBy: profileDetails._id 
                         });
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { likeCount: -1 } }
+                        );
             break;
 
             case 'undislike':
                 await   users.updateOne(
                             { _id: profileDetails._id },
                             { $pull: { dislikes: selectedPost._id } }
+                        );
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { dislikeCount: -1 } }
                         );
             break;
 
@@ -180,31 +188,55 @@ const updateLike = async(req,res) => {
                             likedBy: profileDetails._id ,
                             createdAt: new Date()
                         });
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { likeCount: +1 } }
+                        );
             break;
 
             case 'dislike':
                 profileDetails.dislikes.splice(0, 0, postId);
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { dislikeCount: +1 } }
+                        );
             break;
 
             case 'like+': 
                 await   likes.insertOne({
-                    likedPost: selectedPost._id, 
-                    likedBy: profileDetails._id 
-                });
+                            likedPost: selectedPost._id, 
+                            likedBy: profileDetails._id 
+                        });
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { likeCount: +1 } }
+                        );
 
                 await   users.updateOne(
-                    { _id: profileDetails._id },
-                    { $pull: { dislikes: selectedPost._id } }
-                );
+                            { _id: profileDetails._id },
+                            { $pull: { dislikes: selectedPost._id } }
+                        );
+                await    posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { dislikeCount: -1 } }
+                        );
             break;
 
             case 'dislike+':
                 profileDetails.dislikes.splice(0, 0, postId);
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { dislikeCount: +1 } }
+                        );
 
                 await   likes.deleteOne({ 
-                    likedPost: selectedPost._id, 
-                    likedBy: profileDetails._id,
-                });
+                            likedPost: selectedPost._id, 
+                            likedBy: profileDetails._id,
+                        });
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { likeCount: -1 } }
+                        );
             break;
         }
         await profileDetails.save();
@@ -327,10 +359,21 @@ const updateProfile = async(req,res) => {
     });
 };
 
+const changePhoto = async(req,res) => {
+    const profilePic = req.files.profilePic;
+    const allowedExtensions = /png|jpeg|jpg/;
+    const extension = path.extname(profilePic.name).toLowerCase();
+
+    if (!allowedExtensions.test(extension)) {
+        return res.status(400).send('Invalid file type. Only PNG, JPG, and JPEG are allowed.');
+    }
+};
+
 module.exports = { 
     loadUserProfile, 
     updateBookmark,
     updateLike,
     editProfileLoad,
-    updateProfile
+    updateProfile,
+    changePhoto
 };
