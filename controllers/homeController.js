@@ -16,7 +16,13 @@ const homePage = async (req, res) => {
         const allPostsPromise = Post.find()
             .sort({ createdAt: -1 })
             .populate('author')
-            .exec();
+            .exec()
+            .then((result) => {
+                return result.map(post => {  // Gets formatted date
+                    const postDate = moment(post.createdAt).format('MMM DD, YYYY');
+                    return { post, postDate };
+                });
+            });
         
         // Default (logged-in) user's posts for navbar
         const userPostsPromise = Post.find({ parentPost: null, author: tempUserId })
