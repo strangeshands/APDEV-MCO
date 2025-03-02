@@ -40,16 +40,6 @@ const homeController = require("./controllers/homeController");
 const postRoutes = require('./routes/postRoutes');
 const homeRoutes = require('./routes/homeRoutes');
 
-// ----- Home Page [TEST] ----- //
-
-// uncomment to test home page
-/*
-app.get('/', (req, res) => {
-    
-    res.redirect('/posts');    // temp
-});
-*/
-
 
 // ----- Use Controllers----- //
 app.use("/", homeRoutes);
