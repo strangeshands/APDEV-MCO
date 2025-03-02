@@ -86,14 +86,29 @@
                         <div class="userPostsAndCommentsContent" id="userPostsContent">
                             {{#if userPosts.length}}
                                 {{#each userPosts}}
-                                    <a class="userPostLink" href="/posts/{{_id}}">
-                                        <div class="userPost">
-                                            <p class="userPostTitle">{{title}}</p>
-                                        </div>
+                                    <!-- For each post, create a clickable link -->
+                                    <a class="userPostLink" href="/posts/{{this._id}}">
+                                        <button class="userPost" id="userPost{{@index}}">
+                                            {{#if this.images.length}}
+                                            <img 
+                                                class="userPostImage" 
+                                                src="{{this.images.[0]}}" 
+                                                alt="User Post Image"
+                                            />
+                                            {{else}}
+                                            <img 
+                                                class="userPostImage" 
+                                                src="../resources/Image Holder.svg" 
+                                                alt="No Image"
+                                            />
+                                            {{/if}}
+
+                                            <p class="userPostTitle">{{this.title}}</p>
+                                        </button>
                                     </a>
                                 {{/each}}
                             {{else}}
-                                <p class="noPostsOrComments">No posts yet.</p>
+                                <div class="noPostsOrComments">No Posts Available</div>
                             {{/if}}
                         </div>
                     </div>
@@ -108,14 +123,19 @@
                         <div class="userPostsAndCommentsContent" id="userCommentsContent">
                             {{#if userComments.length}}
                                 {{#each userComments}}
-                                    <a class="userPostLink" href="/posts/{{parentPost}}">
-                                        <div class="userPost">
-                                            <p class="userComment">{{content}}</p>
-                                        </div>
+                                    <a class="userPostLink" href="/posts/{{this.parentPost}}">
+                                        <button class="userPost" id="userComment{{@index}}">
+                                            <img 
+                                            class="userPostImage" 
+                                            src="../resources/Arrow Curve Up Right.svg"
+                                            alt="User Post Image"
+                                            />
+                                            <p class="userComment">{{this.content}}</p>
+                                        </button>
                                     </a>
                                 {{/each}}
                             {{else}}
-                                <p class="noPostsOrComments">No comments yet.</p>
+                                <div class="noPostsOrComments">No Comments Available</div>
                             {{/if}}
                         </div>
                     </div>
