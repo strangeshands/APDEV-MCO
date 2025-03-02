@@ -33,8 +33,19 @@ const logoutUser = (req, res) => {
     res.redirect('/login');
 };
 
+// Render signup page
+const renderSignupPage = (req, res) => {
+    res.render('signupPage', { title: "Sign Up" });
+};
+
+// Handler User sign up
+const signUpUser = async (req, res) => {
+    
+}
+
 module.exports = {
     renderLoginPage,
     loginUser,
-    logoutUser
+    logoutUser,
+    renderSignupPage
 };
