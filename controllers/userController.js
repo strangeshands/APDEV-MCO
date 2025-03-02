@@ -1,6 +1,7 @@
 const users = require('../models/users');
 const posts = require('../models/posts');
 const likes = require('../models/likes');
+const path = require("path");
 
 /**
  *  > for testing only, will find for a specific hard coded user
@@ -360,13 +361,57 @@ const updateProfile = async(req,res) => {
 };
 
 const changePhoto = async(req,res) => {
-    const profilePic = req.files.profilePic;
-    const allowedExtensions = /png|jpeg|jpg/;
-    const extension = path.extname(profilePic.name).toLowerCase();
+    profileDetails = await users.findOne({ username: user });
 
-    if (!allowedExtensions.test(extension)) {
-        return res.status(400).send('Invalid file type. Only PNG, JPG, and JPEG are allowed.');
+    if (!req.files || !req.files.profilePic) {
+        return res.status(400).send("No file uploaded.");
     }
+
+    const image = req.files.profilePic;
+    const fileName = `${Date.now()}-${image.name}`;
+    const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+    const filePathForDB = `/uploads/${fileName}`;
+
+    image.mv(uploadPath, (err) => {
+        if (err) {
+            console.error("File upload error:", err);
+            return res.status(500).send("Failed to upload image.");
+        }
+
+        res.json({ message: "Image uploaded successfully!", filePath: `/uploads/${fileName}` });
+    });
+
+    await users.updateOne(
+        { _id: profileDetails._id },
+        { $set: { profilepic: filePathForDB } }
+    );
+};
+
+const changeHeader = async(req,res) => {
+    profileDetails = await users.findOne({ username: user });
+
+    if (!req.files || !req.files.headerPic) {
+        return res.status(400).send("No file uploaded.");
+    }
+
+    const image = req.files.headerPic;
+    const fileName = `${Date.now()}-${image.name}`;
+    const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+    const filePathForDB = `/uploads/${fileName}`;
+
+    image.mv(uploadPath, (err) => {
+        if (err) {
+            console.error("File upload error:", err);
+            return res.status(500).send("Failed to upload image.");
+        }
+
+        res.json({ message: "Image uploaded successfully!", filePath: `/uploads/${fileName}` });
+    });
+
+    await users.updateOne(
+        { _id: profileDetails._id },
+        { $set: { headerpic: filePathForDB } }
+    );
 };
 
 module.exports = { 
@@ -375,5 +420,6 @@ module.exports = {
     updateLike,
     editProfileLoad,
     updateProfile,
-    changePhoto
+    changePhoto,
+    changeHeader
 };
