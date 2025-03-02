@@ -16,9 +16,10 @@ router.get('/logout', authController.logoutUser);
 
 // -- SIGNUP -- //
 
-// Route render signup page
+// Route to render signup page
 router.get('/signup', authController.renderSignupPage);
 
-
+// Route to handle signup
+router.post('/signup', authController.signupUser);
 
 module.exports = router;

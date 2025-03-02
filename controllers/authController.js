@@ -10,9 +10,9 @@ const renderLoginPage = (req, res) => {
 
 // Handle login authentication
 const loginUser = async (req, res) => {
-    const { username, password } = req.body;
-
     try {
+        const { username, password } = req.body;
+
         // Find user by username
         const user = await User.findOne({ username: username.trim() });
 
@@ -38,14 +38,37 @@ const renderSignupPage = (req, res) => {
     res.render('signupPage', { title: "Sign Up" });
 };
 
-// Handler User sign up
-const signUpUser = async (req, res) => {
-    
+// Handler user signup
+const signupUser = async (req, res) => {
+    try {
+        const { email, username, displayName, password, passwordConf } = req.body;
+
+        // Verify if password and passwordConf are the same
+        if (password !== passwordConf) {
+            return res.render('signupPage', { error: "Password and confirm password input should be the same" });
+        }
+
+        // Verify if username is in use
+        const existingUser = await User.findOne({ username: username });
+        if (existingUser) {
+            return res.render('signupPage', { error: "Username is already in use" });
+        }
+
+        // Create a new user
+        const newUser = new User({ email, username, displayName, password });
+        await newUser.save();
+
+        res.status(201).json({ message: "User added successfully", user: newUser });
+    } catch (err) {
+        console.error("Signup error:", error);
+        res.status(500).send("Server Error");
+    }
 }
 
 module.exports = {
     renderLoginPage,
     loginUser,
     logoutUser,
-    renderSignupPage
+    renderSignupPage,
+    signupUser
 };
