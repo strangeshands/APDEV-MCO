@@ -12,7 +12,7 @@ const path = require("path");
  *          > (2) default is the user logged in
  */
 //const user = "@jabeedabee";
-var user = "@AkoSiDarna";
+// var user = "@AkoSiDarna";
 
 /**
  *  activeUser: user logged in
@@ -23,7 +23,7 @@ var user = "@AkoSiDarna";
  *      (2) if activeUser is null, "log in" button will show on the header
  */
 var activeUser;
-var profileSelected;
+//var profileSelected;
 
 // Initialize variables
 var profileDetails;
@@ -31,9 +31,13 @@ var postCount;
 var likesCount;
 
 const loadUserProfile = async(req,res) => {
-    const loggedInUserId = req.query.userId;
-    global.user = await users.findById(loggedInUserId).select('username');
-    if (!user) {
+    const loggedInUserId = req.query.userId;  
+    if (!loggedInUserId) {
+        return res.redirect('/login');
+    }
+
+    const loggedInUser = await users.findById(loggedInUserId);
+    if (!loggedInUser) {
         return res.status(404).send("User not found");
     }
 
@@ -44,7 +48,7 @@ const loadUserProfile = async(req,res) => {
         tabId = "posts"
 
     // query profile
-    profileDetails = await users.findOne({ username: user });
+    profileDetails = loggedInUser;
     console.log(profileDetails);
 
     if (!profileDetails) {
@@ -84,7 +88,7 @@ const loadUserProfile = async(req,res) => {
 
         // query profile bookmarks
         const bookmarksTemp = await users
-            .findOne({ username: user })
+            .findOne({ username: loggedInUser.username })
             .populate({
                 path: 'bookmarks',
                 populate: [
@@ -123,7 +127,7 @@ const loadUserProfile = async(req,res) => {
 
         // query profile dislikes
         const dislikesTemp = await users
-            .findOne({ username: user })
+            .findOne({ username: loggedInUser.username })
             .populate({
                 path: 'dislikes',
                 populate: [
@@ -156,7 +160,8 @@ const loadUserProfile = async(req,res) => {
 
 const updateBookmark = async(req,res) => {
     const { postId, action } = req.body;
-    profileDetails = await users.findOne({ username: user });
+    const loggedInUserId = req.query.userId;  
+    const profileDetails = await users.findById(loggedInUserId); 
 
     if (!profileDetails) {
         return res.status(404).json({ success: false, message: 'User not found' });
@@ -173,12 +178,18 @@ const updateBookmark = async(req,res) => {
         );
     }
     await profileDetails.save();
+    res.status(200).json({ success: true, message: 'Bookmark updated successfully' });
 }; 
 
-const updateLike = async(req,res) => {
-    let { postId, action } = req.body;
-    let selectedPost = await posts.findById(postId);
-    profileDetails = await users.findOne({ username: user });
+const updateLike = async(req, res) => {
+    const { postId, action } = req.body;
+    const loggedInUserId = req.query.userId;  
+    const selectedPost = await posts.findById(postId);
+    const profileDetails = await users.findById(loggedInUserId); 
+
+    if (!selectedPost || !profileDetails) {
+        return res.status(404).json({ success: false, message: 'Post or User not found' });
+    }
 
     if (selectedPost) {
         switch (action) {
@@ -262,9 +273,11 @@ const updateLike = async(req,res) => {
             break;
         }
         await profileDetails.save();
+        res.status(200).json({ success: true, message: 'Like/Dislike updated successfully' });
     }
 };
 
+// TODO: please check this
 const editProfileLoad = async(req,res) => {
     var find = req.params.username;
     activeUser = await users.findOne({ username: find });
@@ -275,7 +288,12 @@ const editProfileLoad = async(req,res) => {
 };
 
 const updateProfile = async(req,res) => {
-    profileDetails = await users.findOne({ username: user });
+    const loggedInUserId = req.query.userId; 
+    const profileDetails = await users.findById(loggedInUserId);  
+
+    if (!profileDetails) {
+        return res.status(404).send("User not found");
+    }
 
     var { newUser, newDisplayName, newBio } = req.body;
     var { newEmail, newNum } = req.body;
@@ -382,6 +400,7 @@ const updateProfile = async(req,res) => {
     });
 };
 
+// TODO; please check this
 const updateUserDetails = async(req,res) => {
     // find the details of the profile
     /**
@@ -502,7 +521,12 @@ const updateUserDetails = async(req,res) => {
 };
 
 const changePhoto = async(req,res) => {
-    profileDetails = await users.findOne({ username: user });
+    const loggedInUserId = req.query.userId;  
+    const profileDetails = await users.findById(loggedInUserId);  
+
+    if (!profileDetails) {
+        return res.status(404).send("User not found");
+    }
 
     if (!req.files || !req.files.profilePic) {
         return res.status(400).send("No file uploaded.");
@@ -529,7 +553,12 @@ const changePhoto = async(req,res) => {
 };
 
 const changeHeader = async(req,res) => {
-    profileDetails = await users.findOne({ username: user });
+    const loggedInUserId = req.query.userId; 
+    const profileDetails = await users.findById(loggedInUserId);  
+
+    if (!profileDetails) {
+        return res.status(404).send("User not found");
+    }
 
     if (!req.files || !req.files.headerPic) {
         return res.status(400).send("No file uploaded.");
