@@ -55,11 +55,9 @@ app.use("/", authRoutes);
 
 /**
  *  [PROFILE PAGES]
- *  TO DO:
- *      > update to "/profile/<username>" so <username> dynamically changes depending on the selected profile
  */
-app.get("/profile", userController.loadUserProfile);
-app.get("/profile/:tabId", userController.loadUserProfile);
+app.use("/profile/:username/:tabId", userController.loadUserProfile);
+app.use("/profile/:username", userController.loadUserProfile);
 
 /**
  *  [EDIT PROFILE PAGE]

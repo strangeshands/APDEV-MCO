@@ -4,17 +4,6 @@ const likes = require('../models/likes');
 const path = require("path");
 
 /**
- *  > for testing only, will find for a specific hard coded user
- * 
- *  > TO DO: 
- *      > find active user based on
- *          > (1) the profile clicked
- *          > (2) default is the user logged in
- */
-//const user = "@jabeedabee";
-// var user = "@AkoSiDarna";
-
-/**
  *  activeUser: user logged in
  *  profileSelected: selected profile, can be not the same as the active user
  *  
@@ -23,38 +12,96 @@ const path = require("path");
  *      (2) if activeUser is null, "log in" button will show on the header
  */
 var activeUser;
-//var profileSelected;
+var profileSelected;
 
-// Initialize variables
-var profileDetails;
+/**
+ *  activeUserDetails is dependent on activeUser
+ *  profileDetails is dependent on profileSelected
+ */
+var activeUserDetails = null;
+var profileDetails = null;
+
+/**
+ *  postCount is the post count of the profile selected
+ *  likesCount is the like count of the profile selected
+ *  ownPage determines if the profile selected is the same as active user
+ */
 var postCount;
 var likesCount;
+var ownPage = false;
+
+/**
+ *  active user's bookmarks, likes, and dislikes
+ */
+var activeBookmarks = null;
+var activeLikes = null;
+var activeDislikes = null;
 
 // TODO: do also for comments, bookmarks, likes, dislikes tabs
 const loadUserProfile = async(req,res) => {
-    const loggedInUserId = req.query.userId;  
-    if (!loggedInUserId) {
-        return res.redirect('/login');
+    // request profileSelected
+    profileSelected = req.params.username;
+    profileDetails = await users.findOne({ username: profileSelected });
+
+    // request active user
+    activeUser = req.query.userId;
+
+    // if null, meaning there is no active user
+    if (activeUser) {
+        activeUserDetails = await users.findById(activeUser);
+
+        // if null, profile is not found
+        if (!activeUserDetails)
+            return res.render('profileNotFound');
+
+        ownPage = profileDetails.username === activeUserDetails.username;
+        
+        // query profile bookmarks
+        const activeBookmarksTemp = await users
+            .findOne({ username: activeUserDetails.username })
+            .select('bookmarks');
+        activeBookmarks =   activeBookmarksTemp.bookmarks
+                            .map(bookmark => bookmark)
+                            .filter(bookmark => bookmark !== null);
+
+        // query profile likes
+        const activeLikesTemp = await likes
+            .find({ likedBy: activeUserDetails })
+            .populate({
+                path: 'likedPost',
+                populate: [
+                    { path: 'author' },
+                    { 
+                        path: 'parentPost', 
+                        populate: { path: 'author' }
+                    }
+                ]
+            })
+            .sort({ createdAt: -1, updatedAt: -1 })
+            .select('likedPost');
+        activeLikes =   activeLikesTemp
+                        .map(like => like.likedPost)
+                        .filter(likedPost => likedPost !== null);
+
+        // query profile dislikes
+        const activeDislikesTemp = await users
+            .findOne({ username: activeUserDetails.username })
+            .select('dislikes');
+        activeDislikes =    activeDislikesTemp.dislikes
+                            .map(dislike => dislike)
+                            .filter(dislike => dislike !== null);
     }
 
-    const loggedInUser = await users.findById(loggedInUserId);
-    if (!loggedInUser) {
-        return res.status(404).send("User not found");
-    }
-
-    let tabId = req.params.tabId || "posts";
-    
-    // default is posts if tabId is null
-    if (!tabId) 
-        tabId = "posts"
-
-    // query profile
-    profileDetails = loggedInUser;
-    console.log(profileDetails);
+    // set active tabId
+    let tabId = req.params.tabId;
+    if (!tabId)
+        tabId = "posts";
 
     if (!profileDetails) {
-        return res.status(404).render("errorPage");
+        return res.render('profileNotFound');
     } else {
+        console.log("ACTIVE LIKES");
+        console.log(activeLikes);
         // query post count
         postCount = await posts.countDocuments({ author: profileDetails });
         console.log(`Post Count: ${postCount}`);
@@ -89,7 +136,7 @@ const loadUserProfile = async(req,res) => {
 
         // query profile bookmarks
         const bookmarksTemp = await users
-            .findOne({ username: loggedInUser.username })
+            .findOne({ username: profileDetails.username })
             .populate({
                 path: 'bookmarks',
                 populate: [
@@ -101,7 +148,9 @@ const loadUserProfile = async(req,res) => {
                 ]
             })
             .select('bookmarks');
-        const profileBookmarks = bookmarksTemp.bookmarks.map(bookmark => bookmark);
+        const profileBookmarks =    bookmarksTemp.bookmarks
+                                    .map(bookmark => bookmark)
+                                    .filter(bookmark => bookmark !== null);
         console.log(profileBookmarks);
 
         // query profile likes
@@ -122,13 +171,12 @@ const loadUserProfile = async(req,res) => {
             .select('likedPost');
         const profileLikes =    likesTemp
                                 .map(like => like.likedPost)
-                                .filter(likedPost => likedPost !== null);;
-        console.log("LIKES");
+                                .filter(likedPost => likedPost !== null);
         console.log(profileLikes);
 
         // query profile dislikes
         const dislikesTemp = await users
-            .findOne({ username: loggedInUser.username })
+            .findOne({ username: profileDetails.username })
             .populate({
                 path: 'dislikes',
                 populate: [
@@ -140,12 +188,20 @@ const loadUserProfile = async(req,res) => {
                 ]
             })
             .select('dislikes');
-        const profileDislikes = dislikesTemp.dislikes.map(dislike => dislike);
+        const profileDislikes =     dislikesTemp.dislikes
+                                    .map(dislike => dislike)
+                                    .filter(dislike => dislike !== null);
         console.log(profileDislikes);
 
         res.render("profilePage", {
             activeTab: tabId,
-            
+            ownPage,
+
+            activeUserDetails,
+            activeBookmarks,
+            activeLikes,
+            activeDislikes,
+
             profileDetails,
             likesCount,
             postCount,
@@ -160,36 +216,37 @@ const loadUserProfile = async(req,res) => {
 };
 
 const updateBookmark = async(req,res) => {
-    const { postId, action } = req.body;
-    const loggedInUserId = req.query.userId;  
-    const profileDetails = await users.findById(loggedInUserId); 
+    var { postId, activeUserDetails, action } = req.body;
+    // just to ensure it exists in the db
+    activeUserDetails = await users.findById(activeUserDetails._id);
 
-    if (!profileDetails) {
-        return res.status(404).json({ success: false, message: 'User not found' });
+    if (!activeUserDetails) {
+        return res.render("profileNotFound");
     }
 
     if (action === 'add') {
-        if (!profileDetails.bookmarks.includes(postId)) {
-            profileDetails.bookmarks.splice(0, 0, postId);
+        if (!activeUserDetails.bookmarks.includes(postId)) {
+            activeUserDetails.bookmarks.splice(0, 0, postId);
         }
     } else if (action === 'remove') {
         await users.updateOne(
-            { _id: profileDetails._id },
+            { _id: activeUserDetails._id },
             { $pull: { bookmarks: postId } }
         );
     }
-    await profileDetails.save();
+    await activeUserDetails.save();
     res.status(200).json({ success: true, message: 'Bookmark updated successfully' });
 }; 
 
 const updateLike = async(req, res) => {
-    const { postId, action } = req.body;
-    const loggedInUserId = req.query.userId;  
+    var { postId, activeUserDetails, action } = req.body;
     const selectedPost = await posts.findById(postId);
-    const profileDetails = await users.findById(loggedInUserId); 
 
-    if (!selectedPost || !profileDetails) {
-        return res.status(404).json({ success: false, message: 'Post or User not found' });
+    // just to ensure it exists in the db
+    activeUserDetails = await users.findById(activeUserDetails._id);
+
+    if (!selectedPost || !activeUserDetails) {
+        return res.render("errorPage");
     }
 
     if (selectedPost) {
@@ -197,7 +254,7 @@ const updateLike = async(req, res) => {
             case 'unlike':
                 await   likes.deleteOne({ 
                             likedPost: selectedPost._id, 
-                            likedBy: profileDetails._id 
+                            likedBy: activeUserDetails._id 
                         });
                 await   posts.updateOne(
                             { _id: selectedPost._id },
@@ -207,7 +264,7 @@ const updateLike = async(req, res) => {
 
             case 'undislike':
                 await   users.updateOne(
-                            { _id: profileDetails._id },
+                            { _id: activeUserDetails._id },
                             { $pull: { dislikes: selectedPost._id } }
                         );
                 await   posts.updateOne(
@@ -219,7 +276,7 @@ const updateLike = async(req, res) => {
             case 'like':
                 await   likes.insertOne({
                             likedPost: selectedPost._id, 
-                            likedBy: profileDetails._id ,
+                            likedBy: activeUserDetails._id ,
                             createdAt: new Date()
                         });
                 await   posts.updateOne(
@@ -229,7 +286,7 @@ const updateLike = async(req, res) => {
             break;
 
             case 'dislike':
-                profileDetails.dislikes.splice(0, 0, postId);
+                activeUserDetails.dislikes.splice(0, 0, postId);
                 await   posts.updateOne(
                             { _id: selectedPost._id },
                             { $inc: { dislikeCount: +1 } }
@@ -239,7 +296,7 @@ const updateLike = async(req, res) => {
             case 'like+': 
                 await   likes.insertOne({
                             likedPost: selectedPost._id, 
-                            likedBy: profileDetails._id 
+                            likedBy: activeUserDetails._id 
                         });
                 await   posts.updateOne(
                             { _id: selectedPost._id },
@@ -247,7 +304,7 @@ const updateLike = async(req, res) => {
                         );
 
                 await   users.updateOne(
-                            { _id: profileDetails._id },
+                            { _id: activeUserDetails._id },
                             { $pull: { dislikes: selectedPost._id } }
                         );
                 await    posts.updateOne(
@@ -257,7 +314,7 @@ const updateLike = async(req, res) => {
             break;
 
             case 'dislike+':
-                profileDetails.dislikes.splice(0, 0, postId);
+                activeUserDetails.dislikes.splice(0, 0, postId);
                 await   posts.updateOne(
                             { _id: selectedPost._id },
                             { $inc: { dislikeCount: +1 } }
@@ -265,7 +322,7 @@ const updateLike = async(req, res) => {
 
                 await   likes.deleteOne({ 
                             likedPost: selectedPost._id, 
-                            likedBy: profileDetails._id,
+                            likedBy: activeUserDetails._id,
                         });
                 await   posts.updateOne(
                             { _id: selectedPost._id },
@@ -273,7 +330,7 @@ const updateLike = async(req, res) => {
                         );
             break;
         }
-        await profileDetails.save();
+        await activeUserDetails.save();
         res.status(200).json({ success: true, message: 'Like/Dislike updated successfully' });
     }
 };

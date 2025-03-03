@@ -112,6 +112,7 @@ function iconClicked(button, iconType, postId) {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                          postId: postId,
+                         activeUserDetails,
                          action: action
                     })
                     })
@@ -137,6 +138,7 @@ function iconClicked(button, iconType, postId) {
                headers: { 'Content-Type': 'application/json' },
                body: JSON.stringify({
                    postId: postId,
+                   activeUserDetails,
                    action: isCurrentlyBookmarked ? 'remove' : 'add'
                })
           })
@@ -145,22 +147,22 @@ function iconClicked(button, iconType, postId) {
 }
 
 /**
- *   Checks if a post is liked
+ * Checks if a post is liked
  */
 function checkLiked(check) {
-     return userLikes.find(post => post._id === check._id);
-}
-
-/**
- *   Checks if a post is bookmarked
- */
-function checkBookmarked(check) {
-     return userBookmarks.find(post => post._id === check._id);
-}
-
-/**
- *   Checks if a post is disliked
- */
-function checkDisliked(check) {
-     return userDislikes.find(post => post._id === check._id);
-}
+     return activeLikes.some(post => post._id === check._id);
+ }
+ 
+ /**
+  * Checks if a post is bookmarked
+  */
+ function checkBookmarked(check) {
+     return activeBookmarks.some(post => post._id === check._id);
+ }
+ 
+ /**
+  * Checks if a post is disliked
+  */
+ function checkDisliked(check) {
+     return activeDislikes.some(post => post._id === check._id);
+ }

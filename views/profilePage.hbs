@@ -2,7 +2,7 @@
 <html>
      <head>
           <title> {{profileDetails.username}} - Connectify </title>
-          <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
+          <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
 
           <!-- CSS -->
           <link rel="stylesheet" type="text/css" href="/css/profilePage.css">
@@ -17,6 +17,12 @@
                var activeTab = {{{ json activeTab }}};
 
                var profileDetails = {{{ json profileDetails }}}; 
+               var activeUserDetails = {{{ json activeUserDetails }}};
+
+               var activeLikes = {{{ json activeLikes }}};
+               console.log(activeLikes);
+               var activeBookmarks = {{{ json activeBookmarks }}};
+               var activeDislikes = {{{ json activeDislikes }}};
 
                var userPosts  = {{{ json profilePosts }}} ;
                var userComments  = {{{ json profileComments }}};
@@ -30,19 +36,22 @@
           <!-- HEADER PORTION -->
           <header>
                <div id="headercol1" onclick="window.location.href='../html/homePage.html'">
-                    <img id="logo" src="../resources/Logo.svg" />
+                    <img id="logo" src="/resources/Logo.svg" />
                     <p id="appName"> Connectify </p>
                </div>
                <div id="headercol2">
                     <div class="searchBar">
-                         <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
+                         <img src="/resources/Trailing-Elements.svg" alt="Search Icon">
                          <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
                     </div>
                
-                    <!-- IF USER IS NOT LOGGED IN -->
-                    <!--<div class="logIn">
-                         <button id="logInButton" onclick="window.location.href='../html/loginPage.html'">Log In</button>
-                    </div>-->
+                    {{#if activeUserDetails}}
+                         <!-- No Log In button -->
+                    {{else}}
+                         <div class="logIn">
+                              <button id="logInButton" onclick="window.location.href='../html/loginPage.html'">Log In</button>
+                         </div>
+                    {{/if}}
                </div>
           </header>
 
@@ -99,27 +108,31 @@
                          </div>
 
                          <!-- SETTINGS -->
-                         <div class="col1-sub-container"> 
-                              <button class="editProfile" onclick="window.location.href='/edit-profile/{{profileDetails.username}}';">
-                                   <img src="../resources/Edit Icon.svg" alt="">
-                                   Account Settings
-                              </button>
-                              <button class="logOut" onclick="window.location.href='../html/loginPage.html'">
-                                   <img src="../resources/Log Out Icon.svg" alt="">
-                                   Log Out
-                              </button>
-                         </div>
+                         {{#if ownPage}}
+                              <div class="col1-sub-container"> 
+                                   <button class="editProfile" onclick="window.location.href='/edit-profile/{{activeUserDetails.username}}';">
+                                        <img src="/resources/Edit Icon.svg" alt="">
+                                        Account Settings
+                                   </button>
+                                   <button class="logOut" onclick="window.location.href='../html/loginPage.html'">
+                                        <img src="/resources/Log Out Icon.svg" alt="">
+                                        Log Out
+                                   </button>
+                              </div>
+                         {{/if}}
                     </div>
 
                     <!-- USER POSTS/COMMENTS COLUMN -->
                     <div id="col2">
                          <!-- TAB SELECTION ROW -->
                          <div id="tabrow"> 
-                              <button class="tab" data-id="posts" onclick="window.location.href='/profile/posts';">Posts</button>
-                              <button class="tab" data-id="comments" onclick="window.location.href='/profile/comments';">Comments</button>
-                              <button class="tab" data-id="bookmarks" onclick="window.location.href='/profile/bookmarks';">Bookmarks</button>
-                              <button class="tab" data-id="likes" onclick="window.location.href='/profile/likes';">Likes</button>
-                              <button class="tab" data-id="dislikes" onclick="window.location.href='/profile/dislikes';">Dislikes</button>
+                              <button class="tab" data-id="posts" onclick="window.location.href='/profile/{{profileDetails.username}}/posts?userId={{activeUserDetails._id}}';">Posts</button>
+                              <button class="tab" data-id="comments" onclick="window.location.href='/profile/{{profileDetails.username}}/comments?userId={{activeUserDetails._id}}';">Comments</button>
+                              {{#if ownPage }}
+                                   <button class="tab" data-id="bookmarks" onclick="window.location.href='/profile/{{profileDetails.username}}/bookmarks?userId={{activeUserDetails._id}}';">Bookmarks</button>
+                                   <button class="tab" data-id="likes" onclick="window.location.href='/profile/{{profileDetails.username}}/likes?userId={{activeUserDetails._id}}';">Likes</button>
+                                   <button class="tab" data-id="dislikes" onclick="window.location.href='/profile/{{profileDetails.username}}/dislikes?userId={{activeUserDetails._id}}';">Dislikes</button>
+                              {{/if}}
                          </div>
 
                          <!-- SPECIFIC TAB -->

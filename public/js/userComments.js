@@ -2,6 +2,10 @@
 function loadUserComments(type) {
      const container = document.getElementById("userCommentContainer");
 
+     let userCheck = ''
+     if (activeUserDetails)
+          userCheck = activeUserDetails.username;
+
      if (!userComments || userComments.length === 0) {
           container.innerHTML = `
                <p class="no-post-msg">No comments yet. Go interact with others...</p>
@@ -14,7 +18,7 @@ function loadUserComments(type) {
 
      userComments.forEach((post, index) => {
           // check if own post
-          own = post.author.username === profileDetails.username;
+          own = post.author.username === userCheck;
           // check if liked post
           liked = !!checkLiked(post);
           // check if bookmarked post
@@ -34,34 +38,38 @@ function loadUserComments(type) {
                postContent += `
                     <!-- REPLY USER -->
                     <!-- TO CHANGE: href link -->
-                    <div id="reply-to-msg" onclick="window.location.href='../html/postPage.html';">
+                    <div id="reply-to-msg" onclick="window.location.href='/posts/${post.parentPost}';">
                          Replied to ${post.parentPost.author.username}
                     </div>
                `
           }
 
+          let parentAuthor = post.author.username;
+
           postContent += `
                <!-- USER DETAILS -->
                <div class="pfpuserrow" id="${type}-pfpuserrow-${index}">
-                    <div id="userandpfp">
+                    <div id="userandpfp" onclick="window.location.href='/profile/${post.author.username}?userId=${activeUserDetails._id}'" style="cursor: pointer;">
                          <div class="pfpPost">
                          <img src="${post.author.profilepic}" />
                          </div>
                          <div id="pfpnames">
-                         <span class="pfpdisplayname">${post.author.displayname}</span>
-                         <span class="pfpusername">${post.author.username} | ${date}</span>
+                              <span class="pfpdisplayname">${post.author.displayname}</span>
+                              <span class="pfpusername">
+                                   ${post.author.username} | ${date}
+                              </span>
                          </div>
                     </div>
                     
                     <button class="optionsButton" onclick="togglePopup('${type}', '${index}', '${container.id}')">
-                         <img src="../resources/Options Button.svg"/>
+                         <img src="/resources/Options Button.svg"/>
                     </button>
 
                     <!-- POST OPTIONS POPUP -->
                     <div class="popUpOptions" id="${type}-popup-${index}">
                          <div class="postOptionsContent">
                               <button class="optionsButton option-exit" onclick="togglePopup('${type}', '${index}', '${container.id}')">
-                                   <img src="../resources/Options Button.svg"/>
+                                   <img src="/resources/Options Button.svg"/>
                               </button>
                               <button class="editButton" onclick="window.location.href='/posts/${post._id}';">View Post</button>
                               <button class="editButton">Copy Link</button>
@@ -104,26 +112,29 @@ function loadUserComments(type) {
 
                <!-- POST OPTIONS -->
                <div class="postActions" id="postoptionrow">
-                    <!-- HEART FEATURE: RED IF BOOKMARKED -->
-                    <button class="postoptionbutton actionButton" id="heart" onclick="iconClicked(this, 'heart', '${post._id}')">
-                         <img src="${liked ? '../resources/Heart-Clicked.svg' : '../resources/Heart.svg'}"/>
-                         <span class="counter">${post.likeCount}</span>
-                    </button>
+                    ${activeUserDetails ? `
+                         <!-- HEART FEATURE: RED IF BOOKMARKED -->
+                         <button class="postoptionbutton actionButton" id="heart" onclick="iconClicked(this, 'heart', '${post._id}')">
+                              <img src="${liked ? '/resources/Heart-Clicked.svg' : '/resources/Heart.svg'}"/>
+                              <span class="counter">${post.likeCount}</span>
+                         </button>
 
-                    <img src="../resources/Line.svg" alt="Line">
-                    <button class="postoptionbutton actionButton" id="heartCrack" onclick="iconClicked(this, 'heartCrack', '${post._id}')">
-                         <img src="${disliked ? '../resources/HeartCrack-Clicked.svg' : '../resources/HeartCrack.svg'}"/>
-                         <span class="counter">${post.dislikeCount}</span>
-                    </button>
+                         <img src="/resources/Line.svg" alt="Line">
+                         <button class="postoptionbutton actionButton" id="heartCrack" onclick="iconClicked(this, 'heartCrack', '${post._id}')">
+                              <img src="${disliked ? '/resources/HeartCrack-Clicked.svg' : '/resources/HeartCrack.svg'}"/>
+                              <span class="counter">${post.dislikeCount}</span>
+                         </button>
 
-                    <button class="postoptionbutton actionButton" onclick="window.location.href='../html/replyPage.html'">
-                              <img src="../resources/Comments.svg"/>
-                    </button>
+                         <button class="postoptionbutton actionButton" onclick="window.location.href='../html/replyPage.html'">
+                                   <img src="/resources/Comments.svg"/>
+                         </button>
 
-                    <!-- BOOKMARK FEATURE: YELLOW IF BOOKMARKED -->
-                    <button class="postoptionbutton actionButton" id="bookmark" onclick="iconClicked(this, 'bookmark', '${post._id}')">
-                         <img src="${bookmarked ? '../resources/Bookmark-Clicked.svg' : '../resources/bookmark.svg'}"/>
-                    </button>
+                         <!-- BOOKMARK FEATURE: YELLOW IF BOOKMARKED -->
+                         <button class="postoptionbutton actionButton" id="bookmark" onclick="iconClicked(this, 'bookmark', '${post._id}')">
+                              <img src="${bookmarked ? '/resources/Bookmark-Clicked.svg' : '/resources/bookmark.svg'}"/>
+                         </button>
+                         
+                    ` : ""}
                </div>
 
                <div class="post-break"></div>

@@ -8,6 +8,7 @@ const homePage = async (req, res) => {
     try {
         // Extract userId from query parameters
         const loggedInUserId = req.query.userId;
+        const activeUser = User.findById(loggedInUserId);
 
         if (!loggedInUserId) {
             return res.redirect('/login'); // Redirect to login if no userId
@@ -90,7 +91,9 @@ const homePage = async (req, res) => {
             user,
             userPosts,
             userComments,
-            loggedInUserId
+            
+            loggedInUserId,
+            activeUser
         });
     } catch(err) {
         console.error(err);
