@@ -2,9 +2,12 @@
 function loadUserComments(type) {
      const container = document.getElementById("userCommentContainer");
 
-     let userCheck = ''
-     if (activeUserDetails)
+     let userCheck = '';
+     let activeId = '';
+     if (activeUserDetails) {
           userCheck = activeUserDetails.username;
+          activeId = activeUserDetails._id;
+     }
 
      if (!userComments || userComments.length === 0) {
           container.innerHTML = `
@@ -49,7 +52,7 @@ function loadUserComments(type) {
           postContent += `
                <!-- USER DETAILS -->
                <div class="pfpuserrow" id="${type}-pfpuserrow-${index}">
-                    <div id="userandpfp" onclick="window.location.href='/profile/${post.author.username}?userId=${activeUserDetails._id}'" style="cursor: pointer;">
+                    <div id="userandpfp" onclick="window.location.href='/profile/${post.author.username}?userId=${activeId}'" style="cursor: pointer;">
                          <div class="pfpPost">
                          <img src="${post.author.profilepic}" />
                          </div>

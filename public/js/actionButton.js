@@ -150,19 +150,28 @@ function iconClicked(button, iconType, postId) {
  * Checks if a post is liked
  */
 function checkLiked(check) {
-     return activeLikes.some(post => post._id === check._id);
+     if (activeLikes)
+          return activeLikes.some(post => post._id === check._id);
+     else
+          return false;
  }
  
  /**
   * Checks if a post is bookmarked
   */
  function checkBookmarked(check) {
-     return activeBookmarks.some(post => post._id === check._id);
+     if (activeBookmarks)
+          return activeBookmarks.some(post => post._id === check._id);
+     else 
+          return false;
  }
  
  /**
   * Checks if a post is disliked
   */
  function checkDisliked(check) {
-     return activeDislikes.some(post => post._id === check._id);
+     if (activeDislikes)
+          return activeDislikes.some(post => post._id === check._id);
+     else
+          return false;
  }
