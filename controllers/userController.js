@@ -30,6 +30,7 @@ var profileDetails;
 var postCount;
 var likesCount;
 
+// TODO: do also for comments, bookmarks, likes, dislikes tabs
 const loadUserProfile = async(req,res) => {
     const loggedInUserId = req.query.userId;  
     if (!loggedInUserId) {
