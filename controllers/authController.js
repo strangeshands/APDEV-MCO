@@ -13,8 +13,11 @@ const loginUser = async (req, res) => {
     try {
         const { username, password } = req.body;
 
+        // Add @ to username if not present
+        const formattedUsername = username.startsWith('@') ? username : `@${username}`;
+
         // Find user by username
-        const user = await User.findOne({ username: username.trim() });
+        const user = await User.findOne({ username: formattedUsername.trim() });
 
         if (!user || user.password !== password) {
             return res.render('loginPage', { error: "Invalid username or password" });
