@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
      <head>
-          <title> [usernmae] - Connectify </title>
+          <title> {{profileDetails.username}} - Connectify </title>
           <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
 
           <!-- CSS -->
@@ -19,7 +19,7 @@
      <body>
           <!-- HEADER PORTION -->
           <header>
-               <div id="headercol1" onclick="window.location.href='../html/homePage.html'">
+               <div id="headercol1" onclick="window.location.href='/';">
                     <img id="logo" src="../resources/Logo.svg" />
                     <p id="appName"> Connectify </p>
                </div>
@@ -38,7 +38,7 @@
                <div id="col1" class="base-columns">
                     <div class="col1-sub-container">
                          <button class="discard" onclick="window.location.href='/profile';">
-                              Discard Changes
+                              Back
                          </button>
                     </div>
 
@@ -56,7 +56,7 @@
                          <div class="col1-row1-col">
                               <div id="pfpcontainer">
                                    <div id="pfpPic">
-                                        <img src="" />
+                                        <img src="{{profileDetails.profilepic}}" />
                                    </div>
                               </div>
 
@@ -69,7 +69,7 @@
                          <!-- CHANGE PROFILE HEADER -->
                          <div class="col1-row1-col">
                               <div id="profileHeader">
-                                   <img src="" />
+                                   <img src="{{profileDetails.headerpic}}" />
                               </div>
                               <button id="change-header" class="change-photo" onclick="imageChange(this)">
                                    Change Header
@@ -104,12 +104,12 @@
                               <div class="input-col">
                                    <div id="change-username" class="input-fields">
                                         <p class="input-label"> Username </p>
-                                        <input type="text" id="username" name="username" placeholder="New username">
+                                        <input type="text" id="username" name="username" placeholder="{{profileDetails.username}}">
                                         <label id="username-feedback" class="input-feedback"></label>
                                    </div>
                                    <div id="change-display-name" class="input-fields">
                                         <p class="input-label"> Display Name </p>
-                                        <input type="text" id="display-name" name="display-name" placeholder="New display name">
+                                        <input type="text" id="display-name" name="display-name" placeholder="{{profileDetails.displayname}}">
                                         <label id="dn-feedback" class="input-feedback"></label>
                                    </div>
                               </div>
@@ -117,7 +117,7 @@
                               <div class="input-col">
                                    <div id="change-bio" class="input-fields">
                                         <p class="input-label"> Bio </p>
-                                        <textarea id="bio" name="bio" rows="5" cols="80" placeholder="New bio..."></textarea>
+                                        <textarea id="bio" name="bio" rows="5" cols="80" placeholder="{{profileDetails.bio}}"></textarea>
                                         <label id="bio-feedback" class="input-feedback">0/100</label>
                                    </div>
                               </div>
@@ -140,12 +140,12 @@
                                    <label> Account Information </label>
                                    <div id="change-email" class="input-fields">
                                         <p class="input-label"> Email </p>
-                                        <input type="email" id="email" name="email" placeholder="New email">
+                                        <input type="email" id="email" name="email" placeholder="{{profileDetails.email}}">
                                         <label id="email-feedback" class="input-feedback"></label>
                                    </div>
                                    <div id="change-ematelil" class="input-fields">
                                         <p class="input-label"> Phone Number </p>
-                                        <input type="tel" id="tel-number" name="tel-number" placeholder="New number">
+                                        <input type="tel" id="tel-number" name="tel-number" placeholder="{{profileDetails.phone}}">
                                         <label id="tel-feedback" class="input-feedback"></label>
                                    </div>
 

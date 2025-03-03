@@ -6,20 +6,6 @@ const bioholder = document.getElementById("bio");
 const emailholder = document.getElementById("email");
 const numholder = document.getElementById("tel-number");
 
-document.addEventListener("DOMContentLoaded", () => {
-    // set images
-    headerImage.src = profileDetails.headerpic;
-    pfpImage.src = profileDetails.profilepic;
-
-    // set details
-    document.title = `${profileDetails.username} - Edit Profile`
-    usernameholder.placeholder = profileDetails.username;
-    displaynameholder.placeholder = profileDetails.displayname;
-    bioholder.placeholder = profileDetails.bio;
-    emailholder.placeholder = profileDetails.email;
-    numholder.placeholder = profileDetails.phone;
-});
-
 /* ---- BIO COUNTER ---- */
 document.addEventListener("DOMContentLoaded", () => {
     const bioTextarea = document.getElementById("bio");
@@ -43,8 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
          feedbackLabel.textContent = `${bioTextarea.value.length}/${maxCharacters}`;
     });
-
-    document.getElementById('save-changes-feedback').textContent = "FEEDBACK";
 });
 
 /* ---- CROPPER ---- */
@@ -202,7 +186,7 @@ function saveUserDetails() {
     }
 
     if (change) {
-        fetch('/edit-profile', {
+        fetch(`/edit-profile/${profileDetails.username}/update-user-details`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -215,6 +199,8 @@ function saveUserDetails() {
         .then(data => {
             document.getElementById('username-feedback').textContent = data.errorMessageUser;
             document.getElementById('dn-feedback').textContent = data.errorMessageDN;
+            document.getElementById('bio-feedback').textContent = data.errorMessageBio;
+            document.getElementById('save-changes-feedback').textContent = data.errorMessageButton;
         });
     }
 }
