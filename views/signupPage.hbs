@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-     <header>
-          <title> Connectify - Sign Up </title>
-          <link rel="stylesheet" type="text/css" href="../css/starterPage.css">
-          <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
-     </header>
+    <header>
+        <title> Connectify - Sign Up </title>
+        <link rel="stylesheet" type="text/css" href="../css/starterPage.css">
+        <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
+    </header>
 
      <body>
           <!-- INPUT SPACE -->
@@ -29,15 +29,19 @@
                             <p class="inputLabel"> Email </p>
                             <input type="email" id="email" name="email" placeholder="Enter your email" required>
                         </div>
-
+                        
                         <div class="inputs">
                             <p class="inputLabel"> Phone Number </p>
-                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone no." required>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number"
+                                pattern="^\+?\d{10,15}$" 
+                                title="Please enter a valid phone number with only numbers, optionally starting with '+'. (e.g., +639123456789 or 09123456789)" 
+                                required>
                         </div>
 
                         <div class="inputs">
                             <p class="inputLabel"> Username </p>
-                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                            <input type="text" id="username" name="username" placeholder="Enter your username" required pattern="[a-zA-Z0-9_]+"
+                                   title="Username can only contain letters, numbers, and underscores.">
                         </div>
 
                         <div class="inputs">
