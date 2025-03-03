@@ -1,6 +1,7 @@
 const Post = require('../models/posts');
 const User = require('../models/users');
 const moment = require('moment');   // For time display
+const path = require('path');       // For file upload
 
 // Default user ID (will replace with actual logged-in user after login implementation)
 const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
@@ -76,25 +77,66 @@ const post_create_post = async (req, res) => {
         return res.status(404).send("User not found");
     }
 
-    /*
-    let formattedImages = formData.images;
+    const uploadedImages = req.files.images;
 
-    formattedImages = formattedImages.map(img => {
-        return "/resources/" + img;
-    });
-    */
+    // Prepare to save image paths
+    let imagePaths = [];
 
-    const postData = { ...formData, author: postAuthor._id };
-    
-    const post = new Post(postData);
-
-    post.save()
-        .then((result) => {
-            res.redirect('/');
-        })
-        .catch((err) => {
-            console.log(err);
+    // Handle multiple image uploads
+    if (Array.isArray(uploadedImages)) {
+        const imageUploadPromises = uploadedImages.map((image) => {
+            return new Promise((resolve, reject) => {
+                const uploadPath = path.resolve(__dirname, '..', 'resources', image.name);
+                image.mv(uploadPath, (err) => {
+                    
+                    if (err) {
+                        reject(err);
+                        console.log("Error");
+                    } else {
+                        imagePaths.push(`/resources/${image.name}`);
+                        resolve();
+                    }
+                });
+            });
         });
+
+        // Wait for all image uploads to complete before proceeding
+        try {
+            await Promise.all(imageUploadPromises);
+        } catch (err) {
+            console.log("Error uploading images: " + err.message);
+        }
+        
+    } else {  // Handle single image upload
+        const uploadPath = path.resolve(__dirname, '..', 'resources', uploadedImages.name);
+        uploadedImages.mv(uploadPath, (err) => {
+            if (err) {
+                console.log("Error");
+            }
+            imagePaths.push(`/resources/${uploadedImages.name}`);
+        });
+    }
+
+    const postData = { 
+        ...formData, 
+        author: postAuthor._id,
+        images: imagePaths 
+    };
+    
+    try {
+        const post = new Post(postData);
+        await post.save()
+                    .then((result) => {
+                        res.redirect('/?userId=67b9fd7ab7db71f6ae3b21d4');
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+
+    } catch (err) {
+        console.log(err);
+    }
+
 };
 
 // NOT DONE

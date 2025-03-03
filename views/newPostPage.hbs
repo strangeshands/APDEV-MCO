@@ -31,7 +31,9 @@
                 <span class="back">Back</span>
             </div>
 
-            <form action="/posts" method="POST">
+            <form action="/posts" 
+                  method="POST"
+                  enctype="multipart/form-data">
                 <div class="post">
                     <div class="postHeader">
                         <div class="userInfo">
@@ -70,14 +72,21 @@
                         ></textarea>
                     </div>
                     <!-- IMAGE INPUT (hidden by default) -->
-                    <input
+                    <!-- 
+                        <input
                         type="file"
                         id="imageUploadInput"
                         accept="image/*"
                         multiple
                         style="display: none;"
                         name="image"
-                    />
+                    /> -->
+
+
+                    <!-- EXPRESS FILE UPLOAD -->
+                    <input type="file" name="images" multiple>
+
+
                     <!-- CHARACTER LIMIT DISPLAY -->
                     <div id="feedback" class="charLim">0/300</div>
                     <div id="break"></div>
