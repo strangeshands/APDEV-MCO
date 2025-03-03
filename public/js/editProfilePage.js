@@ -101,7 +101,7 @@ if (currentContext === "profile") {
         const formData = new FormData();
         formData.append("profilePic", blob, "cropped-image.png");
 
-        fetch("/upload-profilepic", {
+        fetch(`/upload-profilepic/${activeUserDetails.username}`, {
             method: "POST",
             body: formData,
         })
@@ -128,7 +128,7 @@ if (currentContext === "profile") {
         const formData = new FormData();
         formData.append("headerPic", blob, "cropped-image.png");
 
-        fetch("/upload-headerpic", {
+        fetch(`/upload-headerpic/${activeUserDetails.username}`, {
             method: "POST",
             body: formData,
         })
@@ -172,27 +172,29 @@ function saveUserDetails() {
     const newDisplayName = document.getElementById('display-name').value;
     const newBio = document.getElementById('bio').value;
 
-    if (newUser === profileDetails.username) {
+    if (newUser === activeUserDetails.username) {
         document.getElementById('username-feedback').textContent = "This is already your username.";
         change = false;
     }
-    if (newDisplayName === profileDetails.displayname) {
+    if (newDisplayName === activeUserDetails.displayname) {
         document.getElementById('dn-feedback').textContent = "This is already your display name.";
         change = false;
     }
-    if (newBio === profileDetails.bio) {
+    if (newBio === activeUserDetails.bio) {
         document.getElementById('bio-feedback').textContent = "This is already your bio.";
         change = false;
     }
 
     if (change) {
-        fetch(`/edit-profile/${profileDetails.username}/update-user-details`, {
+        fetch(`/edit-profile/${activeUserDetails.username}/update-user-details`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 newUser, 
                 newDisplayName,
-                newBio
+                newBio,
+
+                activeUserDetails
             })
         })
         .then(response => response.json())
@@ -213,11 +215,11 @@ function saveAccountInfo() {
     var newNum = document.getElementById('tel-number').value;
     newNum = newNum.replace(/\s+/g, '');
 
-    if (newEmail === profileDetails.email) {
+    if (newEmail === activeUserDetails.email) {
         document.getElementById('username-feedback').textContent = "This is already your registered email.";
         change = false;
     }
-    const phoneClean = profileDetails.displayname.replace(/\s+/g, '');
+    const phoneClean = activeUserDetails.displayname.replace(/\s+/g, '');
     if (newNum === phoneClean) {
         document.getElementById('dn-feedback').textContent = "This is already your registered phone number.";
         change = false;
@@ -226,12 +228,14 @@ function saveAccountInfo() {
     if (change) {
         newNum = newNum.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3");
 
-        fetch('/edit-profile', {
+        fetch(`/edit-profile/${activeUserDetails.username}/update-acc-info`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 newEmail, 
-                newNum
+                newNum,
+
+                activeUserDetails
             })
         })
         .then(response => response.json())
@@ -250,15 +254,15 @@ function changePassword() {
     var newPass = document.getElementById('password').value;
     var repeatPass = document.getElementById('confirm-password').value;
 
-    if (currentPass != profileDetails.password) {
-        console.log(profileDetails.password);
+    if (currentPass != activeUserDetails.password) {
+        console.log(activeUserDetails.password);
         console.log(currentPass);
         document.getElementById('update-pw-feedback').textContent = "Your entry does not match your current password.";
         change = false;
     }
 
-    if (newPass == profileDetails.password) {
-        console.log(profileDetails.password);
+    if (newPass == activeUserDetails.password) {
+        console.log(activeUserDetails.password);
         document.getElementById('update-pw-feedback').textContent = "Please choose a different password.";
         change = false;
     }
@@ -270,11 +274,13 @@ function changePassword() {
     }
 
     if (change) {
-        fetch('/edit-profile', {
+        fetch(`/edit-profile/${activeUserDetails.username}/update-acc-info`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-                newPass
+                newPass,
+
+                activeUserDetails
             })
         })
         .then(response => response.json());

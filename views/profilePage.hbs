@@ -110,7 +110,7 @@
                          <!-- SETTINGS -->
                          {{#if ownPage}}
                               <div class="col1-sub-container"> 
-                                   <button class="editProfile" onclick="window.location.href='/edit-profile/{{activeUserDetails.username}}';">
+                                   <button class="editProfile" onclick="window.location.href='/edit-profile/{{activeUserDetails.username}}?userId={{activeUserDetails._id}}';">
                                         <img src="/resources/Edit Icon.svg" alt="">
                                         Account Settings
                                    </button>

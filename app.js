@@ -61,21 +61,22 @@ app.use("/profile/:username", userController.loadUserProfile);
 
 /**
  *  [EDIT PROFILE PAGE]
- *  TO DO:
- *      > update to "/edit-profile/<username>" so <username> dynamically changes depending on the selected profile
  */
 app.get("/edit-profile/:username", userController.editProfileLoad);
 app.post("/edit-profile/:username/update-user-details", userController.updateUserDetails);
-app.post("/edit-profile", userController.updateProfile);
+app.post("/edit-profile/:username/update-acc-info", userController.updateUserDetails);
 
 /**
- *  GHOST LINK - no dedicated page
- *  > allows updating of bookmarks
+ *  [GHOST LINKS] - no dedicated page
+ *      (1) allows updating of bookmarks
+ *      (2) allows updated of likes and dislikes
+ *      (3) allows updating of profile pic
+ *      (4) allows updating of header picture
  */
 app.post("/update-bookmark", userController.updateBookmark);
 app.post("/update-like", userController.updateLike);
-app.post("/upload-profilepic", userController.changePhoto);
-app.post("/upload-headerpic", userController.changeHeader);
+app.post("/upload-profilepic/:username", userController.changePhoto);
+app.post("/upload-headerpic/:username", userController.changeHeader);
 
 // ----- 404 Page (Catch-All Route) ----- //
 app.use((req, res) => {     

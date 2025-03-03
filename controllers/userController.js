@@ -1,6 +1,7 @@
 const users = require('../models/users');
 const posts = require('../models/posts');
 const likes = require('../models/likes');
+
 const path = require("path");
 
 /**
@@ -37,7 +38,6 @@ var activeBookmarks = null;
 var activeLikes = null;
 var activeDislikes = null;
 
-// TODO: do also for comments, bookmarks, likes, dislikes tabs
 const loadUserProfile = async(req,res) => {
     // request profileSelected
     profileSelected = req.params.username;
@@ -335,140 +335,29 @@ const updateLike = async(req, res) => {
     }
 };
 
-// TODO: please check this
+/**
+ *  assume params.username is the user logged in since the option
+ *      will only appear if logged in
+ */
 const editProfileLoad = async(req,res) => {
     var find = req.params.username;
-    activeUser = await users.findOne({ username: find });
+    activeUserDetails = await users.findOne({ username: find });
 
     res.render('editProfilePage', { 
-        profileDetails: activeUser 
-    });
-};
-
-const updateProfile = async(req,res) => {
-    const loggedInUserId = req.query.userId; 
-    const profileDetails = await users.findById(loggedInUserId);  
-
-    if (!profileDetails) {
-        return res.status(404).send("User not found");
-    }
-
-    var { newUser, newDisplayName, newBio } = req.body;
-    var { newEmail, newNum } = req.body;
-    var { newPass } = req.body;
-
-    var errorMessageUser = '';
-    var errorMessageDN = '';
-    var errorMessageBio = '';
-    var errorMessageEmail = '';
-    var errorMessageNum = '';
-
-    if (newUser) {
-        if (!newUser.startsWith('@')) {
-            newUser = '@' + newUser;
-        }
-        const existingUser = await users.findOne({ username: newUser });
-
-        if (existingUser)
-            errorMessageUser = newUser + ' already exists!'
-        else {
-            await users.updateOne(
-                { _id: profileDetails._id }, 
-                { $set: { username: newUser } }
-            );
-
-            /**
-             *  TO DO:
-             *      > update 'user' depending on the user logged in
-             */
-            user = newUser;
-
-            errorMessageUser = newUser + ' is your new username!';
-            profileDetails.username = newUser;
-        }
-    }
-
-    if (newDisplayName) {
-        await users.updateOne(
-            { _id: profileDetails._id }, 
-            { $set: { displayname: newDisplayName } }
-        );
-
-        errorMessageDN = newDisplayName + " is your new display name."
-        profileDetails.displayname = newDisplayName;
-    }
-
-    if (newBio) {
-        await users.updateOne(
-            { _id: profileDetails._id }, 
-            { $set: { bio: newBio } }
-        );
-
-        errorMessageBio = "You have updated your bio."
-        profileDetails.bio = newBio;
-    }
-
-    if (newEmail) {
-        const existingUser = await users.findOne({ email: newEmail });
-
-        if (existingUser)
-            errorMessageEmail = newEmail + ' is already registered to another account.'
-        else {
-            await users.updateOne(
-                { _id: profileDetails._id }, 
-                { $set: { email: newEmail } }
-            );
-
-            errorMessageEmail = newEmail + ' is your new email!';
-            profileDetails.email = newEmail;
-        }
-    }
-
-    if (newNum) {
-        const existingUser = await users.findOne({ phone: newNum });
-
-        if (existingUser)
-            errorMessageNum = newNum + ' is already registered to another account.'
-        else {
-            await users.updateOne(
-                { _id: profileDetails._id }, 
-                { $set: { phone: newNum } }
-            );
-
-            errorMessageNum = newNum + ' is your new phone number!';
-            profileDetails.phone = newNum;
-        }
-    }
-
-    if (newPass) {
-        await users.updateOne(
-            { _id: profileDetails._id }, 
-            { $set: { password: newPass } }
-        );
-
-        profileDetails.password = newPass;
-    }
-
-    return res.json({ 
-        errorMessageUser,
-        errorMessageDN,
-        errorMessageBio,
-        errorMessageEmail,
-        errorMessageNum
+        activeUserDetails 
     });
 };
 
 // TODO; please check this
 const updateUserDetails = async(req,res) => {
-    // find the details of the profile
-    /**
-     *  TO DO:
-     *      > find must be equal to the activeUser
-     */
-    var find = req.params.username;
-    profileDetails = await users.findOne({ username: find });
+    var { newUser, newDisplayName, newBio, activeUserDetails } = req.body;
 
-    var { newUser, newDisplayName, newBio } = req.body;
+    // just to ensure it exists in the db
+    activeUserDetails = await users.findById(activeUserDetails._id);
+
+    if (!activeUserDetails) {
+        return res.render("errorPage");
+    }
 
     // checkpoint for changes
     var cpUser, cpDN, cpBio = false;
@@ -532,7 +421,7 @@ const updateUserDetails = async(req,res) => {
     if (overallstatus) {
         if (cpUser) {
             await users.updateOne(
-                { _id: profileDetails._id }, 
+                { _id: activeUserDetails._id }, 
                 { $set: { username: newUser } }
             );
     
@@ -543,26 +432,26 @@ const updateUserDetails = async(req,res) => {
             user = newUser;
     
             errorMessageUser = newUser + ' is your new username!';
-            profileDetails.username = newUser;
+            activeUserDetails.username = newUser;
         }
         if (cpDN) {
             await users.updateOne(
-                { _id: profileDetails._id }, 
+                { _id: activeUserDetails._id }, 
                 { $set: { displayname: newDisplayName } }
             );
     
             errorMessageDN = newDisplayName + " is your new display name."
-            profileDetails.displayname = newDisplayName;
+            activeUserDetails.displayname = newDisplayName;
         }
     
         if (cpBio) {
             await users.updateOne(
-                { _id: profileDetails._id }, 
+                { _id: activeUserDetails._id }, 
                 { $set: { bio: newBio } }
             );
     
             errorMessageBio = "You have updated your bio."
-            profileDetails.bio = newBio;
+            activeUserDetails.bio = newBio;
         }
 
         errorMessageButton = "You have saved your changes."
@@ -578,15 +467,75 @@ const updateUserDetails = async(req,res) => {
     });
 };
 
-const changePhoto = async(req,res) => {
-    const loggedInUserId = req.query.userId;  
-    const profileDetails = await users.findById(loggedInUserId);  
+const updateAccountInfo = async(req,res) => {
+    var { newEmail, newNum, activeUserDetails } = req.body;
 
-    if (!profileDetails) {
-        return res.status(404).send("User not found");
+    // just to ensure it exists in the db
+    activeUserDetails = await users.findById(activeUserDetails._id);
+
+    if (!activeUserDetails) {
+        return res.render("errorPage");
     }
 
-    if (!req.files || !req.files.profilePic) {
+    var errorMessageEmail = '';
+    var errorMessageNum = '';
+
+    if (newEmail) {
+        const existingUser = await users.findOne({ email: newEmail });
+
+        if (existingUser)
+            errorMessageEmail = newEmail + ' is already registered to another account.'
+        else {
+            await users.updateOne(
+                { _id: activeUserDetails._id }, 
+                { $set: { email: newEmail } }
+            );
+
+            errorMessageEmail = newEmail + ' is your new email!';
+            activeUserDetails.email = newEmail;
+        }
+    }
+
+    if (newNum) {
+        const existingUser = await users.findOne({ phone: newNum });
+
+        if (existingUser)
+            errorMessageNum = newNum + ' is already registered to another account.'
+        else {
+            await users.updateOne(
+                { _id: activeUserDetails._id }, 
+                { $set: { phone: newNum } }
+            );
+
+            errorMessageNum = newNum + ' is your new phone number!';
+            activeUserDetails.phone = newNum;
+        }
+    }
+
+    if (newPass) {
+        await users.updateOne(
+            { _id: profileDetails._id }, 
+            { $set: { password: newPass } }
+        );
+
+        profileDetails.password = newPass;
+    }
+
+    return res.json({ 
+        errorMessageEmail,
+        errorMessageNum
+    });
+}
+
+const changePhoto = async(req,res) => {
+    const activeUser = req.params.username;
+    // just to ensure it exists in the db
+    activeUserDetails = await users.findOne({username:activeUser});
+
+    if (!activeUserDetails) {
+        return res.status(404).send("User not found");
+    }
+    if (!req.files || !req.files.headerPic) {
         return res.status(400).send("No file uploaded.");
     }
 
@@ -594,6 +543,9 @@ const changePhoto = async(req,res) => {
     const fileName = `${Date.now()}-${image.name}`;
     const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
     const filePathForDB = `/uploads/${fileName}`;
+
+    console.log(uploadPath);
+    console.log(filePathForDB);
 
     image.mv(uploadPath, (err) => {
         if (err) {
@@ -605,16 +557,17 @@ const changePhoto = async(req,res) => {
     });
 
     await users.updateOne(
-        { _id: profileDetails._id },
+        { _id: activeUserDetails._id },
         { $set: { profilepic: filePathForDB } }
     );
 };
 
 const changeHeader = async(req,res) => {
-    const loggedInUserId = req.query.userId; 
-    const profileDetails = await users.findById(loggedInUserId);  
+    const activeUser = req.params.username;
+    // just to ensure it exists in the db
+    activeUserDetails = await users.findOne({username:activeUser});
 
-    if (!profileDetails) {
+    if (!activeUserDetails) {
         return res.status(404).send("User not found");
     }
 
@@ -637,18 +590,21 @@ const changeHeader = async(req,res) => {
     });
 
     await users.updateOne(
-        { _id: profileDetails._id },
+        { _id: activeUserDetails._id },
         { $set: { headerpic: filePathForDB } }
     );
 };
 
 module.exports = { 
     loadUserProfile, 
+
     updateBookmark,
     updateLike,
+
     editProfileLoad,
-    updateProfile,
     updateUserDetails,
+    updateAccountInfo,
+
     changePhoto,
     changeHeader
 };
