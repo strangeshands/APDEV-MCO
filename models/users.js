@@ -68,5 +68,13 @@ const userSchema = new Schema({
     }
 });
 
+// Pre-save hook to add @ to username before saving
+userSchema.pre('save', function (next) {
+    if (!this.username.startsWith('@')) {
+        this.username = '@' + this.username;
+    }
+    next();
+});
+
 const User = mongoose.model('User', userSchema); // title name is singular because collection name is plural
 module.exports = User;  // export it
