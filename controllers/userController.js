@@ -20,8 +20,14 @@ let postCount;
 let likesCount;
 
 const loadUserProfile = async(req,res) => {
-    let tabId = req.params.tabId;
+    const loggedInUserId = req.query.userId;
+    global.user = await users.findById(loggedInUserId).select('username');
+    if (!user) {
+        return res.status(404).send("User not found");
+    }
 
+    let tabId = req.params.tabId || "posts";
+    
     // default is posts if tabId is null
     if (!tabId) 
         tabId = "posts"

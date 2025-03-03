@@ -89,7 +89,8 @@ const homePage = async (req, res) => {
             post: allPosts,
             user,
             userPosts,
-            userComments
+            userComments,
+            loggedInUserId
         });
     } catch(err) {
         console.error(err);
