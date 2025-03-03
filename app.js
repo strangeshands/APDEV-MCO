@@ -46,7 +46,7 @@ const homeController = require("./controllers/homeController");
 /* ---------- Routes ----------- */
 const postRoutes = require('./routes/postRoutes');
 const homeRoutes = require('./routes/homeRoutes');
-const authRoutes = require('./routes/authRoutes')
+const authRoutes = require('./routes/authRoutes');
 
 // ----- Use Controllers----- //
 app.use("/", homeRoutes);
@@ -66,7 +66,8 @@ app.get("/profile/:tabId", userController.loadUserProfile);
  *  TO DO:
  *      > update to "/edit-profile/<username>" so <username> dynamically changes depending on the selected profile
  */
-app.get("/edit-profile", userController.editProfileLoad);
+app.get("/edit-profile/:username", userController.editProfileLoad);
+app.post("/edit-profile/:username/update-user-details", userController.updateUserDetails);
 app.post("/edit-profile", userController.updateProfile);
 
 /**
