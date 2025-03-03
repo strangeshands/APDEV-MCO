@@ -1,16 +1,17 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const headerImage = document.querySelector("#profileHeader img");
-    const pfpImage = document.querySelector("#pfpPic img");
-    const usernameholder = document.getElementById("username");
-    const displaynameholder = document.getElementById("display-name");
-    const bioholder = document.getElementById("bio");
-    const emailholder = document.getElementById("email");
-    const numholder = document.getElementById("tel-number");
+const headerImage = document.querySelector("#profileHeader img");
+const pfpImage = document.querySelector("#pfpPic img");
+const usernameholder = document.getElementById("username");
+const displaynameholder = document.getElementById("display-name");
+const bioholder = document.getElementById("bio");
+const emailholder = document.getElementById("email");
+const numholder = document.getElementById("tel-number");
 
+document.addEventListener("DOMContentLoaded", () => {
     // set images
     headerImage.src = profileDetails.headerpic;
     pfpImage.src = profileDetails.profilepic;
 
+    // set details
     document.title = `${profileDetails.username} - Edit Profile`
     usernameholder.placeholder = profileDetails.username;
     displaynameholder.placeholder = profileDetails.displayname;
@@ -18,8 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     emailholder.placeholder = profileDetails.email;
     numholder.placeholder = profileDetails.phone;
 });
-
-var change = true;
 
 /* ---- BIO COUNTER ---- */
 document.addEventListener("DOMContentLoaded", () => {
@@ -107,17 +106,59 @@ const croppedImageURL = canvas.toDataURL("image/png");
 
 /* ---- REPLACE HEADER OR PROFILE PICTURE WITH THE CROPPED IMAGE ---- */
 if (currentContext === "profile") {
-    const pfpImage = document.querySelector("#pfpPic img");
-    pfpImage.src = croppedImageURL; 
+    const canvas = cropper.getCroppedCanvas({
+        width: 200,
+        height: 200,
+    });
 
-    // Update profile1
-    profile1.pfp = croppedImageURL; 
-} else if (currentContext === "header") {
-    const headerImage = document.querySelector("#profileHeader img");
+    canvas.toBlob((blob) => {
+        if (!blob) return;
+        
+        const formData = new FormData();
+        formData.append("profilePic", blob, "cropped-image.png");
+
+        fetch("/upload-profilepic", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Image uploaded successfully:", data);
+            cropModal.style.display = "none";
+        })
+        .catch((error) => {
+            console.error("Upload failed:", error);
+        });
+    }, "image/png");
+
+    pfpImage.src = croppedImageURL;
+} else if (currentContext === "header") {    
+    const canvas = cropper.getCroppedCanvas({
+        width: 1600,
+        height: 900,
+    });
+
+    canvas.toBlob((blob) => {
+        if (!blob) return;
+        
+        const formData = new FormData();
+        formData.append("headerPic", blob, "cropped-image.png");
+
+        fetch("/upload-headerpic", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Image uploaded successfully:", data);
+            cropModal.style.display = "none";
+        })
+        .catch((error) => {
+            console.error("Upload failed:", error);
+        });
+    }, "image/png");
+
     headerImage.src = croppedImageURL; 
-
-    // Update profile1
-    profile1.header = croppedImageURL; 
 }
 
 /* ---- CLOSE MODAL ---- */
@@ -135,6 +176,13 @@ cropCancelBtn.addEventListener("click", () => {
     imageInput.value = "";
 });
 
+// ----- EDIT PROFILE DETIALS ----- //
+
+var change = true;
+
+/**
+ *  allows saving of user details
+ */
 function saveUserDetails() {
     const newUser = document.getElementById('username').value;
     const newDisplayName = document.getElementById('display-name').value;
@@ -171,6 +219,9 @@ function saveUserDetails() {
     }
 }
 
+/**
+ *  allows saving of account information
+ */
 function saveAccountInfo() {
     var newEmail = document.getElementById('email').value;
     var newNum = document.getElementById('tel-number').value;
@@ -205,6 +256,9 @@ function saveAccountInfo() {
     }
 }
 
+/**
+ *  allows changing of passwords
+ */
 function changePassword() {
     var currentPass = document.getElementById('curr-password').value;
     var newPass = document.getElementById('password').value;

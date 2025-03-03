@@ -14,7 +14,7 @@ const morgan = require('morgan');
 const mongoose = require('mongoose');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
-const fileUpload = require('express-fileupload')
+const fileUpload = require('express-fileupload');
 /* --------------------- */
 
 const app = express();
@@ -24,7 +24,10 @@ app.use(express.static('public'));                  // everything in the given d
 app.use(express.urlencoded({ extended: true }));    // parses the url to an object to be used in te req obj // needed or else obj is undefined
 app.use(morgan('dev'));                             // used for automatic logging of http request details (method, url, status, ...)
 app.use(express.json());                            // allows JSON parsing
-app.use(fileUpload());                              // allows file uploading
+
+// set up file upload
+app.use(fileUpload());
+app.use('/uploads', express.static('uploads'));
 
 // to make data from DB usable in javascript files
 app.set('view engine','hbs'); // register view engine
@@ -72,6 +75,8 @@ app.post("/edit-profile", userController.updateProfile);
  */
 app.post("/update-bookmark", userController.updateBookmark);
 app.post("/update-like", userController.updateLike);
+app.post("/upload-profilepic", userController.changePhoto);
+app.post("/upload-headerpic", userController.changeHeader);
 
 // ----- 404 Page (Catch-All Route) ----- //
 app.use((req, res) => {     

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+     <header>
+          <title> Connectify - Sign Up </title>
+          <link rel="stylesheet" type="text/css" href="../css/starterPage.css">
+          <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
+     </header>
+
+     <body>
+          <!-- INPUT SPACE -->
+          <div class="frame">
+
+                <!-- REGISTER PROMPT -->
+                <div class="title">
+                        SIGN UP
+                </div>
+
+                <!-- ERROR MESSAGE (if login fails) -->
+                {{#if error}}
+                    <div class="errorMessage">
+                    <p>{{error}}</p>
+                    </div>
+                {{/if}}
+                
+                <!-- SIGNUP FORM -->
+                <form action="/signup" method="POST">
+                    <div class="inputFields">
+                        <div class="inputs">
+                            <p class="inputLabel"> Email </p>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="inputs">
+                            <p class="inputLabel"> Phone Number </p>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone no." required>
+                        </div>
+
+                        <div class="inputs">
+                            <p class="inputLabel"> Username </p>
+                            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                        </div>
+
+                        <div class="inputs">
+                            <p class="inputLabel"> Display Name </p>
+                            <input type="text" id="displayname" name="displayname" placeholder="Enter a display name" required>
+                        </div>
+
+                        <div class="inputs">
+                            <p class="inputLabel"> Password </p>
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                        </div>
+
+                        <div class="inputs">
+                            <p class="inputLabel"> Confirm Password </p>
+                            <input type="password" id="confirmpass" name="confirmpass" placeholder="Confirm your password" required>
+                        </div>
+                    </div>
+        
+                    <!-- LOGIN PROMPT -->
+                    <p class="subText">
+                            Already have an account? <a href="/login">Log In</a>
+                    </p>
+
+                    <!-- CREATE ACCOUNT -->
+                    <button id="buttons" type="submit">Sign Up</button>
+
+                </form>
+          </div>
+     </body>
+</html>

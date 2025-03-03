@@ -1,6 +1,7 @@
 const users = require('../models/users');
 const posts = require('../models/posts');
 const likes = require('../models/likes');
+const path = require("path");
 
 /**
  *  > for testing only, will find for a specific hard coded user
@@ -165,12 +166,20 @@ const updateLike = async(req,res) => {
                             likedPost: selectedPost._id, 
                             likedBy: profileDetails._id 
                         });
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { likeCount: -1 } }
+                        );
             break;
 
             case 'undislike':
                 await   users.updateOne(
                             { _id: profileDetails._id },
                             { $pull: { dislikes: selectedPost._id } }
+                        );
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { dislikeCount: -1 } }
                         );
             break;
 
@@ -180,31 +189,55 @@ const updateLike = async(req,res) => {
                             likedBy: profileDetails._id ,
                             createdAt: new Date()
                         });
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { likeCount: +1 } }
+                        );
             break;
 
             case 'dislike':
                 profileDetails.dislikes.splice(0, 0, postId);
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { dislikeCount: +1 } }
+                        );
             break;
 
             case 'like+': 
                 await   likes.insertOne({
-                    likedPost: selectedPost._id, 
-                    likedBy: profileDetails._id 
-                });
+                            likedPost: selectedPost._id, 
+                            likedBy: profileDetails._id 
+                        });
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { likeCount: +1 } }
+                        );
 
                 await   users.updateOne(
-                    { _id: profileDetails._id },
-                    { $pull: { dislikes: selectedPost._id } }
-                );
+                            { _id: profileDetails._id },
+                            { $pull: { dislikes: selectedPost._id } }
+                        );
+                await    posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { dislikeCount: -1 } }
+                        );
             break;
 
             case 'dislike+':
                 profileDetails.dislikes.splice(0, 0, postId);
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { dislikeCount: +1 } }
+                        );
 
                 await   likes.deleteOne({ 
-                    likedPost: selectedPost._id, 
-                    likedBy: profileDetails._id,
-                });
+                            likedPost: selectedPost._id, 
+                            likedBy: profileDetails._id,
+                        });
+                await   posts.updateOne(
+                            { _id: selectedPost._id },
+                            { $inc: { likeCount: -1 } }
+                        );
             break;
         }
         await profileDetails.save();
@@ -327,10 +360,66 @@ const updateProfile = async(req,res) => {
     });
 };
 
+const changePhoto = async(req,res) => {
+    profileDetails = await users.findOne({ username: user });
+
+    if (!req.files || !req.files.profilePic) {
+        return res.status(400).send("No file uploaded.");
+    }
+
+    const image = req.files.profilePic;
+    const fileName = `${Date.now()}-${image.name}`;
+    const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+    const filePathForDB = `/uploads/${fileName}`;
+
+    image.mv(uploadPath, (err) => {
+        if (err) {
+            console.error("File upload error:", err);
+            return res.status(500).send("Failed to upload image.");
+        }
+
+        res.json({ message: "Image uploaded successfully!", filePath: `/uploads/${fileName}` });
+    });
+
+    await users.updateOne(
+        { _id: profileDetails._id },
+        { $set: { profilepic: filePathForDB } }
+    );
+};
+
+const changeHeader = async(req,res) => {
+    profileDetails = await users.findOne({ username: user });
+
+    if (!req.files || !req.files.headerPic) {
+        return res.status(400).send("No file uploaded.");
+    }
+
+    const image = req.files.headerPic;
+    const fileName = `${Date.now()}-${image.name}`;
+    const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+    const filePathForDB = `/uploads/${fileName}`;
+
+    image.mv(uploadPath, (err) => {
+        if (err) {
+            console.error("File upload error:", err);
+            return res.status(500).send("Failed to upload image.");
+        }
+
+        res.json({ message: "Image uploaded successfully!", filePath: `/uploads/${fileName}` });
+    });
+
+    await users.updateOne(
+        { _id: profileDetails._id },
+        { $set: { headerpic: filePathForDB } }
+    );
+};
+
 module.exports = { 
     loadUserProfile, 
     updateBookmark,
     updateLike,
     editProfileLoad,
-    updateProfile
+    updateProfile,
+    changePhoto,
+    changeHeader
 };
