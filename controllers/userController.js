@@ -14,10 +14,21 @@ const path = require("path");
 //const user = "@jabeedabee";
 var user = "@AkoSiDarna";
 
+/**
+ *  activeUser: user logged in
+ *  profileSelected: selected profile, can be not the same as the active user
+ *  
+ *  restrictions:
+ *      (1) activeUser can only access edit profile page
+ *      (2) if activeUser is null, "log in" button will show on the header
+ */
+var activeUser;
+var profileSelected;
+
 // Initialize variables
-let profileDetails;
-let postCount;
-let likesCount;
+var profileDetails;
+var postCount;
+var likesCount;
 
 const loadUserProfile = async(req,res) => {
     let tabId = req.params.tabId;
@@ -93,11 +104,15 @@ const loadUserProfile = async(req,res) => {
                         path: 'parentPost', 
                         populate: { path: 'author' }  
                     }
-                ]
+                ],
+                options: { strictPopulate: false }
             })
             .sort({ createdAt: -1, updatedAt: -1 })
             .select('likedPost');
-        const profileLikes = likesTemp.map(like => like.likedPost);
+        const profileLikes =    likesTemp
+                                .map(like => like.likedPost)
+                                .filter(likedPost => likedPost !== null);;
+        console.log("LIKES");
         console.log(profileLikes);
 
         // query profile dislikes
@@ -245,10 +260,11 @@ const updateLike = async(req,res) => {
 };
 
 const editProfileLoad = async(req,res) => {
-    profileDetails = await users.findOne({ username: user });
+    var find = req.params.username;
+    activeUser = await users.findOne({ username: find });
 
     res.render('editProfilePage', { 
-        profileDetails 
+        profileDetails: activeUser 
     });
 };
 
@@ -360,6 +376,125 @@ const updateProfile = async(req,res) => {
     });
 };
 
+const updateUserDetails = async(req,res) => {
+    // find the details of the profile
+    /**
+     *  TO DO:
+     *      > find must be equal to the activeUser
+     */
+    var find = req.params.username;
+    profileDetails = await users.findOne({ username: find });
+
+    var { newUser, newDisplayName, newBio } = req.body;
+
+    // checkpoint for changes
+    var cpUser, cpDN, cpBio = false;
+
+    // error messages to return
+    var errorMessageUser = '';
+    var errorMessageDN = '';
+    var errorMessageBio = '';
+
+    // checker for button feedback
+    var overallstatus = true;
+    var errorMessageButton = '';
+
+    /**
+     *  username should be unique
+     */
+    if (newUser) {
+        if (!newUser.startsWith('@')) {
+            newUser = '@' + newUser;
+        }
+        
+        const existingUser = await users.findOne({ username: newUser });
+        if (existingUser) {
+            errorMessageUser = newUser + ' already exists!'
+
+            cpUser = false;
+            overallstatus = false;
+        }
+        else
+            cpUser = true;
+    }
+
+    /**
+     *  display name have a character limit of 20
+     */
+    if (newDisplayName) {
+        if (newDisplayName.length > 20) {
+            errorMessageDN = "Your display name exceeded character limit."
+
+            cpDN = false;
+            overallstatus = false;
+        }
+        else 
+            cpDN = true;
+    }
+
+    /**
+     *  bio has a character limit
+     */
+    if (newBio) {
+        if (newBio.length > 100) {
+            errorMessageBio = "Your bio exceeded character limit."
+
+            cpBio = false;
+            overallstatus = false;
+        }
+        else
+            cpBio = true;
+    }
+
+    if (overallstatus) {
+        if (cpUser) {
+            await users.updateOne(
+                { _id: profileDetails._id }, 
+                { $set: { username: newUser } }
+            );
+    
+            /**
+             *  TO DO:
+             *      > update 'user' depending on the user logged in
+             */
+            user = newUser;
+    
+            errorMessageUser = newUser + ' is your new username!';
+            profileDetails.username = newUser;
+        }
+        if (cpDN) {
+            await users.updateOne(
+                { _id: profileDetails._id }, 
+                { $set: { displayname: newDisplayName } }
+            );
+    
+            errorMessageDN = newDisplayName + " is your new display name."
+            profileDetails.displayname = newDisplayName;
+        }
+    
+        if (cpBio) {
+            await users.updateOne(
+                { _id: profileDetails._id }, 
+                { $set: { bio: newBio } }
+            );
+    
+            errorMessageBio = "You have updated your bio."
+            profileDetails.bio = newBio;
+        }
+
+        errorMessageButton = "You have saved your changes."
+    }
+    else
+        errorMessageButton = "Cannot procceed. Please check your input."
+
+    return res.json({ 
+        errorMessageUser,
+        errorMessageDN,
+        errorMessageBio,
+        errorMessageButton
+    });
+};
+
 const changePhoto = async(req,res) => {
     profileDetails = await users.findOne({ username: user });
 
@@ -420,6 +555,7 @@ module.exports = {
     updateLike,
     editProfileLoad,
     updateProfile,
+    updateUserDetails,
     changePhoto,
     changeHeader
 };
