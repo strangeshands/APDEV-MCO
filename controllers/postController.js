@@ -77,45 +77,69 @@ const post_create_post = async (req, res) => {
         return res.status(404).send("User not found");
     }
 
-    const uploadedImages = req.files.images;
+    if (!req.files || !req.files.images) {
+        return res.status(400).send("No file uploaded.");
+    }
 
-    // Prepare to save image paths
     let imagePaths = [];
 
-    // Handle multiple image uploads
-    if (Array.isArray(uploadedImages)) {
-        const imageUploadPromises = uploadedImages.map((image) => {
-            return new Promise((resolve, reject) => {
-                const uploadPath = path.resolve(__dirname, '..', 'resources', image.name);
+    const images = req.files.images;
+
+    if (Array.isArray(images)) {
+        const imageUploadPromises = images.map((image) => {
+            return new Promise((resolve, reject) => { 
+                const fileName = `${Date.now()}-${image.name}`;
+                const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+                const filePathForDB = `/uploads/${fileName}`;
+            
                 image.mv(uploadPath, (err) => {
-                    
                     if (err) {
-                        reject(err);
-                        console.log("Error");
+                        console.error("File upload error:", err);
+                        reject("Failed to upload image.");
+                        return res.status(500).send("Failed to upload image.");
                     } else {
-                        imagePaths.push(`/resources/${image.name}`);
+                        imagePaths.push(`/uploads/${fileName}`);
+                        console.log(`message: "Images uploaded successfully!", filePath: /uploads/${fileName}`);
                         resolve();
                     }
+            
                 });
             });
         });
-
-        // Wait for all image uploads to complete before proceeding
+    
         try {
             await Promise.all(imageUploadPromises);
         } catch (err) {
             console.log("Error uploading images: " + err.message);
         }
+    } else {
+        let image = images;
+
+        const imageUploadPromise = new Promise((resolve, reject) => {
+            const fileName = `${Date.now()}-${image.name}`;
+            const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+            const filePathForDB = `/uploads/${fileName}`;
         
-    } else {  // Handle single image upload
-        const uploadPath = path.resolve(__dirname, '..', 'resources', uploadedImages.name);
-        uploadedImages.mv(uploadPath, (err) => {
-            if (err) {
-                console.log("Error");
-            }
-            imagePaths.push(`/resources/${uploadedImages.name}`);
+            image.mv(uploadPath, (err) => {
+                if (err) {
+                    console.error("File upload error:", err);
+                    reject("Failed to upload image.");
+                    return res.status(500).send("Failed to upload image.");
+                } else {
+                    imagePaths.push(`/uploads/${fileName}`);
+                    console.log(`message: "Image uploaded successfully!", filePath: /uploads/${fileName}`);
+                    resolve();
+                }
+        
+            });
         });
-    }
+
+        try {
+            await imageUploadPromise; // Wait for the upload to finish
+        } catch (err) {
+            console.log("Error uploading image: " + err.message);
+        }
+    };
 
     const postData = { 
         ...formData, 
@@ -127,7 +151,7 @@ const post_create_post = async (req, res) => {
         const post = new Post(postData);
         await post.save()
                     .then((result) => {
-                        res.redirect('/?userId=67b9fd7ab7db71f6ae3b21d4');
+                        res.redirect(`/?userId=${tempUserId}`); // to be changed
                     })
                     .catch((err) => {
                         console.log(err);
