@@ -75,7 +75,7 @@ function loadUserComments(type) {
                                    <img src="/resources/Options Button.svg"/>
                               </button>
                               <button class="editButton" onclick="window.location.href='/posts/${post._id}';">View Post</button>
-                              <button class="editButton">Copy Link</button>
+                              <button class="editButton" onclick="copyLink('${post._id}');">Copy Link</button>
 
                               ${own ? `
                                    <button class="editButton" onclick="window.location.href = '../html/newPostPage.html';">Edit Post</button>

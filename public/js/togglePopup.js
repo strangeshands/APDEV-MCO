@@ -40,7 +40,7 @@ document.addEventListener('click', (e) => {
 }); 
 
 /* --- GO TO POST --- */
-function goToPost(title, postId) {
-    console.log(`Going to post ${postId} -- ${title}`);
-    /*window.location.href = '../html/postPage.html';*/
+function copyLink(postId) {
+    const fullUrl = `${window.location.origin}/posts/${postId}`;
+    navigator.clipboard.writeText(fullUrl);
 }

@@ -59,6 +59,9 @@ function iconClicked(button, iconType, postId) {
           const otherSrc = otherImg.src.split('/').pop();
           const isOtherClicked = otherSrc === iconPaths[iconType === 'heart' ? 'heartCrack' : 'heart'].clicked.split('/').pop();
 
+          // Connection to Node, determines what action to do
+          let action;
+
           // Toggle current button state
           if (isCurrentlyClicked) {
                // ----- Visual ----- //
@@ -66,7 +69,6 @@ function iconClicked(button, iconType, postId) {
                currentImg.src = iconPaths[iconType].default;
                currentCounter.textContent = Math.max(0, parseInt(currentCounter.textContent) - 1);
 
-               let action;
                if (iconType === 'heart')
                     action = 'unlike';
                else 
@@ -82,7 +84,6 @@ function iconClicked(button, iconType, postId) {
                     otherCounter.textContent = Math.max(0, parseInt(otherCounter.textContent) - 1);
                }
 
-               let action;
                if (iconType === 'heart') {
                     action = 'like';
                     
