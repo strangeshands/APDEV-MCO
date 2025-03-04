@@ -20,7 +20,6 @@
                var activeUserDetails = {{{ json activeUserDetails }}};
 
                var activeLikes = {{{ json activeLikes }}};
-               console.log(activeLikes);
                var activeBookmarks = {{{ json activeBookmarks }}};
                var activeDislikes = {{{ json activeDislikes }}};
 
@@ -137,17 +136,14 @@
 
                          <!-- SPECIFIC TAB -->
                          <div class="col2-sub-container" id="contentContainer">
-                              {{#if (isEqual activeTab "comments")}}
-                                   {{> commentsTab }}
-                              {{else if (isEqual activeTab "bookmarks")}}
-                                   {{> bookmarksTab }}
-                              {{else if (isEqual activeTab "likes")}}
-                                   {{> likesTab }}
-                              {{else if (isEqual activeTab "dislikes")}}
-                                   {{> dislikesTab }}
-                              {{else}}
-                                   {{> postsTab }}
-                              {{/if}}
+                              <div id="poststab" class="tab-content" style="display: block">
+                                   <!-- LOAD POST DATA -->
+                                   <div id="postsContainer"></div>
+                                   <script src="/js/loadProfilePosts.js"></script>
+                                   <script>
+                                         document.addEventListener("DOMContentLoaded", loadPosts('{{activeTab}}'));
+                                   </script>
+                              </div>
                          </div>
                     </div>
                </div>

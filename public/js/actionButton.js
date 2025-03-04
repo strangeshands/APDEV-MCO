@@ -7,8 +7,6 @@
  *   @param {*} postId  The postId attached to the button
  */
 function iconClicked(button, iconType, postId) {    
-     console.log(postId);
-
      // Get the image within the button
      const img = button.querySelector('img');
 
@@ -21,16 +19,16 @@ function iconClicked(button, iconType, postId) {
      // Path for different icon types
      const iconPaths = {
           'heart': {
-          default: '../resources/Heart.svg',
-          clicked: '../resources/Heart-Clicked.svg'
+          default: '/resources/Heart.svg',
+          clicked: '/resources/Heart-Clicked.svg'
           },
           'heartCrack': {
-          default: '../resources/HeartCrack.svg',
-          clicked: '../resources/HeartCrack-Clicked.svg'
+          default: '/resources/HeartCrack.svg',
+          clicked: '/resources/HeartCrack-Clicked.svg'
           },
           'bookmark': {
-          default: '../resources/Bookmark.svg',
-          clicked: '../resources/Bookmark-Clicked.svg'
+          default: '/resources/Bookmark.svg',
+          clicked: '/resources/Bookmark-Clicked.svg'
           }
      };
 
