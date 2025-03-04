@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+     <head>
+          <title> Connectify - {{title}} </title>
+          <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
+
+          <!-- CSS -->
+          <link rel="stylesheet" type="text/css" href="../css/homePage.css">
+          <link rel="stylesheet" type="text/css" href="../css/generalStyle.css">
+
+          <!-- SCRIPTS -->
+          <script src="../js/actionButton.js"></script>
+          <script src="../js/togglePopup.js"></script>
+
+          <script>
+            var timelinePosts = {{{ json post }}};
+            
+            var activeUserDetails = {{{ json activeUserDetails }}}
+            var activeBookmarks = {{{ json activeBookmarks }}};
+            var activeLikes = {{{ json activeLikes }}};
+            var activeDislikes = {{{ json activeDislikes }}};
+          </script>
+     </head>
+
+     <body>
+          <!-- HEADER PORTION -->
+          <header>
+               <div id="headercol1" onclick="window.location.href='/'">
+                    <img id="logo" src="../resources/Logo.svg" />
+                    <p id="appName"> Connectify </p>
+               </div>
+               <div id="headercol2">
+                    <div class="searchBar">
+                         <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
+                         <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+                    </div>
+               
+                    <!-- IF USER IS NOT LOGGED IN -->
+                    <div class="logIn">
+                         <button id="logInButton" onclick="window.location.href='/login'">Log In</button>
+                    </div>
+               </div>
+          </header>
+
+          <div class="break"> </div>
+
+          <div class="content">
+
+                <!-- IF USER IS LOGGED IN -->
+                <!-- NAV BAR -->
+                <div class="navBar">
+
+                    <!-- USER PROFILE -->
+                    <div class="profileNav">
+                        <!-- PROFILE NAME, PIC, BIO -->
+                        <div class="profile">
+                            <div id="userAvatar">
+                                <img src="{{user.profilepic}}" class="userProfilePic" alt="User Profile Pic">
+                            </div>
+                            <div class="usernameAndhandle">
+                                <p id="profileUsername">{{user.displayname}}</p>
+                                <p id="profileUserhandle">{{user.username}}</p>
+                            </div>
+                        </div>
+
+                        <div class="navBarDivider"></div>
+
+                        <div class="navBarContent">
+                            <!-- NAV BAR OPTIONS -->
+                            <div class="registeredOptions">
+                                <button class="navBarButtons" id="viewProfile" onclick="window.location.href='/profile/{{user.username}}?userId={{loggedInUserId}}';">
+                                    <img src="../resources/Profile Icon.svg" alt="View Profile Icon">
+                                    View Profile
+                                </button>
+                                <button class="navBarButtons" id="editProfile" onclick="window.location.href='/editProfile'">
+                                    <img src="../resources/Edit Icon.svg" alt="Edit Profile Icon">
+                                    Edit Profile
+                                </button>
+                                <button class="navBarButtons" id="logOut" onclick="window.location.href='/logout'">
+                                    <img src="../resources/Log Out Icon.svg" alt="Log Out Icon">
+                                    Log Out
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- POSTS AND COMMENTS SECTION -->
+                    <div class="userPostsAndComments">
+                        <!-- POSTS -->
+                        <div class="userPostsAndCommentsHeader">
+                            <p class="userNavTitle">Posts</p>
+                            <a class="userNavMore" href="/profile/posts?userId={{loggedInUserId}}">More ></a>
+                        </div>
+
+                        <div class="userPostsAndCommentsContent" id="userPostsContent">
+                            {{#if userPosts.length}}
+                                {{#each userPosts}}
+                                    <a class="userPostLink" href="/posts/{{this._id}}">
+                                        <button class="userPost" id="userPost{{@index}}">
+                                            {{#if this.images.length}}
+                                            <img 
+                                                class="userPostImage" 
+                                                src="{{this.images.[0]}}" 
+                                                alt="User Post Image"
+                                            />
+                                            {{else}}
+                                            <img 
+                                                class="userPostImage" 
+                                                src="../resources/Image Holder.svg" 
+                                                alt="No Image"
+                                            />
+                                            {{/if}}
+
+                                            <p class="userPostTitle">{{this.title}}</p>
+                                        </button>
+                                    </a>
+                                {{/each}}
+                            {{else}}
+                                <div class="noPostsOrComments">No Posts Available</div>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    <!-- COMMENTS -->
+                    <div class="userPostsAndComments">
+                        <div class="userPostsAndCommentsHeader">
+                            <p class="userNavTitle">Comments</p>
+                            <a class="userNavMore" href="/profile/comments?userId={{loggedInUserId}}">More ></a>
+                        </div>
+
+                        <div class="userPostsAndCommentsContent" id="userCommentsContent">
+                            {{#if userComments.length}}
+                                {{#each userComments}}
+                                    <a class="userPostLink" href="/posts/{{this._id}}">
+                                        <button class="userPost" id="userComment{{@index}}">
+                                            <img 
+                                            class="userPostImage" 
+                                            src="../resources/Arrow Curve Up Right.svg"
+                                            alt="User Post Image"
+                                            />
+                                            <p class="userComment">{{this.content}}</p>
+                                        </button>
+                                    </a>
+                                {{/each}}
+                            {{else}}
+                                <div class="noPostsOrComments">No Comments Available</div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+
+               
+               <!-- TIMELINE -->
+               <div class="timeline" id="postsTimeline">
+                    <!-- NEW POST BUTTON -->
+                    <div class="newPost">
+                         <button class="newPostButton" onclick="window.location.href='/posts/create'">+ New Post</button>
+                    </div>
+
+                    <div class="postDivider"></div>
+                    
+                    <!-- POST FEED -->
+                    <div id="postFeed"></div>
+                    <script src="../js/loadPostFeed.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", loadTimelinePosts());
+                    </script>
+               </div>
+
+          </div>
+
+          <!-- IMAGE MODAL -->
+          <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <div id="userphotocontainer-modal"> 
+                 <img class="modal-content" id="modalImage">
+            </div>
+            <div id="caption"></div>
+          </div>
+     </body>
+</html>
+
+<!-- PAGE JAVASCRIPT -->
+<script src="../js/homePage.js"></script>
