@@ -162,12 +162,12 @@ cropCancelBtn.addEventListener("click", () => {
 
 // ----- EDIT PROFILE DETIALS ----- //
 
-var change = true;
-
 /**
  *  allows saving of user details
  */
 function saveUserDetails() {
+    var change = true;
+
     const newUser = document.getElementById('username').value;
     const newDisplayName = document.getElementById('display-name').value;
     const newBio = document.getElementById('bio').value;
@@ -186,6 +186,10 @@ function saveUserDetails() {
     }
 
     if (change) {
+        /**
+         *  [MCO P3]
+         *  > remove activeUserDetails in the body
+         */
         fetch(`/edit-profile/${activeUserDetails.username}/update-user-details`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -211,6 +215,8 @@ function saveUserDetails() {
  *  allows saving of account information
  */
 function saveAccountInfo() {
+    var change = true;
+    
     var newEmail = document.getElementById('email').value;
     var newNum = document.getElementById('tel-number').value;
     newNum = newNum.replace(/\s+/g, '');
@@ -228,6 +234,10 @@ function saveAccountInfo() {
     if (change) {
         newNum = newNum.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3");
 
+        /**
+         *  [MCO P3]
+         *  > remove activeUserDetails in the body
+         */
         fetch(`/edit-profile/${activeUserDetails.username}/update-acc-info`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -242,6 +252,7 @@ function saveAccountInfo() {
         .then(data => {
             document.getElementById('email-feedback').textContent = data.errorMessageEmail;
             document.getElementById('tel-feedback').textContent = data.errorMessageNum;
+            document.getElementById('update-acc-feedback').textContent = data.errorMessageAccInfoButton;
         });
     }
 }
@@ -274,17 +285,21 @@ function changePassword() {
     }
 
     if (change) {
+        /**
+         *  [MCO P3]
+         *  > remove activeUserDetails in the body
+         */
         fetch(`/edit-profile/${activeUserDetails.username}/update-acc-info`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 newPass,
-
                 activeUserDetails
             })
         })
-        .then(response => response.json());
-        
-        document.getElementById('update-pw-feedback').textContent = "Successfully changed password.";
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('update-pw-feedback').textContent = data.errorMessagePasswordButton;
+        });
     }
 }

@@ -26,11 +26,12 @@ function loadUserBookmarks(type) {
           liked = !!checkLiked(post);
           // check if bookmarked post
           bookmarked = !!checkBookmarked(post);
+          console.log(bookmarked);
           // check if disliked post
           disliked = !!checkDisliked(post);
 
           // set date
-          date = new Date(post.createdAt).toLocaleString();
+          date = post.postDate;
 
           console.log(post);
 

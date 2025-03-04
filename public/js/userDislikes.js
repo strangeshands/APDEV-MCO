@@ -30,7 +30,7 @@ function loadUserDislikes(type) {
           disliked = !!checkDisliked(post);
 
           // set date
-          date = new Date(post.createdAt).toLocaleString();
+          date = date = post.postDate;
 
           console.log(post);
 

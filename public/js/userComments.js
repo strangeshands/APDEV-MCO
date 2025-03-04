@@ -30,7 +30,7 @@ function loadUserComments(type) {
           disliked = !!checkDisliked(post);
 
           // set date
-          date = new Date(post.createdAt).toLocaleString();
+          date = post.postDate;
           
           const postElement = document.createElement("div");
           postElement.classList.add("comment");

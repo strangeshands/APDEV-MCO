@@ -66,22 +66,11 @@ function iconClicked(button, iconType, postId) {
                currentImg.src = iconPaths[iconType].default;
                currentCounter.textContent = Math.max(0, parseInt(currentCounter.textContent) - 1);
 
-               // ----- Connection to Node ----- //
                let action;
                if (iconType === 'heart')
                     action = 'unlike';
                else 
                     action = 'undislike';
-
-               fetch('/update-like', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                         postId: postId,
-                         action: action
-                    })
-                    })
-               .then(response => response.json());
           } else {
                // If not clicked, set current button to clicked state
                currentImg.src = iconPaths[iconType].clicked;
@@ -106,18 +95,23 @@ function iconClicked(button, iconType, postId) {
                     if (isOtherClicked)
                          action = 'dislike+'
                }
-
-               fetch('/update-like', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                         postId: postId,
-                         activeUserDetails,
-                         action: action
-                    })
-                    })
-               .then(response => response.json());
           }
+
+          // ----- Connection to Node ----- //
+          /**
+           *   [FOR P3]
+           *   > remove activeUserDetails in body
+           */
+          fetch('/update-like', {
+               method: 'POST',
+               headers: { 'Content-Type': 'application/json' },
+               body: JSON.stringify({
+                    postId: postId,
+                    activeUserDetails,
+                    action: action
+               })
+               })
+          .then(response => response.json());
      } else if (iconType === 'bookmark') {
 
           // ----- Visual ----- //
@@ -133,6 +127,10 @@ function iconClicked(button, iconType, postId) {
           }
 
           // ----- Connection to Node ----- //
+          /**
+           *   [FOR P3]
+           *   > remove activeUserDetails in body
+           */
           fetch('/update-bookmark', {
                method: 'POST',
                headers: { 'Content-Type': 'application/json' },
@@ -160,10 +158,12 @@ function checkLiked(check) {
   * Checks if a post is bookmarked
   */
  function checkBookmarked(check) {
-     if (activeBookmarks)
-          return activeBookmarks.some(post => post._id === check._id);
-     else 
-          return false;
+     if (activeBookmarks) {
+         return activeBookmarks.some(post => { 
+             return post === check._id;
+         });
+     }
+     return false;
  }
  
  /**
@@ -171,7 +171,9 @@ function checkLiked(check) {
   */
  function checkDisliked(check) {
      if (activeDislikes)
-          return activeDislikes.some(post => post._id === check._id);
+          return activeDislikes.some(post => { 
+               return post === check._id;
+          });
      else
           return false;
  }

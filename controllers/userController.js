@@ -2,7 +2,11 @@ const users = require('../models/users');
 const posts = require('../models/posts');
 const likes = require('../models/likes');
 
+const moment = require('moment');   // For time display
 const path = require("path");
+
+// Temporary substitute to session
+const active = require('../activeUser');
 
 /**
  *  activeUser: user logged in
@@ -43,7 +47,10 @@ const loadUserProfile = async(req,res) => {
     profileSelected = req.params.username;
     profileDetails = await users.findOne({ username: profileSelected });
 
-    // request active user
+    /**
+     *  [MCO P3]
+     *  For P3, change this to req.session.id
+     */
     activeUser = req.query.userId;
 
     // if null, meaning there is no active user
@@ -54,9 +61,10 @@ const loadUserProfile = async(req,res) => {
         if (!activeUserDetails)
             return res.render('profileNotFound');
 
+        // own page meaning the active user is also the profile selected
         ownPage = profileDetails.username === activeUserDetails.username;
         
-        // query profile bookmarks
+        // query active user bookmarks
         const activeBookmarksTemp = await users
             .findOne({ username: activeUserDetails.username })
             .select('bookmarks');
@@ -64,26 +72,17 @@ const loadUserProfile = async(req,res) => {
                             .map(bookmark => bookmark)
                             .filter(bookmark => bookmark !== null);
 
-        // query profile likes
+        // query active user likes
         const activeLikesTemp = await likes
             .find({ likedBy: activeUserDetails })
-            .populate({
-                path: 'likedPost',
-                populate: [
-                    { path: 'author' },
-                    { 
-                        path: 'parentPost', 
-                        populate: { path: 'author' }
-                    }
-                ]
-            })
+            .populate('likedPost')
             .sort({ createdAt: -1, updatedAt: -1 })
             .select('likedPost');
         activeLikes =   activeLikesTemp
                         .map(like => like.likedPost)
                         .filter(likedPost => likedPost !== null);
 
-        // query profile dislikes
+        // query active user dislikes
         const activeDislikesTemp = await users
             .findOne({ username: activeUserDetails.username })
             .select('dislikes');
@@ -92,26 +91,16 @@ const loadUserProfile = async(req,res) => {
                             .filter(dislike => dislike !== null);
     }
 
-    // set active tabId
-    let tabId = req.params.tabId;
-    if (!tabId)
-        tabId = "posts";
+    /**
+     *  set active tabId, default is posts
+     */
+    let tabId = req.params.tabId || "posts";
 
     if (!profileDetails) {
         return res.render('profileNotFound');
     } else {
-        console.log("ACTIVE LIKES");
-        console.log(activeLikes);
-        // query post count
-        postCount = await posts.countDocuments({ author: profileDetails });
-        console.log(`Post Count: ${postCount}`);
-
-        // query likes count
-        likesCount = await likes.countDocuments({ likedBy: profileDetails });
-        console.log(`Likes Count: ${likesCount}`);
-
         // query profile posts
-        const profilePosts = await posts
+        var profilePosts = await posts
             .find({ author: profileDetails })
             .populate('author')
             .populate({
@@ -119,10 +108,15 @@ const loadUserProfile = async(req,res) => {
                 populate: { path: 'author' }
             })
             .sort({ createdAt: -1 });
-        console.log(profilePosts);
+        profilePosts = formatPostDates(profilePosts);
+        //console.log(profilePosts);
+
+        // query post count
+        postCount = profilePosts.length;
+        //console.log(`Post Count: ${postCount}`);
 
         // query profile comments
-        const profileComments = await posts
+        var profileComments = await posts
             .find({ 
                 author: profileDetails, 
                 parentPost: { $ne: null }
@@ -133,6 +127,8 @@ const loadUserProfile = async(req,res) => {
                 populate: { path: 'author' }
             })
             .sort({ createdAt: -1 });
+        profileComments = formatPostDates(profileComments);
+        //console.log(profileComments);
 
         // query profile bookmarks
         const bookmarksTemp = await users
@@ -148,10 +144,11 @@ const loadUserProfile = async(req,res) => {
                 ]
             })
             .select('bookmarks');
-        const profileBookmarks =    bookmarksTemp.bookmarks
+        var profileBookmarks =    bookmarksTemp.bookmarks
                                     .map(bookmark => bookmark)
                                     .filter(bookmark => bookmark !== null);
-        console.log(profileBookmarks);
+        profileBookmarks = formatPostDates(profileBookmarks);
+        //console.log(profileBookmarks);
 
         // query profile likes
         const likesTemp = await likes
@@ -169,10 +166,15 @@ const loadUserProfile = async(req,res) => {
             })
             .sort({ createdAt: -1, updatedAt: -1 })
             .select('likedPost');
-        const profileLikes =    likesTemp
+        var profileLikes =    likesTemp
                                 .map(like => like.likedPost)
                                 .filter(likedPost => likedPost !== null);
-        console.log(profileLikes);
+        profileLikes = formatPostDates(profileLikes);
+        //console.log(profileLikes);
+
+        // query likes count
+        likesCount = profileLikes.length;
+        //console.log(`Likes Count: ${likesCount}`);
 
         // query profile dislikes
         const dislikesTemp = await users
@@ -188,10 +190,11 @@ const loadUserProfile = async(req,res) => {
                 ]
             })
             .select('dislikes');
-        const profileDislikes =     dislikesTemp.dislikes
+        var profileDislikes =     dislikesTemp.dislikes
                                     .map(dislike => dislike)
                                     .filter(dislike => dislike !== null);
-        console.log(profileDislikes);
+        profileDislikes = formatPostDates(profileDislikes);
+        //console.log(profileDislikes);
 
         res.render("profilePage", {
             activeTab: tabId,
@@ -205,7 +208,6 @@ const loadUserProfile = async(req,res) => {
             profileDetails,
             likesCount,
             postCount,
-
             profilePosts,
             profileComments,
             profileBookmarks,
@@ -216,7 +218,13 @@ const loadUserProfile = async(req,res) => {
 };
 
 const updateBookmark = async(req,res) => {
-    var { postId, activeUserDetails, action } = req.body;
+    var { postId, action } = req.body;
+
+    /**
+     *  [MCO P3]
+     *  For P3, change this to req.session.id
+     */
+    var { activeUserDetails } = req.body;
     // just to ensure it exists in the db
     activeUserDetails = await users.findById(activeUserDetails._id);
 
@@ -235,13 +243,18 @@ const updateBookmark = async(req,res) => {
         );
     }
     await activeUserDetails.save();
-    res.status(200).json({ success: true, message: 'Bookmark updated successfully' });
+    //res.status(200).json({ success: true, message: 'Bookmark updated successfully' });
 }; 
 
 const updateLike = async(req, res) => {
-    var { postId, activeUserDetails, action } = req.body;
+    var { postId, action } = req.body;
     const selectedPost = await posts.findById(postId);
 
+    /**
+     *  [MCO P3]
+     *  For P3, change this to req.session.id
+     */
+    var { activeUserDetails } = req.body;
     // just to ensure it exists in the db
     activeUserDetails = await users.findById(activeUserDetails._id);
 
@@ -331,15 +344,20 @@ const updateLike = async(req, res) => {
             break;
         }
         await activeUserDetails.save();
-        res.status(200).json({ success: true, message: 'Like/Dislike updated successfully' });
+        //res.status(200).json({ success: true, message: 'Like/Dislike updated successfully' });
     }
 };
 
 /**
+ *  [FOR MCO P2]
  *  assume params.username is the user logged in since the option
  *      will only appear if logged in
  */
 const editProfileLoad = async(req,res) => {
+    /**
+     *  [MCO P3]
+     *  For P3, change this to req.session.id
+     */
     var find = req.params.username;
     activeUserDetails = await users.findOne({ username: find });
 
@@ -348,10 +366,14 @@ const editProfileLoad = async(req,res) => {
     });
 };
 
-// TODO; please check this
 const updateUserDetails = async(req,res) => {
-    var { newUser, newDisplayName, newBio, activeUserDetails } = req.body;
+    var { newUser, newDisplayName, newBio } = req.body;
 
+    /**
+     *  [MCO P3]
+     *  For P3, change this to req.session.id
+     */
+    var { activeUserDetails } = req.body;
     // just to ensure it exists in the db
     activeUserDetails = await users.findById(activeUserDetails._id);
 
@@ -360,7 +382,7 @@ const updateUserDetails = async(req,res) => {
     }
 
     // checkpoint for changes
-    var cpUser, cpDN, cpBio = false;
+    var cpUser, cpDN, cpBio = true;
 
     // error messages to return
     var errorMessageUser = '';
@@ -386,8 +408,6 @@ const updateUserDetails = async(req,res) => {
             cpUser = false;
             overallstatus = false;
         }
-        else
-            cpUser = true;
     }
 
     /**
@@ -400,8 +420,6 @@ const updateUserDetails = async(req,res) => {
             cpDN = false;
             overallstatus = false;
         }
-        else 
-            cpDN = true;
     }
 
     /**
@@ -414,8 +432,6 @@ const updateUserDetails = async(req,res) => {
             cpBio = false;
             overallstatus = false;
         }
-        else
-            cpBio = true;
     }
 
     if (overallstatus) {
@@ -468,62 +484,114 @@ const updateUserDetails = async(req,res) => {
 };
 
 const updateAccountInfo = async(req,res) => {
-    var { newEmail, newNum, activeUserDetails } = req.body;
+    var { newEmail, newNum } = req.body;
 
+    /**
+     *  [MCO P3]
+     *  For P3, change this to req.session.id
+     */
+    var { activeUserDetails } = req.body;
     // just to ensure it exists in the db
     activeUserDetails = await users.findById(activeUserDetails._id);
 
     if (!activeUserDetails) {
-        return res.render("errorPage");
+        return res.render("profileNotFound");
     }
 
     var errorMessageEmail = '';
     var errorMessageNum = '';
+    var errorMessagePass = '';
+
+    // checkpoint for changes
+    var cpEmail, cpNum, cpPass = true;
+
+    var overallstatus = true;
+    var errorMessageAccInfoButton = '';
+    var errorMessagePasswordButton = '';
 
     if (newEmail) {
         const existingUser = await users.findOne({ email: newEmail });
 
-        if (existingUser)
+        if (existingUser) {
             errorMessageEmail = newEmail + ' is already registered to another account.'
-        else {
-            await users.updateOne(
-                { _id: activeUserDetails._id }, 
-                { $set: { email: newEmail } }
-            );
-
-            errorMessageEmail = newEmail + ' is your new email!';
-            activeUserDetails.email = newEmail;
+            
+            cpEmail = false;
+            overallstatus = false;
         }
     }
 
     if (newNum) {
         const existingUser = await users.findOne({ phone: newNum });
 
-        if (existingUser)
+        if (existingUser) {
             errorMessageNum = newNum + ' is already registered to another account.'
-        else {
+
+            cpNum = false;
+            overallstatus = false;
+        }
+    }
+
+    if (newPass) {
+        // Regular expression to check if the password contains:
+        // - At least one number (\d)
+        // - At least one uppercase letter ([A-Z])
+        // - At least one symbol ([!@#$%^&*(),.?":{}|<>])
+        const passwordPattern = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/;
+
+        if (!passwordPattern.test(newPass)) {
+            errorMessagePass = "Include number, uppercase letter, and a sumbol.";
+
+            cpPass = false;
+            overallstatus = false;
+        }
+        if (newPass.length < 8) {
+            errorMessagePass = "Please choose a longer password.";
+
+            cpPass = false;
+            overallstatus = false;
+        }
+
+        errorMessageAccInfoButton = "You have saved your changes."
+    }
+
+    if (overallstatus) {
+        if (cpEmail) {
+            await users.updateOne(
+                { _id: activeUserDetails._id }, 
+                { $set: { email: newEmail } }
+            );
+    
+            errorMessageEmail = newEmail + ' is your new email!';
+            activeUserDetails.email = newEmail;
+        }
+        if (cpNum) {
             await users.updateOne(
                 { _id: activeUserDetails._id }, 
                 { $set: { phone: newNum } }
             );
-
+    
             errorMessageNum = newNum + ' is your new phone number!';
             activeUserDetails.phone = newNum;
         }
     }
 
-    if (newPass) {
+    if (cpPass) {
         await users.updateOne(
-            { _id: profileDetails._id }, 
+            { _id: activeUserDetails._id }, 
             { $set: { password: newPass } }
         );
 
-        profileDetails.password = newPass;
+        activeUserDetails.password = newPass;
+        errorMessagePasswordButton = "Successfully updated your password."
     }
 
+    // Return messages
     return res.json({ 
         errorMessageEmail,
-        errorMessageNum
+        errorMessageNum,
+        errorMessagePass,
+        errorMessageAccInfoButton,
+        errorMessagePasswordButton
     });
 }
 
@@ -593,6 +661,39 @@ const changeHeader = async(req,res) => {
         { _id: activeUserDetails._id },
         { $set: { headerpic: filePathForDB } }
     );
+};
+
+/**
+ *  Function to format dates
+ */
+const formatPostDates = (posts) => {
+    return posts.map(post => {
+        let postDate;
+
+        const postTimeCreated = moment(post.createdAt);
+        const now = moment();
+        const duration = moment.duration(now.diff(postTimeCreated));
+
+        const formatDuration = (unit, value) => {
+            return value > 1 ? `${value} ${unit}s ago` : `${value} ${unit} ago`;
+        };
+
+        if (duration.months() > 0) {
+            postDate = moment(post.createdAt).format('MMM DD, YYYY');
+        } else if (duration.weeks() > 0) {
+            postDate = formatDuration('week', duration.weeks());
+        } else if (duration.days() > 0) {
+            postDate = formatDuration('day', duration.days());
+        } else if (duration.hours() > 0) {
+            postDate = formatDuration('hour', duration.hours());
+        } else if (duration.minutes() > 0) {
+            postDate = formatDuration('minute', duration.minutes());
+        } else {
+            postDate = formatDuration('second', duration.seconds());
+        }
+
+        return { ...post.toObject(), postDate };
+    });
 };
 
 module.exports = { 

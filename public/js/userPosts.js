@@ -3,18 +3,6 @@ function loadUserPosts(type) {
      console.log(userPosts);
      const container = document.getElementById("userPostsContainer");
 
-     /**
-      *   TO DO: fix time and date
-      */
-     var date = {
-          month: 'short', 
-          day: '2-digit', 
-          year: 'numeric', 
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: true
-     };
-
      if (!userPosts || userPosts.length === 0) {
           container.innerHTML = `
                <p class="no-post-msg">Boohoo! No posts yet...</p>
@@ -34,13 +22,8 @@ function loadUserPosts(type) {
 
      /**
       *   TO DO:
-      *        > fix time and date 
-      * 
       *        > fix tags href
       *        > fix reply to href
-      *        > fix go to href
-      *        > fix title href
-      *        > fix caption href
       *        
       *        > fix buttons
       */
@@ -55,7 +38,7 @@ function loadUserPosts(type) {
           disliked = !!checkDisliked(post);
 
           // set date
-          date = new Date(post.createdAt).toLocaleString();
+          date = post.postDate;
 
           const postElement = document.createElement("div");
           postElement.classList.add(post.parentPost != null ? "comment" : "post");
