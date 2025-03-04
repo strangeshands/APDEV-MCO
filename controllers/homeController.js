@@ -1,5 +1,6 @@
 const Post = require('../models/posts');
 const User = require('../models/users');
+const Like = require('../models/likes');
 const moment = require('moment');   // For time display
 
 // ---- [START] TEST for Home with NavBar ---- //
@@ -8,11 +9,42 @@ const homePage = async (req, res) => {
     try {
         // Extract userId from query parameters
         const loggedInUserId = req.query.userId;
-        const activeUser = User.findById(loggedInUserId);
+        const activeUser = await User.findById(loggedInUserId);
 
         if (!loggedInUserId) {
             return res.redirect('/login'); // Redirect to login if no userId
         };
+
+        // if null, meaning there is no active user
+        if (activeUser) {
+            var activeUserDetails = activeUser;
+            
+            // query active user bookmarks
+            const activeBookmarksTemp = await User
+                .findOne({ username: activeUserDetails.username })
+                .select('bookmarks');
+            var activeBookmarks =   activeBookmarksTemp.bookmarks
+                                    .map(bookmark => bookmark)
+                                    .filter(bookmark => bookmark !== null);
+
+            // query active user likes
+            const activeLikesTemp = await Like
+                .find({ likedBy: activeUserDetails })
+                .populate('likedPost')
+                .sort({ createdAt: -1, updatedAt: -1 })
+                .select('likedPost');
+            var activeLikes =   activeLikesTemp
+                                .map(like => like.likedPost)
+                                .filter(likedPost => likedPost !== null);
+
+            // query active user dislikes
+            const activeDislikesTemp = await User
+                .findOne({ username: activeUserDetails.username })
+                .select('dislikes');
+            var activeDislikes =    activeDislikesTemp.dislikes
+                                    .map(dislike => dislike)
+                                    .filter(dislike => dislike !== null);
+        }
 
         // All posts for the timeline
         const allPostsPromise = Post.find()
@@ -84,7 +116,6 @@ const homePage = async (req, res) => {
             return res.status(404).send("User not found");
         }
 
-        // Render homepage
         res.render('homeTemp', {
             title: 'Home',
             post: allPosts,
@@ -93,7 +124,10 @@ const homePage = async (req, res) => {
             userComments,
             
             loggedInUserId,
-            activeUser
+            activeUserDetails, 
+            activeBookmarks,
+            activeLikes,
+            activeDislikes
         });
     } catch(err) {
         console.error(err);

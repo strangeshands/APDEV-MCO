@@ -1,115 +1,13 @@
-/* ---- HARD CODED DATA ---- */
-const timelinePosts = [
-    {
-         replyTo: "",
-
-         displayName: "bartholomewThe5th",
-         username: "@catlover420",
-         pfp: "../resources/cat.jpg",
-         tags: ["#funny", "#life", "#school", "#dolphin", "#rainbow", "#ocean", "#morning", "#depression"],
-         caption: "everything is ok",
-         images: ["../resources/dolphin.jpg", "../resources/sad-hamster.jpg", "../resources/dog.jpg"],
-         title: "good morning",
-
-         time: "4 minutes ago",
-
-         likes: 42,
-         dislikes: 7,
-
-         liked: true,
-         disliked: false,
-         bookmark: false,
-         own: false
-    },
-    {
-         replyTo: "",
-         displayName: "slaysianDivaOfLA",
-         username: "@dontforgettheella",
-         pfp: "../resources/joella.jpg",
-         tags: ["#mug", "#drag", "#lanaSucks", "#joellaDynasty"],
-         caption: "- Joella",
-         images: [],
-         title: "fix ur mug",
-
-         time: "7 hours ago",
-
-         likes: 2,
-         dislikes: 75,
-
-         liked: false,
-         disliked: true,
-         bookmark: false,
-         own: false
-    },
-    {
-         replyTo: "",
-         displayName: "carbonaraEater",
-         username: "@jabeedabee",
-         pfp: "../resources/jabee.jpg",
-         tags: ["#hamster", "#glasses"],
-         caption: "hamster",
-         images: ["../resources/hamster.jpg"],
-         title: "hehe",
-
-         time: "5 days ago",
-
-         likes: 134,
-         dislikes: 12,
-
-         liked: false,
-         disliked: false,
-         bookmark: true,
-         own: false
-    },
-    {
-        replyTo: "",
-
-        displayName: "DARNA",
-        username: "@AkoSiDarna",
-        pfp: "../resources/pfpSample.jpg",
-        tags: ["#AnotherTagHere", "#TagHere", "#ProbablyAnotherTagHere"],
-        caption: "Life is a journey, and every step we take brings us closer...",
-        images: ["../resources/hamster.jpg", "../resources/monkey.jpg"],
-        title: "JOURNEY",
-
-        time: "4 minutes ago",
-
-        likes: 3,
-        dislikes: 0,
-
-        liked: false,
-        disliked: false,
-        bookmark: false,
-        own: true
-   },
-   {
-        replyTo: "",
-
-        displayName: "DARNA",
-        username: "@AkoSiDarna",
-        pfp: "../resources/pfpSample.jpg",
-        tags: ["#Movies"],
-        caption: "I am vengeance. I am the night. I am Batman!",
-        images: [],
-        title: "THE NIGHT",
-
-        time: "10 hours ago",
-
-        likes: 3,
-        dislikes: 0,
-
-        liked: false,
-        disliked: false,
-        bookmark: false,
-        own: true
-   }
-];
-
-
 /* ---- CODE FUNCTION ---- */
 function loadTimelinePosts() {
-
     const container = document.getElementById("postFeed");
+
+    let userCheck = '';
+    let activeId = '';
+    if (activeUserDetails) {
+        userCheck = activeUserDetails.username;
+        activeId = activeUserDetails._id;
+    }
 
     if (!timelinePosts || timelinePosts.length === 0) {
          container.innerHTML += `
@@ -124,26 +22,47 @@ function loadTimelinePosts() {
     let postCounter = 1;
 
     timelinePosts.forEach(post => {
+        // set date
+        date = post.postDate;
+        /**
+         *  timeLinePost is an array of an array
+         *  the actual post is nested on timeLinePost[index]
+         * 
+         *  for visualization:
+         *      timelinePost[0] -
+         *          post[0] - 
+         *              actual post
+         */
+        post = post.post;
 
         const postElement = document.createElement("div");
         postElement.classList.add("post");
         postElement.classList.add("postLink");
         postElement.id = `post${postCounter}`;
         postElement.setAttribute("data-post-id", `post${postCounter}`);
+
+        own = post.author.username === userCheck;
+        // check if liked post
+        liked = !!checkLiked(post);
+        // check if bookmarked post
+        bookmarked = !!checkBookmarked(post);
+        // check if disliked post
+        disliked = !!checkDisliked(post);
+
+        console.log(post);
         
         let postContent = "";
 
         postContent += `
             <!-- POST USER -->
             <div class="postUser">
-
-                <div class="profilePic">
-                    <img src="${post.pfp}" alt="userProfilePicture" class="userProfilePic">
+                <div class="profilePic" onclick="window.location.href='/profile/${post.author.username}?userId=${activeId}'" style="cursor: pointer;">
+                    <img src="${post.author.profilepic}" alt="userProfilePicture" class="userProfilePic">
                 </div>
 
-                <div class="usernameAndTime">
-                    <p class="username">${post.displayName}</p>
-                    <p class="timePosted">${post.username} | ${post.time}</p>
+                <div class="usernameAndTime" onclick="window.location.href='/profile/${post.author.username}?userId=${activeId}'" style="cursor: pointer;">
+                    <p class="username">${post.author.displayname}</p>
+                    <p class="timePosted">${post.author.username} | ${date}</p>
                 </div>
 
                 <!-- IF USER IS LOGGED IN -->
@@ -154,15 +73,15 @@ function loadTimelinePosts() {
                 <!-- POST OPTIONS -->
                 <div class="popUpOptions" id="popUp${postCounter}">
                     <div class="postOptionsContent">
-                        <button class="activeOptionsButton" post-options-id="popUp${postCounter}" onclick="togglePopup('none', '${postCounter}', '${container.id}')">
-                            <img src="../resources/Options Button.svg" alt="">
+                        <button class="optionsButton option-exit" onclick="togglePopup('', '${postCounter}', '')">
+                                   <img src="/resources/Options Button.svg"/>
                         </button>
-                            <a href="../html/postPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="viewButton">View Post</button></a>
-                            <a href="../html/newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Copy Link</button></a>
+                        <button class="editButton" onclick="window.location.href='/posts/${post._id}';">View Post</button>
+                        <button class="editButton" onclick="copyLink('${post._id}');">Copy Link</button>
 
-                        ${post.own ? `
-                            <a href="../html/newPostPage.html" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="editButton">Edit Post</button></a>
-                            <a href="" class="postLink postOptionsButton" data-post-id="post-${postCounter}"><button class="deleteButton">Delete Post</button></a>
+                        ${own ? `
+                            <button class="editButton" onclick="window.location.href = '../html/newPostPage.html';">Edit Post</button>
+                            <button class="deleteButton">Delete Post</button>
                         ` : ""}
                     </div>
                 </div>
@@ -171,20 +90,17 @@ function loadTimelinePosts() {
 
             <!-- POST CONTENT -->
             <div class="postContent">
-
                     <!-- TAGS -->
                     <div class="posttags">
                         ${post.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
                     </div>
-                    <!--<p class="postTitle">${post.title}</p>-->
 
-                    <div id="posttile" onclick="window.location.href='../html/postPage.html';">
+                    <div id="posttile" onclick="window.location.href='/posts/${post._id}';">
                         <h2>${post.title}</h2>
                     </div>
 
                     <!-- POST CAPTION HERE -->
-                    <!-- TO CHANGE: href link -->
-                    <div id="usercaption" onclick="window.location.href='../html/postPage.html';">${post.caption}</div>
+                    <div id="usercaption" onclick="window.location.href='/posts/${post._id}';">${post.content}</div>
 
                     ${post.images.length > 0 ? `
                         <div id="userphotocontainer">
@@ -196,37 +112,35 @@ function loadTimelinePosts() {
                 </div>
             </div>
         
-                <!-- ACTION BUTTONS -->
-                <div class="postActions">
-                    <button id="heart" class="actionButton">
-                        <img src="${post.liked ? '../resources/Heart-Clicked.svg' : '../resources/Heart.svg'}"/>
-                         <span class="counter">${post.likes}</span>
-                    </button>
-                    <img src="../resources/Line.svg" alt="Line">
-                    <button id="heartCrack" class="actionButton">
-                        <img src="${post.disliked ? '../resources/HeartCrack-Clicked.svg' : '../resources/HeartCrack.svg'}"/>
-                         <span class="counter">${post.dislikes}</span>
-                    </button>
-                    <a href="../html/replyPage.html" class="postLink" data-post-id="post${postCounter}">
-                        <button class="actionButton commentButton">
-                            <img src="../resources/Comments.svg"/>
-                        </button>
-                    </a>
-                    <button id="bookmark" class="actionButton">
-                        <img src="${post.bookmark ? '../resources/Bookmark-Clicked.svg' : '../resources/bookmark.svg'}"/>
-                    </button>
-                </div>
+            <!-- ACTION BUTTONS -->
+            <div class="postActions">
+                <button class="postoptionbutton actionButton" id="heart" onclick="iconClicked(this, 'heart', '${post._id}')">
+                            <img src="${liked ? '/resources/Heart-Clicked.svg' : '/resources/Heart.svg'}"/>
+                            <span class="counter">${post.likeCount}</span>
+                </button>
 
-                <div class="postDivider"></div>
-            `;
+                <img src="/resources/Line.svg" alt="Line">
+                <button class="postoptionbutton actionButton" id="heartCrack" onclick="iconClicked(this, 'heartCrack', '${post._id}')">
+                    <img src="${disliked ? '/resources/HeartCrack-Clicked.svg' : '/resources/HeartCrack.svg'}"/>
+                    <span class="counter">${post.dislikeCount}</span>
+                </button>
 
-            postElement.innerHTML += postContent;
-            container.appendChild(postElement);
-            
-            postCounter += 1;
-        });
+                <button class="postoptionbutton actionButton" onclick="window.location.href='../html/replyPage.html'">
+                        <img src="/resources/Comments.svg"/>
+                </button>
 
-    const sendingPostsDataScript = document.createElement("script");
-    sendingPostsDataScript.src = "/js/sendingPostData.js";
-    document.body.appendChild(sendingPostsDataScript);
+                <!-- BOOKMARK FEATURE: YELLOW IF BOOKMARKED -->
+                <button class="postoptionbutton actionButton" id="bookmark" onclick="iconClicked(this, 'bookmark', '${post._id}')">
+                    <img src="${bookmarked ? '/resources/Bookmark-Clicked.svg' : '/resources/bookmark.svg'}"/>
+                </button>
+            </div>
+
+            <div class="postDivider"></div>
+        `;
+
+        postElement.innerHTML += postContent;
+        container.appendChild(postElement);
+        
+        postCounter += 1;
+    });
 }
