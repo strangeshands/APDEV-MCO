@@ -1,6 +1,9 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/users');
 
+// Temporary substitute to session
+const active = require('../activeUser');
+
 // NOTE: bcrypt not used yet and no sessions implemented (user in url)
 
 // Render login page
@@ -22,6 +25,12 @@ const loginUser = async (req, res) => {
         if (!user || user.password !== password) {
             return res.render('loginPage', { error: "Invalid username or password" });
         }
+
+        /**
+         *  [FOR P3]
+         *  > set this one to req.session.id = user.id;
+         */
+        active.setActiveUser(user._id);
 
         // Redirect with userId in the URL
         res.redirect(`/?userId=${user._id}`);
