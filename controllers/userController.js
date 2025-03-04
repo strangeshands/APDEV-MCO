@@ -8,41 +8,41 @@ const path = require("path");
 // Temporary substitute to session
 const active = require('../activeUser');
 
-/**
- *  activeUser: user logged in
- *  profileSelected: selected profile, can be not the same as the active user
- *  
- *  restrictions:
- *      (1) activeUser can only access edit profile page
- *      (2) if activeUser is null, "log in" button will show on the header
- */
-var activeUser;
-var profileSelected;
-
-/**
- *  activeUserDetails is dependent on activeUser
- *  profileDetails is dependent on profileSelected
- */
-var activeUserDetails = null;
-var profileDetails = null;
-
-/**
- *  postCount is the post count of the profile selected
- *  likesCount is the like count of the profile selected
- *  ownPage determines if the profile selected is the same as active user
- */
-var postCount;
-var likesCount;
-var ownPage = false;
-
-/**
- *  active user's bookmarks, likes, and dislikes
- */
-var activeBookmarks = null;
-var activeLikes = null;
-var activeDislikes = null;
-
 const loadUserProfile = async(req,res) => {
+    /**
+     *  activeUser: user logged in
+     *  profileSelected: selected profile, can be not the same as the active user
+     *  
+     *  restrictions:
+     *      (1) activeUser can only access edit profile page
+     *      (2) if activeUser is null, "log in" button will show on the header
+     */
+    var activeUser;
+    var profileSelected;
+
+    /**
+     *  activeUserDetails is dependent on activeUser
+     *  profileDetails is dependent on profileSelected
+     */
+    var activeUserDetails = null;
+    var profileDetails = null;
+
+    /**
+     *  postCount is the post count of the profile selected
+     *  likesCount is the like count of the profile selected
+     *  ownPage determines if the profile selected is the same as active user
+     */
+    var postCount;
+    var likesCount;
+    var ownPage = false;
+
+    /**
+     *  active user's bookmarks, likes, and dislikes
+     */
+    var activeBookmarks = null;
+    var activeLikes = null;
+    var activeDislikes = null;
+
     // request profileSelected
     profileSelected = req.params.username;
     profileDetails = await users.findOne({ username: profileSelected });
@@ -359,7 +359,7 @@ const editProfileLoad = async(req,res) => {
      *  For P3, change this to req.session.id
      */
     var find = req.params.username;
-    activeUserDetails = await users.findOne({ username: find });
+    var activeUserDetails = await users.findOne({ username: find });
 
     res.render('editProfilePage', { 
         activeUserDetails 
@@ -598,7 +598,7 @@ const updateAccountInfo = async(req,res) => {
 const changePhoto = async(req,res) => {
     const activeUser = req.params.username;
     // just to ensure it exists in the db
-    activeUserDetails = await users.findOne({username:activeUser});
+    var activeUserDetails = await users.findOne({username:activeUser});
 
     if (!activeUserDetails) {
         return res.status(404).send("User not found");
@@ -633,7 +633,7 @@ const changePhoto = async(req,res) => {
 const changeHeader = async(req,res) => {
     const activeUser = req.params.username;
     // just to ensure it exists in the db
-    activeUserDetails = await users.findOne({username:activeUser});
+    var activeUserDetails = await users.findOne({username:activeUser});
 
     if (!activeUserDetails) {
         return res.status(404).send("User not found");
