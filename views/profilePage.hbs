@@ -34,7 +34,7 @@
      <body>
           <!-- HEADER PORTION -->
           <header>
-               <div id="headercol1" onclick="window.location.href='../html/homePage.html'">
+               <div id="headercol1" onclick="window.location.href='/?userId={{activeUserDetails._id}}';">
                     <img id="logo" src="/resources/Logo.svg" />
                     <p id="appName"> Connectify </p>
                </div>
@@ -116,6 +116,19 @@
                                    <button class="logOut" onclick="window.location.href='../html/loginPage.html'">
                                         <img src="/resources/Log Out Icon.svg" alt="">
                                         Log Out
+                                   </button>
+                              </div>
+                         {{else}}
+                              <br> 
+                              <div class="col1-sub-container"> 
+                                   <button class="editProfile" onclick="window.location.href='/profile/{{activeUserDetails.username}}?userId={{activeUserDetails._id}}';">
+                                        <img src="/resources/Arrow Curve Up Right.svg" alt="">
+                                        Back to Profile
+                                   </button>
+                                   <br>
+                                   <button class="editProfile" onclick="window.location.href='/?userId={{activeUserDetails._id}}';">
+                                        <img src="/resources/Arrow Curve Up Right.svg" alt="">
+                                        Back to Home
                                    </button>
                               </div>
                          {{/if}}
