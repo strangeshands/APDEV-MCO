@@ -48,6 +48,10 @@ button:active {
      width: 100%;
 }
 
+.backto {
+     padding: 10px;
+}
+
 .usertags {
      display: inline-flex;
      flex-wrap: wrap;
