@@ -75,6 +75,7 @@ header {
 }
 
 .searchBar {
+    position: relative;
     background-color: #ECE6F0;
     color: #49454F;
     
@@ -247,3 +248,41 @@ input[type="text"] {
     transition: transform 0.2s;
 }
 /* ---------- PHOTO CONTAINER AND MODAL ------------ */
+
+/* SEARCH SUGGESTIONS */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #1A1A1A;
+    border: 1px solid #49454F;
+    border-radius: 8px;
+    margin-top: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1001;
+    display: none;
+}
+
+.suggestion-item {
+    padding: 12px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.suggestion-item:hover {
+    background-color: #2D2D2D;
+}
+
+.suggestion-type {
+    color: #98D5DC;
+    font-size: 0.8em;
+}
+
+.suggestion-text {
+    flex-grow: 1;
+}

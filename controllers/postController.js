@@ -180,6 +180,9 @@ const post_create_post = async (req, res) => {
             console.log("Error uploading images: " + err.message);
         }
     } else {
+    } else if (images != null) {
+        let image = images;
+
         const imageUploadPromise = new Promise((resolve, reject) => {
             const fileName = `${Date.now()}-${image.name}`;
             const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
@@ -209,6 +212,8 @@ const post_create_post = async (req, res) => {
     const postData = { 
         ...formData, 
         author: postAuthor._id,
+        images: imagePaths,
+        tags: tags
         images: imagePaths,
         tags: tags
     };

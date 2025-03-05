@@ -88,6 +88,26 @@ function addTagFromInput() {
     }
 }
 
+let postButton = document.getElementById("postButton");
+
+postButton.addEventListener('click', function(e) {
+
+    e.preventDefault();
+
+    tagsInput.style.textTransform = 'none';
+    tagsInput.style.color = 'transparent';
+
+    if (tags.length > 0) {
+        tagsInput.value = tags.join(',');
+        console.log("Tags added = " + tagsInput.value);
+    } else {
+        console.log("No tags added");
+    }
+
+    document.querySelector('form').submit();
+});
+
+
 /* ---- EXPRESS FILE UPLOAD ---- */
 // Records the amount of times the add image button is pressed
 let uploadCounter = 0;

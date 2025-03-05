@@ -10,6 +10,8 @@ const homePage = async (req, res) => {
         // Extract userId from query parameters
         const loggedInUserId = req.query.userId;
         const activeUser = await User.findById(loggedInUserId);
+        let searchQuery = req.query.q;
+        let postConditions = {};
 
         if (!loggedInUserId) {
             return res.redirect('/login'); // Redirect to login if no userId
@@ -46,8 +48,43 @@ const homePage = async (req, res) => {
                                     .filter(dislike => dislike !== null);
         }
 
+        if (searchQuery && searchQuery.trim()) {
+            const processedQuery = searchQuery.trim();
+            
+            if (processedQuery.startsWith('#')) {
+                const tag = processedQuery.trim(); 
+                if (tag) {
+                    // Exact tag math (case-insensitive)
+                    postConditions.tags = {
+                        $elemMatch: {
+                            $regex: new RegExp(`^${tag}$`, 'i')
+                        }
+                    };
+                }
+            } else if (processedQuery.startsWith('@')) {
+                // Exact username match (case-insensitive)
+                const username = processedQuery.slice(1).trim();
+                if (username) {
+                    const user = await User.findOne({ 
+                        username: { 
+                            $regex: new RegExp(`^@${username}$`, 'i') 
+                        } 
+                    });
+                    postConditions.author = user ? user._id : null;
+                }
+            } else {
+                // Substring match for content/title
+                const searchText = processedQuery;
+                const searchRegex = new RegExp(searchText, 'i');
+                postConditions.$or = [
+                    { content: { $regex: searchRegex } },
+                    { title: { $regex: searchRegex } }
+                ];
+            }
+        }
+
         // All posts for the timeline
-        const allPostsPromise = Post.find()
+        const allPostsPromise = Post.find(postConditions)
             .sort({ createdAt: -1 })
             .populate('author')
             .populate({
