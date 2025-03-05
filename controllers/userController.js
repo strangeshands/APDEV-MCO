@@ -17,31 +17,26 @@ const loadUserProfile = async(req,res) => {
      *      (1) activeUser can only access edit profile page
      *      (2) if activeUser is null, "log in" button will show on the header
      */
-    var activeUser;
-    var profileSelected;
+    var activeUser, profileSelected;
 
-    /**
-     *  activeUserDetails is dependent on activeUser
-     *  profileDetails is dependent on profileSelected
-     */
+    // Details of active user and profile selected
     var activeUserDetails = null;
     var profileDetails = null;
 
-    /**
-     *  postCount is the post count of the profile selected
-     *  likesCount is the like count of the profile selected
-     *  ownPage determines if the profile selected is the same as active user
-     */
-    var postCount;
-    var likesCount;
-    var ownPage = false;
-
-    /**
-     *  active user's bookmarks, likes, and dislikes
-     */
+    // Posts retrieved from active user
     var activeBookmarks = null;
     var activeLikes = null;
     var activeDislikes = null;
+    
+    // Posts retrived from profile selected
+    var profilePosts = null;
+    var profileComments = null;
+    var profileBookmarks = null;
+    var profileLikes, profileDislikes = null;
+    var postCount, likesCount;
+
+    // Own page determines if the active user is the same as profile selected
+    var ownPage = false;
 
     // request profileSelected
     profileSelected = req.params.username;
@@ -100,7 +95,7 @@ const loadUserProfile = async(req,res) => {
         return res.render('profileNotFound');
     } else {
         // query profile posts
-        var profilePosts = await posts
+        profilePosts = await posts
             .find({ author: profileDetails })
             .populate('author')
             .populate({
@@ -109,46 +104,50 @@ const loadUserProfile = async(req,res) => {
             })
             .sort({ createdAt: -1 });
         profilePosts = formatPostDates(profilePosts);
-        //console.log(profilePosts);
 
         // query post count
         postCount = profilePosts.length;
         //console.log(`Post Count: ${postCount}`);
 
-        // query profile comments
-        var profileComments = await posts
-            .find({ 
-                author: profileDetails, 
-                parentPost: { $ne: null }
-            })
-            .populate('author')
-            .populate({
-                path: 'parentPost',
-                populate: { path: 'author' }
-            })
-            .sort({ createdAt: -1 });
-        profileComments = formatPostDates(profileComments);
-        //console.log(profileComments);
+        if (tabId == "comments") {
+            // query profile comments
+            profileComments = await posts
+                .find({ 
+                    author: profileDetails, 
+                    parentPost: { $ne: null }
+                })
+                .populate('author')
+                .populate({
+                    path: 'parentPost',
+                    populate: { path: 'author' }
+                })
+                .sort({ createdAt: -1 });
+            profileComments = formatPostDates(profileComments);
+            //console.log(profileComments);
+        }
 
-        // query profile bookmarks
-        const bookmarksTemp = await users
-            .findOne({ username: profileDetails.username })
-            .populate({
-                path: 'bookmarks',
-                populate: [
-                    { path: 'author' },  
-                    { 
-                        path: 'parentPost', 
-                        populate: { path: 'author' } 
-                    }
-                ]
-            })
-            .select('bookmarks');
-        var profileBookmarks =    bookmarksTemp.bookmarks
-                                    .map(bookmark => bookmark)
-                                    .filter(bookmark => bookmark !== null);
-        profileBookmarks = formatPostDates(profileBookmarks);
-        //console.log(profileBookmarks);
+        profileBookmarks = null;
+        if (tabId == "bookmarks") {
+            // query profile bookmarks
+            const bookmarksTemp = await users
+                .findOne({ username: profileDetails.username })
+                .populate({
+                    path: 'bookmarks',
+                    populate: [
+                        { path: 'author' },  
+                        { 
+                            path: 'parentPost', 
+                            populate: { path: 'author' } 
+                        }
+                    ]
+                })
+                .select('bookmarks');
+            profileBookmarks =    bookmarksTemp.bookmarks
+                                        .map(bookmark => bookmark)
+                                        .filter(bookmark => bookmark !== null);
+            profileBookmarks = formatPostDates(profileBookmarks);
+            //console.log(profileBookmarks);
+        }
 
         // query profile likes
         const likesTemp = await likes
@@ -166,7 +165,7 @@ const loadUserProfile = async(req,res) => {
             })
             .sort({ createdAt: -1, updatedAt: -1 })
             .select('likedPost');
-        var profileLikes =    likesTemp
+        profileLikes =    likesTemp
                                 .map(like => like.likedPost)
                                 .filter(likedPost => likedPost !== null);
         profileLikes = formatPostDates(profileLikes);
@@ -176,25 +175,27 @@ const loadUserProfile = async(req,res) => {
         likesCount = profileLikes.length;
         //console.log(`Likes Count: ${likesCount}`);
 
-        // query profile dislikes
-        const dislikesTemp = await users
-            .findOne({ username: profileDetails.username })
-            .populate({
-                path: 'dislikes',
-                populate: [
-                    { path: 'author' },  
-                    { 
-                        path: 'parentPost', 
-                        populate: { path: 'author' } 
-                    }
-                ]
-            })
-            .select('dislikes');
-        var profileDislikes =     dislikesTemp.dislikes
-                                    .map(dislike => dislike)
-                                    .filter(dislike => dislike !== null);
-        profileDislikes = formatPostDates(profileDislikes);
-        //console.log(profileDislikes);
+        if (tabId == "dislikes") {
+            // query profile dislikes
+            const dislikesTemp = await users
+                .findOne({ username: profileDetails.username })
+                .populate({
+                    path: 'dislikes',
+                    populate: [
+                        { path: 'author' },  
+                        { 
+                            path: 'parentPost', 
+                            populate: { path: 'author' } 
+                        }
+                    ]
+                })
+                .select('dislikes');
+            profileDislikes =   dislikesTemp.dislikes
+                                .map(dislike => dislike)
+                                .filter(dislike => dislike !== null);
+            profileDislikes = formatPostDates(profileDislikes);
+            //console.log(profileDislikes);
+        }
 
         res.render("profilePage", {
             activeTab: tabId,
@@ -208,6 +209,7 @@ const loadUserProfile = async(req,res) => {
             profileDetails,
             likesCount,
             postCount,
+
             profilePosts,
             profileComments,
             profileBookmarks,

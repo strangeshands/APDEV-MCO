@@ -1,7 +1,7 @@
 /* ---- CODE FUNCTION ---- */
 function loadPosts(type) {
      var tab;
-     var postsArray;
+     var postsArray = userPosts;
      switch (type) {
           case "comments":
                tab = "userPostsContainer";
@@ -55,8 +55,6 @@ function loadPosts(type) {
       *        > fix buttons
       */
      postsArray.forEach((post, index) => {
-
-          console.log("i went here");
           // check if own post
           own = post.author.username === userCheck;
           // check if liked post
