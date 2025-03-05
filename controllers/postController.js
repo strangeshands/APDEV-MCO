@@ -22,7 +22,6 @@ const post_details = async (req, res) => {
         const id = req.params.id;
         // FOR MCO P3: replace with req.session.id;
         var activeUser = active.getActiveUser();
-        activeUser = tempUserId;
 
         // if null, meaning there is no active user
         if (activeUser) {

@@ -181,6 +181,7 @@ function loadComments() {
         let postContent = "";
 
         postContent += `
+            <br>
             <!-- USER DETAILS -->
             <div class="pfpuserrow" id="comment-pfpuserrow-${index}">
                 <div id="userandpfp" onclick="window.location.href='/profile/${post.author.username}?userId=${activeId}'" style="cursor: pointer;">
