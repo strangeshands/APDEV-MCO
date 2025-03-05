@@ -4,6 +4,7 @@ const Like = require('../models/likes');
 
 const moment = require('moment');   // For time display
 const path = require('path');       // For file upload
+const fs = require('fs');           // For file deletion
 
 // Default user ID (will replace with actual logged-in user after login implementation)
 const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
@@ -225,6 +226,33 @@ const deletePost = async(req,res) => {
                         emotion: null,
                         description: "The post may be deleted or the author cannot be found."
                         });
+
+    /* ----- IMAGE DELETION IN UPLOADS FOLDER ----- */
+
+    function deleteFile(filePath) {
+        const fullPath = path.join(__dirname, '..', 'public', filePath);
+
+        if (fs.existsSync(fullPath)) {          // Checks if the file exists
+            fs.unlink(fullPath, (err) => {      // Deletes the file
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log('file deleted');
+                }
+            });
+        } else {
+            console.log(`File ${filePath} does not exist.`);
+        }
+    }
+
+    await Post.findOne({ _id: postId })
+                .then((result) => {
+                    const images = result.images;
+
+                    images.forEach((image) => {
+                        deleteFile(image);
+                    });
+                });
 
     // delete the post on the post record
     await Post.deleteOne({ _id: postId });
