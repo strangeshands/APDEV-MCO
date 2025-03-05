@@ -5,53 +5,115 @@ const Like = require('../models/likes');
 const moment = require('moment');   // For time display
 const path = require('path');       // For file upload
 
-// Default user ID (will replace with actual logged-in user after login implementation)
+// TEMPORARY; sub for session
+const active = require('../activeUser');
 const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
 
 // Getting a specific post
-const post_details = (req, res) => {    // :id to search for actual id
-    const id = req.params.id            // .id to match with url above
+const post_details = async (req, res) => {
+    // Details of active user, if there is
+    var activeUserDetails = null;
+    var activeBookmarks = null;
+    var activeLikes = null;
+    var activeDislikes = null;
     
-    Post.findById(id)
-        .populate('author') // This will populate the 'author' field with user data
-        .exec()
-        .then((result) => {
-            var postDate;
-            
-            // Get the time the post was made
-            const postTimeCreated = moment(result.createdAt);
+    try {
+        const id = req.params.id;
+        // FOR MCO P3: replace with req.session.id;
+        var activeUser = active.getActiveUser();
+        activeUser = tempUserId;
 
-            // Get the current time
-            const now = moment();
+        // if null, meaning there is no active user
+        if (activeUser) {
+            activeUserDetails = await User.findById(activeUser);
 
-            // Calculate the duration between the two dates
-            const duration = moment.duration(now.diff(postTimeCreated));
-
-            // Time Format
-            function formatDuration(unit, value) {
-                return value > 1 ? `${value} ${unit}s ago` : `${value} ${unit} ago`;
+            // if null, profile is not found
+            if (!activeUserDetails) {
+                return res.render('errorPageTemplate', {
+                header: "Profile not found.",
+                emotion: null,
+                description: "This account may be deleted."
+                });
             }
             
-            if (duration.months() > 0) {
-                postDate = moment(post.createdAt).format('MMM DD, YYYY');
-            } else if (duration.weeks() > 0) {
-                postDate = formatDuration('week', duration.weeks());
-            } else if (duration.days() > 0) {
-                postDate = formatDuration('day', duration.days());
-            } else if (duration.hours() > 0) {
-                postDate = formatDuration('hour', duration.hours());
-            } else if (duration.minutes() > 0) {
-                postDate = formatDuration('minute', duration.minutes());
-            } else {
-                postDate = formatDuration('second', duration.seconds());
-            }
+            // query active user bookmarks
+            const activeBookmarksTemp = await User
+                .findOne({ username: activeUserDetails.username })
+                .select('bookmarks');
+            activeBookmarks =   activeBookmarksTemp.bookmarks
+                                .map(bookmark => bookmark)
+                                .filter(bookmark => bookmark !== null);
+            // clean up null posts
+            
 
-            res.render('postPage', { post: result, title: 'Post', postDate: postDate });
-        })
-        .catch((err) => {
-            res.status(404).render('errorPage');
+            // query active user likes
+            const activeLikesTemp = await Like
+                .find({ likedBy: activeUserDetails })
+                .populate('likedPost')
+                .select('likedPost');
+            activeLikes =   activeLikesTemp
+                            .map(like => like.likedPost)
+                            .filter(likedPost => likedPost !== null);
+
+            // query active user dislikes
+            const activeDislikesTemp = await User
+                .findOne({ username: activeUserDetails.username })
+                .select('dislikes');
+            activeDislikes =    activeDislikesTemp.dislikes
+                                .map(dislike => dislike)
+                                .filter(dislike => dislike !== null);
+        }
+        
+        // find the post
+        var post = await Post.findById(id)
+            .populate('author')
+            .populate({
+                path: 'parentPost',
+                populate: { path: 'author' }
+            });
+        post = formatPostDates([post])[0];
+
+        // if the post is not found, render the error page
+        if (!post) {
+            return res.render('errorPageTemplate', {
+                header: "Post not found.",
+                emotion: null,
+                description: "The post may be deleted or the author cannot be found."
+            });
+        }
+
+        // Find all comments under the post
+        var comments = await Post.find({ parentPost: id })
+                .populate('author')
+                .populate({
+                    path: 'parentPost',
+                    populate: { path: 'author' }
+                })
+                .sort({ createdAt: -1 });
+        comments = formatPostDates(comments);
+
+        // Render the page with post and comments data
+        res.render('postPage', {
+            title: "Post",
+            post,
+            comments,
+
+            activeUserDetails,
+            activeLikes,
+            activeBookmarks,
+            activeDislikes
         });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).render('errorPageTemplate', {
+            header: "Server Error",
+            emotion: "sad",
+            description: "An error occurred while fetching the post. Please try again later."
+        });
+    }
 };
+
 
 // NOT DONE
 const post_create_get = (req, res) => {
@@ -246,6 +308,39 @@ const deletePost = async(req,res) => {
     else
         res.redirect(`/?userId=${activeUser}`);
 }
+
+/**
+ *  Function to format dates
+ */
+const formatPostDates = (posts) => {
+    return posts.map(post => {
+        let postDate;
+
+        const postTimeCreated = moment(post.createdAt);
+        const now = moment();
+        const duration = moment.duration(now.diff(postTimeCreated));
+
+        const formatDuration = (unit, value) => {
+            return value > 1 ? `${value} ${unit}s ago` : `${value} ${unit} ago`;
+        };
+
+        if (duration.months() > 0) {
+            postDate = moment(post.createdAt).format('MMM DD, YYYY');
+        } else if (duration.weeks() > 0) {
+            postDate = formatDuration('week', duration.weeks());
+        } else if (duration.days() > 0) {
+            postDate = formatDuration('day', duration.days());
+        } else if (duration.hours() > 0) {
+            postDate = formatDuration('hour', duration.hours());
+        } else if (duration.minutes() > 0) {
+            postDate = formatDuration('minute', duration.minutes());
+        } else {
+            postDate = formatDuration('second', duration.seconds());
+        }
+
+        return { ...post.toObject(), postDate };
+    });
+};
 
 module.exports = {
     post_details,
