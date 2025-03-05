@@ -52,9 +52,9 @@ const homePage = async (req, res) => {
             const processedQuery = searchQuery.trim();
             
             if (processedQuery.startsWith('#')) {
-                const tag = processedQuery.slice(1).trim();
+                const tag = processedQuery.trim(); 
                 if (tag) {
-                    // Exact tag match (case-insensitive)
+                    // Exact tag math (case-insensitive)
                     postConditions.tags = {
                         $elemMatch: {
                             $regex: new RegExp(`^${tag}$`, 'i')
