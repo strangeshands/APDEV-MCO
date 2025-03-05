@@ -226,8 +226,6 @@ const deletePost = async(req,res) => {
                         description: "The post may be deleted or the author cannot be found."
                         });
 
-    post = null;
-
     // delete the post on the post record
     await Post.deleteOne({ _id: postId });
     // delete the posts on the likes table
