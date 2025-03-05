@@ -50,6 +50,10 @@ const homePage = async (req, res) => {
         const allPostsPromise = Post.find()
             .sort({ createdAt: -1 })
             .populate('author')
+            .populate({
+                path: 'parentPost',
+                populate: { path: 'author' }
+            })
             .exec()
             .then((result) => {
                 return result.map(post => {  // Gets formatted date

@@ -36,8 +36,8 @@ function loadTimelinePosts() {
         post = post.post;
 
         const postElement = document.createElement("div");
-        postElement.classList.add("post");
         postElement.classList.add("postLink");
+        postElement.classList.add(post.parentPost != null ? "comment" : "post");
         postElement.id = `post${postCounter}`;
         postElement.setAttribute("data-post-id", `post${postCounter}`);
 
@@ -48,10 +48,12 @@ function loadTimelinePosts() {
         bookmarked = !!checkBookmarked(post);
         // check if disliked post
         disliked = !!checkDisliked(post);
-
-        console.log(post);
         
         let postContent = "";
+
+        // only show posts and not comments
+        if (post.parentPost != null) 
+            return;
 
         postContent += `
             <!-- POST USER -->
