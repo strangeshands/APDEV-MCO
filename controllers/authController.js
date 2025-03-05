@@ -42,11 +42,15 @@ const loginUser = async (req, res) => {
 
 // Handle logout (simply redirect to login for now)
 const logoutUser = (req, res) => {
+    // FOR MCO P3: change to destroy
+    active.clearActiveUser();
     res.redirect('/login');
 };
 
 // Render signup page
 const renderSignupPage = (req, res) => {
+    // FOR MCO P3: change to destroy
+    active.clearActiveUser();
     res.render('signupPage', { title: "Sign Up" });
 };
 
@@ -81,7 +85,7 @@ const signupUser = async (req, res) => {
         // Create a new user
         const newUser = new User({ email, phone, username, displayname, password });
         await newUser.save();
-
+        
         res.redirect('/login');
     } catch (error) {
         console.error("Signup error:", error);

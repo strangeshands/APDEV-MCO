@@ -5,8 +5,23 @@
         <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
 
         <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="../css/profilePage.css">
         <link rel="stylesheet" type="text/css" href="../css/postPage.css">
         <link rel="stylesheet" type="text/css" href="../css/generalStyle.css">
+
+        <!-- SCRIPT -->
+        <script src="/js/actionButton.js"></script>
+        <script src="/js/togglePopup.js"></script>
+        <script src="/js/loadPostComments.js"></script>
+        <script>
+            var postsArray = {{{ json comments }}};
+            var mainPost = {{{ json post }}};
+
+            var activeUserDetails = {{{ json activeUserDetails }}};
+            var activeLikes = {{{ json activeLikes }}};
+            var activeBookmarks = {{{ json activeBookmarks }}};
+            var activeDislikes = {{{ json activeDislikes }}};
+        </script>
     </head>
 
     <body>
@@ -39,74 +54,19 @@
                 <span class="back">Back</span>
             </div>
 
-            <div id="post">
-                <div id="replyToContainer"></div>
-                <div class="postHeader">
-                    <div class="userInfo">
-                        <div class="avatar" id="postAvatar">
-                            <img src="{{post.author.profilepic}}" alt="" id="postProfilePic">
-                        </div>
-                        <div class="username-and-time">
-                            <div class="displayName" id="postDisplayName">{{post.author.displayname}}</div>
-                            <div class="time" id="postTime">{{post.author.username}} | {{postDate}}</div>
-                        </div>
-                    </div>
-                    <!-- IF POST BELONGS TO USER
-                    <button class="optionsButton" id="postOptions">
-                        <img src="../resources/Options Button.svg" alt="Options">
-                    </button> -->
-                </div>
-
-                <!-- TAGS PORTION -->
-                <div id="tagContainer">
-                    {{#if post.tags}}
-                        <div id="tags">
-                            {{#each post.tags}}
-                                <a href="{{this}}">{{this}}</a>
-                            {{/each}}
-                        </div>
-                    {{/if}}
-                </div>
-                <!-- TITLE PORTION -->
-                <div id="postTitleContainer">
-                    <div id="postTitle">{{post.title}}</div>
-                </div>
-                <!-- CAPTION PORTION -->
-                <div id="postText">{{post.content}}</div>
-                <!-- IMAGE PORTION -->
-                {{#if post.images}}
-                    <div id="userphotocontainer">
-                        {{#each post.images}}
-                            <img class="clickable-image" src="{{this}}" onclick="openModal(this)">
-                        {{/each}}
-                    </div>
-                {{/if}}
-
-                <!-- POST ACTIONS -->
-                <div class="postActions">
-                        <button id="heart" class="actionButton">
-                            <img src="../resources/Heart.svg"/>
-                            <span class="counter" id="postLikeCounter"></span>
-                    </button>
-                    <img src="../resources/Line.svg" alt="Line">
-                    <button id="heartCrack" class="actionButton">
-                            <img src="../resources/HeartCrack.svg"/>
-                            <span class="counter" id="postDislikeCounter"></span>
-                    </button>
-                    <button class="actionButton"onclick="window.location.href='../html/replyPage.html'">
-                            <img src="../resources/Comments.svg"/>
-                    </button>
-                    <button id="bookmark" class="actionButton">
-                            <img src="../resources/bookmark.svg"/>
-                    </button>
-                </div>
-            </div>
+            <div id="post"></div>
+            <script>
+                        document.addEventListener("DOMContentLoaded", loadPost());
+            </script>
 
             <!-- COMMENTS -->
             <div id="comments">
                 <h2>Comments</h2>
                 <div class="horizontalBar"></div>
-                <div class="comment-thread"></div>
+                <div id="comments-container" class="comment-thread"></div>
+                <script>
+                        document.addEventListener("DOMContentLoaded", loadComments());
+                </script>
             </div>
         </main>
 
@@ -118,11 +78,6 @@
             </div>
             <div id="caption"></div>
         </div>
-
-        <script src="../js/sampleComments.js"></script>
-        <script src="../js/commentsRenderer.js"></script>
-        <script src="../js/sendingPostData.js"></script>
-        <script src="../js/receivingPostData.js"></script>
     </body>
 </html>
 

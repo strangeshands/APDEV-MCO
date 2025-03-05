@@ -61,6 +61,7 @@ main {
 
 #reply-to-msg {
     margin-bottom: 25px;
+    margin-left: 0px;
     padding: 10px;
     background-color: #7FB8C8;
     color: #1D1E1F;
@@ -130,17 +131,6 @@ main {
     font-size: 14px;
     color: #E4F3F6;
     opacity: 80%;
-}
-
-.optionsButton {
-    background-color: #030909;
-    color: #E4F3F6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0px;
-    width: 5px;
-    height: 20px;
 }
 
 #postOptions {
@@ -254,32 +244,6 @@ main {
 .commentActions.nested {
     margin-left: 52px;
 }
-
-/*#postImageContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    min-height: 0;
-}
-
-#postImageContainer img {
-    flex: 1 1 0;
-    min-width: 0;        
-    width: 100%;
-    height: inherit;
-    object-fit: cover;
-    display: block;      
-    border-radius: 12px;
-    cursor: pointer;
-    padding: 2px;
-}
-
-#postImageContainer img:hover {
-    transform: scale(1.02);
-}*/
 
 .viewRepliesLink {
     text-decoration: none;
