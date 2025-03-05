@@ -88,13 +88,38 @@ function addTagFromInput() {
     }
 }
 
+/* ---- EXPRESS FILE UPLOAD ---- */
+// Records the amount of times the add image button is pressed
+let uploadCounter = 0;
+
+// We'll store the preview image URLs in this array
+let images = [];
+
+let allFiles = [];
+
+const fileUploadInput = document.getElementById('fileUpload');
+const customFileButton = document.getElementById('addImageButton');
+
+// Ensure the file input allows multiple files
+fileUploadInput.setAttribute('multiple', 'multiple');
+
+// Trigger the file input when the custom button is clicked
+customFileButton.addEventListener('click', function() {
+    
+    fileUploadInput.click();
+    
+});
+
+fileUploadInput.addEventListener("change", handleImageUpload);
+
+
 /* ---- IMAGE UPLOAD ---- */
+/*
+
 const imageUploadInput = document.getElementById("imageUploadInput");
 const postContentContainer = document.getElementById("postContentContainer");
 const addImageBtn = document.getElementById("addImageButton");
 
-// We'll store the preview image URLs in this array
-let images = [];
 
 // Trigger the hidden file input when "Add Image" is clicked
 addImageBtn.addEventListener("click", () => {
@@ -104,7 +129,11 @@ addImageBtn.addEventListener("click", () => {
 // Handle file selection
 imageUploadInput.addEventListener("change", handleImageUpload);
 
+
+*/
+
 function handleImageUpload(event) {
+
     const selectedFiles = Array.from(event.target.files);
     const formData = new FormData();
 
@@ -116,11 +145,70 @@ function handleImageUpload(event) {
         }
     });
 
-    renderImages();
+    uploadCounter++;
+
+    const currentFiles = Array.from(fileUploadInput.files);
+
+    if (uploadCounter == 1) {
+        // Gets the currently selected files in the file input
+        allFiles = Array.from(fileUploadInput.files);
+    } else {
+        // Combines the newly selected files with the already selected ones
+        allFiles = [...allFiles, ...currentFiles];
+    }
+
+    // Sets the combined files to the input's file list (simulating appending files)
+    const dataTransfer = new DataTransfer();
+    allFiles.forEach(file => dataTransfer.items.add(file));
+
+    // Updates the input's file list
+    fileUploadInput.files = dataTransfer.files;
+
+    console.log("all files = " + allFiles.length);
+    console.log("current files = " + currentFiles.length);
+
+    if (currentFiles.length > 4 && (allFiles.length - currentFiles.length) == 0) {
+        
+        // TODO: Display invalid: cannot upload more than 4 files
+
+        fileUploadInput.value = '';
+        allFiles = [];
+        images = [];
+        
+    } else if (allFiles.length > 4) {
+
+        // TODO: Display invalid: cannot upload more than 4 files
+
+        for (let i = allFiles.length - 1; i >= 4; i--) {
+            removeFileFromInput(fileUploadInput.files[i]);
+            console.log("index = " + i);
+        }
+
+        renderImages();
+
+    } else {
+        renderImages();
+    }
+
+    
 }
 
-/* ---- REMOVE TAG FROM ARRAY ---- */
+// Removes a file by its index or file reference
+function removeFileFromInput(fileToRemove) {
+
+    const currentFiles = Array.from(fileUploadInput.files); // Converts FileList to array
+    const newFiles = currentFiles.filter(file => file !== fileToRemove); // Filters out the file to remove
+
+    const dataTransfer = new DataTransfer();
+    newFiles.forEach(file => dataTransfer.items.add(file));
+    fileUploadInput.files = dataTransfer.files;
+
+    allFiles = Array.from(fileUploadInput.files);
+}
+
+/* ---- REMOVE IMAGE FROM ARRAY ---- */
 function removeImage(index) {
+    removeFileFromInput(fileUploadInput.files[index]);
     images.splice(index, 1);
     renderImages();
 }
@@ -158,7 +246,9 @@ function renderImages() {
         const removeIcon = document.createElement("span");
         removeIcon.classList.add("remove-image-icon");
         removeIcon.innerHTML = "&times;";
-        removeIcon.addEventListener("click", () => removeImage(index));
+        removeIcon.addEventListener("click", () => {
+            removeImage(index);
+        });
 
         // Append them together
         imgWrapper.appendChild(img);
