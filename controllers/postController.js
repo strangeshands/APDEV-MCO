@@ -183,29 +183,36 @@ const post_delete = (req, res) => {
  * 
  *  FOR MCO P2:
  *      > link is /delete-post/:postId?userId=<active user id>
+ *      > additionally, if from profile page, additional query is added
+ *          > /delete-post/:postId?userId=<active user id>&from=profile
  *  FOR MCO P3:
  *      > the link will be simplified to /delete-post/:postId
  *      > this is because you can now retrieve the active user through
  *          req.session.id
+ *      > ?from query is still applied
  * 
  *  restrictions:
  *      > a user can only delete a post of their own
  */
 const deletePost = async(req,res) => {
-    console.log("i went here");
     const postId = req.params.postId;
     const activeUser = req.query.userId;
 
-    console.log(postId, activeUser);
-
     // there should be an active user to delete a post
     if (!activeUser) 
-        return res.render('errorPage');
+        return res.render('errorPageTemplate', {
+                        header: "You are not logged in.",
+                        emotion: "Oops. Cannot perform action.",
+                        description: "Please log in to delete a post."
+                        });
 
     var activeUserDetails = await User.findById(activeUser);
-
     if (!activeUserDetails)
-        return res.render('profileNotFound');
+        return res.render('errorPageTemplate', {
+                        header: "Profile not found.",
+                        emotion: null,
+                        description: "This account may be deleted."
+                        });
 
     var post = await Post.findOne({
         _id: postId,
@@ -213,17 +220,20 @@ const deletePost = async(req,res) => {
     })
 
     if (!post)
-        return res.render('errorPage');
+        return res.render('errorPageTemplate', {
+                        header: "Post not found.",
+                        emotion: null,
+                        description: "The post may be deleted or the author cannot be found."
+                        });
 
-    console.log("POST TO DELETE: ", post);
+    post = null;
 
     // delete the post on the post record
     await Post.deleteOne({ _id: postId });
     // delete the posts on the likes table
     await Like.deleteMany({ _id: postId });
     // delete the posts on the users' bookmarks or dislikes
-    await User.updateMany(
-        {},
+    await User.updateMany({},
         {
             $pull: {
                 bookmarks: postId,
@@ -232,7 +242,11 @@ const deletePost = async(req,res) => {
         }
     );
 
-    res.redirect(`/profile/${activeUserDetails.username}?userId=${activeUser}`);
+    var origin = req.query.from;
+    if (origin == "profile")
+        res.redirect(`/profile/${activeUserDetails.username}?userId=${activeUser}`);
+    else
+        res.redirect(`/?userId=${activeUser}`);
 }
 
 module.exports = {
