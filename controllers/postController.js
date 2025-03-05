@@ -141,13 +141,23 @@ const post_create_post = async (req, res) => {
         return res.status(404).send("User not found");
     }
 
-    if (!req.files || !req.files.images) {
-        return res.status(400).send("No file uploaded.");
+    let tags = req.body.tags;
+
+    if (tags) {
+        tags = tags.split(',').map(tag => tag.trim()); // Splits the string by commas
     }
 
+    console.log("Tags Data = " + tags);
+        
     let imagePaths = [];
+    
+    let images;
 
-    const images = req.files.images;
+    if (req.files) {
+        if (req.files.images) {
+            images = req.files.images;
+        }
+    }
 
     if (Array.isArray(images)) {
         const imageUploadPromises = images.map((image) => {
@@ -176,7 +186,7 @@ const post_create_post = async (req, res) => {
         } catch (err) {
             console.log("Error uploading images: " + err.message);
         }
-    } else {
+    } else if (images != null) {
         let image = images;
 
         const imageUploadPromise = new Promise((resolve, reject) => {
@@ -208,7 +218,8 @@ const post_create_post = async (req, res) => {
     const postData = { 
         ...formData, 
         author: postAuthor._id,
-        images: imagePaths 
+        images: imagePaths,
+        tags: tags
     };
     
     try {
