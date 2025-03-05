@@ -54,12 +54,15 @@ const homePage = async (req, res) => {
             if (processedQuery.startsWith('#')) {
                 const tag = processedQuery.slice(1).trim();
                 if (tag) {
-                    // Match any post containing the tag in its tags array
-                    postConditions.tags = { 
-                        $elemMatch: { $regex: new RegExp(tag, 'i') } 
+                    // Exact tag match (case-insensitive)
+                    postConditions.tags = {
+                        $elemMatch: {
+                            $regex: new RegExp(`^${tag}$`, 'i')
+                        }
                     };
                 }
             } else if (processedQuery.startsWith('@')) {
+                // Exact username match (case-insensitive)
                 const username = processedQuery.slice(1).trim();
                 if (username) {
                     const user = await User.findOne({ 
@@ -70,14 +73,13 @@ const homePage = async (req, res) => {
                     postConditions.author = user ? user._id : null;
                 }
             } else {
-                const words = processedQuery.split(/\s+/);
-                if (words.length) {
-                    const searchRegex = new RegExp(words.join('|'), 'i');
-                    postConditions.$or = [
-                        { content: { $regex: searchRegex } },
-                        { title: { $regex: searchRegex } }
-                    ];
-                }
+                // Substring match for content/title
+                const searchText = processedQuery;
+                const searchRegex = new RegExp(searchText, 'i');
+                postConditions.$or = [
+                    { content: { $regex: searchRegex } },
+                    { title: { $regex: searchRegex } }
+                ];
             }
         }
 
