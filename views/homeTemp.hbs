@@ -11,6 +11,9 @@
           <!-- SCRIPTS -->
           <script src="/js/actionButton.js"></script>
           <script src="../js/togglePopup.js"></script>
+          <script>
+            var loggedInUserId = "{{loggedInUserId}}";
+          </script>
 
           <script>
             var timelinePosts = {{{ json post }}};
@@ -30,11 +33,12 @@
                     <p id="appName"> Connectify </p>
                </div>
                <div id="headercol2">
-                    <form action="/" method="GET">
-                        <div class="searchBar">
+                    <form action="/" method="GET" style="display: contents;">
+                        <div class="searchBar" id="searchContainer">
                             <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
-                            <input type="text" id="search" name="q" placeholder="Search #tags, @authors, or words">
+                            <input type="text" id="search" name="q" placeholder="Search #tags, @authors, or words" autocomplete="off">
                             <input type="hidden" name="userId" value="{{loggedInUserId}}">
+                            <div id="searchSuggestions" class="search-suggestions"></div>
                         </div>
                     </form>
                
@@ -185,3 +189,4 @@
 
 <!-- PAGE JAVASCRIPT -->
 <script src="/js/homePage.js"></script>
+<script src="../js/searchSuggestions.js"></script>

@@ -87,7 +87,7 @@ function loadTimelinePosts() {
                         ` : ""}
                     </div>
                 </div>
-
+                
             </div>
 
             <!-- POST CONTENT -->
