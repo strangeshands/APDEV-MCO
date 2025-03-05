@@ -164,9 +164,6 @@ function handleImageUpload(event) {
     // Updates the input's file list
     fileUploadInput.files = dataTransfer.files;
 
-    console.log("all files = " + allFiles.length);
-    console.log("current files = " + currentFiles.length);
-
     if (currentFiles.length > 4 && (allFiles.length - currentFiles.length) == 0) {
         
         // TODO: Display invalid: cannot upload more than 4 files
@@ -181,7 +178,6 @@ function handleImageUpload(event) {
 
         for (let i = allFiles.length - 1; i >= 4; i--) {
             removeFileFromInput(fileUploadInput.files[i]);
-            console.log("index = " + i);
         }
 
         renderImages();
