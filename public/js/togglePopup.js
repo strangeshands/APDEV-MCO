@@ -39,7 +39,7 @@ document.addEventListener('click', (e) => {
     }
 }); 
 
-/* --- GO TO POST --- */
+/* --- COPY LINK OF POST --- */
 function copyLink(postId) {
     const fullUrl = `${window.location.origin}/posts/${postId}`;
     navigator.clipboard.writeText(fullUrl);
