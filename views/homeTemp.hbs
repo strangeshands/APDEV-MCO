@@ -30,10 +30,13 @@
                     <p id="appName"> Connectify </p>
                </div>
                <div id="headercol2">
-                    <div class="searchBar">
-                         <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
-                         <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
-                    </div>
+                    <form action="/" method="GET">
+                        <div class="searchBar">
+                            <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
+                            <input type="text" id="search" name="q" placeholder="Search #tags, @authors, or words">
+                            <input type="hidden" name="userId" value="{{loggedInUserId}}">
+                        </div>
+                    </form>
                
                     <!-- IF USER IS NOT LOGGED IN -->
                     <div class="logIn">
