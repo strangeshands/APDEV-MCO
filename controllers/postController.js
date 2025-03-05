@@ -150,9 +150,14 @@ const post_create_post = async (req, res) => {
     }
 
     let imagePaths = [];
-    const images = req.files?.images || [];
+    const images = Array.isArray(req.files?.images) 
+                    ? req.files.images 
+                    : req.files?.images 
+                    ? [req.files.images] 
+                    : [];
 
-    if (Array.isArray(images)) {
+
+    if (images) {
         const imageUploadPromises = images.map((image) => {
             return new Promise((resolve, reject) => { 
                 const fileName = `${Date.now()}-${image.name}`;
@@ -179,41 +184,11 @@ const post_create_post = async (req, res) => {
         } catch (err) {
             console.log("Error uploading images: " + err.message);
         }
-    } else {
-    } else if (images != null) {
-        let image = images;
-
-        const imageUploadPromise = new Promise((resolve, reject) => {
-            const fileName = `${Date.now()}-${image.name}`;
-            const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
-            const filePathForDB = `/uploads/${fileName}`;
-        
-            image.mv(uploadPath, (err) => {
-                if (err) {
-                    console.error("File upload error:", err);
-                    reject("Failed to upload image.");
-                    return res.status(500).send("Failed to upload image.");
-                } else {
-                    imagePaths.push(`/uploads/${fileName}`);
-                    console.log(`message: "Image uploaded successfully!", filePath: /uploads/${fileName}`);
-                    resolve();
-                }
-        
-            });
-        });
-
-        try {
-            await imageUploadPromise; // Wait for the upload to finish
-        } catch (err) {
-            console.log("Error uploading image: " + err.message);
-        }
-    };
+    } 
 
     const postData = { 
         ...formData, 
         author: postAuthor._id,
-        images: imagePaths,
-        tags: tags
         images: imagePaths,
         tags: tags
     };
@@ -279,7 +254,11 @@ const editPostLoad = async(req,res) => {
 const editPostSave = async (req, res) => {
     const postId = req.params.postId;
     const formData = req.body;
-    var images = [req.files?.images] || [];
+    var images = Array.isArray(req.files?.images) 
+                ? req.files.images 
+                : req.files?.images 
+                ? [req.files.images] 
+                : [];
 
     const existingPost = await Post.findById(postId);
     const existingImages = existingPost.images || [];
@@ -306,9 +285,7 @@ const editPostSave = async (req, res) => {
         if (!res)
             remainingImages.push(img);
     });
-    console.log(remainingImages);
-    console.log(finalImages);
-
+    
     existingImages.forEach(exist => {
         exist = exist.substring(exist.lastIndexOf('/') + 1);
         var res = images.some(img => {
@@ -320,8 +297,6 @@ const editPostSave = async (req, res) => {
             finalImages = finalImages.filter(image => !image.endsWith(exist));
         }
     });
-    console.log(forDelete);
-    console.log(finalImages);
 
     // Function to handle image upload
     const uploadImage = (image) => {
@@ -345,7 +320,9 @@ const editPostSave = async (req, res) => {
     // Handle image uploads and await all promises
     let newimagePaths = [];
     if (remainingImages)
-        newimagePaths = await Promise.all(remainingImages.map(uploadImage));
+        newimagePaths = await Promise.all(
+            remainingImages.map((img) => uploadImage(img))
+        );
     if (forDelete) {
         forDelete.forEach((fileName) => {
             const filePath = path.join(__dirname, '..', 'public', 'uploads', fileName);
@@ -382,7 +359,6 @@ const editPostSave = async (req, res) => {
         res.status(500).send("Failed to update the post.");
     }
 };
-
 
 /**
  *  > Draft of delete post
