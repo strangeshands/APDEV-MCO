@@ -15,4 +15,7 @@ router.get('/:id', postController.post_details);
 // DELETE 
 router.delete('/:id', postController.post_delete);
 
+// draft
+router.use("/delete/:postId", postController.deletePost);
+
 module.exports = router;

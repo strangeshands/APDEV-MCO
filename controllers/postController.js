@@ -1,5 +1,7 @@
 const Post = require('../models/posts');
 const User = require('../models/users');
+const Like = require('../models/likes');
+
 const moment = require('moment');   // For time display
 const path = require('path');       // For file upload
 
@@ -176,9 +178,67 @@ const post_delete = (req, res) => {
         });
 }
 
+/**
+ *  > Draft of delete post
+ * 
+ *  FOR MCO P2:
+ *      > link is /delete-post/:postId?userId=<active user id>
+ *  FOR MCO P3:
+ *      > the link will be simplified to /delete-post/:postId
+ *      > this is because you can now retrieve the active user through
+ *          req.session.id
+ * 
+ *  restrictions:
+ *      > a user can only delete a post of their own
+ */
+const deletePost = async(req,res) => {
+    console.log("i went here");
+    const postId = req.params.postId;
+    const activeUser = req.query.userId;
+
+    console.log(postId, activeUser);
+
+    // there should be an active user to delete a post
+    if (!activeUser) 
+        return res.render('errorPage');
+
+    var activeUserDetails = await User.findById(activeUser);
+
+    if (!activeUserDetails)
+        return res.render('profileNotFound');
+
+    var post = await Post.findOne({
+        _id: postId,
+        author: activeUser
+    })
+
+    if (!post)
+        return res.render('errorPage');
+
+    console.log("POST TO DELETE: ", post);
+
+    // delete the post on the post record
+    await Post.deleteOne({ _id: postId });
+    // delete the posts on the likes table
+    await Like.deleteMany({ _id: postId });
+    // delete the posts on the users' bookmarks or dislikes
+    await User.updateMany(
+        {},
+        {
+            $pull: {
+                bookmarks: postId,
+                dislikes: postId
+            }
+        }
+    );
+
+    res.redirect(`/profile/${activeUserDetails.username}?userId=${activeUser}`);
+}
+
 module.exports = {
     post_details,
     post_create_get,
     post_create_post,
-    post_delete
+    post_delete, 
+    deletePost
 };

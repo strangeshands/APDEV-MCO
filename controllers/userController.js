@@ -66,12 +66,13 @@ const loadUserProfile = async(req,res) => {
         activeBookmarks =   activeBookmarksTemp.bookmarks
                             .map(bookmark => bookmark)
                             .filter(bookmark => bookmark !== null);
+        // clean up null posts
+        
 
         // query active user likes
         const activeLikesTemp = await likes
             .find({ likedBy: activeUserDetails })
             .populate('likedPost')
-            .sort({ createdAt: -1, updatedAt: -1 })
             .select('likedPost');
         activeLikes =   activeLikesTemp
                         .map(like => like.likedPost)

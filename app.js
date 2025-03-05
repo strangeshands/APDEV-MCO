@@ -41,7 +41,6 @@ hbs.registerHelper("json", function (context) {
 
 // ----- Connect Controllers ----- //
 const userController = require("./controllers/userController");
-const homeController = require("./controllers/homeController");
 
 /* ---------- Routes ----------- */
 const postRoutes = require('./routes/postRoutes');
@@ -70,8 +69,8 @@ app.post("/edit-profile/:username/update-acc-info", userController.updateUserDet
  *  [GHOST LINKS] - no dedicated page
  *      (1) allows updating of bookmarks
  *      (2) allows updated of likes and dislikes
- *      (3) allows updating of profile pic
- *      (4) allows updating of header picture
+ *      (3) allows uploading and updating of profile pic
+ *      (4) allows uploading and updating of header picture
  */
 app.post("/update-bookmark", userController.updateBookmark);
 app.post("/update-like", userController.updateLike);
