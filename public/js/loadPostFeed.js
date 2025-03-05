@@ -94,7 +94,12 @@ function loadTimelinePosts() {
             <div class="postContent">
                     <!-- TAGS -->
                     <div class="posttags">
-                        ${post.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
+                        ${post.tags.map(tag => `
+                            <a href="/?q=${encodeURIComponent(tag)}&userId=${activeId}" 
+                                style="cursor: pointer; text-decoration: none;">
+                                ${tag}
+                            </a>
+                        `).join(" ")}
                     </div>
 
                     <div id="posttile" onclick="window.location.href='/posts/${post._id}';">
