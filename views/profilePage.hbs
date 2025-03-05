@@ -28,6 +28,9 @@
                var userBookmarks  = {{{ json profileBookmarks }}};
                var userLikes  = {{{ json profileLikes }}};
                var userDislikes  = {{{ json profileDislikes }}};
+
+               console.log(profileDetails);
+               console.log(userPosts);
           </script>
      </head>
 
@@ -48,7 +51,7 @@
                          <!-- No Log In button -->
                     {{else}}
                          <div class="logIn">
-                              <button id="logInButton" onclick="window.location.href='../html/loginPage.html'">Log In</button>
+                              <button id="logInButton" onclick="window.location.href='/'">Log In</button>
                          </div>
                     {{/if}}
                </div>
@@ -107,8 +110,8 @@
                          </div>
 
                          <!-- SETTINGS -->
-                         <div class="col1-sub-container"> 
-                              {{#if ownPage}}
+                         {{#if ownPage}}
+                              <div class="col1-sub-container"> 
                                    <button class="editProfile" onclick="window.location.href='/edit-profile/{{activeUserDetails.username}}?userId={{activeUserDetails._id}}';">
                                         <img src="/resources/Edit Icon.svg" alt="">
                                         Account Settings
@@ -117,17 +120,21 @@
                                         <img src="/resources/Log Out Icon.svg" alt="">
                                         Log Out
                                    </button>
-                              {{else}} 
-                                   <button class="editProfile backto" onclick="window.location.href='/profile/{{activeUserDetails.username}}?userId={{activeUserDetails._id}}';">
-                                        <img src="/resources/Arrow Curve Up Right.svg" alt="">
-                                        Back to Profile
-                                   </button>
-                                   <button class="editProfile backto" onclick="window.location.href='/?userId={{activeUserDetails._id}}';">
-                                        <img src="/resources/Arrow Curve Up Right.svg" alt="">
-                                        Back to Home
-                                   </button>
+                              </div>
+                         {{else}} 
+                              {{#if activeUserDetails}}
+                                   <div class="col1-sub-container"> 
+                                        <button class="editProfile backto" onclick="window.location.href='/profile/{{activeUserDetails.username}}?userId={{activeUserDetails._id}}';">
+                                             <img src="/resources/Arrow Curve Up Right.svg" alt="">
+                                             Back to Profile
+                                        </button>
+                                        <button class="editProfile backto" onclick="window.location.href='/?userId={{activeUserDetails._id}}';">
+                                             <img src="/resources/Arrow Curve Up Right.svg" alt="">
+                                             Back to Home
+                                        </button>
+                                   </div>
                               {{/if}}
-                         </div>
+                         {{/if}}
                     </div>
 
                     <!-- USER POSTS/COMMENTS COLUMN -->
