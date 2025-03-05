@@ -105,11 +105,8 @@ fileUploadInput.setAttribute('multiple', 'multiple');
 
 // Trigger the file input when the custom button is clicked
 customFileButton.addEventListener('click', function() {
-    
     fileUploadInput.click();
-    
 });
-
 fileUploadInput.addEventListener("change", handleImageUpload);
 
 
@@ -128,14 +125,49 @@ addImageBtn.addEventListener("click", () => {
 
 // Handle file selection
 imageUploadInput.addEventListener("change", handleImageUpload);
-
-
 */
 
-function handleImageUpload(event) {
+let postButton = document.getElementById("postButton");
+postButton.addEventListener('click', function(e) {
+    e.preventDefault();
 
-    const selectedFiles = Array.from(event.target.files);
+    tagsInput.style.textTransform = 'none';
+    tagsInput.style.color = 'transparent';
+
+    if (tags.length > 0) {
+        tagsInput.value = tags.join(',');
+        console.log("Tags added = " + tagsInput.value);
+    } else {
+        console.log("No tags added");
+    }
+
+    document.querySelector('form').submit();
+});
+
+function handleImageUpload(event = null) {
+    const selectedFiles = event ? Array.from(event.target.files) : [];
     const formData = new FormData();
+
+    if (!event) {
+        // Convert existing image paths to File objects
+        const promises = images.map(async (imagePath, index) => {
+            const response = await fetch(imagePath);
+            const blob = await response.blob();
+            const fileName = imagePath.substring(imagePath.lastIndexOf('/') + 1);
+            return new File([blob], fileName, { type: blob.type });
+        });
+
+        Promise.all(promises).then(files => {
+            files.forEach(file => {
+                allFiles.push(file);
+                formData.append("images[]", file);
+            });
+            fileUploadInput.files = createFileList(allFiles);
+            renderImages();
+        });
+
+        return;
+    }
 
     // Limit total images to 4
     selectedFiles.forEach((file) => {
@@ -179,19 +211,20 @@ function handleImageUpload(event) {
         for (let i = allFiles.length - 1; i >= 4; i--) {
             removeFileFromInput(fileUploadInput.files[i]);
         }
-
         renderImages();
-
     } else {
         renderImages();
     }
+}
 
-    
+function createFileList(files) {
+    const dataTransfer = new DataTransfer();
+    files.forEach(file => dataTransfer.items.add(file));
+    return dataTransfer.files;
 }
 
 // Removes a file by its index or file reference
 function removeFileFromInput(fileToRemove) {
-
     const currentFiles = Array.from(fileUploadInput.files); // Converts FileList to array
     const newFiles = currentFiles.filter(file => file !== fileToRemove); // Filters out the file to remove
 
@@ -213,18 +246,6 @@ function removeImage(index) {
 function renderImages() {
     // Clear previous previews
     postContentContainer.innerHTML = "";
-
-    // Decide layout based on image count
-    /*if (images.length === 1) {
-        postContentContainer.classList.add("single-image");
-        postContentContainer.classList.remove("multi-images");
-    } else if (images.length > 1) {
-        postContentContainer.classList.remove("single-image");
-        postContentContainer.classList.add("multi-images");
-    } else {
-        // No images
-        postContentContainer.classList.remove("single-image", "multi-images");
-    }*/
 
     // Create an element for each image with a remove icon
     images.forEach((url, index) => {
@@ -253,11 +274,37 @@ function renderImages() {
     });
 }
 
+/* ---- IF EDIT POST ---- */
+window.onload = function () {
+    if (mainPost) {
+        tags = mainPost.tags; // Load existing tags into the tags array
+        if (tags.length > 0)
+            tagsContainer.style.display = "block";
+        renderTags();      // Render the tags as chips
+
+        document.getElementById("postTitleInput").value = mainPost.title;
+
+        document.getElementById("postTextInput").value = mainPost.content;
+        const currentLength =  mainPost.content.length;
+        charLim.textContent = `${currentLength}/300`;
+
+        images = mainPost.images;
+        uploadCounter = images.length;
+        if (images.length > 0)
+            document.getElementById("postContentContainer").style.display = "flex";
+        handleImageUpload();
+        renderImages();
+    }
+
+    const postForm = document.getElementById("postForm");
+    postForm.setAttribute("action", directory);
+    console.log("Form action set to:", postForm.action); // Debugging output
+};
+
 /* ---- OPEN MODAL ---- */
 function openModal(image) {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("modalImage");
-    const captionText = document.getElementById("caption");
 
     modal.style.display = "block";
     modalImg.src = image.src;

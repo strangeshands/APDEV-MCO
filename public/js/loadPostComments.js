@@ -217,7 +217,7 @@ function loadComments() {
 
             <!-- POST TAGS HERE -->
             <!-- TO CHANGE: href link -->
-            <div class="tagContainer" id="posttags">
+            <div class="tagContainer" id="tags">
                 ${post.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
             </div>
 

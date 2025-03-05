@@ -10,7 +10,9 @@ const fs = require('fs');           // For file deletion
 const active = require('../activeUser');
 const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
 
-// Getting a specific post
+/**
+ *  Getting specific post and its comments
+ */
 const post_details = async (req, res) => {
     // Details of active user, if there is
     var activeUserDetails = null;
@@ -114,16 +116,17 @@ const post_details = async (req, res) => {
     }
 };
 
-
 // NOT DONE
 const post_create_get = (req, res) => {
+    var activeUser = active.getActiveUser();
+    activeUser = tempUserId;
 
-    User.findById(tempUserId)
+    User.findById(activeUser)
         .exec()
         .then((result) => {
-            user = result;
+            activeUserDetails = result;
 
-            res.render('newPostPage', { user: user, title: 'New Post' });
+            res.render('newPostPage', { post: null, activeUserDetails, title: 'New Post' });
         })
         .catch((err) => {
             res.status(404).render('errorPage');
@@ -141,13 +144,13 @@ const post_create_post = async (req, res) => {
         return res.status(404).send("User not found");
     }
 
-    if (!req.files || !req.files.images) {
-        return res.status(400).send("No file uploaded.");
+    let tags = req.body.tags;
+    if (tags) {
+        tags = tags.split(',').map(tag => tag.trim()); // Splits the string by commas
     }
 
     let imagePaths = [];
-
-    const images = req.files.images;
+    const images = req.files?.images || [];
 
     if (Array.isArray(images)) {
         const imageUploadPromises = images.map((image) => {
@@ -177,8 +180,6 @@ const post_create_post = async (req, res) => {
             console.log("Error uploading images: " + err.message);
         }
     } else {
-        let image = images;
-
         const imageUploadPromise = new Promise((resolve, reject) => {
             const fileName = `${Date.now()}-${image.name}`;
             const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
@@ -208,7 +209,8 @@ const post_create_post = async (req, res) => {
     const postData = { 
         ...formData, 
         author: postAuthor._id,
-        images: imagePaths 
+        images: imagePaths,
+        tags: tags
     };
     
     try {
@@ -220,11 +222,9 @@ const post_create_post = async (req, res) => {
                     .catch((err) => {
                         console.log(err);
                     });
-
     } catch (err) {
         console.log(err);
     }
-
 };
 
 // NOT DONE
@@ -239,6 +239,145 @@ const post_delete = (req, res) => {
             console.log(err);
         });
 }
+
+const editPostLoad = async(req,res) => {
+    const postId = req.params.postId;
+    // FOR MCO P3: replace with req.session.id;
+    var activeUser = active.getActiveUser();
+    activeUser = tempUserId;
+
+    // there should be an active user to delete a post
+    if (!activeUser) 
+        return res.render('errorPageTemplate', {
+        header: "You are not logged in.",
+        emotion: "Oops. Cannot perform action.",
+        description: "Please log in to edit a post."
+        });
+
+    if (activeUser) {
+        activeUserDetails = await User.findById(activeUser);
+
+        // if null, profile is not found
+        if (!activeUserDetails) {
+            return res.render('errorPageTemplate', {
+            header: "Profile not found.",
+            emotion: null,
+            description: "This account may be deleted."
+            });
+        }
+    }
+
+    var post = await Post.findById(postId);
+    res.render('newPostPage', {post, activeUserDetails});
+};
+
+const editPostSave = async (req, res) => {
+    const postId = req.params.postId;
+    const formData = req.body;
+    var images = [req.files?.images] || [];
+
+    const existingPost = await Post.findById(postId);
+    const existingImages = existingPost.images || [];
+
+    var remainingImages = [];
+    var finalImages = [];
+    var forDelete = [];
+
+    let tags = req.body.tags;
+    if (tags) {
+        tags = tags.split(',').map(tag => tag.trim()); // Splits the string by commas
+    }
+    
+    images.forEach(img => {
+        var res = existingImages.some(exist => {
+            exist = exist.substring(exist.lastIndexOf('/') + 1);
+
+            // get the uploaded images
+            if (exist === img.name) 
+                finalImages.push(exist);
+
+            return exist === img.name;
+        });
+        if (!res)
+            remainingImages.push(img);
+    });
+    console.log(remainingImages);
+    console.log(finalImages);
+
+    existingImages.forEach(exist => {
+        exist = exist.substring(exist.lastIndexOf('/') + 1);
+        var res = images.some(img => {
+            return exist === img.name;
+        });
+
+        if (!res) {
+            forDelete.push(exist);
+            finalImages = finalImages.filter(image => !image.endsWith(exist));
+        }
+    });
+    console.log(forDelete);
+    console.log(finalImages);
+
+    // Function to handle image upload
+    const uploadImage = (image) => {
+        return new Promise((resolve, reject) => {
+            const fileName = `${Date.now()}-${image.name}`;
+            const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+            const filePathForDB = `/uploads/${fileName}`;
+
+            image.mv(uploadPath, (err) => {
+                if (err) {
+                    console.error("File upload error:", err);
+                    reject(new Error("Failed to upload image."));
+                } else {
+                    console.log(`Image uploaded: ${filePathForDB}`);
+                    resolve(filePathForDB);
+                }
+            });
+        });
+    };
+
+    // Handle image uploads and await all promises
+    let newimagePaths = [];
+    if (remainingImages)
+        newimagePaths = await Promise.all(remainingImages.map(uploadImage));
+    if (forDelete) {
+        forDelete.forEach((fileName) => {
+            const filePath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+    
+            fs.unlink(filePath, (err) => {
+                if (err) {
+                    console.error(`Failed to delete file: ${filePath}`, err);
+                } else {
+                    console.log(`Successfully deleted file: ${filePath}`);
+                }
+            });
+        });
+    }
+        
+    // Combine remaining and newly uploaded images
+    const updatedImages = [...finalImages, ...newimagePaths].map(image => 
+        image.startsWith('/uploads') ? image : path.join('/uploads', image)
+    );
+    console.log("Updated images:", updatedImages);
+
+    const updatedPostData = { 
+        ...formData, 
+        images: updatedImages,
+        tags 
+    };
+
+    console.log("Updated Post Data:", updatedPostData);
+
+    try {
+        await Post.updateOne({ _id: postId }, { $set: updatedPostData });
+        res.redirect(`/posts/${postId}`);
+    } catch (err) {
+        console.error("Post update error:", err);
+        res.status(500).send("Failed to update the post.");
+    }
+};
+
 
 /**
  *  > Draft of delete post
@@ -343,7 +482,7 @@ const formatPostDates = (posts) => {
     return posts.map(post => {
         let postDate;
 
-        const postTimeCreated = moment(post.createdAt);
+        const postTimeCreated = moment(post.updatedAt || post.createdAt);
         const now = moment();
         const duration = moment.duration(now.diff(postTimeCreated));
 
@@ -374,5 +513,7 @@ module.exports = {
     post_create_get,
     post_create_post,
     post_delete, 
+    editPostLoad,
+    editPostSave,
     deletePost
 };

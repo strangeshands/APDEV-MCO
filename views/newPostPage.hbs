@@ -2,23 +2,31 @@
 <html>
     <head>
         <title>Connectify - {{title}}</title>
-        <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
+        <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
         
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="../css/generalStyle.css">
-        <link rel="stylesheet" type="text/css" href="../css/newPostPage.css">
+        <link rel="stylesheet" type="text/css" href="/css/generalStyle.css">
+        <link rel="stylesheet" type="text/css" href="/css/newPostPage.css">
+
+        <script>
+            var mainPost = {{{ json post }}};
+
+            var directory = "/posts";
+            if (mainPost)
+                directory = `/posts/edit-save/${mainPost._id}`;
+        </script>
     </head>
 
     <body>
         <!-- HEADER PORTION -->
         <header>
             <div id="headercol1" onclick="window.location.href='/'">
-                <img id="logo" src="../resources/Logo.svg" />
+                <img id="logo" src="/resources/Logo.svg" />
                 <p id="appName"> Connectify </p>
             </div>
             <div id="headercol2">
                 <div class="searchBar">
-                    <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
+                    <img src="/resources/Trailing-Elements.svg" alt="Search Icon">
                     <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
                 </div>
             </div>
@@ -31,16 +39,16 @@
                 <span class="back">Back</span>
             </div>
 
-            <form action="/posts" 
+            <form id="postForm" 
                   method="POST"
                   enctype="multipart/form-data">
                 <div class="post">
                     <div class="postHeader">
                         <div class="userInfo">
                             <div class="avatar">
-                                <img src="{{user.profilepic}}" alt="userProfilePicture" class="userProfilePic">
+                                <img src="{{activeUserDetails.profilepic}}" alt="userProfilePicture" class="userProfilePic">
                             </div>
-                            <div class="username">{{user.displayname}}</div>
+                            <div class="username">{{activeUserDetails.displayname}}</div>
                         </div>
                     </div>
                     <!-- TAG INPUT CONTAINER (hidden by default) -->
@@ -50,7 +58,7 @@
                             type="text"
                             id="tagsInput"
                             placeholder="Type a tag, then press comma or enter"
-                            name="tags[]"
+                            name="tags"
                         />
                     </div>
                     <!-- TITLE INPUT -->
@@ -86,7 +94,7 @@
                     <div class="postActions">
                         <div class="actionButtonsLeft">
                             <button type="button" class="actionButton" id="addImageButton">
-                                <img src="../resources/ImageAdd.svg" alt="Upload">
+                                <img src="/resources/ImageAdd.svg" alt="Upload">
                             </button>
                             <!-- Image Modal -->
                             <div id="imageModal" class="modal">
@@ -104,17 +112,21 @@
                                 });
                             </script>
                             <button type="button"class="actionButton" id="addTagButton">
-                                <img src="../resources/Hash.svg" alt="Add Tag">
+                                <img src="/resources/Hash.svg" alt="Add Tag">
                             </button>
                         </div>
                         <!-- POST BUTTON -->
-                        <button type="submit" class="postButton">Post</button>
+                        {{#if post}}
+                            <button type="submit" class="postButton" id="postButton" onclick="window.location.href='../posts/edit-save/{{post._id}}'">Save Changes</button>
+                        {{else}}
+                            <button type="submit" class="postButton" id="postButton">Post</button>
+                        {{/if}}
                     </div>
                 </div>
             </form>
         </main>
 
         <!-- PAGE JAVASCRIPT -->
-        <script src="../js/newPostPage.js"></script>        
+        <script src="/js/newPostPage.js"></script>   
     </body>
 </html>

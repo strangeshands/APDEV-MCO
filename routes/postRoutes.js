@@ -18,4 +18,8 @@ router.delete('/:id', postController.post_delete);
 // draft
 router.use("/delete/:postId", postController.deletePost);
 
+router.use("/edit/:postId", postController.editPostLoad);
+
+router.post("/edit-save/:postId", postController.editPostSave);
+
 module.exports = router;
