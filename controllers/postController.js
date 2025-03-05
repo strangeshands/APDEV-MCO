@@ -319,7 +319,7 @@ const deletePost = async(req,res) => {
     // delete the post on the post record
     await Post.deleteOne({ _id: postId });
     // delete the posts on the likes table
-    await Like.deleteMany({ _id: postId });
+    await Like.deleteMany({ likedPost: postId });
     // delete the posts on the users' bookmarks or dislikes
     await User.updateMany({},
         {
