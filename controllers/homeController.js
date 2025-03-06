@@ -2,14 +2,19 @@ const Post = require('../models/posts');
 const User = require('../models/users');
 const Like = require('../models/likes');
 const moment = require('moment');   // For time display
+const activeUserModule = require('../activeUser');
 
 // ---- [START] TEST for Home with NavBar ---- //
 
 const homePage = async (req, res) => {
     try {
-        // Extract userId from query parameters
-        const loggedInUserId = req.query.userId;
-        const activeUser = await User.findById(loggedInUserId);
+        var activeUser = activeUserModule.getActiveUser();
+        if (!activeUser) {
+            return res.redirect('/login');
+        }
+        const loggedInUserId = activeUser._id;
+        activeUser = await User.findById(loggedInUserId);
+
         let searchQuery = req.query.q;
         let postConditions = {};
 
