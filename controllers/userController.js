@@ -46,7 +46,7 @@ const loadUserProfile = async(req,res) => {
      *  [MCO P3]
      *  For P3, change this to req.session.id
      */
-    activeUser = req.query.userId;
+    activeUser = active.getActiveUser();
 
     // if null, meaning there is no active user
     if (activeUser) {
@@ -363,7 +363,7 @@ const editProfileLoad = async(req,res) => {
      */
     var find = req.params.username;
     var activeUserDetails = await users.findOne({ username: find });
-
+    
     res.render('editProfilePage', { 
         activeUserDetails 
     });
@@ -602,15 +602,25 @@ const updateAccountInfo = async(req,res) => {
     });
 }
 
+/**
+ *  [DONE/DEBUGGED] Allows updating of profile photo
+ */
 const changePhoto = async(req,res) => {
-    const activeUser = req.params.username;
+    console.log("iwenthere");
+    // FOR MCO P3: change to req.session.id
+    const activeUser = active.getActiveUser();
     // just to ensure it exists in the db
-    var activeUserDetails = await users.findOne({username:activeUser});
+    var activeUserDetails = await users.findOne({ _id:activeUser });
 
     if (!activeUserDetails) {
-        return res.status(404).send("User not found");
+        return res.render('errorPageTemplate', {
+            header: "Profile not found.",
+            emotion: null,
+            description: "This account may be deleted."
+        });
     }
-    if (!req.files || !req.files.headerPic) {
+
+    if (!req.files || !req.files.profilePic) {
         return res.status(400).send("No file uploaded.");
     }
 
@@ -618,9 +628,6 @@ const changePhoto = async(req,res) => {
     const fileName = `${Date.now()}-${image.name}`;
     const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
     const filePathForDB = `/uploads/${fileName}`;
-
-    console.log(uploadPath);
-    console.log(filePathForDB);
 
     image.mv(uploadPath, (err) => {
         if (err) {
@@ -637,13 +644,21 @@ const changePhoto = async(req,res) => {
     );
 };
 
+/**
+ *  [DONE/DEBUGGED] Allows updating of header
+ */
 const changeHeader = async(req,res) => {
-    const activeUser = req.params.username;
+    // FOR MCO P3: change to req.session.id
+    const activeUser = active.getActiveUser();
     // just to ensure it exists in the db
-    var activeUserDetails = await users.findOne({username:activeUser});
+    var activeUserDetails = await users.findOne({ _id:activeUser });
 
     if (!activeUserDetails) {
-        return res.status(404).send("User not found");
+        return res.render('errorPageTemplate', {
+            header: "Profile not found.",
+            emotion: null,
+            description: "This account may be deleted."
+        });
     }
 
     if (!req.files || !req.files.headerPic) {
@@ -671,7 +686,7 @@ const changeHeader = async(req,res) => {
 };
 
 /**
- *  Function to format dates
+ *  [DONE/DEBUGGED] Function to format dates
  */
 const formatPostDates = (posts) => {
     return posts.map(post => {

@@ -74,8 +74,8 @@ app.post("/edit-profile/:username/update-acc-info", userController.updateAccount
  */
 app.post("/update-bookmark", userController.updateBookmark);
 app.post("/update-like", userController.updateLike);
-app.post("/upload-profilepic/:username", userController.changePhoto);
-app.post("/upload-headerpic/:username", userController.changeHeader);
+app.post("/upload-profilepic", userController.changePhoto);
+app.post("/upload-headerpic", userController.changeHeader);
 
 // ----- 404 Page (Catch-All Route) ----- //
 app.use((req, res) => {     

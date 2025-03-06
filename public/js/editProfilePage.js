@@ -105,12 +105,13 @@ if (currentContext === "profile") {
     });
 
     canvas.toBlob((blob) => {
-        if (!blob) return;
+        if (!blob) 
+            return;
         
         const formData = new FormData();
         formData.append("profilePic", blob, "cropped-image.png");
 
-        fetch(`/upload-profilepic/${activeUserDetails.username}`, {
+        fetch('/upload-profilepic', {
             method: "POST",
             body: formData,
         })
@@ -137,7 +138,7 @@ if (currentContext === "profile") {
         const formData = new FormData();
         formData.append("headerPic", blob, "cropped-image.png");
 
-        fetch(`/upload-headerpic/${activeUserDetails.username}`, {
+        fetch(`/upload-headerpic`, {
             method: "POST",
             body: formData,
         })
