@@ -488,6 +488,9 @@ const updateUserDetails = async(req,res) => {
     });
 };
 
+/**
+ *  [DONE/DEBUGGED] Save changes in account information (email, number, password)
+ */
 const updateAccountInfo = async(req,res) => {
     var { newEmail, newNum, newPass } = req.body;
 
@@ -500,7 +503,11 @@ const updateAccountInfo = async(req,res) => {
     activeUserDetails = await users.findById(activeUserDetails._id);
 
     if (!activeUserDetails) {
-        return res.render("profileNotFound");
+        return res.render('errorPageTemplate', {
+            header: "Profile not found.",
+            emotion: null,
+            description: "This account may be deleted."
+        });
     }
 
     var errorMessageEmail = '';
@@ -525,6 +532,14 @@ const updateAccountInfo = async(req,res) => {
             cpEmail = false;
             overallstatus = false;
         }
+
+        const allowedDomains = /^[^\s@]+@(gmail\.com|yahoo\.com)$/i;
+        if (!allowedDomains.test(newEmail)) {
+            errorMessageEmail = 'Only emails from @gmail.com or @yahoo.com are allowed.';
+
+            cpEmail = false;
+            overallstatus = false;
+        }
     }
 
     if (newNum) {
@@ -532,6 +547,14 @@ const updateAccountInfo = async(req,res) => {
 
         if (existingUser) {
             errorMessageNum = newNum + ' is already registered to another account.'
+
+            cpNum = false;
+            overallstatus = false;
+        }
+
+        const cleanedNum = newNum.replace(/\s+/g, ''); // Remove all spaces
+        if (cleanedNum.length !== 11 || !/^[\d\s]+$/.test(newNum)) {
+            errorMessageNum = 'Please enter a valid phone number.';
 
             cpNum = false;
             overallstatus = false;
@@ -546,7 +569,7 @@ const updateAccountInfo = async(req,res) => {
         const passwordPattern = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/;
 
         if (!passwordPattern.test(newPass)) {
-            errorMessagePass = "Include number, uppercase letter, and a sumbol.";
+            errorMessagePass = "Include number, uppercase letter, and a symbol.";
 
             cpPass = false;
             overallstatus = false;
@@ -581,6 +604,9 @@ const updateAccountInfo = async(req,res) => {
             activeUserDetails.phone = newNum;
         }
     }
+    else {
+        errorMessageAccInfoButton = "Please check your input."
+    }
 
     if (cpPass && newPass) {
         await users.updateOne(
@@ -600,7 +626,7 @@ const updateAccountInfo = async(req,res) => {
         errorMessageAccInfoButton,
         errorMessagePasswordButton
     });
-}
+};
 
 /**
  *  [DONE/DEBUGGED] Allows updating of profile photo

@@ -222,7 +222,7 @@ function saveUserDetails() {
 }
 
 /**
- *  allows saving of account information
+ *  [DONE/DEBUGGED] allows saving of account information
  */
 function saveAccountInfo() {
     var change = true;
@@ -232,12 +232,14 @@ function saveAccountInfo() {
     newNum = newNum.replace(/\s+/g, '');
 
     if (newEmail === activeUserDetails.email) {
-        document.getElementById('username-feedback').textContent = "This is already your registered email.";
+        document.getElementById('email-feedback').textContent = "This is already your registered email.";
+        document.getElementById('update-acc-feedback').textContent = "Please check your entries.";
         change = false;
     }
-    const phoneClean = activeUserDetails.displayname.replace(/\s+/g, '');
+    const phoneClean = activeUserDetails.phone.replace(/\s+/g, '');
     if (newNum === phoneClean) {
-        document.getElementById('dn-feedback').textContent = "This is already your registered phone number.";
+        document.getElementById('tel-feedback').textContent = "This is already your registered phone number.";
+        document.getElementById('update-acc-feedback').textContent = "Please check your entries.";
         change = false;
     }
 
@@ -268,12 +270,14 @@ function saveAccountInfo() {
 }
 
 /**
- *  allows changing of passwords
+ *  [DONE/DEBUGGED] allows changing of passwords
  */
 function changePassword() {
     var currentPass = document.getElementById('curr-password').value;
     var newPass = document.getElementById('password').value;
     var repeatPass = document.getElementById('confirm-password').value;
+
+    let change = true;
 
     if (currentPass != activeUserDetails.password) {
         console.log(activeUserDetails.password);
