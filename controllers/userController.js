@@ -97,7 +97,10 @@ const loadUserProfile = async(req,res) => {
     } else {
         // query profile posts
         profilePosts = await posts
-            .find({ author: profileDetails })
+            .find({ 
+                author: profileDetails,
+                parentPost: null 
+            })
             .populate('author')
             .populate({
                 path: 'parentPost',

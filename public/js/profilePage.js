@@ -20,9 +20,15 @@ function printTags (tags) {
     if (tags.length === 0) {
          tagListElement.innerHTML = '<p class="regulartext" id="no-tag-msg">No tags available</p>';
     } else {
-         tagListElement.innerHTML = tags
-              .map(tag => `<button class="usertags" onclick="">${tag}</button>`)
-              .join("");
+          let activeId = ''
+          if (activeUserDetails)
+               activeId = activeUserDetails._id;
+
+          tagListElement.innerHTML = tags
+               .map(tag =>    `<button class="usertags" onclick="window.location.href='/?q=${encodeURIComponent(tag)}&userId=${activeId}'">
+                                   ${tag}
+                              </button>`)
+               .join("");
     }
 }
 

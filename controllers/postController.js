@@ -95,10 +95,13 @@ const post_details = async (req, res) => {
         comments = formatPostDates(comments);
 
         // Render the page with post and comments data
+        let origin = req.query.from;
+
         res.render('postPage', {
             title: "Post",
             post,
             comments,
+            origin,
 
             activeUserDetails,
             activeLikes,

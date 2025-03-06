@@ -54,14 +54,16 @@
                             <img src="/resources/Profile Icon.svg" alt="View Profile Icon">
                             View Profile
                         </button>
-                        <button class="navBarButtons" onclick="window.location.href='/editProfile'">
-                            <img src="/resources/Edit Icon.svg" alt="Edit Profile Icon">
-                            Edit Profile
-                        </button>
-                        <button class="navBarButtons" onclick="window.location.href='/logout'">
-                            <img src="/resources/Log Out Icon.svg" alt="Log Out Icon">
-                            Log Out
-                        </button>
+                        {{#if activeUserDetail}}
+                            <button class="navBarButtons" onclick="window.location.href='/edit-profile/{{activeUserDetail.username}}'">
+                                <img src="/resources/Edit Icon.svg" alt="Edit Profile Icon">
+                                Edit Profile
+                            </button>
+                            <button class="navBarButtons" onclick="window.location.href='/logout'">
+                                <img src="/resources/Log Out Icon.svg" alt="Log Out Icon">
+                                Log Out
+                            </button>
+                        {{/if}}
                     </div>
                 </div>
             </div>

@@ -119,19 +119,25 @@ function loadPosts(type) {
                <!-- POST TAGS HERE -->
                <!-- TO CHANGE: href link -->
                <div class="tagContainer" id="posttags">
-                    ${post.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
+                    ${post.tags.map(tag => `
+                         <a href="/?q=${encodeURIComponent(tag)}&userId=${activeId}" 
+                         style="cursor: pointer; text-decoration: none;">
+                         ${tag}
+                         </a>
+                    `).join(" ")}
                </div>
 
                <!-- POST TITLE HERE -->
                ${post.title.length > 0 ? `
-                    <div id="posttile" onclick="window.location.href='/posts/${post._id}';">
+                    <div id="posttile" onclick="window.location.href='/posts/${post._id}?from=profile';"
+                    style="cursor: pointer; text-decoration: none;">
                         <h2>${post.title}</h2>
                     </div>
                 ` : "" }
 
                <!-- POST CAPTION HERE -->
                <!-- TO CHANGE: href link -->
-               <div id="usercaption" onclick="window.location.href='/posts/${post._id}';">${post.content}</div>
+               <div id="usercaption" onclick="window.location.href='/posts/${post._id}?from=profile';">${post.content}</div>
 
                <!-- POST PHOTO/S HERE -->
                ${post.images.length > 0 ? `
