@@ -57,7 +57,7 @@ const loadUserProfile = async(req,res) => {
             return res.render('profileNotFound');
 
         // own page meaning the active user is also the profile selected
-        ownPage = profileDetails.username === activeUserDetails.username;
+        ownPage = profileDetails._id.toString() === activeUserDetails._id.toString();
         
         // query active user bookmarks
         const activeBookmarksTemp = await users
@@ -369,6 +369,9 @@ const editProfileLoad = async(req,res) => {
     });
 };
 
+/**
+ *  [DONE/DEBUGGED] Allows updating of user details (username, display name, bio)
+ */
 const updateUserDetails = async(req,res) => {
     var { newUser, newDisplayName, newBio } = req.body;
 
@@ -381,7 +384,11 @@ const updateUserDetails = async(req,res) => {
     activeUserDetails = await users.findById(activeUserDetails._id);
 
     if (!activeUserDetails) {
-        return res.render("errorPage");
+        return res.render('errorPageTemplate', {
+            header: "Profile not found.",
+            emotion: null,
+            description: "This account may be deleted."
+        });
     }
 
     // checkpoint for changes
@@ -412,6 +419,9 @@ const updateUserDetails = async(req,res) => {
 
             cpUser = false;
             overallstatus = false;
+
+            if (existingUser.username === activeUserDetails.username)
+                errorMessageUser = newUser + ' is already your username.'
         }
     }
 
@@ -440,7 +450,7 @@ const updateUserDetails = async(req,res) => {
     }
 
     if (overallstatus) {
-        if (cpUser) {
+        if (cpUser && newUser) {
             await users.updateOne(
                 { _id: activeUserDetails._id }, 
                 { $set: { username: newUser } }
@@ -455,7 +465,7 @@ const updateUserDetails = async(req,res) => {
             errorMessageUser = newUser + ' is your new username!';
             activeUserDetails.username = newUser;
         }
-        if (cpDN) {
+        if (cpDN && newDisplayName) {
             await users.updateOne(
                 { _id: activeUserDetails._id }, 
                 { $set: { displayname: newDisplayName } }
@@ -465,7 +475,7 @@ const updateUserDetails = async(req,res) => {
             activeUserDetails.displayname = newDisplayName;
         }
     
-        if (cpBio) {
+        if (cpBio && newBio) {
             await users.updateOne(
                 { _id: activeUserDetails._id }, 
                 { $set: { bio: newBio } }
@@ -481,6 +491,9 @@ const updateUserDetails = async(req,res) => {
         errorMessageButton = "Cannot procceed. Please check your input."
 
     return res.json({ 
+        cpUser,
+        newUser,
+
         errorMessageUser,
         errorMessageDN,
         errorMessageBio,
