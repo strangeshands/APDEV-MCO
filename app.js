@@ -63,7 +63,7 @@ app.use("/profile/:username", userController.loadUserProfile);
  */
 app.get("/edit-profile/:username", userController.editProfileLoad);
 app.post("/edit-profile/:username/update-user-details", userController.updateUserDetails);
-app.post("/edit-profile/:username/update-acc-info", userController.updateUserDetails);
+app.post("/edit-profile/:username/update-acc-info", userController.updateAccountInfo);
 
 /**
  *  [GHOST LINKS] - no dedicated page

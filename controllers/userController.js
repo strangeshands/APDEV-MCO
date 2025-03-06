@@ -385,7 +385,9 @@ const updateUserDetails = async(req,res) => {
     }
 
     // checkpoint for changes
-    var cpUser, cpDN, cpBio = true;
+    var cpUser = true, 
+        cpDN = true, 
+        cpBio = true;
 
     // error messages to return
     var errorMessageUser = '';
@@ -487,7 +489,7 @@ const updateUserDetails = async(req,res) => {
 };
 
 const updateAccountInfo = async(req,res) => {
-    var { newEmail, newNum } = req.body;
+    var { newEmail, newNum, newPass } = req.body;
 
     /**
      *  [MCO P3]
@@ -506,7 +508,9 @@ const updateAccountInfo = async(req,res) => {
     var errorMessagePass = '';
 
     // checkpoint for changes
-    var cpEmail, cpNum, cpPass = true;
+    var cpEmail = true, 
+        cpNum = true, 
+        cpPass = true;
 
     var overallstatus = true;
     var errorMessageAccInfoButton = '';
@@ -558,7 +562,7 @@ const updateAccountInfo = async(req,res) => {
     }
 
     if (overallstatus) {
-        if (cpEmail) {
+        if (cpEmail && newEmail) {
             await users.updateOne(
                 { _id: activeUserDetails._id }, 
                 { $set: { email: newEmail } }
@@ -567,7 +571,7 @@ const updateAccountInfo = async(req,res) => {
             errorMessageEmail = newEmail + ' is your new email!';
             activeUserDetails.email = newEmail;
         }
-        if (cpNum) {
+        if (cpNum && newNum) {
             await users.updateOne(
                 { _id: activeUserDetails._id }, 
                 { $set: { phone: newNum } }
@@ -578,7 +582,7 @@ const updateAccountInfo = async(req,res) => {
         }
     }
 
-    if (cpPass) {
+    if (cpPass && newPass) {
         await users.updateOne(
             { _id: activeUserDetails._id }, 
             { $set: { password: newPass } }
