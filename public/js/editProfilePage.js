@@ -60,6 +60,15 @@ imageInput.addEventListener("change", (event) => {
     const file = event.target.files[0];
     console.log("File selected:", file);
     if (file) {
+        const allowedTypes = ["image/jpeg", "image/png"];
+        const isValidType = allowedTypes.includes(file.type);
+
+        if (!isValidType) {
+            alert("Invalid file type. Only JPG and PNG are allowed.");
+            event.target.value = "";
+            return;
+        }
+
         const reader = new FileReader();
         reader.onload = () => {
             cropImage.src = reader.result;
