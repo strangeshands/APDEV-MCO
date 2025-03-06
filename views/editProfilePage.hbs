@@ -24,12 +24,13 @@
                     <p id="appName"> Connectify </p>
                </div>
 
-               <div id="headercol2">
-                    <div id="search-bar" class="searchBar">
+               <form action="/" method="GET" style="display: contents;">
+                    <div class="searchBar" id="searchContainer">
                          <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
-                         <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
+                         <input type="text" id="search" name="q" placeholder="Search #tags, @authors, or words" autocomplete="off">
+                         <div id="searchSuggestions" class="search-suggestions"></div>
                     </div>
-               </div>
+               </form>
           </header>
 
           <div id="base">
@@ -196,3 +197,4 @@
 
 <!-- ADDITIONAL JS FILE: CONTAINS CROPPER -->
 <script src="../js/editProfilePage.js"></script>
+<script src="../js/searchSuggestions.js"></script>

@@ -42,10 +42,13 @@
                     <p id="appName"> Connectify </p>
                </div>
                <div id="headercol2">
-                    <div class="searchBar">
-                         <img src="/resources/Trailing-Elements.svg" alt="Search Icon">
-                         <input type="text" id="search" name="search" placeholder="Search #tags or ::words::" required>
-                    </div>
+                    <form action="/" method="GET" style="display: contents;">
+                        <div class="searchBar" id="searchContainer">
+                            <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
+                            <input type="text" id="search" name="q" placeholder="Search #tags, @authors, or words" autocomplete="off">
+                            <div id="searchSuggestions" class="search-suggestions"></div>
+                        </div>
+                    </form>
                
                     {{#if activeUserDetails}}
                          <!-- No Log In button -->
@@ -178,3 +181,4 @@
 
 <!-- PAGE JAVASCRIPT -->
 <script src="/js/profilePage.js"></script>
+<script src="../js/searchSuggestions.js"></script>
