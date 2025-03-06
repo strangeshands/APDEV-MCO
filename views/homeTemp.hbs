@@ -11,9 +11,6 @@
           <!-- SCRIPTS -->
           <script src="/js/actionButton.js"></script>
           <script src="../js/togglePopup.js"></script>
-          <script>
-            var loggedInUserId = "{{loggedInUserId}}";
-          </script>
 
           <script>
             var timelinePosts = {{{ json post }}};
@@ -37,7 +34,6 @@
                         <div class="searchBar" id="searchContainer">
                             <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
                             <input type="text" id="search" name="q" placeholder="Search #tags, @authors, or words" autocomplete="off">
-                            <input type="hidden" name="userId" value="{{loggedInUserId}}">
                             <div id="searchSuggestions" class="search-suggestions"></div>
                         </div>
                     </form>
@@ -75,7 +71,7 @@
                         <div class="navBarContent">
                             <!-- NAV BAR OPTIONS -->
                             <div class="registeredOptions">
-                                <button class="navBarButtons" id="viewProfile" onclick="window.location.href='/profile/{{user.username}}?userId={{loggedInUserId}}';">
+                                <button class="navBarButtons" id="viewProfile" onclick="window.location.href='/profile/{{user.username}}';">
                                     <img src="../resources/Profile Icon.svg" alt="View Profile Icon">
                                     View Profile
                                 </button>
@@ -96,7 +92,7 @@
                         <!-- POSTS -->
                         <div class="userPostsAndCommentsHeader">
                             <p class="userNavTitle">Posts</p>
-                            <a class="userNavMore" href="/profile/posts?userId={{loggedInUserId}}">More ></a>
+                            <a class="userNavMore" href="/profile/{{user.username}}">More ></a>
                         </div>
 
                         <div class="userPostsAndCommentsContent" id="userPostsContent">
@@ -132,7 +128,7 @@
                     <div class="userPostsAndComments">
                         <div class="userPostsAndCommentsHeader">
                             <p class="userNavTitle">Comments</p>
-                            <a class="userNavMore" href="/profile/comments?userId={{loggedInUserId}}">More ></a>
+                            <a class="userNavMore" href="/profile/{{user.username}}/comments">More ></a>
                         </div>
 
                         <div class="userPostsAndCommentsContent" id="userCommentsContent">

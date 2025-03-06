@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         searchTimeout = setTimeout(async () => {
             try {
-                const response = await fetch(`/search/suggestions?q=${encodeURIComponent(query)}&userId=${loggedInUserId}`);
+                const response = await fetch(`/search/suggestions?q=${encodeURIComponent(query)}`);
                 const { tags, authors } = await response.json();
                 
                 suggestionsDiv.innerHTML = '';
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="suggestion-text">${tag}</span>
                     `;
                     div.onclick = () => {
-                        window.location.href = `/?q=${encodeURIComponent(tag)}&userId=${loggedInUserId}`;
+                        window.location.href = `/?q=${encodeURIComponent(tag)}`;
                     };
                     suggestionsDiv.appendChild(div);
                 });
@@ -56,8 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="suggestion-text">@${user.username.replace('@', '')}</span>
                     `;
                     div.onclick = () => {
-                        window.location.href = `/profile/${user.username}?userId=${loggedInUserId}`;
-                    };
+                        window.location.href = `/profile/${user.username}`;
+                    };                    
                     suggestionsDiv.appendChild(div);
                 });
 
