@@ -119,7 +119,9 @@ const post_details = async (req, res) => {
     }
 };
 
-// NOT DONE
+/**
+ *  Renders the page for creating a new post
+ */
 const post_create_get = (req, res) => {
     var activeUser = active.getActiveUser();
     activeUser = tempUserId;
@@ -137,7 +139,9 @@ const post_create_get = (req, res) => {
 
 };
 
-// NOT DONE
+/** 
+ *  Sends data from the new post to the db
+ */
 const post_create_post = async (req, res) => {
     const formData = req.body;
 
