@@ -8,8 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ----- NECESSARY FUNCTIONS ----- */
 /**
- *   [TO DO]: link tags --> edit onclick="" attribute
- * 
  *   Prints the profile tags
  * 
  *   @param {*} tags The tags to print

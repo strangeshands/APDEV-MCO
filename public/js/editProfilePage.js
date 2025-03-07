@@ -214,7 +214,7 @@ function saveUserDetails() {
         .then(response => response.json())
         .then(data => {
             // This should reload the page if the username is changed
-            if (data.cpUser) {
+            if (data.newUserChanged) {
                 activeUserDetails.username = data.newUser;
                 window.location.href = `/edit-profile/${activeUserDetails.username}`;
             }

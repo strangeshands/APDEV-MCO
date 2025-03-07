@@ -400,6 +400,7 @@ const updateUserDetails = async(req,res) => {
     var cpUser = true, 
         cpDN = true, 
         cpBio = true;
+    var newUserChanged = false;
 
     // error messages to return
     var errorMessageUser = '';
@@ -460,13 +461,8 @@ const updateUserDetails = async(req,res) => {
                 { _id: activeUserDetails._id }, 
                 { $set: { username: newUser } }
             );
-    
-            /**
-             *  TO DO:
-             *      > update 'user' depending on the user logged in
-             */
-            user = newUser;
-    
+
+            newUserChanged = true;
             errorMessageUser = newUser + ' is your new username!';
             activeUserDetails.username = newUser;
         }
@@ -496,7 +492,7 @@ const updateUserDetails = async(req,res) => {
         errorMessageButton = "Cannot procceed. Please check your input."
 
     return res.json({ 
-        cpUser,
+        newUserChanged,
         newUser,
 
         errorMessageUser,
