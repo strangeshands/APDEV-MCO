@@ -17,7 +17,7 @@ const loadUserProfile = async(req,res) => {
      *      (1) activeUser can only access edit profile page
      *      (2) if activeUser is null, "log in" button will show on the header
      */
-    var activeUser, profileSelected;
+    var activeUser;
 
     // Details of active user and profile selected
     var activeUserDetails = null;
@@ -57,7 +57,9 @@ const loadUserProfile = async(req,res) => {
             return res.render('profileNotFound');
 
         // own page meaning the active user is also the profile selected
-        ownPage = profileDetails._id.toString() === activeUserDetails._id.toString();
+        if (profileDetails._id === activeUserDetails._id ||
+            profileDetails._id.toString() === activeUserDetails._id.toString())
+            ownPage = true;
         
         // query active user bookmarks
         const activeBookmarksTemp = await users

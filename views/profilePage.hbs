@@ -29,8 +29,7 @@
                var userLikes  = {{{ json profileLikes }}};
                var userDislikes  = {{{ json profileDislikes }}};
 
-               console.log(profileDetails);
-               console.log(userPosts);
+               console.log("PROFILE DETAILS: ", profileDetails);
           </script>
      </head>
 
@@ -44,7 +43,7 @@
                <div id="headercol2">
                     <form action="/" method="GET" style="display: contents;">
                         <div class="searchBar" id="searchContainer">
-                            <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
+                            <img src="/resources/Trailing-Elements.svg" alt="Search Icon">
                             <input type="text" id="search" name="q" placeholder="Search #tags, @authors, or words" autocomplete="off">
                             <div id="searchSuggestions" class="search-suggestions"></div>
                         </div>
@@ -144,12 +143,12 @@
                     <div id="col2">
                          <!-- TAB SELECTION ROW -->
                          <div id="tabrow"> 
-                              <button class="tab" data-id="posts" onclick="window.location.href='/profile/{{profileDetails.username}}/posts?userId={{activeUserDetails._id}}';">Posts</button>
-                              <button class="tab" data-id="comments" onclick="window.location.href='/profile/{{profileDetails.username}}/comments?userId={{activeUserDetails._id}}';">Comments</button>
+                              <button class="tab" data-id="posts" onclick="window.location.href='/profile/{{profileDetails.username}}/posts';">Posts</button>
+                              <button class="tab" data-id="comments" onclick="window.location.href='/profile/{{profileDetails.username}}/comments';">Comments</button>
                               {{#if ownPage }}
-                                   <button class="tab" data-id="bookmarks" onclick="window.location.href='/profile/{{profileDetails.username}}/bookmarks?userId={{activeUserDetails._id}}';">Bookmarks</button>
-                                   <button class="tab" data-id="likes" onclick="window.location.href='/profile/{{profileDetails.username}}/likes?userId={{activeUserDetails._id}}';">Likes</button>
-                                   <button class="tab" data-id="dislikes" onclick="window.location.href='/profile/{{profileDetails.username}}/dislikes?userId={{activeUserDetails._id}}';">Dislikes</button>
+                                   <button class="tab" data-id="bookmarks" onclick="window.location.href='/profile/{{profileDetails.username}}/bookmarks';">Bookmarks</button>
+                                   <button class="tab" data-id="likes" onclick="window.location.href='/profile/{{profileDetails.username}}/likes';">Likes</button>
+                                   <button class="tab" data-id="dislikes" onclick="window.location.href='/profile/{{profileDetails.username}}/dislikes';">Dislikes</button>
                               {{/if}}
                          </div>
 
@@ -181,4 +180,4 @@
 
 <!-- PAGE JAVASCRIPT -->
 <script src="/js/profilePage.js"></script>
-<script src="../js/searchSuggestions.js"></script>
+<script src="/js/searchSuggestions.js"></script>
