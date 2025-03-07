@@ -1,30 +1,36 @@
 /* ---- CODE FUNCTION ---- */
 function loadPosts(type) {
      var tab;
+     var noMessage = '';
      var postsArray = userPosts;
      switch (type) {
           case "comments":
                tab = "userPostsContainer";
+               noMessage = 'Boohoo! No comments yet...';
                postsArray = userComments;
           break;
 
           case "bookmarks":
                tab = "userBookmarksContainer"
+               noMessage = 'Boohoo! No bookmarks yet...';
                postsArray = userBookmarks;
           break;
 
           case "likes":
                tab = "userLikesContainer";
+               noMessage = 'Boohoo! No likes yet...';
                postsArray = userLikes;
           break;
 
           case "dislikes":
                tab = "userDislikesContainer";
+               noMessage = 'Boohoo! No dislikes yet...';
                postsArray = userDislikes;
           break;
 
           default: 
                tab = "userPostsContainer";
+               noMessage = 'Boohoo! No posts yet...';
                postsArray = userPosts;
      };
 
@@ -32,9 +38,9 @@ function loadPosts(type) {
 
      if (!postsArray || postsArray.length === 0) {
           container.innerHTML = `
-               <p class="no-post-msg">Boohoo! No posts yet...</p>
-               <a id="create-first-link" href="../html/homePage.html">
-                    <p id="create-first" class="no-post-msg">Create your first post</p>
+               <p class="no-post-msg">${noMessage}</p>
+               <a id="create-first-link" href="/">
+                    <p id="create-first" class="no-post-msg">Go back to home page</p>
                </a>
           `;
           return;
