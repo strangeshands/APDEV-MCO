@@ -27,7 +27,7 @@
             <div id="headercol2">
                 <form action="/" method="GET" style="display: contents;">
                     <div class="searchBar" id="searchContainer">
-                        <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
+                        <img src="/resources/Trailing-Elements.svg" alt="Search Icon">
                         <input type="text" id="search" name="q" placeholder="Search #tags, @authors, or words" autocomplete="off">
                         <div id="searchSuggestions" class="search-suggestions"></div>
                     </div>
@@ -42,7 +42,7 @@
                 <span class="back">Back</span>
             </div>
 
-            <form id="postForm" 
+            <form id="postForm"
                   method="POST"
                   enctype="multipart/form-data">
                 <div class="post">
@@ -121,7 +121,7 @@
                         </div>
                         <!-- POST BUTTON -->
                         {{#if post}}
-                            <button type="submit" class="postButton" id="postButton" onclick="window.location.href='../posts/edit-save/{{post._id}}'">Save Changes</button>
+                            <button type="submit" class="postButton" id="postButton">Save Changes</button>
                         {{else}}
                             <button type="submit" class="postButton" id="postButton">Post</button>
                         {{/if}}
@@ -129,10 +129,9 @@
                 </div>
             </form>
         </main>
-
-        <!-- PAGE JAVASCRIPT -->
-        <script src="/js/newPostPage.js"></script>   
     </body>
 </html>
 
-<script src="../js/searchSuggestions.js"></script>
+<!-- PAGE JAVASCRIPT -->
+<script src="/js/newPostPage.js"></script>   
+<script src="/js/searchSuggestions.js"></script>

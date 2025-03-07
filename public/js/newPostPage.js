@@ -1,3 +1,31 @@
+/* ---- SET VARIABLES ---- */
+window.onload = function () {
+    if (mainPost) {
+        tags = mainPost.tags; // Load existing tags into the tags array
+        if (tags.length > 0)
+            tagsContainer.style.display = "block";
+        renderTags();      // Render the tags as chips
+
+        document.getElementById("postTitleInput").value = mainPost.title;
+
+        document.getElementById("postTextInput").value = mainPost.content;
+        const currentLength =  mainPost.content.length;
+        charLim.textContent = `${currentLength}/300`;
+
+        images = mainPost.images;
+        uploadCounter = images.length;
+        if (images.length > 0)
+            document.getElementById("postContentContainer").style.display = "flex";
+        handleImageUpload();
+        renderImages();
+    }
+
+    const postForm = document.getElementById("postForm");
+    postForm.setAttribute("action", directory);
+    console.log("Form action set to:", postForm.action); // Debugging output
+};
+
+
 /* ---- REAL-TIME CHAR LIMIT ---- */
 const postTextInput = document.getElementById("postTextInput");
 const charLim = document.querySelector(".charLim");
@@ -109,28 +137,8 @@ customFileButton.addEventListener('click', function() {
 });
 fileUploadInput.addEventListener("change", handleImageUpload);
 
-
-/* ---- IMAGE UPLOAD ---- */
-/*
-
-const imageUploadInput = document.getElementById("imageUploadInput");
-const postContentContainer = document.getElementById("postContentContainer");
-const addImageBtn = document.getElementById("addImageButton");
-
-
-// Trigger the hidden file input when "Add Image" is clicked
-addImageBtn.addEventListener("click", () => {
-    imageUploadInput.click();
-});
-
-// Handle file selection
-imageUploadInput.addEventListener("change", handleImageUpload);
-*/
-
 let postButton = document.getElementById("postButton");
 postButton.addEventListener('click', function(e) {
-    e.preventDefault();
-
     tagsInput.style.textTransform = 'none';
     tagsInput.style.color = 'transparent';
 
@@ -273,33 +281,6 @@ function renderImages() {
         postContentContainer.appendChild(imgWrapper);
     });
 }
-
-/* ---- IF EDIT POST ---- */
-window.onload = function () {
-    if (mainPost) {
-        tags = mainPost.tags; // Load existing tags into the tags array
-        if (tags.length > 0)
-            tagsContainer.style.display = "block";
-        renderTags();      // Render the tags as chips
-
-        document.getElementById("postTitleInput").value = mainPost.title;
-
-        document.getElementById("postTextInput").value = mainPost.content;
-        const currentLength =  mainPost.content.length;
-        charLim.textContent = `${currentLength}/300`;
-
-        images = mainPost.images;
-        uploadCounter = images.length;
-        if (images.length > 0)
-            document.getElementById("postContentContainer").style.display = "flex";
-        handleImageUpload();
-        renderImages();
-    }
-
-    const postForm = document.getElementById("postForm");
-    postForm.setAttribute("action", directory);
-    console.log("Form action set to:", postForm.action); // Debugging output
-};
 
 /* ---- OPEN MODAL ---- */
 function openModal(image) {

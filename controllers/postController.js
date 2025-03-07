@@ -124,28 +124,24 @@ const post_details = async (req, res) => {
  */
 const post_create_get = (req, res) => {
     var activeUser = active.getActiveUser();
-    activeUser = tempUserId;
-
     User.findById(activeUser)
         .exec()
         .then((result) => {
             activeUserDetails = result;
-
             res.render('newPostPage', { post: null, activeUserDetails, title: 'New Post' });
         })
         .catch((err) => {
             res.status(404).render('errorPage');
         });
-
 };
 
 /** 
  *  Sends data from the new post to the db
  */
 const post_create_post = async (req, res) => {
+    console.log("iwenthere");
     const formData = req.body;
-
-    const postAuthor = await User.findById(tempUserId);
+    const postAuthor = await User.findById(active.getActiveUser());
 
     if (!postAuthor) {
         return res.status(404).send("User not found");
@@ -199,16 +195,26 @@ const post_create_post = async (req, res) => {
         images: imagePaths,
         tags: tags
     };
+
+    console.log(postData);
     
     try {
         const post = new Post(postData);
         await post.save()
                     .then((result) => {
-                        res.redirect(`/?userId=${tempUserId}`); // to be changed
+                        res.redirect(`/`); // to be changed
                     })
                     .catch((err) => {
                         console.log(err);
                     });
+
+        // update the tags of user
+        const userPosts = await Post.find({ author: postAuthor });
+        const allUserTags = userPosts.flatMap(post => post.tags);
+        await User.updateOne(
+            { _id: postAuthor },
+            { $set: { tags: allUserTags } }
+        );
     } catch (err) {
         console.log(err);
     }
@@ -282,6 +288,7 @@ const editPostSave = async (req, res) => {
     images.forEach(img => {
         var res = existingImages.some(exist => {
             exist = exist.substring(exist.lastIndexOf('/') + 1);
+            console.log(exist);
 
             // get the uploaded images
             if (exist === img.name) 
@@ -343,23 +350,31 @@ const editPostSave = async (req, res) => {
             });
         });
     }
-        
+    
     // Combine remaining and newly uploaded images
     const updatedImages = [...finalImages, ...newimagePaths].map(image => 
-        image.startsWith('/uploads') ? image : path.join('/uploads', image)
+        image.startsWith('/uploads') ? image : `/uploads/${image}`
     );
-    console.log("Updated images:", updatedImages);
+    //console.log("Updated images:", updatedImages);
 
     const updatedPostData = { 
         ...formData, 
         images: updatedImages,
         tags 
     };
-
-    console.log("Updated Post Data:", updatedPostData);
+    //console.log("Updated Post Data:", updatedPostData);
 
     try {
         await Post.updateOne({ _id: postId }, { $set: updatedPostData });
+
+        // update the tags of user
+        const userPosts = await Post.find({ author: existingPost.author });
+        const allUserTags = userPosts.flatMap(post => post.tags);
+        await User.updateOne(
+            { _id: existingPost.author },
+            { $set: { tags: allUserTags } }
+        );
+
         res.redirect(`/posts/${postId}`);
     } catch (err) {
         console.error("Post update error:", err);
@@ -454,6 +469,13 @@ const deletePost = async(req,res) => {
                 dislikes: postId
             }
         }
+    );
+    // update the tags of user
+    const userPosts = await Post.find({ author: activeUser });
+    const allUserTags = userPosts.flatMap(post => post.tags);
+    await User.updateOne(
+        { _id: activeUser },
+        { $set: { tags: allUserTags } }
     );
 
     var origin = req.query.from;

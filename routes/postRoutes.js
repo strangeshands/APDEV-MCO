@@ -5,9 +5,8 @@ const router = express.Router();
 const postController = require('../controllers/postController');
 
 // POST
-router.post('/', postController.post_create_post);
-
 router.get('/create', postController.post_create_get);
+router.post('/', postController.post_create_post);
 
 // Getting an entry by id
 router.get('/:id', postController.post_details); 
