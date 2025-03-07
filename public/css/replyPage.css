@@ -1,0 +1,500 @@
+button {
+    border: none; 
+    cursor: pointer;
+
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* ---------- BACK BUTTON ---------- */
+main {    
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.goBackLink {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+.goBackLink .arrow {
+    font-size: 40px; 
+    line-height: 0; 
+    display: flex;
+    align-items: center;
+    margin-bottom: 2px; 
+}
+
+.goBackLink .back {
+    font-size: 16px;
+    font-weight: bold;
+}
+/* ---------- BACK BUTTON ---------- */
+
+/* ---------- MAIN ---------- */
+.postSpace {
+    background-color: #1A1A1A;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.replySpace {
+    display: flex;
+    justify-content: flex-start;
+
+    margin-left: 20px;
+}
+
+.replyLine {
+    background-color: #49454F;
+
+    margin: 0px 10px;
+
+    width: 1px;
+    height: 175px;
+    box-sizing: border-box;
+}
+
+.replyThread {
+    position: relative;
+    padding-left: 32px;
+    margin-top: 30px;
+
+    overflow: visible;
+
+    width: 100%;
+}
+
+.replyPost {
+    height: auto;
+}
+
+.space {
+    margin-top: 50px;
+}
+
+#post {
+    background-color: #1A1A1A;
+    border-radius: 16px;
+    width: 100%;
+}
+
+#replyToContainer {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+}
+
+#reply-to-msg {
+    margin-bottom: 25px;
+    padding: 10px;
+    background-color: #7FB8C8;
+    color: #1D1E1F;
+    border-radius: 5px;
+
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.postHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.userInfo {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.avatar {
+     background-color: #D9D9D9;
+     border-radius: 50%;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     width: 40px;
+     height: 40px;
+     overflow: hidden;
+}
+
+#postAvatar {
+     background-color: #D9D9D9;
+     border-radius: 50%;
+
+     display: flex;
+     justify-content: center;
+     align-items: center;
+
+     width: 40px;
+     height: 40px;
+     overflow: hidden;
+}
+
+#postProfilePic {
+     width: 100%;
+     height: 100%;
+}
+
+#currentUserProfilePic {
+    width: 100%;
+    height: 100%;
+}
+
+.userDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.displayName {
+    font-weight: bold;
+    line-height: 25px;
+}
+
+.REPusername {
+    font-weight: bold;
+    line-height: 25px;
+}
+
+.time {
+    font-size: 14px;
+    color: #E4F3F6;
+    opacity: 80%;
+}
+
+.currentUsername {
+    font-size: 14px;
+    color: #E4F3F6;
+    opacity: 80%;
+}
+
+.optionsButton {
+    background-color: #030909;
+    color: #E4F3F6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0px;
+    width: 5px;
+    height: 20px;
+}
+
+#postOptions {
+    background-color: #1A1A1A;
+}
+
+#tagContainer {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+}
+
+#tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+    opacity: 50%;
+    padding: 10px 0 20px;
+}
+
+#tags a {
+    color: white;
+    text-decoration: none;
+}
+
+#postTitleContainer {
+    width: auto;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+}
+
+#postTitle {
+    font-size: 24px;
+    font-weight: Bold;
+    color: #E4F3F6;
+    padding-bottom: 25px;
+    width: 100%;
+}
+
+#postText {
+    margin-bottom: 15px;
+}
+
+.postActions, .commentActions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.separator {
+    border-left: 2px solid white;
+    height: 35px;
+}
+
+.actionButton {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.actionButton:hover {
+    transform: scale(1.05);
+}
+
+.actionButton:active {
+    transform: scale(0.95); 
+}
+
+.actionButton .counter {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 0;
+}
+
+#postTextInput {
+    width: 100%;
+    height: 120px;
+    resize: none;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    font-family: "Inter";
+    box-sizing: border-box;
+    outline: none;
+}
+
+.replyPrompt {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.prompt {
+    color: #9FA1A1;
+}
+
+.repliedUser {
+    color: #98D5DC;
+}
+
+.charLim{
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+    font-size: 12px;
+
+    margin-bottom: 10px;
+}
+
+#postContentContainer {
+    margin: 16px 0;
+}
+
+#postContentContainer.single-image img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+#postContentContainer.multi-images {
+    display: grid;
+    gap: 8px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+#postContentContainer.multi-images img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.imageWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.remove-image-icon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.remove-image-icon:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
+.horizontalBar {
+    height: 1px;
+    background-color: #49454F;
+    margin: 16px 0;
+}
+
+.postAction{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.imageActionButton {
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.imageActionButton:hover {
+    opacity: 1;
+}
+
+.commentButton {
+    margin-left: auto;
+    background-color: #98D5DC;
+    color: #030909;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 100px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap; 
+    flex-shrink: 0; 
+}
+
+
+#userphotocontainer {
+    width: 100%;
+    height: 200px;
+
+    max-height: 200px;
+    max-width: inherit;
+
+    display: flex;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+#replyphotocontainer {
+    height: auto;
+    width: 100%;
+
+    max-height: 200px;
+    max-width: inherit;
+
+    display: none;
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+.clickable-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border-radius: 15px;
+}
+
+.clickable-image:hover {
+    transform: scale(1.008);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close:hover {
+    transform: scale(1.05);
+    color: #7FB8C8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal {
+    display: none;
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8); 
+}
+
+#userphotocontainer-modal {
+    position: absolute; 
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    width: 90%;
+    height: 90%; 
+
+    max-width: 90vh;
+    max-height: 90vh; 
+
+    object-fit: contain;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+/* ---------- MAIN ---------- */

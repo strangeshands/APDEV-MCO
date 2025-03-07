@@ -496,8 +496,6 @@ const formatPostDates = (posts) => {
     });
 };
 
-// Add these functions to your existing postController.js file
-
 /**
  * Renders the reply page for creating a reply to a post
  */
@@ -617,6 +615,7 @@ const reply_create_post = async (req, res) => {
         
         // Create the reply post data
         const replyPostData = {
+            title: "",
             content: formData.content,
             author: postAuthor._id,
             parentPost: originalPost._id,

@@ -132,7 +132,7 @@ function loadTimelinePosts() {
                     <span class="counter">${post.dislikeCount}</span>
                 </button>
 
-                <button class="postoptionbutton actionButton" onclick="window.location.href='../html/replyPage.html'">
+                <button class="postoptionbutton actionButton" onclick="window.location.href='/posts/reply/${post._id}'">
                         <img src="/resources/Comments.svg"/>
                 </button>
 

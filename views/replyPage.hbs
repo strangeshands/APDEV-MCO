@@ -48,7 +48,7 @@
                 <div id="post">
                     <div id="replyToContainer">
                         {{#if post.parentPost}}
-                        <div class="replyingTo">Replying to: @{{post.parentPost.author.username}}</div>
+                        <div class="replyingTo">Replying to: {{post.parentPost.author.username}}</div>
                         {{/if}}
                     </div>
                     <div class="postHeader">
@@ -123,7 +123,7 @@
                                 </div>
                                 <div class="replyPrompt">
                                     <div class="prompt">replying to</div>
-                                    <div class="repliedUser" id="repliedUser">@{{post.author.username}}</div>
+                                    <div class="repliedUser" id="repliedUser">{{post.author.username}}</div>
                                 </div>
                                 <div class="postText">
                                     <textarea
