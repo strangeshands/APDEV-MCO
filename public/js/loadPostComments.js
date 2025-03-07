@@ -67,11 +67,10 @@ function loadPost() {
                         <button class="optionsButton option-exit" onclick="togglePopup('none', '00', '${container.id}')">
                             <img src="/resources/Options Button.svg"/>
                         </button>
-                        <button class="editButton" onclick="window.location.href='/posts/${mainPost._id}';">View Post</button>
                         <button class="editButton" onclick="copyLink('${mainPost._id}');">Copy Link</button>
 
                         ${own ? `
-                            <button class="editButton" onclick="window.location.href = '../html/newPostPage.html';">Edit Post</button>
+                            <button class="editButton" onclick="window.location.href = '/posts/edit/${mainPost._id}';">Edit Post</button>
                             <button class="deleteButton" onclick="window.location.href='/posts/delete/${mainPost._id}?userId=${activeId}&from=profile'">Delete Post</button>
                         ` : ""}
                 </div>
@@ -208,8 +207,8 @@ function loadComments() {
                             <button class="editButton" onclick="copyLink('${post._id}');">Copy Link</button>
 
                             ${own ? `
-                                <button class="editButton" onclick="window.location.href = '../html/newPostPage.html';">Edit Post</button>
-                                <button class="deleteButton" onclick="window.location.href='/posts/delete/${post._id}?userId=${activeId}&from=profile'">Delete Post</button>
+                                <button class="editButton" onclick="window.location.href = '/posts/edit/${post._id}';">Edit Post</button>
+                                <button class="deleteButton" onclick="window.location.href='/posts/delete/${post._id}?userId=${activeId}'">Delete Post</button>
                             ` : ""}
                     </div>
                 </div>
