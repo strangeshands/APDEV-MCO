@@ -58,8 +58,8 @@ function loadTimelinePosts() {
         postContent += `
             <!-- POST USER -->
             <div class="postUser">
-                <div class="profilePic" onclick="window.location.href='/profile/${post.author.username}?userId=${activeId}'" style="cursor: pointer;">
-                    <img src="${post.author.profilepic}" alt="userProfilePicture" class="userProfilePic">
+                <div class="pfpPost" onclick="window.location.href='/profile/${post.author.username}?userId=${activeId}'" style="cursor: pointer;">
+                    <img src="${post.author.profilepic}" alt="userProfilePicture">
                 </div>
 
                 <div class="usernameAndTime" onclick="window.location.href='/profile/${post.author.username}?userId=${activeId}'" style="cursor: pointer;">
