@@ -39,9 +39,12 @@
                     </form>
                
                     <!-- IF USER IS NOT LOGGED IN -->
-                    <div class="logIn">
-                         <button id="logInButton" onclick="window.location.href='/login'">Log In</button>
-                    </div>
+                    {{#if activeUserDetails}}
+                    {{else}}
+                        <div class="logIn">
+                            <button id="logInButton" onclick="window.location.href='/login'">Log In</button>
+                        </div>
+                    {{/if}}
                </div>
           </header>
 
