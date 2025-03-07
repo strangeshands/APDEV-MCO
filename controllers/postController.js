@@ -496,12 +496,158 @@ const formatPostDates = (posts) => {
     });
 };
 
+// Add these functions to your existing postController.js file
+
+/**
+ * Renders the reply page for creating a reply to a post
+ */
+const reply_create_get = async (req, res) => {
+    const postId = req.params.id;
+    
+    // TEMPORARY; sub for session
+    const activeUser = active.getActiveUser();
+    const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
+    
+    try {
+        // Find the post being replied to
+        var post = await Post.findById(postId)
+            .populate('author')
+            .populate({
+                path: 'parentPost',
+                populate: { path: 'author' }
+            });
+        
+        // Format the post date
+        post = formatPostDates([post])[0];
+        
+        // Get active user details
+        var activeUserDetails = await User.findById(activeUser || tempUserId);
+        
+        if (!post) {
+            return res.render('errorPageTemplate', {
+                header: "Post not found.",
+                emotion: null,
+                description: "The post may be deleted or the author cannot be found."
+            });
+        }
+        
+        res.render('replyPage', {
+            title: 'Reply',
+            post,
+            activeUserDetails
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).render('errorPageTemplate', {
+            header: "Server Error",
+            emotion: "sad",
+            description: "An error occurred while loading the reply page. Please try again later."
+        });
+    }
+};
+
+/**
+ * Handles the submission of a reply post
+ */
+const reply_create_post = async (req, res) => {
+    const postId = req.params.id;
+    const formData = req.body;
+    
+    // TEMPORARY; sub for session
+    const activeUser = active.getActiveUser();
+    const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
+    
+    try {
+        // Get the post being replied to
+        const originalPost = await Post.findById(postId);
+        
+        if (!originalPost) {
+            return res.status(404).render('errorPageTemplate', {
+                header: "Post not found.",
+                emotion: null,
+                description: "The post you're replying to may have been deleted."
+            });
+        }
+        
+        // Get the active user
+        const postAuthor = await User.findById(activeUser || tempUserId);
+        
+        if (!postAuthor) {
+            return res.status(404).render('errorPageTemplate', {
+                header: "User not found.",
+                emotion: null,
+                description: "You need to be logged in to reply to a post."
+            });
+        }
+        
+        // Handle image uploads if any
+        let imagePaths = [];
+        const images = Array.isArray(req.files?.images) 
+                        ? req.files.images 
+                        : req.files?.images 
+                        ? [req.files.images] 
+                        : [];
+
+        if (images && images.length > 0) {
+            const imageUploadPromises = images.map((image) => {
+                return new Promise((resolve, reject) => { 
+                    const fileName = `${Date.now()}-${image.name}`;
+                    const uploadPath = path.join(__dirname, '..', 'public', 'uploads', fileName);
+                    const filePathForDB = `/uploads/${fileName}`;
+                
+                    image.mv(uploadPath, (err) => {
+                        if (err) {
+                            console.error("File upload error:", err);
+                            reject("Failed to upload image.");
+                        } else {
+                            imagePaths.push(filePathForDB);
+                            console.log(`message: "Images uploaded successfully!", filePath: ${filePathForDB}`);
+                            resolve();
+                        }
+                    });
+                });
+            });
+        
+            try {
+                await Promise.all(imageUploadPromises);
+            } catch (err) {
+                console.log("Error uploading images: " + err.message);
+            }
+        }
+        
+        // Create the reply post data
+        const replyPostData = {
+            content: formData.content,
+            author: postAuthor._id,
+            parentPost: originalPost._id,
+            images: imagePaths
+        };
+        
+        // Save the reply post
+        const replyPost = new Post(replyPostData);
+        await replyPost.save();
+        
+        // Redirect to the original post page to see the reply
+        res.redirect(`/posts/${postId}`);
+        
+    } catch (error) {
+        console.error(error);
+        res.status(500).render('errorPageTemplate', {
+            header: "Server Error",
+            emotion: "sad",
+            description: "An error occurred while posting your reply. Please try again later."
+        });
+    }
+};
+
 module.exports = {
     post_details,
     post_create_get,
     post_create_post,
-    post_delete, 
+    post_delete,
     editPostLoad,
     editPostSave,
-    deletePost
+    deletePost,
+    reply_create_get,
+    reply_create_post
 };
