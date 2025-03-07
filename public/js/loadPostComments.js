@@ -79,7 +79,7 @@ function loadPost() {
 
         <!-- POST TAGS HERE -->
         <!-- TO CHANGE: href link -->
-        <div class="tagContainer" id="posttags">
+        <div class="tagContainer" id="posttags" style="font-size: 15px; margin-bottom: -5px;">
             ${mainPost.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
         </div>
 
