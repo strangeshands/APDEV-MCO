@@ -60,7 +60,7 @@
                             </div>
                             <div class="username-and-time">
                                 <div class="displayName" id="postDisplayName">{{post.author.displayname}}</div>
-                                <div class="time" id="postTime">{{post.postDate}}</div>
+                                <div class="time" id="postTime">{{post.author.username}} | {{post.postDate}}</div>
                             </div>
                         </div>
                     </div>
@@ -86,24 +86,6 @@
                         {{/each}}
                     </div>
                     {{/if}}
-    
-                     <div class="postActions">
-                            <button id="heart" class="actionButton" data-post-id="{{post._id}}">
-                                <img src="/resources/Heart.svg"/>
-                                <span class="counter" id="postLikeCounter">{{post.likeCount}}</span>
-                        </button>
-                        <img src="/resources/Line.svg" alt="Line">
-                        <button id="heartCrack" class="actionButton" data-post-id="{{post._id}}">
-                                <img src="/resources/HeartCrack.svg"/>
-                                <span class="counter" id="postDislikeCounter">{{post.dislikeCount}}</span>
-                        </button>
-                        <button class="actionButton" onclick="window.location.href='/posts/reply/{{post._id}}'">
-                                <img src="/resources/Comments.svg"/>
-                        </button>
-                        <button id="bookmark" class="actionButton" data-post-id="{{post._id}}">
-                                <img src="/resources/bookmark.svg"/>
-                        </button>
-                     </div>
                 </div>
 
                 <!-- INPUTS FOR REPLY -->
@@ -118,8 +100,8 @@
                                             <img src="{{activeUserDetails.profilepic}}" alt="userProfilePicture" class="userProfilePic">
                                         </div>
                                         <div class="username-and-time">
-                                            <div class="REPusername" id="REPusername">{{activeUserDetails.username}}</div>
-                                            <div class="currentUsername" id="currentUsername">{{activeUserDetails.displayname}}</div>
+                                            <div class="REPusername" id="REPusername">{{activeUserDetails.displayname}}</div>
+                                            <div class="currentUsername" id="currentUsername">{{activeUserDetails.username}}</div>
                                         </div>
                                     </div>
                                 </div>
