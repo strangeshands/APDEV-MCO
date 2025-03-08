@@ -12,13 +12,10 @@ router.post('/', postController.post_create_post);
 router.get('/:id', postController.post_details); 
 
 // DELETE 
-router.delete('/:id', postController.post_delete);
-
-// draft
 router.use("/delete/:postId", postController.deletePost);
 
+// EDIT POST
 router.get("/edit/:postId", postController.editPostLoad);
-
 router.post("/edit-save/:postId", postController.editPostSave);
 
 // Reply routes

@@ -220,24 +220,10 @@ const post_create_post = async (req, res) => {
     }
 };
 
-// NOT DONE
-const post_delete = (req, res) => {
-    const id = req.params.id;
-
-    Blog.findByIdAndDelete(id)
-        .then((result) => {
-            res.json({ redirect: '/blogs' });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-}
-
 const editPostLoad = async(req,res) => {
     const postId = req.params.postId;
     // FOR MCO P3: replace with req.session.id;
     var activeUser = active.getActiveUser();
-    activeUser = tempUserId;
 
     // there should be an active user to delete a post
     if (!activeUser) 
@@ -383,8 +369,6 @@ const editPostSave = async (req, res) => {
 };
 
 /**
- *  > Draft of delete post
- * 
  *  FOR MCO P2:
  *      > link is /delete-post/:postId?userId=<active user id>
  *      > additionally, if from profile page, additional query is added
@@ -399,90 +383,95 @@ const editPostSave = async (req, res) => {
  *      > a user can only delete a post of their own
  */
 const deletePost = async(req,res) => {
-    const postId = req.params.postId;
-    const activeUser = req.query.userId;
+    try {
+        const postId = req.params.postId;
+        // FOR MCO P3: change this to req.session.id
+        const activeUser = active.getActiveUser();
 
-    // there should be an active user to delete a post
-    if (!activeUser) 
-        return res.render('errorPageTemplate', {
-                        header: "You are not logged in.",
-                        emotion: "Oops. Cannot perform action.",
-                        description: "Please log in to delete a post."
-                        });
+        // there should be an active user to delete a post
+        if (!activeUser) 
+            return res.render('errorPageTemplate', {
+                            header: "You are not logged in.",
+                            emotion: "Oops. Cannot perform action.",
+                            description: "Please log in to delete a post."
+                            });
 
-    var activeUserDetails = await User.findById(activeUser);
-    if (!activeUserDetails)
-        return res.render('errorPageTemplate', {
-                        header: "Profile not found.",
-                        emotion: null,
-                        description: "This account may be deleted."
-                        });
+        var activeUserDetails = await User.findById(activeUser);
+        if (!activeUserDetails)
+            return res.render('errorPageTemplate', {
+                            header: "Profile not found.",
+                            emotion: null,
+                            description: "This account may be deleted."
+                            });
 
-    var post = await Post.findOne({
-        _id: postId,
-        author: activeUser
-    })
+        var post = await Post.findOne({
+            _id: postId,
+            author: activeUser
+        })
 
-    if (!post)
-        return res.render('errorPageTemplate', {
-                        header: "Post not found.",
-                        emotion: null,
-                        description: "The post may be deleted or the author cannot be found."
-                        });
+        if (!post)
+            return res.render('errorPageTemplate', {
+                            header: "Post not found.",
+                            emotion: null,
+                            description: "The post may be deleted or the author cannot be found."
+                            });
 
-    /* ----- IMAGE DELETION IN UPLOADS FOLDER ----- */
+        /* ----- IMAGE DELETION IN UPLOADS FOLDER ----- */
 
-    function deleteFile(filePath) {
-        const fullPath = path.join(__dirname, '..', 'public', filePath);
+        function deleteFile(filePath) {
+            const fullPath = path.join(__dirname, '..', 'public', filePath);
 
-        if (fs.existsSync(fullPath)) {          // Checks if the file exists
-            fs.unlink(fullPath, (err) => {      // Deletes the file
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log('file deleted');
-                }
-            });
-        } else {
-            console.log(`File ${filePath} does not exist.`);
-        }
-    }
-
-    await Post.findOne({ _id: postId })
-                .then((result) => {
-                    const images = result.images;
-
-                    images.forEach((image) => {
-                        deleteFile(image);
-                    });
+            if (fs.existsSync(fullPath)) {          // Checks if the file exists
+                fs.unlink(fullPath, (err) => {      // Deletes the file
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('file deleted');
+                    }
                 });
-
-    // delete the post on the post record
-    await Post.deleteOne({ _id: postId });
-    // delete the posts on the likes table
-    await Like.deleteMany({ likedPost: postId });
-    // delete the posts on the users' bookmarks or dislikes
-    await User.updateMany({},
-        {
-            $pull: {
-                bookmarks: postId,
-                dislikes: postId
+            } else {
+                console.log(`File ${filePath} does not exist.`);
             }
         }
-    );
-    // update the tags of user
-    const userPosts = await Post.find({ author: activeUser });
-    const allUserTags = userPosts.flatMap(post => post.tags);
-    await User.updateOne(
-        { _id: activeUser },
-        { $set: { tags: allUserTags } }
-    );
 
-    var origin = req.query.from;
-    if (origin == "profile")
-        res.redirect(`/profile/${activeUserDetails.username}?userId=${activeUser}`);
-    else
-        res.redirect(`/?userId=${activeUser}`);
+        await Post.findOne({ _id: postId })
+                    .then((result) => {
+                        const images = result.images;
+
+                        images.forEach((image) => {
+                            deleteFile(image);
+                        });
+                    });
+
+        // delete the post on the post record
+        await Post.deleteOne({ _id: postId });
+        // delete the posts on the likes table
+        await Like.deleteMany({ likedPost: postId });
+        // delete the posts on the users' bookmarks or dislikes
+        await User.updateMany({},
+            {
+                $pull: {
+                    bookmarks: postId,
+                    dislikes: postId
+                }
+            }
+        );
+        // update the tags of user
+        const userPosts = await Post.find({ author: activeUser });
+        const allUserTags = userPosts.flatMap(post => post.tags);
+        await User.updateOne(
+            { _id: activeUser },
+            { $set: { tags: allUserTags } }
+        );
+
+        var origin = req.query.from;
+        if (origin == "profile")
+            res.redirect(`/profile/${activeUserDetails.username}`);
+        else
+            res.redirect(`/`);
+    } catch(err) {
+        res.status(500).send("Internal Server Error");
+    }
 }
 
 /**
@@ -667,7 +656,6 @@ module.exports = {
     post_details,
     post_create_get,
     post_create_post,
-    post_delete,
     editPostLoad,
     editPostSave,
     deletePost,
