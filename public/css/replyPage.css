@@ -1,18 +1,24 @@
+/* ----- Override General Style ----- */
+.postActions {
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
 button {
     border: none; 
     cursor: pointer;
-
     border-radius: 8px;
     transition: background-color 0.3s, transform 0.2s;
 }
 
-/* ---------- BACK BUTTON ---------- */
-main {    
-    max-width: 800px;
+main {
+    max-width: 1000px;
     margin: 0 auto;
     padding: 24px;
+    width: 100%;
 }
 
+/* ---------- BACK BUTTON ---------- */
 .goBackLink {
     display: flex;
     align-items: center;
@@ -36,53 +42,20 @@ main {
 }
 /* ---------- BACK BUTTON ---------- */
 
-/* ---------- MAIN ---------- */
+/* ---------- POST SPACE ---------- */
 .postSpace {
     background-color: #1A1A1A;
     border-radius: 16px;
     padding: 24px;
     margin-bottom: 24px;
-}
-
-.replySpace {
-    display: flex;
-    justify-content: flex-start;
-
-    margin-left: 20px;
-}
-
-.replyLine {
-    background-color: #49454F;
-
-    margin: 0px 10px;
-
-    width: 1px;
-    height: 175px;
-    box-sizing: border-box;
-}
-
-.replyThread {
-    position: relative;
-    padding-left: 32px;
-    margin-top: 30px;
-
-    overflow: visible;
-
     width: 100%;
-}
-
-.replyPost {
-    height: auto;
-}
-
-.space {
-    margin-top: 50px;
 }
 
 #post {
     background-color: #1A1A1A;
     border-radius: 16px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 #replyToContainer {
@@ -92,16 +65,14 @@ main {
     padding: 0px;
 }
 
-#reply-to-msg {
-    margin-bottom: 25px;
+.replyingTo {
+    margin-bottom: 16px;
     padding: 10px;
     background-color: #7FB8C8;
     color: #1D1E1F;
     border-radius: 5px;
-
     font-size: 15px;
     font-weight: bold;
-    cursor: pointer;
 }
 
 .postHeader {
@@ -118,42 +89,34 @@ main {
 }
 
 .avatar {
-     background-color: #D9D9D9;
-     border-radius: 50%;
-
-     display: flex;
-     justify-content: center;
-     align-items: center;
-
-     width: 40px;
-     height: 40px;
-     overflow: hidden;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
 }
 
 #postAvatar {
-     background-color: #D9D9D9;
-     border-radius: 50%;
-
-     display: flex;
-     justify-content: center;
-     align-items: center;
-
-     width: 40px;
-     height: 40px;
-     overflow: hidden;
+    background-color: #D9D9D9;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
 }
 
-#postProfilePic {
-     width: 100%;
-     height: 100%;
-}
-
-#currentUserProfilePic {
+.userProfilePic {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
-.userDetails {
+.username-and-time {
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -181,45 +144,25 @@ main {
     opacity: 80%;
 }
 
-.optionsButton {
-    background-color: #030909;
-    color: #E4F3F6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0px;
-    width: 5px;
-    height: 20px;
-}
-
-#postOptions {
-    background-color: #1A1A1A;
-}
-
+/* Tag styling */
 #tagContainer {
     width: auto;
     height: auto;
     margin: 0px;
     padding: 0px;
-}
-
-#tags {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
     gap: 12px;
-    width: 100%;
-    height: auto;
-    opacity: 50%;
-    padding: 10px 0 20px;
+    margin-bottom: 16px;
 }
 
-#tags a {
+.tag {
     color: white;
-    text-decoration: none;
+    opacity: 0.5;
+    display: inline-block;
 }
 
+/* Post title styling */
 #postTitleContainer {
     width: auto;
     height: auto;
@@ -227,70 +170,74 @@ main {
     padding: 0px;
 }
 
-#postTitle {
+.postTitle {
     font-size: 24px;
     font-weight: Bold;
     color: #E4F3F6;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     width: 100%;
 }
 
 #postText {
     margin-bottom: 15px;
+    line-height: 1.5;
 }
 
-.postActions, .commentActions {
+/* Post images */
+#photo-container {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 8px;
-    margin-top: 16px;
-}
-
-.separator {
-    border-left: 2px solid white;
-    height: 35px;
-}
-
-.actionButton {
-    background: none;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.actionButton:hover {
-    transform: scale(1.05);
-}
-
-.actionButton:active {
-    transform: scale(0.95); 
-}
-
-.actionButton .counter {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 15px;
-    font-weight: bold;
-    margin-left: 0;
-}
-
-#postTextInput {
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
     width: 100%;
-    height: 120px;
-    resize: none;
-    background-color: #333;
-    color: white;
-    border: none;
+}
+
+.postImage {
+    max-width: 100%;
     border-radius: 8px;
-    padding: 8px;
-    font-size: 14px;
-    font-family: "Inter";
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.postImage:hover {
+    transform: scale(1.01);
+}
+
+/* For multiple images */
+#photo-container:has(> img:nth-child(2)) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+}
+/* ---------- POST SPACE ---------- */
+
+/* ---------- REPLY SECTION ---------- */
+.replySpace {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 20px;
+    margin-top: 40px;
+}
+
+.replyLine {
+    background-color: #49454F;
+    margin: 0px 10px;
+    width: 1px;
+    height: 250px;
     box-sizing: border-box;
-    outline: none;
+}
+
+.replyThread {
+    position: relative;
+    padding-left: 32px;
+    margin-top: 30px;
+    overflow: visible;
+    width: 100%;
+}
+
+.replyPost {
+    height: auto;
 }
 
 .replyPrompt {
@@ -308,59 +255,55 @@ main {
     color: #98D5DC;
 }
 
-.charLim{
+#postTextInput {
+    width: 100%;
+    height: 120px;
+    resize: none;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 14px;
+    font-family: "Inter";
+    box-sizing: border-box;
+    outline: none;
+}
+
+.postText {
+    width: 100%;
+}
+
+.charLim {
     display: flex;
     justify-content: flex-end;
     color: white;
     font-size: 12px;
-
-    margin-bottom: 10px;
+    margin-top: 8px;
+    margin-bottom: 16px;
 }
 
-#postContentContainer {
-    margin: 16px 0;
-}
-
-#postContentContainer.single-image img {
-    width: 100%;
-    border-radius: 8px;
-    display: block;
-    margin: 0 auto;
-}
-
-#postContentContainer.multi-images {
-    display: grid;
-    gap: 8px;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-}
-
-#postContentContainer.multi-images img {
-    width: 100%;
+#replyphotocontainer {
     height: auto;
-    object-fit: cover;
+    width: 100%;
+    max-height: 200px;
+    max-width: inherit;
+    display: none;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.preview-image {
+    max-height: 150px;
     border-radius: 8px;
-}
-
-.imageWrapper {
-    position: relative;
-    display: inline-block;
-}
-
-.remove-image-icon {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 4px 8px;
-    border-radius: 4px;
+    object-fit: cover;
     cursor: pointer;
-    font-weight: bold;
-    font-size: 18px;
+    transition: transform 0.2s;
 }
 
-.remove-image-icon:hover {
-    background-color: rgba(255, 0, 0, 0.7);
+.preview-image:hover {
+    transform: scale(1.01);
 }
 
 .horizontalBar {
@@ -369,7 +312,7 @@ main {
     margin: 16px 0;
 }
 
-.postAction{
+.postAction {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -403,42 +346,20 @@ main {
     flex-shrink: 0; 
 }
 
-
-#userphotocontainer {
-    width: 100%;
-    height: 200px;
-
-    max-height: 200px;
-    max-width: inherit;
-
-    display: flex;
-    justify-content: space-between;
-
-    gap: 10px;
+.commentButton:hover {
+    background-color: #7FB8C8;
+    transform: scale(1.02);
 }
 
-#replyphotocontainer {
-    height: auto;
-    width: 100%;
-
-    max-height: 200px;
-    max-width: inherit;
-
-    display: none;
-    justify-content: space-between;
-
-    gap: 10px;
+.commentButton:active {
+    transform: scale(0.95); 
 }
+/* ---------- REPLY SECTION ---------- */
 
+/* Clickable images */
 .clickable-image {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-    overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s;
-    border-radius: 15px;
 }
 
 .clickable-image:hover {
@@ -446,55 +367,48 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.close:hover {
-    transform: scale(1.05);
-    color: #7FB8C8;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.modal {
-    display: none;
-    position: fixed; 
-    z-index: 1000; 
-    left: 0;
-    top: 0;
-
+/* For compatibility with userphotocontainer from generalStyles */
+#replyphotocontainer.userphotocontainer {
     width: 100%;
-    height: 100%;
-
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8); 
-}
-
-#userphotocontainer-modal {
-    position: absolute; 
-    top: 50%;
-    left: 50%; 
-    transform: translate(-50%, -50%);
-
+    height: 200px;
+    max-height: 200px;
+    max-width: inherit;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.modal-content {
-    width: 90%;
-    height: 90%; 
-
-    max-width: 90vh;
-    max-height: 90vh; 
-
-    object-fit: contain;
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    color: white;
-    font-size: 35px;
+#postDisplayName {
     font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s;
+    line-height: 1.5;
 }
-/* ---------- MAIN ---------- */
+
+#postTime {
+    font-size: 14px;
+    color: #E4F3F6;
+    opacity: 0.8;
+}
+
+#photo-container img.postImage {
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+/* Remove duplicate modal styles as they're in generalStyles */
+@media (max-width: 768px) {
+    .postSpace {
+        padding: 16px;
+    }
+    
+    .replySpace {
+        margin-left: 0;
+    }
+    
+    .replyThread {
+        padding-left: 15px;
+    }
+    
+    #replyphotocontainer {
+        flex-wrap: wrap;
+    }
+}

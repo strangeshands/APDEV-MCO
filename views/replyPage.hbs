@@ -5,8 +5,9 @@
         <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="/css/replyPage.css">
         <link rel="stylesheet" type="text/css" href="/css/generalStyle.css">
+        <link rel="stylesheet" type="text/css" href="/css/replyPage.css">
+
     
         <!-- CROPPER -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
@@ -36,7 +37,7 @@
         <main>
 
             <!-- BACK BUTTON -->
-            <div class="goBackLink" onclick="window.location.href='/posts/{{post._id}}'">
+            <div class="goBackLink" onclick="window.history.back()">
                 <span class="arrow">&#8604;</span>
                 <span class="back">Back</span>
             </div>
@@ -58,13 +59,13 @@
                             </div>
                             <div class="username-and-time">
                                 <div class="displayName" id="postDisplayName">{{post.author.displayname}}</div>
-                                <div class="time" id="postTime">{{post.postDate}}</div>
+                                <div class="time" id="postTime">{{post.author.username}} | {{post.postDate}}</div>
                             </div>
                         </div>
                     </div>
                     <div id="tagContainer">
                         {{#each post.tags}}
-                            <span class="tag">#{{this}}</span>
+                            <span class="tag">{{this}}</span>
                         {{/each}}
                     </div>
                     {{#if post.title}}
@@ -78,30 +79,12 @@
     
                     <!-- IMAGES -->
                     {{#if post.images.length}}
-                    <div id="photo-container">
+                    <div id="userphotocontainer">
                         {{#each post.images}}
-                            <img src="{{this}}" alt="Post image" class="postImage">
+                            <img src="{{this}}" alt="Post image" class="postImage clickable-image" onclick="openModal(this)">
                         {{/each}}
                     </div>
                     {{/if}}
-    
-                     <div class="postActions">
-                            <button id="heart" class="actionButton" data-post-id="{{post._id}}">
-                                <img src="/resources/Heart.svg"/>
-                                <span class="counter" id="postLikeCounter">{{post.likeCount}}</span>
-                        </button>
-                        <img src="/resources/Line.svg" alt="Line">
-                        <button id="heartCrack" class="actionButton" data-post-id="{{post._id}}">
-                                <img src="/resources/HeartCrack.svg"/>
-                                <span class="counter" id="postDislikeCounter">{{post.dislikeCount}}</span>
-                        </button>
-                        <button class="actionButton" onclick="window.location.href='/posts/reply/{{post._id}}'">
-                                <img src="/resources/Comments.svg"/>
-                        </button>
-                        <button id="bookmark" class="actionButton" data-post-id="{{post._id}}">
-                                <img src="/resources/bookmark.svg"/>
-                        </button>
-                     </div>
                 </div>
 
                 <!-- INPUTS FOR REPLY -->
@@ -116,8 +99,8 @@
                                             <img src="{{activeUserDetails.profilepic}}" alt="userProfilePicture" class="userProfilePic">
                                         </div>
                                         <div class="username-and-time">
-                                            <div class="REPusername" id="REPusername">{{activeUserDetails.username}}</div>
-                                            <div class="currentUsername" id="currentUsername">{{activeUserDetails.displayname}}</div>
+                                            <div class="REPusername" id="REPusername">{{activeUserDetails.displayname}}</div>
+                                            <div class="currentUsername" id="currentUsername">{{activeUserDetails.username}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -126,26 +109,14 @@
                                     <div class="repliedUser" id="repliedUser">{{post.author.username}}</div>
                                 </div>
                                 <div class="postText">
-                                    <textarea
-                                        id="postTextInput"
-                                        name="content"
-                                        placeholder="What's on your mind?"
-                                        maxlength="300">
-                                    </textarea>
+                                    <textarea id="postTextInput" name="content" placeholder="What's on your mind?" maxlength="300"></textarea>
                                 </div>
                                 
                                 <!-- CHAR LIM -->
                                 <div class="charLim"> <span id="char-counter">0/300</span> </div>
+                                
+                                <!-- IMAGE UPLOAD CONTAINER -->
                                 <div id="replyphotocontainer"></div>
-
-                                <!-- Image Modal -->
-                                <div id="imageModal" class="modal">
-                                    <span class="close">&times;</span>
-                                    <div id="userphotocontainer-modal">
-                                        <img class="modal-content" id="modalImage">
-                                    </div>
-                                    <div id="caption"></div>
-                                </div>
                             </div>
                         </div>
                     </div>  
@@ -173,48 +144,18 @@
                 </form>
             </div>
         </main>
+
+        <!-- IMAGE MODAL -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <div id="userphotocontainer-modal">
+                <img class="modal-content" id="modalImage">
+            </div>
+            <div id="caption"></div>
+        </div>
         
         <script src="/js/actionButton.js"></script>
         <script src="/js/searchSuggestions.js"></script>
-        <script>
-            // Character counter
-            const textarea = document.getElementById('postTextInput');
-            const charCounter = document.getElementById('char-counter');
-            
-            textarea.addEventListener('input', () => {
-                const currentLength = textarea.value.length;
-                charCounter.textContent = `${currentLength}/300`;
-            });
-            
-            // Image upload handling
-            const addImageButton = document.getElementById('addImageButton');
-            const imageUploadInput = document.getElementById('imageUploadInput');
-            const imageContainer = document.getElementById('replyphotocontainer');
-            
-            addImageButton.addEventListener('click', () => {
-                imageUploadInput.click();
-            });
-            
-            imageUploadInput.addEventListener('change', function() {
-                if (this.files && this.files.length > 0) {
-                    imageContainer.style.display = 'flex';
-                    imageContainer.innerHTML = '';
-                    
-                    for (let i = 0; i < this.files.length; i++) {
-                        const file = this.files[i];
-                        const reader = new FileReader();
-                        
-                        reader.onload = function(e) {
-                            const img = document.createElement('img');
-                            img.src = e.target.result;
-                            img.className = 'preview-image';
-                            imageContainer.appendChild(img);
-                        }
-                        
-                        reader.readAsDataURL(file);
-                    }
-                }
-            });
-        </script>
+        <script src="/js/replyPage.js"></script>
     </body>
 </html>

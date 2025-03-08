@@ -650,8 +650,6 @@ const reply_create_post = async (req, res) => {
     }
 };
 
-// TODO: fix css issue with replyPage
-
 module.exports = {
     post_details,
     post_create_get,
