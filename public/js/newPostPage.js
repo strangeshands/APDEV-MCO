@@ -1,10 +1,12 @@
 /* ---- SET VARIABLES ---- */
 window.onload = function () {
     if (mainPost) {
-        tags = mainPost.tags; // Load existing tags into the tags array
-        if (tags.length > 0)
-            tagsContainer.style.display = "block";
-        renderTags();      // Render the tags as chips
+        if (!mainPost.parentPost) {
+            tags = mainPost.tags; // Load existing tags into the tags array
+            if (tags.length > 0)
+                tagsContainer.style.display = "block";
+            renderTags();      // Render the tags as chips
+        }   
 
         document.getElementById("postTitleInput").value = mainPost.title;
 
@@ -18,6 +20,15 @@ window.onload = function () {
             document.getElementById("postContentContainer").style.display = "flex";
         handleImageUpload();
         renderImages();
+    }
+
+    console.log(mainPost.parentPost);
+    if (mainPost.parentPost) {
+        const tagButton = document.getElementById("addTagButton");
+        tagButton.style.display = "none";
+
+        const titleRow = document.getElementById("titleRow");
+        titleRow.style.display = "none";
     }
 
     const postForm = document.getElementById("postForm");

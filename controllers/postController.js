@@ -149,7 +149,10 @@ const post_create_post = async (req, res) => {
 
     let tags = req.body.tags;
     if (tags) {
-        tags = tags.split(',').map(tag => tag.trim()); // Splits the string by commas
+        tags = tags
+            .split(',')
+            .map(tag => tag.trim())
+            .filter(tag => tag && tag !== '#'); 
     }
 
     let imagePaths = [];
@@ -210,7 +213,10 @@ const post_create_post = async (req, res) => {
 
         // update the tags of user
         const userPosts = await Post.find({ author: postAuthor });
-        const allUserTags = userPosts.flatMap(post => post.tags);
+        let allUserTags = userPosts.flatMap(post => post.tags);
+        allUserTags = Array.from(
+            new Set(allUserTags.map(tag => tag.toLowerCase()))
+        );
         await User.updateOne(
             { _id: postAuthor },
             { $set: { tags: allUserTags } }
@@ -268,7 +274,10 @@ const editPostSave = async (req, res) => {
 
     let tags = req.body.tags;
     if (tags) {
-        tags = tags.split(',').map(tag => tag.trim()); // Splits the string by commas
+        tags = tags
+            .split(',')
+            .map(tag => tag.trim())
+            .filter(tag => tag && tag !== '#'); 
     }
     
     images.forEach(img => {
@@ -355,7 +364,10 @@ const editPostSave = async (req, res) => {
 
         // update the tags of user
         const userPosts = await Post.find({ author: existingPost.author });
-        const allUserTags = userPosts.flatMap(post => post.tags);
+        let allUserTags = userPosts.flatMap(post => post.tags);
+        allUserTags = Array.from(
+            new Set(allUserTags.map(tag => tag.toLowerCase()))
+        );
         await User.updateOne(
             { _id: existingPost.author },
             { $set: { tags: allUserTags } }
@@ -458,7 +470,10 @@ const deletePost = async(req,res) => {
         );
         // update the tags of user
         const userPosts = await Post.find({ author: activeUser });
-        const allUserTags = userPosts.flatMap(post => post.tags);
+        let allUserTags = userPosts.flatMap(post => post.tags);
+        allUserTags = Array.from(
+            new Set(allUserTags.map(tag => tag.toLowerCase()))
+        );
         await User.updateOne(
             { _id: activeUser },
             { $set: { tags: allUserTags } }
