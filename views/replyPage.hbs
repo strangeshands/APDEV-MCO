@@ -5,9 +5,8 @@
         <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="/css/postPage.css">
-        <link rel="stylesheet" type="text/css" href="/css/replyPage.css">
         <link rel="stylesheet" type="text/css" href="/css/generalStyle.css">
+        <link rel="stylesheet" type="text/css" href="/css/replyPage.css">
 
     
         <!-- CROPPER -->
@@ -80,9 +79,9 @@
     
                     <!-- IMAGES -->
                     {{#if post.images.length}}
-                    <div id="photo-container">
+                    <div id="userphotocontainer">
                         {{#each post.images}}
-                            <img src="{{this}}" alt="Post image" class="postImage">
+                            <img src="{{this}}" alt="Post image" class="postImage clickable-image" onclick="openModal(this)">
                         {{/each}}
                     </div>
                     {{/if}}
@@ -116,15 +115,6 @@
                                 <!-- CHAR LIM -->
                                 <div class="charLim"> <span id="char-counter">0/300</span> </div>
                                 <div id="replyphotocontainer"></div>
-
-                                <!-- Image Modal -->
-                                <div id="imageModal" class="modal">
-                                    <span class="close">&times;</span>
-                                    <div id="userphotocontainer-modal">
-                                        <img class="modal-content" id="modalImage">
-                                    </div>
-                                    <div id="caption"></div>
-                                </div>
                             </div>
                         </div>
                     </div>  
@@ -152,6 +142,15 @@
                 </form>
             </div>
         </main>
+
+        <!-- IMAGE MODAL -->
+        <div id="imageModal" class="modal">
+            <span class="close">&times;</span>
+            <div id="userphotocontainer-modal">
+                <img class="modal-content" id="modalImage">
+            </div>
+            <div id="caption"></div>
+        </div>
         
         <script src="/js/actionButton.js"></script>
         <script src="/js/searchSuggestions.js"></script>
@@ -186,12 +185,45 @@
                         reader.onload = function(e) {
                             const img = document.createElement('img');
                             img.src = e.target.result;
-                            img.className = 'preview-image';
+                            img.className = 'preview-image clickable-image';
+                            img.onclick = function() { openModal(this); };
                             imageContainer.appendChild(img);
                         }
                         
                         reader.readAsDataURL(file);
                     }
+                }
+            });
+
+            // Image modal functionality
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            const captionText = document.getElementById("caption");
+            const closeBtn = document.getElementsByClassName("close")[0];
+
+            /* ---- OPEN MODAL ---- */
+            function openModal(imgElement) {
+                modal.style.display = "block";
+                modalImg.src = imgElement.src;
+                captionText.innerHTML = imgElement.alt || "";
+            }
+
+            /* ---- CLOSE MODAL WHEN X CLICKED ---- */
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            /* ---- CLOSE MODAL WHEN OUTSIDE CLICKED ---- */
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+
+            /* ---- CLOSE MODAL WITH ESCAPE KEY ---- */
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape" && modal.style.display === "block") {
+                    modal.style.display = "none";
                 }
             });
         </script>
