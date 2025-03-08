@@ -5,8 +5,10 @@
         <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
 
         <!-- CSS -->
+        <link rel="stylesheet" type="text/css" href="/css/postPage.css">
         <link rel="stylesheet" type="text/css" href="/css/replyPage.css">
         <link rel="stylesheet" type="text/css" href="/css/generalStyle.css">
+
     
         <!-- CROPPER -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
@@ -36,7 +38,7 @@
         <main>
 
             <!-- BACK BUTTON -->
-            <div class="goBackLink" onclick="window.location.href='/posts/{{post._id}}'">
+            <div class="goBackLink" onclick="window.history.back()">
                 <span class="arrow">&#8604;</span>
                 <span class="back">Back</span>
             </div>
@@ -64,7 +66,7 @@
                     </div>
                     <div id="tagContainer">
                         {{#each post.tags}}
-                            <span class="tag">#{{this}}</span>
+                            <span class="tag">{{this}}</span>
                         {{/each}}
                     </div>
                     {{#if post.title}}
@@ -126,12 +128,7 @@
                                     <div class="repliedUser" id="repliedUser">{{post.author.username}}</div>
                                 </div>
                                 <div class="postText">
-                                    <textarea
-                                        id="postTextInput"
-                                        name="content"
-                                        placeholder="What's on your mind?"
-                                        maxlength="300">
-                                    </textarea>
+                                    <textarea id="postTextInput" name="content" placeholder="What's on your mind?" maxlength="300"></textarea>
                                 </div>
                                 
                                 <!-- CHAR LIM -->

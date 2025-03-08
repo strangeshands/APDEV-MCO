@@ -498,3 +498,67 @@ main {
     transition: transform 0.2s;
 }
 /* ---------- MAIN ---------- */
+
+/* Fix for the replyingTo message */
+.replyingTo {
+    margin-bottom: 16px;
+    padding: 10px;
+    background-color: #7FB8C8;
+    color: #1D1E1F;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Fix for tags */
+.tag {
+    color: white;
+    opacity: 0.5;
+    margin-right: 12px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+/* Fix for post title */
+.postTitle {
+    font-size: 24px;
+    font-weight: Bold;
+    color: #E4F3F6;
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+/* Fix for images in the post */
+#photo-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.postImage {
+    max-width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* For multiple images */
+#photo-container:has(> img:nth-child(2)) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 8px;
+}
+
+/* Ensure userProfilePic is displayed correctly */
+.userProfilePic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Fix for username and time display */
+.username-and-time {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

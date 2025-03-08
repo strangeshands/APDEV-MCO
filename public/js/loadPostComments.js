@@ -120,7 +120,7 @@ function loadPost() {
                         <span class="counter">${mainPost.dislikeCount}</span>
                 </button>
 
-                <button class="postoptionbutton actionButton" onclick="window.location.href='/posts/reply/${post._id}''">
+                <button class="postoptionbutton actionButton" onclick="window.location.href='/posts/reply/${mainPost._id}'">
                             <img src="/resources/Comments.svg"/>
                 </button>
 
