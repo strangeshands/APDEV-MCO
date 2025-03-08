@@ -80,7 +80,7 @@ function loadPost() {
         <!-- POST TAGS HERE -->
         <!-- TO CHANGE: href link -->
         <div class="tagContainer" id="posttags" style="font-size: 15px; margin-bottom: -5px;">
-            ${mainPost.tags.map(tag => `<a href="">${tag}</a>`).join(" ")}
+            ${mainPost.tags.map(tag => `<a href="/?q=${encodeURIComponent(tag)}&userId=${activeId}">${tag}</a>`).join(" ")}
         </div>
 
         <!-- POST TITLE HERE -->
