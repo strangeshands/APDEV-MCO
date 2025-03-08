@@ -11,16 +11,6 @@ button {
      transition: background-color 0.3s, transform 0.2s;
 }
 
-/* button:hover {
-     background-color: #7FB8C8;
-     transform: scale(1.02);
-}
- 
-
-button:active {
-     transform: scale(0.95); 
-} */
-
 .content {
      display: flex;
      justify-content: center;
