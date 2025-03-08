@@ -217,6 +217,7 @@ main {
     display: flex;
     justify-content: flex-start;
     margin-left: 20px;
+    margin-top: 40px;
 }
 
 .replyLine {
