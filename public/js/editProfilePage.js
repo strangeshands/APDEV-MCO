@@ -6,6 +6,10 @@ const bioholder = document.getElementById("bio");
 const emailholder = document.getElementById("email");
 const numholder = document.getElementById("tel-number");
 
+window.onload = function() {
+    document.getElementById('bio-feedback').textContent = '';
+};
+
 /* ---- BIO COUNTER ---- */
 document.addEventListener("DOMContentLoaded", () => {
     const bioTextarea = document.getElementById("bio");
@@ -173,7 +177,7 @@ cropCancelBtn.addEventListener("click", () => {
 // ----- EDIT PROFILE DETIALS ----- //
 
 /**
- *  allows saving of user details
+ *  [DONE/DEBUGGED] allows saving of user details
  */
 function saveUserDetails() {
     var change = true;
@@ -182,7 +186,7 @@ function saveUserDetails() {
     const newDisplayName = document.getElementById('display-name').value;
     const newBio = document.getElementById('bio').value;
 
-    if (newUser === activeUserDetails.username) {
+    /*if (newUser === activeUserDetails.username) {
         document.getElementById('username-feedback').textContent = "This is already your username.";
         change = false;
     }
@@ -193,7 +197,7 @@ function saveUserDetails() {
     if (newBio === activeUserDetails.bio) {
         document.getElementById('bio-feedback').textContent = "This is already your bio.";
         change = false;
-    }
+    }*/
 
     if (change) {
         /**
