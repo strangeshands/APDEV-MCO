@@ -377,7 +377,6 @@ main {
     gap: 10px;
 }
 
-/* Specific styles for the postPage look */
 #postDisplayName {
     font-weight: bold;
     line-height: 1.5;
@@ -389,7 +388,6 @@ main {
     opacity: 0.8;
 }
 
-/* Make sure the images in the photo container work with the modal */
 #photo-container img.postImage {
     border-radius: 15px;
     cursor: pointer;
