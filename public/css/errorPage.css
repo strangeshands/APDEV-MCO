@@ -23,3 +23,11 @@
 .connectify-link:hover{
     color: #49454F;
 }
+
+button {
+    border: none; 
+    cursor: pointer;
+
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
