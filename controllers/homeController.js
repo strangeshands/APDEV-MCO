@@ -99,17 +99,21 @@ const homePage = async (req, res) => {
             .exec()
             .then((result) => {
                 return result.map(post => {  // Gets formatted date
-                    
                     var postDate;
 
-                    // Get the time the post was made
                     const postTimeCreated = moment(post.createdAt);
-
-                    // Get the current time
+                    const editedTime = moment(post.updatedAt);
                     const now = moment();
 
-                    // Calculate the duration between the two dates
-                    const duration = moment.duration(now.diff(postTimeCreated));
+                    let duration;
+                    if (!postTimeCreated.isSame(editedTime) && editedTime) {
+                        duration = moment.duration(now.diff(editedTime));
+                        postDate = 'Updated ';
+                    }
+                    else {
+                        duration = moment.duration(now.diff(postTimeCreated));
+                        postDate = '';
+                    }
 
                     // Time Format
                     function formatDuration(unit, value) {
@@ -117,17 +121,20 @@ const homePage = async (req, res) => {
                     }
                     
                     if (duration.months() > 0) {
-                        postDate = moment(post.createdAt).format('MMM DD, YYYY');
+                        if (!postTimeCreated.isSame(editedTime))
+                            postDate += moment(post.updatedAt).format('MMM DD, YYYY');
+                        else
+                            postDate += moment(post.createdAt).format('MMM DD, YYYY');
                     } else if (duration.weeks() > 0) {
-                        postDate = formatDuration('week', duration.weeks());
+                        postDate += formatDuration('week', duration.weeks());
                     } else if (duration.days() > 0) {
-                        postDate = formatDuration('day', duration.days());
+                        postDate += formatDuration('day', duration.days());
                     } else if (duration.hours() > 0) {
-                        postDate = formatDuration('hour', duration.hours());
+                        postDate += formatDuration('hour', duration.hours());
                     } else if (duration.minutes() > 0) {
-                        postDate = formatDuration('minute', duration.minutes());
+                        postDate += formatDuration('minute', duration.minutes());
                     } else {
-                        postDate = formatDuration('second', duration.seconds());
+                        postDate += formatDuration('second', duration.seconds());
                     }
                     
                     return { post, postDate };
