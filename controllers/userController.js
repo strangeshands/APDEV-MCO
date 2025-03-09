@@ -849,9 +849,7 @@ const formatPostDates = (posts) => {
             duration = moment.duration(now.diff(postTimeCreated));
             postDate = '';
         }
-
-        console.log(postTimeCreated, ' ', editedTime);
-
+        
         const formatDuration = (unit, value) => {
             return value > 1 ? `${value} ${unit}s ago` : `${value} ${unit} ago`;
         };
