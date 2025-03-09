@@ -102,6 +102,14 @@ const loadUserProfile = async(req,res) => {
          */
         let tabId = req.params.tabId || "posts";
 
+        if ((tabId != "posts" || tabId != "comments") && !ownPage) {
+            return res.render('errorPageTemplate', {
+                header: "No permission to view.",
+                emotion: "You are trying to view a profile that is not yours.",
+                description: "You can only view your other's posts and comments"
+            });
+        }
+
         if (!profileDetails) {
             return res.render('errorPageTemplate', {
                     header: "Profile not found.",
@@ -829,25 +837,40 @@ const formatPostDates = (posts) => {
         let postDate;
 
         const postTimeCreated = moment(post.createdAt);
+        const editedTime = moment(post.updatedAt);
         const now = moment();
-        const duration = moment.duration(now.diff(postTimeCreated));
+
+        let duration;
+        if (!postTimeCreated.isSame(editedTime)) {
+            duration = moment.duration(now.diff(editedTime));
+            postDate = 'Updated ';
+        }
+        else {
+            duration = moment.duration(now.diff(postTimeCreated));
+            postDate = '';
+        }
+
+        console.log(postTimeCreated, ' ', editedTime);
 
         const formatDuration = (unit, value) => {
             return value > 1 ? `${value} ${unit}s ago` : `${value} ${unit} ago`;
         };
 
         if (duration.months() > 0) {
-            postDate = moment(post.createdAt).format('MMM DD, YYYY');
+            if (!postTimeCreated.isSame(editedTime))
+                postDate += moment(post.updatedAt).format('MMM DD, YYYY');
+            else
+                postDate += moment(post.createdAt).format('MMM DD, YYYY');
         } else if (duration.weeks() > 0) {
-            postDate = formatDuration('week', duration.weeks());
+            postDate += formatDuration('week', duration.weeks());
         } else if (duration.days() > 0) {
-            postDate = formatDuration('day', duration.days());
+            postDate += formatDuration('day', duration.days());
         } else if (duration.hours() > 0) {
-            postDate = formatDuration('hour', duration.hours());
+            postDate += formatDuration('hour', duration.hours());
         } else if (duration.minutes() > 0) {
-            postDate = formatDuration('minute', duration.minutes());
+            postDate += formatDuration('minute', duration.minutes());
         } else {
-            postDate = formatDuration('second', duration.seconds());
+            postDate += formatDuration('second', duration.seconds());
         }
 
         return { ...post.toObject(), postDate };
