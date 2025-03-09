@@ -20,15 +20,14 @@ window.onload = function () {
             document.getElementById("postContentContainer").style.display = "flex";
         handleImageUpload();
         renderImages();
-    }
 
-    console.log(mainPost.parentPost);
-    if (mainPost.parentPost) {
-        const tagButton = document.getElementById("addTagButton");
-        tagButton.style.display = "none";
+        if (mainPost.parentPost) {
+            const tagButton = document.getElementById("addTagButton");
+            tagButton.style.display = "none";
 
-        const titleRow = document.getElementById("titleRow");
-        titleRow.style.display = "none";
+            const titleRow = document.getElementById("titleRow");
+            titleRow.style.display = "none";
+        }
     }
 
     const postForm = document.getElementById("postForm");
