@@ -73,8 +73,6 @@ const post_details = async (req, res) => {
                 path: 'parentPost',
                 populate: { path: 'author' }
             });
-        post = formatPostDates([post])[0];
-
         // if the post is not found, render the error page
         if (!post) {
             return res.render('errorPageTemplate', {
@@ -83,6 +81,7 @@ const post_details = async (req, res) => {
                 description: "The post may be deleted or the author cannot be found."
             });
         }
+        post = formatPostDates([post])[0];
 
         // Find all comments under the post
         var comments = await Post.find({ parentPost: id })
@@ -113,7 +112,7 @@ const post_details = async (req, res) => {
         console.error(error);
         res.status(500).render('errorPageTemplate', {
             header: "Server Error",
-            emotion: "sad",
+            emotion: null,
             description: "An error occurred while fetching the post. Please try again later."
         });
     }
@@ -496,9 +495,19 @@ const formatPostDates = (posts) => {
     return posts.map(post => {
         let postDate;
 
-        const postTimeCreated = moment(post.updatedAt || post.createdAt);
+        const postTimeCreated = moment(post.createdAt || null);
+        const editedTime = moment(post.updatedAt);
         const now = moment();
-        const duration = moment.duration(now.diff(postTimeCreated));
+
+        let duration;
+        if (!postTimeCreated.isSame(editedTime) && editedTime) {
+            duration = moment.duration(now.diff(editedTime));
+            postDate = 'Updated ';
+        }
+        else {
+            duration = moment.duration(now.diff(postTimeCreated));
+            postDate = '';
+        }
 
         const formatDuration = (unit, value) => {
             return value > 1 ? `${value} ${unit}s ago` : `${value} ${unit} ago`;
@@ -507,15 +516,15 @@ const formatPostDates = (posts) => {
         if (duration.months() > 0) {
             postDate = moment(post.createdAt).format('MMM DD, YYYY');
         } else if (duration.weeks() > 0) {
-            postDate = formatDuration('week', duration.weeks());
+            postDate += formatDuration('week', duration.weeks());
         } else if (duration.days() > 0) {
-            postDate = formatDuration('day', duration.days());
+            postDate += formatDuration('day', duration.days());
         } else if (duration.hours() > 0) {
-            postDate = formatDuration('hour', duration.hours());
+            postDate += formatDuration('hour', duration.hours());
         } else if (duration.minutes() > 0) {
-            postDate = formatDuration('minute', duration.minutes());
+            postDate += formatDuration('minute', duration.minutes());
         } else {
-            postDate = formatDuration('second', duration.seconds());
+            postDate += formatDuration('second', duration.seconds());
         }
 
         return { ...post.toObject(), postDate };
