@@ -102,12 +102,13 @@ const loadUserProfile = async(req,res) => {
          */
         let tabId = req.params.tabId || "posts";
 
-        if ((tabId != "posts" || tabId != "comments") && !ownPage) {
-            return res.render('errorPageTemplate', {
-                header: "No permission to view.",
-                emotion: "You are trying to view a profile that is not yours.",
-                description: "You can only view your other's posts and comments"
-            });
+        if ((tabId !== "posts" && tabId !== "comments")) {
+            if (!ownPage)
+                return res.render('errorPageTemplate', {
+                    header: "No permission to view.",
+                    emotion: "You are trying to view a profile that is not yours.",
+                    description: "You can only view your other's posts and comments"
+                });
         }
 
         if (!profileDetails) {
@@ -841,7 +842,7 @@ const formatPostDates = (posts) => {
         const now = moment();
 
         let duration;
-        if (!postTimeCreated.isSame(editedTime)) {
+        if (!postTimeCreated.isSame(editedTime) && editedTime) {
             duration = moment.duration(now.diff(editedTime));
             postDate = 'Updated ';
         }
@@ -849,7 +850,7 @@ const formatPostDates = (posts) => {
             duration = moment.duration(now.diff(postTimeCreated));
             postDate = '';
         }
-        
+
         const formatDuration = (unit, value) => {
             return value > 1 ? `${value} ${unit}s ago` : `${value} ${unit} ago`;
         };
