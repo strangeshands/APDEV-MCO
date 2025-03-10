@@ -90,6 +90,7 @@ const homePage = async (req, res) => {
 
         // All posts for the timeline
         const allPostsPromise = Post.find(postConditions)
+            .find({ parentPost: null })
             .sort({ createdAt: -1 })
             .populate('author')
             .populate({

@@ -66,6 +66,16 @@ const post_details = async (req, res) => {
                                 .filter(dislike => dislike !== null);
         }
         
+        // precheck post
+        let parentToDeleted = false;
+        const parentCheck = await Post.findById(id).select('parentPost').lean();
+        if (parentCheck?.parentPost) {
+            const postCheck = await Post.findById(parentCheck.parentPost);
+
+            if (!postCheck)
+                parentToDeleted = true;
+        }
+
         // find the post
         var post = await Post.findById(id)
             .populate('author')
@@ -101,6 +111,8 @@ const post_details = async (req, res) => {
             post,
             comments,
             origin,
+
+            parentToDeleted,
 
             activeUserDetails,
             activeLikes,

@@ -33,8 +33,15 @@ function loadPost() {
     postElement.classList.add("post");
     let postContent = "";
 
-    if (mainPost.parentPost != null) {
-        console.log(mainPost.parentPost);
+    if (parentToDeleted) {
+        postContent += `
+                <!-- REPLY USER -->
+                <!-- TO CHANGE: href link -->
+                <div id="reply-to-msg" style="margin-left: 5px;">
+                    This is a reply to a deleted post or user.
+                </div>
+        `
+    } else if (mainPost.parentPost != null) {
         postContent += `
              <!-- REPLY USER -->
              <!-- TO CHANGE: href link -->

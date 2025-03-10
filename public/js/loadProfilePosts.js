@@ -77,15 +77,26 @@ function loadPosts(type) {
           postElement.classList.add(post.parentPost != null ? "comment" : "post");
           let postContent = "";
 
-          if (post.parentPost != null) {
-               console.log(post.parentPost);
-               postContent += `
-                    <!-- REPLY USER -->
-                    <!-- TO CHANGE: href link -->
-                    <div id="reply-to-msg" onclick="window.location.href='/posts/${post.parentPost._id}';">
-                         Replied to ${post.parentPost.author.username}
-                    </div>
-               `
+          console.log("POST #", index, post);
+
+          if (post.parentPost != null || userComments) {
+               if (post.parentPost == null) {
+                    postContent += `
+                         <!-- REPLY USER -->
+                         <!-- TO CHANGE: href link -->
+                         <div id="reply-to-msg" style="margin-left: 5px;">
+                              This is a reply to a deleted post or user.
+                         </div>
+                    `
+               } else {
+                    postContent += `
+                         <!-- REPLY USER -->
+                         <!-- TO CHANGE: href link -->
+                         <div id="reply-to-msg" onclick="window.location.href='/posts/${post.parentPost._id}';">
+                              Replied to ${post.parentPost.author.username}
+                         </div>
+                    `
+               }
           }
 
           postContent += `
