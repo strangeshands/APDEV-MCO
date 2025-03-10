@@ -327,3 +327,16 @@ function changePassword() {
         });
     }
 }
+
+function openDeleteModal() {
+    document.getElementById("deleteModal").style.display = "block";
+}
+
+function closeDeleteModal() {
+    document.getElementById("deleteModal").style.display = "none";
+}
+
+function confirmDeletion() {
+    window.location.href = "/delete-profile";
+    closeDeleteModal()
+}

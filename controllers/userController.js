@@ -269,7 +269,7 @@ const updateBookmark = async(req,res) => {
             return res.render('errorPageTemplate', {
                 header: "You are not logged in.",
                 emotion: "Oops. Cannot perform action.",
-                description: "Please log in to edit a post."
+                description: "Please log in to bookmark a post."
                 });
         }
 
@@ -318,7 +318,7 @@ const updateLike = async(req, res) => {
             return res.render('errorPageTemplate', {
                 header: "You are not logged in.",
                 emotion: "Oops. Cannot perform action.",
-                description: "Please log in to edit a post."
+                description: "Please log in to like a post."
                 });
         }
 
@@ -427,7 +427,7 @@ const editProfileLoad = async(req,res) => {
         return res.render('errorPageTemplate', {
             header: "You are not logged in.",
             emotion: "Oops. Cannot perform action.",
-            description: "Please log in to edit a post."
+            description: "Please log in to perform this action."
             });
     }
     
@@ -830,6 +830,61 @@ const changeHeader = async(req,res) => {
     }
 };
 
+const deleteUser = async(req,res) => {
+    try {
+        // FOR MCO P3: change to req.session.id
+        const activeUser = active.getActiveUser();
+        // just to ensure it exists in the db
+        var activeUserDetails = await users.findOne({ _id:activeUser });
+
+        if (!activeUserDetails) {
+            return res.render('errorPageTemplate', {
+                header: "You are not logged in.",
+                emotion: "Oops. Cannot perform action.",
+                description: "Please log in to perform this action."
+                });
+        }
+
+        // delete all posts 
+        await posts.deleteMany({ author: activeUser });
+        
+        // delete/update all likes
+        const userLikes = await likes.find({ likedBy: activeUser });
+        const likedPostIds = userLikes.map(like => like.likedPost);
+        console.log(likedPostIds);
+        if (likedPostIds.length > 0) {
+            await posts.updateMany(
+                { _id: { $in: likedPostIds }, likeCount: {$gt: 0} },
+                { $inc: { likeCount: -1 } }
+            );
+        }
+        await likes.deleteMany({ likedBy: activeUser });
+
+        // delete all dislikes
+        const dislikedPostIds = activeUserDetails.dislikes || [];
+        console.log(dislikedPostIds);
+        if (dislikedPostIds.length > 0) {
+            await posts.updateMany(
+                { _id: { $in: dislikedPostIds }, dislikeCount: { $gt: 0 } },
+                { $inc: { dislikeCount: -1 } }
+            );
+        }
+
+        // delete account
+        await users.deleteOne({ _id: activeUser });
+
+        // change to destroy
+        active.setActiveUser(null);
+        res.redirect("/");
+    } catch(err) {
+        return res.render('errorPageTemplate', {
+            header: "An error occured.",
+            emotion: null,
+            description: "Please try to refresh the browser."
+        });
+    }
+};
+
 /**
  *  Function to format dates
  */
@@ -887,5 +942,7 @@ module.exports = {
     updateAccountInfo,
 
     changePhoto,
-    changeHeader
+    changeHeader,
+
+    deleteUser
 };

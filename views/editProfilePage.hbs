@@ -2,11 +2,11 @@
 <html>
      <head>
           <title> {{activeUserDetails.username}} - Connectify </title>
-          <link rel="icon" href="../resources/Logo.svg" type="image/svg+xml">
+          <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
 
           <!-- CSS -->
-          <link rel="stylesheet" type="text/css" href="../css/generalStyle.css">
-          <link rel="stylesheet" type="text/css" href="../css/editProfile.css">
+          <link rel="stylesheet" type="text/css" href="/css/generalStyle.css">
+          <link rel="stylesheet" type="text/css" href="/css/editProfile.css">
 
           <!-- CROPPER -->
           <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
@@ -20,13 +20,13 @@
           <!-- HEADER PORTION -->
           <header>
                <div id="headercol1" onclick="window.location.href='/';">
-                    <img id="logo" src="../resources/Logo.svg" />
+                    <img id="logo" src="/resources/Logo.svg" />
                     <p id="appName"> Connectify </p>
                </div>
 
                <form action="/" method="GET" style="display: contents;">
                     <div class="searchBar" id="searchContainer">
-                         <img src="../resources/Trailing-Elements.svg" alt="Search Icon">
+                         <img src="/resources/Trailing-Elements.svg" alt="Search Icon">
                          <input type="text" id="search" name="q" placeholder="Search #tags, @authors, or words" autocomplete="off">
                          <div id="searchSuggestions" class="search-suggestions"></div>
                     </div>
@@ -44,9 +44,19 @@
                     </div>
 
                     <div class="col1-sub-container"> 
-                         <button class="delete-account">
+                         <button class="delete-account" onclick="openDeleteModal()">
                               Delete Account
                          </button>
+                    </div>
+
+                    <!-- Delete Modal -->
+                    <div id="deleteModal">
+                         <div class="delete-modal">
+                              <h3>Confirm Deletion</h3>
+                              <p id="delete-msg">Are you sure you want to delete your account? This action cannot be undone.</p>
+                              <button class="confirm" id="confirm-delete" onclick="confirmDeletion()">Delete</button>
+                              <button class="cancel" onclick="closeDeleteModal()">Cancel</button>
+                         </div>
                     </div>
                </div>
 
@@ -196,5 +206,5 @@
 </html>
 
 <!-- ADDITIONAL JS FILE: CONTAINS CROPPER -->
-<script src="../js/editProfilePage.js"></script>
-<script src="../js/searchSuggestions.js"></script>
+<script src="/js/editProfilePage.js"></script>
+<script src="/js/searchSuggestions.js"></script>

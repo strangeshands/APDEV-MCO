@@ -66,6 +66,11 @@ app.post("/edit-profile/:username/update-user-details", userController.updateUse
 app.post("/edit-profile/:username/update-acc-info", userController.updateAccountInfo);
 
 /**
+ *  [DELETE PROFILE]
+ */
+app.get("/delete-profile", userController.deleteUser);
+
+/**
  *  [GHOST LINKS] - no dedicated page
  *      (1) allows updating of bookmarks
  *      (2) allows updated of likes and dislikes

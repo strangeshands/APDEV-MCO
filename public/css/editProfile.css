@@ -106,7 +106,7 @@ button:active {
      flex-direction: column;
      justify-content: center;
      align-items: center;
- }
+}
  
  #crop-modal img {
      max-width: 70vw;
@@ -114,9 +114,9 @@ button:active {
      display: block;
      margin: 0 auto;
      border-radius: 5px;
- }
+}
  
- #crop-modal button {
+ #crop-modal button, .confirm, .cancel {
      margin: 15px 0;
      padding: 5px 10px;
 
@@ -128,16 +128,30 @@ button:active {
      font-weight: bold;
 
      border-radius: 5px;
- }
+}
  
  #crop-modal button:hover {
      background-color: white;
      opacity: 80%;
- }
+}
  
- #crop-modal {
+ #crop-modal, #deleteModal {
      display: none;
- } 
+} 
+
+.delete-modal {
+     justify-content: center;
+     height: 100%;
+}
+
+#confirm-delete {
+     background-color: red;
+     color: white;
+}
+
+#delete-msg {
+     font-size: 13px;
+}
 /* ---------- MODAL ---------- */
 
 /* ----------------------------- */
