@@ -331,18 +331,21 @@ const updateLike = async(req, res) => {
                             });
                     await   posts.updateOne(
                                 { _id: selectedPost._id },
-                                { $inc: { likeCount: -1 } }
+                                { $inc: { likeCount: -1 } },
+                                { timestamps: false }
                             );
                 break;
 
                 case 'undislike':
                     await   users.updateOne(
                                 { _id: activeUserDetails._id },
-                                { $pull: { dislikes: selectedPost._id } }
+                                { $pull: { dislikes: selectedPost._id } },
+                                { timestamps: false }
                             );
                     await   posts.updateOne(
                                 { _id: selectedPost._id },
-                                { $inc: { dislikeCount: -1 } }
+                                { $inc: { dislikeCount: -1 } },
+                                { timestamps: false }
                             );
                 break;
 
@@ -354,7 +357,8 @@ const updateLike = async(req, res) => {
                             });
                     await   posts.updateOne(
                                 { _id: selectedPost._id },
-                                { $inc: { likeCount: +1 } }
+                                { $inc: { likeCount: +1 } },
+                                { timestamps: false }
                             );
                 break;
 
@@ -362,7 +366,8 @@ const updateLike = async(req, res) => {
                     activeUserDetails.dislikes.splice(0, 0, postId);
                     await   posts.updateOne(
                                 { _id: selectedPost._id },
-                                { $inc: { dislikeCount: +1 } }
+                                { $inc: { dislikeCount: +1 } },
+                                { timestamps: false }
                             );
                 break;
 
@@ -373,7 +378,8 @@ const updateLike = async(req, res) => {
                             });
                     await   posts.updateOne(
                                 { _id: selectedPost._id },
-                                { $inc: { likeCount: +1 } }
+                                { $inc: { likeCount: +1 } },
+                                { timestamps: false }
                             );
 
                     await   users.updateOne(
@@ -382,7 +388,8 @@ const updateLike = async(req, res) => {
                             );
                     await    posts.updateOne(
                                 { _id: selectedPost._id },
-                                { $inc: { dislikeCount: -1 } }
+                                { $inc: { dislikeCount: -1 } },
+                                { timestamps: false }
                             );
                 break;
 
@@ -390,7 +397,8 @@ const updateLike = async(req, res) => {
                     activeUserDetails.dislikes.splice(0, 0, postId);
                     await   posts.updateOne(
                                 { _id: selectedPost._id },
-                                { $inc: { dislikeCount: +1 } }
+                                { $inc: { dislikeCount: +1 } },
+                                { timestamps: false }
                             );
 
                     await   likes.deleteOne({ 
@@ -399,11 +407,12 @@ const updateLike = async(req, res) => {
                             });
                     await   posts.updateOne(
                                 { _id: selectedPost._id },
-                                { $inc: { likeCount: -1 } }
+                                { $inc: { likeCount: -1 } },
+                                { timestamps: false }
                             );
                 break;
             }
-            await activeUserDetails.save();
+            await activeUserDetails.save({ timestamps: false });
         }
     } catch(err) {
         return res.render('errorPageTemplate', {
@@ -851,22 +860,22 @@ const deleteUser = async(req,res) => {
         // delete/update all likes
         const userLikes = await likes.find({ likedBy: activeUser });
         const likedPostIds = userLikes.map(like => like.likedPost);
-        console.log(likedPostIds);
         if (likedPostIds.length > 0) {
             await posts.updateMany(
                 { _id: { $in: likedPostIds }, likeCount: {$gt: 0} },
-                { $inc: { likeCount: -1 } }
+                { $inc: { likeCount: -1 } },
+                { timestamps: false }
             );
         }
         await likes.deleteMany({ likedBy: activeUser });
 
         // delete all dislikes
         const dislikedPostIds = activeUserDetails.dislikes || [];
-        console.log(dislikedPostIds);
         if (dislikedPostIds.length > 0) {
             await posts.updateMany(
                 { _id: { $in: dislikedPostIds }, dislikeCount: { $gt: 0 } },
-                { $inc: { dislikeCount: -1 } }
+                { $inc: { dislikeCount: -1 } },
+                { timestamps: false }
             );
         }
 
