@@ -33,7 +33,7 @@ const loginUser = async (req, res) => {
         active.setActiveUser(user._id);
 
         // Redirect with userId in the URL
-        res.redirect(`/?userId=${user._id}`);
+        res.redirect(`/`);
     } catch (error) {
         console.error("Login error:", error);
         res.status(500).send("Server Error");
