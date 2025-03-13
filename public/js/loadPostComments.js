@@ -37,7 +37,7 @@ function loadPost() {
         postContent += `
                 <!-- REPLY USER -->
                 <!-- TO CHANGE: href link -->
-                <div id="reply-to-msg" style="margin-left: 5px;">
+                <div id="reply-to-msg" style="margin-left: 0px;">
                     This is a reply to a deleted post or user.
                 </div>
         `
