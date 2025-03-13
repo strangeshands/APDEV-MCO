@@ -8,7 +8,6 @@ const fs = require('fs');           // For file deletion
 
 // TEMPORARY; sub for session
 const active = require('../activeUser');
-const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
 
 /**
  *  Getting specific post and its comments
@@ -32,9 +31,9 @@ const post_details = async (req, res) => {
             // if null, profile is not found
             if (!activeUserDetails) {
                 return res.render('errorPageTemplate', {
-                header: "Profile not found.",
-                emotion: null,
-                description: "This account may be deleted."
+                    header: "Profile not found.",
+                    emotion: null,
+                    description: "This account may be deleted."
                 });
             }
             
@@ -150,12 +149,15 @@ const post_create_get = (req, res) => {
  *  Sends data from the new post to the db
  */
 const post_create_post = async (req, res) => {
-    console.log("iwenthere");
     const formData = req.body;
     const postAuthor = await User.findById(active.getActiveUser());
 
     if (!postAuthor) {
-        return res.status(404).send("User not found");
+        return res.render('errorPageTemplate', {
+                header: "You are not logged in.",
+                emotion: "Oops. Cannot perform action.",
+                description: "Please log in to like a post."
+            });
     }
 
     let tags = req.body.tags;
@@ -163,7 +165,9 @@ const post_create_post = async (req, res) => {
         tags = tags
             .split(',')
             .map(tag => tag.trim())
-            .filter(tag => tag && tag !== '#'); 
+            .filter(tag => tag.length > 1); 
+    } else {
+        tags = []
     }
 
     let imagePaths = [];
@@ -210,7 +214,7 @@ const post_create_post = async (req, res) => {
         tags: tags
     };
 
-    console.log(postData);
+    //console.log(postData);
     
     try {
         const post = new Post(postData);
@@ -226,7 +230,10 @@ const post_create_post = async (req, res) => {
         const userPosts = await Post.find({ author: postAuthor });
         let allUserTags = userPosts.flatMap(post => post.tags);
         allUserTags = Array.from(
-            new Set(allUserTags.map(tag => tag.toLowerCase()))
+            new Set(allUserTags
+                    .map(tag => tag.toLowerCase()
+                    .filter(tag => tag.length > 1)
+                    ))
         );
         await User.updateOne(
             { _id: postAuthor },
@@ -284,12 +291,16 @@ const editPostSave = async (req, res) => {
     var forDelete = [];
 
     let tags = req.body.tags;
+    console.log("TAGS: ", tags.length);
     if (tags) {
         tags = tags
             .split(',')
             .map(tag => tag.trim())
-            .filter(tag => tag && tag !== '#'); 
+            .filter(tag => tag.length > 1); 
+    } else {
+        tags = []
     }
+    console.log("FILTERED TAGS: ", tags.length);
     
     images.forEach(img => {
         var res = existingImages.some(exist => {
@@ -368,7 +379,8 @@ const editPostSave = async (req, res) => {
         images: updatedImages,
         tags 
     };
-    //console.log("Updated Post Data:", updatedPostData);
+    console.log("Updated Post Data:", updatedPostData);
+    console.log(tags);
 
     try {
         await Post.updateOne({ _id: postId }, { $set: updatedPostData });

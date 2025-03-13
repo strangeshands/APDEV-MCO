@@ -434,9 +434,9 @@ const editProfileLoad = async(req,res) => {
 
     if (!activeUserDetails) {
         return res.render('errorPageTemplate', {
-            header: "You are not logged in.",
-            emotion: "Oops. Cannot perform action.",
-            description: "Please log in to perform this action."
+                header: "You are not logged in.",
+                emotion: "Oops. Cannot perform action.",
+                description: "Please log in to perform this action."
             });
     }
     
