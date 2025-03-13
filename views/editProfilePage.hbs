@@ -41,16 +41,16 @@
                          <button class="discard" onclick="window.location.href='/profile/{{activeUserDetails.username}}?userId={{activeUserDetails._id}}';">
                               Back
                          </button>
-                    </div>
 
-                    <div class="col1-sub-container"> 
+                         <div class="row-brk"></div>
+
                          <button class="delete-account" onclick="openDeleteModal()">
                               Delete Account
                          </button>
                     </div>
 
                     <!-- Delete Modal -->
-                    <div id="deleteModal">
+                    <div id="deleteModal" style="margin-left: 20px; margin-top: -10px;">
                          <div class="delete-modal">
                               <h3>Confirm Deletion</h3>
                               <p id="delete-msg">Are you sure you want to delete your account? This action cannot be undone.</p>
