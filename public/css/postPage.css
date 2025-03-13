@@ -1,7 +1,7 @@
 /* ----- Override General Style ----- */
 .postActions {
     margin-top: 10px;
-    margin-bottom: -10px;
+    margin-bottom: 0px;
 }
 
 button {
@@ -48,7 +48,7 @@ main {
 #post {
     background-color: #1A1A1A;
     border-radius: 16px;
-    padding: 24px;
+    padding: 24px 24px 10px 24px;
     width: 100%;
 }
 
@@ -189,12 +189,20 @@ main {
 }
 
 #comments {
-    margin-top: 32px;
+    width: 95%;
+    margin-top: 0px;
+    margin: auto;
 }
 
 .comment {
     padding: 16px 0;
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+#comments-container {
+    width: 100%;
+    display: block;
+    margin: auto;
 }
 
 .replyTo {

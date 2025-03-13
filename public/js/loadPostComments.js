@@ -54,7 +54,7 @@ function loadPost() {
     postContent += `
         <!-- USER DETAILS -->
         <div class="pfpuserrow" id="comment-pfpuserrow-00">
-            <div id="userandpfp" onclick="window.location.href='/profile/${mainPost.author.username}?userId=${activeId}'" style="cursor: pointer;">
+            <div id="userandpfp" onclick="window.location.href='/profile/${mainPost.author.username}'" style="cursor: pointer;">
                 <div class="pfpPost">
                 <img src="${mainPost.author.profilepic}" />
                 </div>
@@ -149,8 +149,7 @@ function loadComments() {
 
     if (!postsArray || postsArray.length === 0) {
          container.innerHTML = `
-                <br>
-                <p class="no-post-msg">No comments yet for this post.</p>
+                <p class="no-post-msg" style="margin-top:0px">No comments yet for this post.</p>
          `;
          return;
     }
