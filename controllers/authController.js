@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const User = require('../models/users');
 
 // Temporary substitute to session
