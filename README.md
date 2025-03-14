@@ -7,8 +7,25 @@
 + **js/profile1-data.js** : includes multiple profiles; modify comments to test
 + **index.html** : load this file to start the app
 
+#### FOR MCO Phase 2
++ **Install dependencies (npm install)**
+  + express
+  + morgan
+  + mongoose
+  + hbs
+  + moment
+  + body-parser
+  + bcrypt
+  + express-fileupload
+ 
+  `npm install express morgan mongoose hbs moment body-parser bcrypt express-fileupload`
+  
++ **General Account, please sign in with this if needed**
+  + username: AkoSiDarna
+  + password: narda
+
 ##### Submitted By:
 + CHUA, Hanielle
 + KELSEY, Gabrielle
-+ SANTOS, Francine
++ ~~SANTOS, Francine~~
 + TOLENTINO, Hephzi
