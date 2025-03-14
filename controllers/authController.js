@@ -66,10 +66,10 @@ const signupUser = async (req, res) => {
         // Strong password and reach character requirement
         const passwordPattern = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/;
         if (!passwordPattern.test(password)) {
-            return res.render('signupPage', { error: "Please choose a stronger password." });
+            return res.render('signupPage', { error: "Please choose a stronger password. At least 8 characters, must include a symbol, number, and uppercase letter." });
         }
         if (password.length < 8) {
-            return res.render('signupPage', { error: "Please choose a longer password." });
+            return res.render('signupPage', { error: "Please choose a longer password. At least 8 characters." });
         }
 
         // Verify if password and passwordConf are the same
