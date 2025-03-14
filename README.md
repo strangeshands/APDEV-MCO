@@ -1,7 +1,3 @@
-Here’s an improved version of the README for MCO Phase 2 with the requested updates:
-
----
-
 ## Repository for CCAPDEV MCO (Phase 1 to 3)
 
 ### **MCO Phase 1**
