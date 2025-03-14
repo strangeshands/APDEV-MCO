@@ -478,7 +478,7 @@ const updateUserDetails = async(req,res) => {
 
         // checker for button feedback
         var overallstatus = true;
-        var errorMessageButton = '';
+        var errorMessageUserButton = '';
 
         /**
          *  username should be unique
@@ -573,10 +573,10 @@ const updateUserDetails = async(req,res) => {
                 activeUserDetails.bio = newBio;
             }
 
-            errorMessageButton = "You have saved your changes. Please refresh your page."
+            errorMessageUserButton = "You have saved your changes. Please refresh your page."
         }
         else
-            errorMessageButton = "Cannot procceed. Please check your input."
+            errorMessageUserButton = "Cannot procceed. Please check your input."
 
         return res.json({ 
             newUserChanged,
@@ -585,7 +585,7 @@ const updateUserDetails = async(req,res) => {
             errorMessageUser,
             errorMessageDN,
             errorMessageBio,
-            errorMessageButton
+            errorMessageUserButton
         });
     } catch(err) {
         return res.render('errorPageTemplate', {
@@ -675,19 +675,17 @@ const updateAccountInfo = async(req,res) => {
             const passwordPattern = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/;
 
             if (!passwordPattern.test(newPass)) {
-                errorMessagePass = "Include number, uppercase letter, and a symbol.";
+                errorMessagePasswordButton = "Include number, uppercase letter, and a symbol.";
 
                 cpPass = false;
                 overallstatus = false;
             }
             if (newPass.length < 8) {
-                errorMessagePass = "Please choose a longer password.";
+                errorMessagePasswordButton = "Please choose a longer password.";
 
                 cpPass = false;
                 overallstatus = false;
             }
-
-            errorMessageAccInfoButton = "You have saved your changes. Please refresh the page."
         }
 
         if (overallstatus) {
@@ -709,6 +707,8 @@ const updateAccountInfo = async(req,res) => {
                 errorMessageNum = newNum + ' is your new phone number!';
                 activeUserDetails.phone = newNum;
             }
+
+            errorMessageAccInfoButton = "You have saved your changes. Please refresh the page."
         }
         else {
             errorMessageAccInfoButton = "Please check your input."
@@ -721,7 +721,7 @@ const updateAccountInfo = async(req,res) => {
             );
 
             activeUserDetails.password = newPass;
-            errorMessagePasswordButton = "Successfully updated your password."
+            errorMessagePasswordButton = "Successfully updated your password. Please refresh the page."
         }
 
         // Return messages
