@@ -170,7 +170,7 @@ const homePage = async (req, res) => {
             return res.status(404).send("User not found");
         }
 
-        res.render('homeTemp', {
+        res.render('homePage', {
             title: 'Home',
             post: allPosts,
             user,
@@ -198,7 +198,7 @@ const homePage = (req, res) => {
         .populate('author') // This will populate the 'author' field with user data
         .exec()
         .then((result) => {
-            res.render('homeTemp', { title: 'Home', post: result});  // sends db data to html file
+            res.render('homePage', { title: 'Home', post: result});  // sends db data to html file
         })
         .catch((err) => {
             console.log(err)
