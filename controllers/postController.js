@@ -231,9 +231,8 @@ const post_create_post = async (req, res) => {
         let allUserTags = userPosts.flatMap(post => post.tags);
         allUserTags = Array.from(
             new Set(allUserTags
-                    .map(tag => tag.toLowerCase()
-                    .filter(tag => tag.length > 1)
-                    ))
+                    .map(tag => tag.toLowerCase())
+                    .filter(tag => tag.length > 1))
         );
         await User.updateOne(
             { _id: postAuthor },
@@ -391,6 +390,7 @@ const editPostSave = async (req, res) => {
         allUserTags = Array.from(
             new Set(allUserTags.map(tag => tag.toLowerCase()))
         );
+        console.log(allUserTags);
         await User.updateOne(
             { _id: existingPost.author },
             { $set: { tags: allUserTags } }
