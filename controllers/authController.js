@@ -77,11 +77,15 @@ const signupUser = async (req, res) => {
             return res.render('signupPage', { error: "Passwords don't match." });
         }
 
+        // Ensure username has a consistent format
+        const formattedUsername = username.startsWith('@') ? username.trim() : `@${username.trim()}`;
+
         // Verify if username is in use
-        const existingUser = await User.findOne({ username: username });
+        const existingUser = await User.findOne({ username: formattedUsername });
         if (existingUser) {
             return res.render('signupPage', { error: "Username is already in use." });
         }
+
 
         // Verify if email is in use
         const existingEmail = await User.findOne({ email: email });
@@ -103,7 +107,7 @@ const signupUser = async (req, res) => {
         }
 
         // Create a new user
-        const newUser = new User({ email, phone: formattedPhone, username, displayname, password });
+        const newUser = new User({ email, phone: formattedPhone, username: formattedUsername, displayname, password });
         await newUser.save();
         
         res.redirect('/login');
