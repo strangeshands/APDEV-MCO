@@ -29,6 +29,16 @@ main {
 /* ---------- BACK BUTTON ---------- */
 
 /* ---------- MAIN ---------- */
+.feedback {
+    display: flex;
+    width: 100%;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    align-items: end;
+    justify-content: end;
+}
+
 /* Post Container */
 .post {
     background-color: #1A1A1A;

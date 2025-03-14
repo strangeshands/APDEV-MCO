@@ -573,7 +573,7 @@ const updateUserDetails = async(req,res) => {
                 activeUserDetails.bio = newBio;
             }
 
-            errorMessageButton = "You have saved your changes."
+            errorMessageButton = "You have saved your changes. Please refresh your page."
         }
         else
             errorMessageButton = "Cannot procceed. Please check your input."
@@ -687,7 +687,7 @@ const updateAccountInfo = async(req,res) => {
                 overallstatus = false;
             }
 
-            errorMessageAccInfoButton = "You have saved your changes."
+            errorMessageAccInfoButton = "You have saved your changes. Please refresh the page."
         }
 
         if (overallstatus) {

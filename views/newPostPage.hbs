@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Connectify - {{title}}</title>
+        {{#if title}}
+            <title>Connectify - {{title}}</title>
+        {{/if}}
+        <title>Connectify - Share your thoughts!</title>
         <link rel="icon" href="/resources/Logo.svg" type="image/svg+xml">
         
         <!-- CSS -->
@@ -121,6 +124,9 @@
                             </button>
                         </div>
                         <!-- POST BUTTON -->
+                        {{#if feedback}}
+                                <div class="feedback"> {{feedback}}</div>
+                        {{/if}}
                         {{#if post}}
                             <button type="submit" class="postButton" id="postButton">Save Changes</button>
                         {{else}}

@@ -132,17 +132,23 @@ const post_details = async (req, res) => {
 /**
  *  Renders the page for creating a new post
  */
-const post_create_get = (req, res) => {
+const post_create_get = async (req, res) => {
     var activeUser = active.getActiveUser();
-    User.findById(activeUser)
-        .exec()
-        .then((result) => {
-            activeUserDetails = result;
-            res.render('newPostPage', { post: null, activeUserDetails, title: 'New Post' });
-        })
-        .catch((err) => {
-            res.status(404).render('errorPage');
+    if (activeUser) {
+        let feedback = req.query.feedback;
+        let msg = "";
+
+        if (feedback == "nopost")
+            msg = "Cannot post nothing, buddy."
+        activeUserDetails = await User.findById(activeUser);
+        res.render('newPostPage', { post: null, activeUserDetails, title: 'New Post', feedback: msg });
+    } else {
+        return res.render('errorPageTemplate', {
+            header: "You are not logged in.",
+            emotion: "Oops. Cannot perform action.",
+            description: "Please log in to like a post."
         });
+    }
 };
 
 /** 
@@ -151,6 +157,10 @@ const post_create_get = (req, res) => {
 const post_create_post = async (req, res) => {
     const formData = req.body;
     const postAuthor = await User.findById(active.getActiveUser());
+    
+    if (!formData.title || !formData.content) {
+        return res.redirect('/posts/create?feedback=nopost');
+    }
 
     if (!postAuthor) {
         return res.render('errorPageTemplate', {
@@ -563,9 +573,14 @@ const reply_create_get = async (req, res) => {
     
     // TEMPORARY; sub for session
     const activeUser = active.getActiveUser();
-    const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
     
     try {
+        let feedback = req.query.feedback;
+        let msg = "";
+
+        if (feedback == "nopost")
+            msg = "Cannot reply nothing, buddy."
+
         // Find the post being replied to
         var post = await Post.findById(postId)
             .populate('author')
@@ -591,13 +606,14 @@ const reply_create_get = async (req, res) => {
         res.render('replyPage', {
             title: 'Reply',
             post,
-            activeUserDetails
+            activeUserDetails,
+            feedback: msg
         });
     } catch (error) {
         console.error(error);
         res.status(500).render('errorPageTemplate', {
             header: "Server Error",
-            emotion: "sad",
+            emotion: null,
             description: "An error occurred while loading the reply page. Please try again later."
         });
     }
@@ -612,7 +628,10 @@ const reply_create_post = async (req, res) => {
     
     // TEMPORARY; sub for session
     const activeUser = active.getActiveUser();
-    const tempUserId = "67b9fd7ab7db71f6ae3b21d4";
+
+    if (!formData.content) {
+        return res.redirect(`/posts/reply/${postId}?feedback=nopost`);
+    }
     
     try {
         // Get the post being replied to

@@ -4,8 +4,6 @@ const User = require('../models/users');
 // Temporary substitute to session
 const active = require('../activeUser');
 
-// NOTE: bcrypt not used yet and no sessions implemented (user in url)
-
 // Render login page
 const renderLoginPage = (req, res) => {
     res.render('loginPage', { title: "Log In" });
@@ -59,15 +57,30 @@ const signupUser = async (req, res) => {
     try {
         const { email, phone, username, displayname, password, confirmpass } = req.body;
 
+        // Valid email
+        const allowedDomains = /^[^\s@]+@(gmail\.com|yahoo\.com)$/i;
+        if (!allowedDomains.test(email)) {
+            return res.render('signupPage', { error: "Please enter a valid email." });
+        }
+
+        // Strong password and reach character requirement
+        const passwordPattern = /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>]).+$/;
+        if (!passwordPattern.test(password)) {
+            return res.render('signupPage', { error: "Please choose a stronger password." });
+        }
+        if (password.length < 8) {
+            return res.render('signupPage', { error: "Please choose a longer password." });
+        }
+
         // Verify if password and passwordConf are the same
         if (password !== confirmpass) {
-            return res.render('signupPage', { error: "Password and confirm password input should be the same" });
+            return res.render('signupPage', { error: "Passwords don't match." });
         }
 
         // Verify if username is in use
         const existingUser = await User.findOne({ username: username });
         if (existingUser) {
-            return res.render('signupPage', { error: "Username is already in use" });
+            return res.render('signupPage', { error: "Username is already in use." });
         }
 
         // Verify if email is in use
@@ -76,14 +89,21 @@ const signupUser = async (req, res) => {
             return res.render('signupPage', { error: "Email is already in use" });
         }
 
+        // Valid phone number
+        let phoneClean = phone.replace(/\s+/g, '');
+        if (phoneClean.length != 11) {
+            return res.render('signupPage', { error: "Phone number is invalid." });
+        }
+
         // Verify if phone number is in use
-        const existingPhone = await User.findOne({ phone: phone });
+        let formattedPhone = phone.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3");
+        const existingPhone = await User.findOne({ phone: formattedPhone });
         if (existingPhone) {
-            return res.render('signupPage', { error: "Phone Number is already in use" });
+            return res.render('signupPage', { error: "Phone number is already in use." });
         }
 
         // Create a new user
-        const newUser = new User({ email, phone, username, displayname, password });
+        const newUser = new User({ email, phone: formattedPhone, username, displayname, password });
         await newUser.save();
         
         res.redirect('/login');

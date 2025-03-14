@@ -139,6 +139,9 @@
                             <img src="/resources/ImageAdd.svg" alt="Add Image">
                         </button>
                         
+                        {{#if feedback}}
+                                <div class="feedback"> {{feedback}}</div>
+                        {{/if}}
                         <button type="submit" class="commentButton">Comment</button>
                     </div>
                 </form>
