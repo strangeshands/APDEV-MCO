@@ -186,19 +186,6 @@ function saveUserDetails() {
     const newDisplayName = document.getElementById('display-name').value;
     const newBio = document.getElementById('bio').value;
 
-    /*if (newUser === activeUserDetails.username) {
-        document.getElementById('username-feedback').textContent = "This is already your username.";
-        change = false;
-    }
-    if (newDisplayName === activeUserDetails.displayname) {
-        document.getElementById('dn-feedback').textContent = "This is already your display name.";
-        change = false;
-    }
-    if (newBio === activeUserDetails.bio) {
-        document.getElementById('bio-feedback').textContent = "This is already your bio.";
-        change = false;
-    }*/
-
     if (change) {
         /**
          *  [MCO P3]
@@ -217,9 +204,10 @@ function saveUserDetails() {
         })
         .then(response => response.json())
         .then(data => {
+            activeUserDetails = data.updatedUser;
+
             // This should reload the page if the username is changed
             if (data.newUserChanged) {
-                activeUserDetails.username = data.newUser;
                 window.location.href = `/edit-profile/${activeUserDetails.username}`;
             }
 
@@ -227,7 +215,15 @@ function saveUserDetails() {
             document.getElementById('dn-feedback').textContent = data.errorMessageDN;
             document.getElementById('bio-feedback').textContent = data.errorMessageBio;
             document.getElementById('save-changes-feedback').textContent = data.errorMessageButton;
+
+            document.getElementById('username').placeholder = activeUserDetails.username;
+            document.getElementById('display-name').placeholder = activeUserDetails.displayname;
+            document.getElementById('bio').placeholder = activeUserDetails.bio;
         });
+
+        document.getElementById('username').value = "";
+        document.getElementById('display-name').value = "";
+        document.getElementById('bio').value = "";
     }
 }
 
@@ -272,10 +268,18 @@ function saveAccountInfo() {
         })
         .then(response => response.json())
         .then(data => {
+            activeUserDetails = data.updatedUser;
+
             document.getElementById('email-feedback').textContent = data.errorMessageEmail;
             document.getElementById('tel-feedback').textContent = data.errorMessageNum;
             document.getElementById('update-acc-feedback').textContent = data.errorMessageAccInfoButton;
+
+            document.getElementById('email').placeholder = activeUserDetails.email;
+            document.getElementById('tel-number').placeholder = activeUserDetails.phone;
         });
+
+        document.getElementById('email').value = "";
+        document.getElementById('tel-number').value = "";
     }
 }
 
@@ -283,26 +287,26 @@ function saveAccountInfo() {
  *  [DONE/DEBUGGED] allows changing of passwords
  */
 function changePassword() {
+    console.log(activeUserDetails);
     var currentPass = document.getElementById('curr-password').value;
     var newPass = document.getElementById('password').value;
-    var repeatPass = document.getElementById('confirm-password').value;
+    var repeatPass = document.getElementById('confPass').value;
 
     let change = true;
 
-    if (currentPass != activeUserDetails.password) {
-        console.log(activeUserDetails.password);
-        console.log(currentPass);
+    console.log(currentPass, newPass, repeatPass);
+
+    if (currentPass !== activeUserDetails.password) {
         document.getElementById('update-pw-feedback').textContent = "Your entry does not match your current password.";
         change = false;
     }
 
-    if (newPass == activeUserDetails.password) {
-        console.log(activeUserDetails.password);
-        document.getElementById('update-pw-feedback').textContent = "Please choose a different password.";
+    if (newPass === activeUserDetails.password) {
+        document.getElementById('pw-feedback').textContent = "Please choose a different password.";
         change = false;
     }
 
-    if (newPass == repeatPass) {
+    if (repeatPass && newPass !== repeatPass) {
         document.getElementById('cpw-feedback').textContent = "Your entries do not match.";
         document.getElementById('update-pw-feedback').textContent = "";
         change = false;
@@ -324,7 +328,14 @@ function changePassword() {
         .then(response => response.json())
         .then(data => {
             document.getElementById('update-pw-feedback').textContent = data.errorMessagePasswordButton;
+
+            document.getElementById('pw-feedback').textContent = "";
+            document.getElementById('cpw-feedback').textContent = "";
         });
+
+        document.getElementById('curr-password').value = "";
+        document.getElementById('password').value = "";
+        document.getElementById('confPass').value = "";
     }
 }
 

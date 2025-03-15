@@ -140,6 +140,11 @@ const post_create_get = async (req, res) => {
 
         if (feedback == "nopost")
             msg = "Cannot post nothing, buddy."
+        else if (feedback == "notitle")
+            msg = "Hmm, your post needs a title."
+        else if (feedback == "nocontent")
+            msg = "Hmm, care to add more details?"
+
         activeUserDetails = await User.findById(activeUser);
         res.render('newPostPage', { post: null, activeUserDetails, title: 'New Post', feedback: msg });
     } else {
@@ -158,8 +163,12 @@ const post_create_post = async (req, res) => {
     const formData = req.body;
     const postAuthor = await User.findById(active.getActiveUser());
     
-    if (!formData.title || !formData.content) {
+    if (!formData.title && !formData.content) {
         return res.redirect('/posts/create?feedback=nopost');
+    } else if (!formData.title) {
+        return res.redirect('/posts/create?feedback=notitle');
+    } else if (!formData.content) {
+        return res.redirect('/posts/create?feedback=nocontent');
     }
 
     if (!postAuthor) {

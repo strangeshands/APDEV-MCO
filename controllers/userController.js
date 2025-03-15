@@ -582,6 +582,8 @@ const updateUserDetails = async(req,res) => {
             newUserChanged,
             newUser,
 
+            updatedUser: activeUserDetails,
+
             errorMessageUser,
             errorMessageDN,
             errorMessageBio,
@@ -726,6 +728,8 @@ const updateAccountInfo = async(req,res) => {
 
         // Return messages
         return res.json({ 
+            updatedUser: activeUserDetails,
+            
             errorMessageEmail,
             errorMessageNum,
             errorMessagePass,
