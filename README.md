@@ -22,7 +22,7 @@ For **Phase 2**, the application is built using Node.js and Express. Below are t
 - **/views**: Folder for Handlebars (`hbs`) files used for rendering the frontend templates.
 - **/public**: Contains static assets like CSS, JavaScript, resources, and uploaded files.
 
-### **Installation**
+#### **Installation**
 
 Before starting the application, ensure you have Node.js and npm installed. To install the required dependencies, run the following command:
 
@@ -39,6 +39,11 @@ This will install the following packages:
 - **moment**: A library for parsing, validating, manipulating, and formatting dates.
 - **body-parser**: Middleware for parsing incoming request bodies.
 - **express-fileupload**: Middleware to handle file uploads.
+
+#### **Log In**
+- please use these details if you wish to log in:
+  - username: AkoSiDarna
+  - password: narda
 
 ### **Submitted By:**
 - **CHUA, Hanielle**
