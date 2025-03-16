@@ -57,7 +57,7 @@
             
             <!-- BACK BUTTON -->
             {{#if origin}}
-                <div class="goBackLink" onclick="window.history.back()"> 
+                <div class="goBackLink" onclick="window.location.href=`/profile/{{post.author.username}}`"> 
             {{else}}
                 <div class="goBackLink" onclick="window.location.href='/'"> 
             {{/if}}

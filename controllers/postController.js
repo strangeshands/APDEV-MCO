@@ -267,29 +267,38 @@ const editPostLoad = async(req,res) => {
     // FOR MCO P3: replace with req.session.id;
     var activeUser = active.getActiveUser();
 
-    // there should be an active user to delete a post
-    if (!activeUser) 
-        return res.render('errorPageTemplate', {
-        header: "You are not logged in.",
-        emotion: "Oops. Cannot perform action.",
-        description: "Please log in to edit a post."
-        });
+    try {
+        if (activeUser) {
+            let feedback = req.query.feedback;
+            let msg = "";
 
-    if (activeUser) {
-        activeUserDetails = await User.findById(activeUser);
+            if (feedback == "nopost")
+                msg = "Cannot post nothing, buddy."
+            else if (feedback == "notitle")
+                msg = "Hmm, your post needs a title."
+            else if (feedback == "nocontent")
+                msg = "Hmm, care to add more details?"
 
-        // if null, profile is not found
-        if (!activeUserDetails) {
-            return res.render('errorPageTemplate', {
-            header: "Profile not found.",
-            emotion: null,
-            description: "This account may be deleted."
-            });
+            activeUserDetails = await User.findById(activeUser);
+            // if null, profile is not found
+            if (!activeUserDetails) {
+                return res.render('errorPageTemplate', {
+                    header: "Profile not found.",
+                    emotion: null,
+                    description: "This account may be deleted."
+                });
+            }
+
+            var post = await Post.findById(postId);
+            res.render('newPostPage', {post, activeUserDetails, feedback:msg});
         }
+    } catch(err) {
+        res.status(500).render('errorPageTemplate', {
+            header: "Server Error",
+            emotion: null,
+            description: "An error occurred. Please try again later."
+        });
     }
-
-    var post = await Post.findById(postId);
-    res.render('newPostPage', {post, activeUserDetails});
 };
 
 const editPostSave = async (req, res) => {
@@ -297,11 +306,11 @@ const editPostSave = async (req, res) => {
     const formData = req.body;
 
     if (!formData.title && !formData.content) {
-        return res.redirect('/posts/create?feedback=nopost');
+        return res.redirect(`/posts/edit/${postId}?feedback=nopost`);
     } else if (!formData.title) {
-        return res.redirect('/posts/create?feedback=notitle');
+        return res.redirect(`/posts/edit/${postId}?feedback=notitle`);
     } else if (!formData.content) {
-        return res.redirect('/posts/create?feedback=nocontent');
+        return res.redirect(`/posts/edit/${postId}?feedback=nocontent`);
     }
     
     var images = Array.isArray(req.files?.images) 

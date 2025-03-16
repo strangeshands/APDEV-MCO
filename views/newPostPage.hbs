@@ -40,7 +40,11 @@
 
         <main>
             <!-- BACK BUTTON -->
-            <div class="goBackLink" onclick="window.location.href='/?userId=67b9fd7ab7db71f6ae3b21d4'"> <!-- TEMP USER -->
+            {{#if post}}
+            <div class="goBackLink" onclick="window.location.href=`/posts/{{post._id}}`">
+            {{else}}
+            <div class="goBackLink" onclick="window.location.href='/'">
+            {{/if}}
                 <span class="arrow">&#8604;</span>
                 <span class="back">Back</span>
             </div>
