@@ -295,6 +295,15 @@ const editPostLoad = async(req,res) => {
 const editPostSave = async (req, res) => {
     const postId = req.params.postId;
     const formData = req.body;
+
+    if (!formData.title && !formData.content) {
+        return res.redirect('/posts/create?feedback=nopost');
+    } else if (!formData.title) {
+        return res.redirect('/posts/create?feedback=notitle');
+    } else if (!formData.content) {
+        return res.redirect('/posts/create?feedback=nocontent');
+    }
+    
     var images = Array.isArray(req.files?.images) 
                 ? req.files.images 
                 : req.files?.images 
