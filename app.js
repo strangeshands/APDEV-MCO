@@ -23,9 +23,8 @@ const app = express();
 // ----- Session Proper ----- //
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const MongoDBStore = require("connect-mongodb-session")(session);
 
-// ----- Setup Session Store in MongoDB ----- //
+// ----- Setup Session ----- //
 app.use(cookieParser());
 app.use(
     session({
@@ -114,6 +113,9 @@ const dbURI = 'mongodb+srv://ConnectifyAdmin:apdevgorlz@connectify.2pt1b.mongodb
 const store = new MongoDBStore({
     uri: dbURI,
     collection: "sessions", 
+});
+store.on("error", (error) => {
+    console.error("Session Store Error:", error);
 });
 
 mongoose.connect(dbURI)
