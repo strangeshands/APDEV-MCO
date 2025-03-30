@@ -15,9 +15,28 @@ const mongoose = require('mongoose');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
+
 /* --------------------- */
 
 const app = express();
+
+// ----- Session Proper ----- //
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+
+app.use(cookieParser());
+app.use(
+    session({
+        secret: "secret-key", 
+        resave: false,        
+        saveUninitialized: false,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, 
+            httpOnly: true, 
+            secure: false,
+        }
+    })
+);
 
 // ----- Middleware & Static Files ----- //
 app.use(express.static('public'));                  // everything in the given dir is accessible (great for css and images)
