@@ -1,6 +1,6 @@
 const User = require('../models/users');
 
-// Temporary substitute to session
+// active user module
 const active = require('../activeUser');
 
 // Render login page
@@ -27,9 +27,9 @@ const loginUser = async (req, res) => {
          *  [FOR P3]
          *  > set this one to req.session.id = user.id;
          */
-        active.setActiveUser(user._id);
+        req.session.user = user;
+        active.setActiveUser(req.session.user);
 
-        // Redirect with userId in the URL
         res.redirect(`/`);
     } catch (error) {
         console.error("Login error:", error);
@@ -40,14 +40,18 @@ const loginUser = async (req, res) => {
 // Handle logout (simply redirect to login for now)
 const logoutUser = (req, res) => {
     // FOR MCO P3: change to destroy
+    req.session.destroy()
     active.clearActiveUser();
+
     res.redirect('/login');
 };
 
 // Render signup page
 const renderSignupPage = (req, res) => {
     // FOR MCO P3: change to destroy
+    req.session.destroy()
     active.clearActiveUser();
+
     res.render('signupPage', { title: "Sign Up" });
 };
 
