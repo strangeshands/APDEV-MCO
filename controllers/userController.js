@@ -5,9 +5,6 @@ const likes = require('../models/likes');
 const moment = require('moment');   // For time display
 const path = require("path");
 
-// Temporary substitute to session
-const active = require('../activeUser');
-
 /**
  *  Loads the profile of the user
  */
@@ -50,7 +47,7 @@ const loadUserProfile = async(req,res) => {
          *  [MCO P3]
          *  For P3, change this to req.session.id
          */
-        activeUser = active.getActiveUser();
+        activeUser = req.session.user;
 
         // if null, meaning there is no active user
         if (activeUser) {
@@ -261,7 +258,7 @@ const updateBookmark = async(req,res) => {
         var { postId, action } = req.body;
 
         // FOR MCO P3: change to req.session.id
-        var activeUserDetails = active.getActiveUser();
+        var activeUserDetails = req.session.user;
         // just to ensure it exists in the db
         activeUserDetails = await users.findById(activeUserDetails);
 
@@ -302,7 +299,7 @@ const updateLike = async(req, res) => {
         const selectedPost = await posts.findById(postId);
 
         // FOR MCO P3: change to req.session.id
-        var activeUserDetails = active.getActiveUser();
+        var activeUserDetails = req.session.user;
         // just to ensure it exists in the db
         activeUserDetails = await users.findById(activeUserDetails);
 
@@ -428,7 +425,7 @@ const updateLike = async(req, res) => {
  */
 const editProfileLoad = async(req,res) => {
     // FOR MCO P3: change to req.session.id
-    var activeUserDetails = active.getActiveUser();
+    var activeUserDetails = req.session.user;
     // just to ensure it exists in the db
     activeUserDetails = await users.findById(activeUserDetails);
 
@@ -453,7 +450,7 @@ const updateUserDetails = async(req,res) => {
         var { newUser, newDisplayName, newBio } = req.body;
 
         // FOR MCO P3: change to req.session.id
-        var activeUserDetails = active.getActiveUser();
+        var activeUserDetails = req.session.user;
         // just to ensure it exists in the db
         activeUserDetails = await users.findById(activeUserDetails);
 
@@ -606,7 +603,7 @@ const updateAccountInfo = async(req,res) => {
         var { newEmail, newNum, newPass } = req.body;
 
         // FOR MCO P3: change to req.session.id
-        var activeUserDetails = active.getActiveUser();
+        var activeUserDetails = req.session.user;
         // just to ensure it exists in the db
         activeUserDetails = await users.findById(activeUserDetails);
 
@@ -751,7 +748,7 @@ const updateAccountInfo = async(req,res) => {
 const changePhoto = async(req,res) => {
     try {
         // FOR MCO P3: change to req.session.id
-        const activeUser = active.getActiveUser();
+        const activeUser = req.session.user;
         // just to ensure it exists in the db
         var activeUserDetails = await users.findOne({ _id:activeUser });
 
@@ -800,7 +797,7 @@ const changePhoto = async(req,res) => {
 const changeHeader = async(req,res) => {
     try {
         // FOR MCO P3: change to req.session.id
-        const activeUser = active.getActiveUser();
+        const activeUser = req.session.user;
         // just to ensure it exists in the db
         var activeUserDetails = await users.findOne({ _id:activeUser });
 
@@ -846,7 +843,7 @@ const changeHeader = async(req,res) => {
 const deleteUser = async(req,res) => {
     try {
         // FOR MCO P3: change to req.session.id
-        const activeUser = active.getActiveUser();
+        const activeUser = req.session.user;
         // just to ensure it exists in the db
         var activeUserDetails = await users.findOne({ _id:activeUser });
 
@@ -887,7 +884,7 @@ const deleteUser = async(req,res) => {
         await users.deleteOne({ _id: activeUser });
 
         // change to destroy
-        active.setActiveUser(null);
+        req.session.destroy();
         res.redirect("/");
     } catch(err) {
         return res.render('errorPageTemplate', {

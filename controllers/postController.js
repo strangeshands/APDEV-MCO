@@ -6,9 +6,6 @@ const moment = require('moment');   // For time display
 const path = require('path');       // For file upload
 const fs = require('fs');           // For file deletion
 
-// TEMPORARY; sub for session
-const active = require('../activeUser');
-
 /**
  *  Getting specific post and its comments
  */
@@ -22,7 +19,7 @@ const post_details = async (req, res) => {
     try {
         const id = req.params.id;
         // FOR MCO P3: replace with req.session.id;
-        var activeUser = active.getActiveUser();
+        var activeUser = req.session.user;
 
         // if null, meaning there is no active user
         if (activeUser) {
@@ -133,7 +130,7 @@ const post_details = async (req, res) => {
  *  Renders the page for creating a new post
  */
 const post_create_get = async (req, res) => {
-    var activeUser = active.getActiveUser();
+    var activeUser = req.session.user;
     if (activeUser) {
         let feedback = req.query.feedback;
         let msg = "";
@@ -161,7 +158,7 @@ const post_create_get = async (req, res) => {
  */
 const post_create_post = async (req, res) => {
     const formData = req.body;
-    const postAuthor = await User.findById(active.getActiveUser());
+    const postAuthor = await User.findById(req.session.user);
     
     if (!formData.title && !formData.content) {
         return res.redirect('/posts/create?feedback=nopost');
@@ -265,7 +262,7 @@ const post_create_post = async (req, res) => {
 const editPostLoad = async(req,res) => {
     const postId = req.params.postId;
     // FOR MCO P3: replace with req.session.id;
-    var activeUser = active.getActiveUser();
+    var activeUser = req.session.user;
 
     try {
         if (activeUser) {
@@ -458,7 +455,7 @@ const deletePost = async(req,res) => {
     try {
         const postId = req.params.postId;
         // FOR MCO P3: change this to req.session.id
-        const activeUser = active.getActiveUser();
+        const activeUser = req.session.user;
 
         // there should be an active user to delete a post
         if (!activeUser) 
@@ -599,7 +596,7 @@ const reply_create_get = async (req, res) => {
     const postId = req.params.id;
     
     // TEMPORARY; sub for session
-    const activeUser = active.getActiveUser();
+    const activeUser = req.session.user;
     
     try {
         let feedback = req.query.feedback;
@@ -654,7 +651,7 @@ const reply_create_post = async (req, res) => {
     const formData = req.body;
     
     // TEMPORARY; sub for session
-    const activeUser = active.getActiveUser();
+    const activeUser = req.session.user;
 
     if (!formData.content) {
         return res.redirect(`/posts/reply/${postId}?feedback=nopost`);
