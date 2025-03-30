@@ -23,6 +23,7 @@ const app = express();
 // ----- Session Proper ----- //
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const MongoDBStore = require("connect-mongodb-session")(session);
 
 // ----- Setup Session ----- //
 app.use(cookieParser());
