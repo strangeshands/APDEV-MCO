@@ -25,21 +25,6 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const MongoDBStore = require("connect-mongodb-session")(session);
 
-// ----- Setup Session ----- //
-app.use(cookieParser());
-app.use(
-    session({
-        secret: "secret-key", 
-        resave: false,        
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24, 
-            httpOnly: true, 
-            secure: false,
-        }
-    })
-);
-
 // ----- Middleware & Static Files ----- //
 app.use(express.static('public'));                  // everything in the given dir is accessible (great for css and images)
 app.use(express.urlencoded({ extended: true }));    // parses the url to an object to be used in te req obj // needed or else obj is undefined
@@ -118,6 +103,22 @@ const store = new MongoDBStore({
 store.on("error", (error) => {
     console.error("Session Store Error:", error);
 });
+
+// ----- Setup Session ----- //
+app.use(cookieParser());
+app.use(
+    session({
+        secret: "secret-key", 
+        resave: false,        
+        saveUninitialized: false,
+        store: store,  // 🔹 Now using MongoDB instead of MemoryStore
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, 
+            httpOnly: true, 
+            secure: false,
+        }
+    })
+);
 
 mongoose.connect(dbURI)
     .then(() => {
