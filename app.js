@@ -23,12 +23,6 @@ const app = express();
 // ----- Session Proper ----- //
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-const MongoDBStore = require("connect-mongodb-session")(session);
-
-const store = new MongoDBStore({
-    uri: dbURI,
-    collection: "sessions", // Stores session data in this MongoDB collection
-});
 
 app.use(cookieParser());
 app.use(
