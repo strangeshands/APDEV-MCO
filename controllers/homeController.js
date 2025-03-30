@@ -2,13 +2,10 @@ const Post = require('../models/posts');
 const User = require('../models/users');
 const Like = require('../models/likes');
 const moment = require('moment');   // For time display
-const activeUserModule = require('../activeUser');
-
-// ---- [START] TEST for Home with NavBar ---- //
 
 const homePage = async (req, res) => {
     try {
-        var activeUser = activeUserModule.getActiveUser();
+        var activeUser = req.session.user;
         if (!activeUser) {
             return res.redirect('/login');
         }
@@ -188,23 +185,6 @@ const homePage = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 };
-
-// ---- [END] TEST for Home with NavBar ---- //
-
-/*
-// Renders the Home Page
-const homePage = (req, res) => {
-    Post.find().sort({ createdAt: -1 }) // sorts to show latest entry
-        .populate('author') // This will populate the 'author' field with user data
-        .exec()
-        .then((result) => {
-            res.render('homePage', { title: 'Home', post: result});  // sends db data to html file
-        })
-        .catch((err) => {
-            console.log(err)
-        });
-};
-*/
 
 const search = async (req, res) => {
     try {
