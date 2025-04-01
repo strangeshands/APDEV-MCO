@@ -13,7 +13,7 @@ const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const hbs = require('hbs');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); //TODO: I think we can remove this
 const fileUpload = require('express-fileupload');
 
 /* --------------------- */

@@ -27,7 +27,7 @@ For **Phase 2**, the application is built using Node.js and Express. Below are t
 Before starting the application, ensure you have Node.js and npm installed. To install the required dependencies, run the following command:
 
 ```bash
-npm install express morgan mongoose hbs moment body-parser express-fileupload
+npm install express morgan mongoose hbs moment body-parser express-fileupload bcrypt
 ```
 
 This will install the following packages:
