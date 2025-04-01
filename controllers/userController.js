@@ -600,7 +600,7 @@ const updateUserDetails = async(req,res) => {
  */
 const updateAccountInfo = async(req,res) => {
     try {
-        var { newEmail, newNum, newPass } = req.body;
+        var { newEmail, newNum, newPass, currentPass } = req.body;
 
         // FOR MCO P3: change to req.session.id
         var activeUserDetails = req.session.user;
@@ -666,7 +666,7 @@ const updateAccountInfo = async(req,res) => {
             }
         }
 
-        if (newPass) {
+        if (newPass && currentPass) {
             // Regular expression to check if the password contains:
             // - At least one number (\d)
             // - At least one uppercase letter ([A-Z])
@@ -684,6 +684,26 @@ const updateAccountInfo = async(req,res) => {
 
                 cpPass = false;
                 overallstatus = false;
+            }
+
+            // Validations with bcrypt
+
+            const isPasswordCorrect = await activeUserDetails.comparePassword(currentPass);
+
+            if (!isPasswordCorrect) {
+                errorMessagePasswordButton = "Your entry does not match your current password.";
+
+                cpPass = false;
+                overallstatus = false;
+            } else {
+                const isPasswordSame = await activeUserDetails.comparePassword(newPass);
+
+                if (isPasswordSame) {
+                    errorMessagePasswordButton = "Please choose a different password.";
+
+                    cpPass = false;
+                    overallstatus = false;
+                }
             }
         }
 

@@ -296,15 +296,18 @@ function changePassword() {
 
     console.log(currentPass, newPass, repeatPass);
 
+    /* TODO: transfer to serverside
     if (currentPass !== activeUserDetails.password) {
         document.getElementById('update-pw-feedback').textContent = "Your entry does not match your current password.";
         change = false;
     }
+    
 
     if (newPass === activeUserDetails.password) {
         document.getElementById('pw-feedback').textContent = "Please choose a different password.";
         change = false;
     }
+    */
 
     if (repeatPass && newPass !== repeatPass) {
         document.getElementById('cpw-feedback').textContent = "Your entries do not match.";
@@ -321,6 +324,7 @@ function changePassword() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
+                currentPass,
                 newPass,
                 activeUserDetails
             })
