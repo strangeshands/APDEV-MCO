@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt'); 
 
 const userSchema = new Schema({
     username: {
@@ -75,6 +76,25 @@ userSchema.pre('save', function (next) {
     }
     next();
 });
+
+// Hash password before saving (only if modified)
+userSchema.pre('save', async function (next) {
+    // Only hash the password if it has been modified (or is new)
+    if (!this.isModified('password')) return next();
+    
+    try {
+        const salt = await bcrypt.genSalt(10); // Generate a salt with 10 rounds
+        this.password = await bcrypt.hash(this.password, salt);
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Method to check password validity
+userSchema.methods.comparePassword = async function(candidatePassword) {
+    return await bcrypt.compare(candidatePassword, this.password);
+};
 
 const User = mongoose.model('User', userSchema); // title name is singular because collection name is plural
 module.exports = User;  // export it
