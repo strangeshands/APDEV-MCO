@@ -714,12 +714,13 @@ const updateAccountInfo = async(req,res) => {
         }
 
         if (cpPass && newPass) {
-            await users.updateOne(
-                { _id: activeUserDetails._id }, 
-                { $set: { password: newPass } }
-            );
+            // Get user model and update password (this triggers pre-save hook)
+            const userToUpdate = await users.findById(activeUserDetails._id);
+            userToUpdate.password = newPass;
+            await userToUpdate.save();
 
-            activeUserDetails.password = newPass;
+            // Update session user
+            activeUserDetails = userToUpdate;
             errorMessagePasswordButton = "Successfully updated your password. Please refresh the page."
         }
 
