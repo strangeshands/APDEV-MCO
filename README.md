@@ -27,7 +27,7 @@ For **Phase 2**, the application is built using Node.js and Express. Below are t
 Before starting the application, ensure you have Node.js and npm installed. To install the required dependencies, run the following command:
 
 ```bash
-npm install express morgan mongoose hbs moment body-parser express-fileupload bcrypt express-session
+npm install express morgan mongoose hbs moment body-parser express-fileupload bcrypt express-session cookie-parser
 ```
 
 This will install the following packages:
@@ -41,6 +41,7 @@ This will install the following packages:
 - **express-fileupload**: Middleware to handle file uploads.
 - **bcrypt**: A library for hashing and comparing passwords securely.
 - **express-session**: Middleware for managing user sessions with a unique session ID.
+- **cookie-parser**: Middleware for parsing cookies attached to incoming requests.
 
 #### **Log In**
 - please use these details if you wish to log in:
