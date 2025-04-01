@@ -1,4 +1,5 @@
 const User = require('../models/users');
+const bcrypt = require('bcrypt'); 
 
 // active user module
 const active = require('../activeUser');
@@ -19,7 +20,14 @@ const loginUser = async (req, res) => {
         // Find user by username
         const user = await User.findOne({ username: formattedUsername.trim() });
 
-        if (!user || user.password !== password) {
+        // Check if user exists
+        if (!user) {
+            return res.render('loginPage', { error: "Invalid username or password" });
+        }
+
+        // Verify password with bcrypt
+        const isPasswordValid = await user.comparePassword(password);
+        if (!isPasswordValid) {
             return res.render('loginPage', { error: "Invalid username or password" });
         }
 
