@@ -39,6 +39,7 @@ This will install the following packages:
 - **moment**: A library for parsing, validating, manipulating, and formatting dates.
 - **body-parser**: Middleware for parsing incoming request bodies.
 - **express-fileupload**: Middleware to handle file uploads.
+- **bcrypt**: A library for hashing and comparing passwords securely.
 
 #### **Log In**
 - please use these details if you wish to log in:
