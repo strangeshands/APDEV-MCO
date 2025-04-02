@@ -15,7 +15,7 @@ For **Phase 2**, the application is built using Node.js and Express. Below are t
   ```bash
   node app.js
   ```
-- alternatively, you can access the deployed app here: https://connectify-y0tq.onrender.com 
+  - alternatively, you can access the deployed app here: https://connectify-y0tq.onrender.com 
 
 - **/controllers**: Contains functions that are called by the routes defined in the application.
 - **/routes**: Includes route definitions that map HTTP requests to the corresponding controller functions.
@@ -28,7 +28,7 @@ For **Phase 2**, the application is built using Node.js and Express. Below are t
 Before starting the application, ensure you have Node.js and npm installed. To install the required dependencies, run the following command:
 
 ```bash
-npm install express morgan mongoose hbs moment body-parser express-fileupload bcrypt express-session cookie-parser
+npm install express morgan mongoose hbs moment body-parser express-fileupload bcrypt express-session cookie-parser connect-mongo
 ```
 
 This will install the following packages:
