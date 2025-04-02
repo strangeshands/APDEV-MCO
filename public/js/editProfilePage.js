@@ -187,10 +187,6 @@ function saveUserDetails() {
     const newBio = document.getElementById('bio').value;
 
     if (change) {
-        /**
-         *  [MCO P3]
-         *  > remove activeUserDetails in the body
-         */
         fetch(`/edit-profile/${activeUserDetails.username}/update-user-details`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -198,8 +194,6 @@ function saveUserDetails() {
                 newUser, 
                 newDisplayName,
                 newBio,
-
-                activeUserDetails
             })
         })
         .then(response => response.json())
@@ -252,18 +246,12 @@ function saveAccountInfo() {
     if (change) {
         newNum = newNum.replace(/(\d{4})(\d{3})(\d{3})/, "$1 $2 $3");
 
-        /**
-         *  [MCO P3]
-         *  > remove activeUserDetails in the body
-         */
         fetch(`/edit-profile/${activeUserDetails.username}/update-acc-info`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 newEmail, 
                 newNum,
-
-                activeUserDetails
             })
         })
         .then(response => response.json())
@@ -296,19 +284,6 @@ function changePassword() {
 
     console.log(currentPass, newPass, repeatPass);
 
-    /* TODO: transfer to serverside
-    if (currentPass !== activeUserDetails.password) {
-        document.getElementById('update-pw-feedback').textContent = "Your entry does not match your current password.";
-        change = false;
-    }
-    
-
-    if (newPass === activeUserDetails.password) {
-        document.getElementById('pw-feedback').textContent = "Please choose a different password.";
-        change = false;
-    }
-    */
-
     if (repeatPass && newPass !== repeatPass) {
         document.getElementById('cpw-feedback').textContent = "Your entries do not match.";
         document.getElementById('update-pw-feedback').textContent = "";
@@ -316,17 +291,12 @@ function changePassword() {
     }
 
     if (change) {
-        /**
-         *  [MCO P3]
-         *  > remove activeUserDetails in the body
-         */
         fetch(`/edit-profile/${activeUserDetails.username}/update-acc-info`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 currentPass,
                 newPass,
-                activeUserDetails
             })
         })
         .then(response => response.json())
