@@ -44,8 +44,7 @@ const loadUserProfile = async(req,res) => {
         profileDetails = await users.findOne({ username: profileSelected });
 
         /**
-         *  [MCO P3]
-         *  For P3, change this to req.session.id
+         *  sets the active user for this function
          */
         activeUser = req.session.user;
 
@@ -257,7 +256,6 @@ const updateBookmark = async(req,res) => {
     try {
         var { postId, action } = req.body;
 
-        // FOR MCO P3: change to req.session.id
         var activeUserDetails = req.session.user;
         // just to ensure it exists in the db
         activeUserDetails = await users.findById(activeUserDetails);
@@ -298,7 +296,6 @@ const updateLike = async(req, res) => {
         var { postId, action } = req.body;
         const selectedPost = await posts.findById(postId);
 
-        // FOR MCO P3: change to req.session.id
         var activeUserDetails = req.session.user;
         // just to ensure it exists in the db
         activeUserDetails = await users.findById(activeUserDetails);
@@ -424,7 +421,6 @@ const updateLike = async(req, res) => {
  *  Loads the edit profile page
  */
 const editProfileLoad = async(req,res) => {
-    // FOR MCO P3: change to req.session.id
     var activeUserDetails = req.session.user;
     // just to ensure it exists in the db
     activeUserDetails = await users.findById(activeUserDetails);
@@ -449,7 +445,6 @@ const updateUserDetails = async(req,res) => {
     try {
         var { newUser, newDisplayName, newBio } = req.body;
 
-        // FOR MCO P3: change to req.session.id
         var activeUserDetails = req.session.user;
         // just to ensure it exists in the db
         activeUserDetails = await users.findById(activeUserDetails);
@@ -602,7 +597,6 @@ const updateAccountInfo = async(req,res) => {
     try {
         var { newEmail, newNum, newPass, currentPass } = req.body;
 
-        // FOR MCO P3: change to req.session.id
         var activeUserDetails = req.session.user;
         // just to ensure it exists in the db
         activeUserDetails = await users.findById(activeUserDetails);
@@ -687,8 +681,13 @@ const updateAccountInfo = async(req,res) => {
             }
 
             // Validations with bcrypt
-
-            const isPasswordCorrect = await activeUserDetails.comparePassword(currentPass);
+            let isPasswordCorrect = await activeUserDetails.comparePassword(currentPass);
+            /*
+                > fail safe to still allow existing accounts with non-hashed passwords to proceed
+                > nontheless, once modified, the new password is already hashed
+            */
+            if (!isPasswordCorrect)
+                isPasswordCorrect = currentPass === activeUserDetails.password;
 
             if (!isPasswordCorrect) {
                 errorMessagePasswordButton = "Your entry does not match your current password.";
@@ -736,7 +735,7 @@ const updateAccountInfo = async(req,res) => {
         if (cpPass && newPass) {
             // Get user model and update password (this triggers pre-save hook)
             const userToUpdate = await users.findById(activeUserDetails._id);
-            userToUpdate.password = newPass;
+            userToUpdate.set('password', newPass);
             await userToUpdate.save();
 
             // Update session user
@@ -768,7 +767,6 @@ const updateAccountInfo = async(req,res) => {
  */
 const changePhoto = async(req,res) => {
     try {
-        // FOR MCO P3: change to req.session.id
         const activeUser = req.session.user;
         // just to ensure it exists in the db
         var activeUserDetails = await users.findOne({ _id:activeUser });
@@ -817,7 +815,6 @@ const changePhoto = async(req,res) => {
  */
 const changeHeader = async(req,res) => {
     try {
-        // FOR MCO P3: change to req.session.id
         const activeUser = req.session.user;
         // just to ensure it exists in the db
         var activeUserDetails = await users.findOne({ _id:activeUser });
@@ -861,9 +858,11 @@ const changeHeader = async(req,res) => {
     }
 };
 
+/**
+ *  Allows deleting of account
+ */
 const deleteUser = async(req,res) => {
     try {
-        // FOR MCO P3: change to req.session.id
         const activeUser = req.session.user;
         // just to ensure it exists in the db
         var activeUserDetails = await users.findOne({ _id:activeUser });

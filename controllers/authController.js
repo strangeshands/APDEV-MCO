@@ -1,9 +1,6 @@
 const User = require('../models/users');
 const bcrypt = require('bcrypt'); 
 
-// active user module
-const active = require('../activeUser');
-
 // Render login page
 const renderLoginPage = (req, res) => {
     res.render('loginPage', { title: "Log In" });
@@ -13,6 +10,7 @@ const renderLoginPage = (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const { username, password } = req.body;
+        const rememberMe = req.body.rememberMe;
 
         // Add @ to username if not present
         const formattedUsername = username.startsWith('@') ? username : `@${username}`;
@@ -28,7 +26,13 @@ const loginUser = async (req, res) => {
         // Verify password with bcrypt
         const isPasswordValid = await user.comparePassword(password);
         if (!isPasswordValid) {
-            return res.render('loginPage', { error: "Invalid username or password" });
+            /*
+                > fail safe :: this is for existing accounts -- password is not hashed yet
+            */
+            if (password === user.password)
+                req.session.user = user;
+            else
+                return res.render('loginPage', { error: "Invalid username or password" });
         }
 
         /**
@@ -36,8 +40,16 @@ const loginUser = async (req, res) => {
          *  > set this one to req.session.id = user.id;
          */
         req.session.user = user;
-        active.setActiveUser(req.session.user);
 
+        if (rememberMe)
+            req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; 
+        
+        /* 
+            > [VERIFY] should be higher if rememberMe is checked
+            > by default, this is 86399899 (1 day)
+            > if rememberMe is checked, this is 2592000000 (30 days)
+        */
+        console.log(req.session.cookie.maxAge);
         res.redirect(`/`);
     } catch (error) {
         console.error("Login error:", error);
@@ -47,19 +59,15 @@ const loginUser = async (req, res) => {
 
 // Handle logout (simply redirect to login for now)
 const logoutUser = (req, res) => {
-    // FOR MCO P3: change to destroy
-    req.session.destroy()
-    active.clearActiveUser();
-
+    req.session.destroy();
+    res.clearCookie('connect.sid');
     res.redirect('/login');
 };
 
 // Render signup page
 const renderSignupPage = (req, res) => {
-    // FOR MCO P3: change to destroy
-    req.session.destroy()
-    active.clearActiveUser();
-
+    req.session.destroy();
+    res.clearCookie('connect.sid');
     res.render('signupPage', { title: "Sign Up" });
 };
 
