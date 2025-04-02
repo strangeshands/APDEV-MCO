@@ -190,7 +190,7 @@ main {
 /* Wrapper for each image + remove icon */
 .imageWrapper {
     position: relative;
-    display: inline-block; /* or block if you prefer the entire width */
+    display: flex; /* or block if you prefer the entire width */
 }
 
 /* The remove icon (e.g., a small “×”) in the top-right corner */
@@ -291,7 +291,7 @@ button img {
     max-width: inherit;
 
     display: none;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     gap: 10px;
 }
