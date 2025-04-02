@@ -25,6 +25,27 @@ const app = express();
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
 
+const dbURI = 'mongodb+srv://ConnectifyAdmin:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db';
+
+// ----- Setup Session ----- //
+app.use(cookieParser());
+app.use(
+    session({
+        secret: "secret-key", 
+        resave: false,        
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: dbURI,
+            collectionName: "sessions",
+        }),
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, 
+            httpOnly: true, 
+            secure: false,
+        }
+    })
+);
+
 // ----- Middleware & Static Files ----- //
 app.use(express.static('public'));                  // everything in the given dir is accessible (great for css and images)
 app.use(express.urlencoded({ extended: true }));    // parses the url to an object to be used in te req obj // needed or else obj is undefined
@@ -94,27 +115,6 @@ app.use((req, res) => {
 });
 
 // ----- MongoDB Connection ----- //
-const dbURI = 'mongodb+srv://ConnectifyAdmin:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db';
-
-// ----- Setup Session ----- //
-app.use(cookieParser());
-app.use(
-    session({
-        secret: "secret-key", 
-        resave: false,        
-        saveUninitialized: false,
-        store: MongoStore.create({
-            mongoUrl: dbURI,
-            collectionName: "sessions",
-        }),
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24, 
-            httpOnly: true, 
-            secure: false,
-        }
-    })
-);
-
 mongoose.connect(dbURI)
     .then(() => {
         console.log("MongoDB Connected");
