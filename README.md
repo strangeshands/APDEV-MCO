@@ -15,6 +15,7 @@ For **Phase 2**, the application is built using Node.js and Express. Below are t
   ```bash
   node app.js
   ```
+- alternatively, you can access the deployed app here: https://connectify-y0tq.onrender.com 
 
 - **/controllers**: Contains functions that are called by the routes defined in the application.
 - **/routes**: Includes route definitions that map HTTP requests to the corresponding controller functions.
@@ -46,7 +47,7 @@ This will install the following packages:
 #### **Log In**
 - please use these details if you wish to log in:
   - username: AkoSiDarna
-  - password: narda
+  - password: Narda!85
 
 ### **Submitted By:**
 - **CHUA, Hanielle**
