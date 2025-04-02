@@ -15,6 +15,7 @@ const mongoose = require('mongoose');
 const hbs = require('hbs');
 const bodyParser = require('body-parser'); //TODO: I think we can remove this
 const fileUpload = require('express-fileupload');
+const MongoStore = require("connect-mongo");
 
 /* --------------------- */
 
@@ -23,21 +24,6 @@ const app = express();
 // ----- Session Proper ----- //
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
-
-// ----- Setup Session ----- //
-app.use(cookieParser());
-app.use(
-    session({
-        secret: "secret-key", 
-        resave: false,        
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24, 
-            httpOnly: true, 
-            secure: false,
-        }
-    })
-);
 
 // ----- Middleware & Static Files ----- //
 app.use(express.static('public'));                  // everything in the given dir is accessible (great for css and images)
@@ -109,6 +95,26 @@ app.use((req, res) => {
 
 // ----- MongoDB Connection ----- //
 const dbURI = 'mongodb+srv://ConnectifyAdmin:apdevgorlz@connectify.2pt1b.mongodb.net/connectify-db';
+
+// ----- Setup Session ----- //
+app.use(cookieParser());
+app.use(
+    session({
+        secret: "secret-key", 
+        resave: false,        
+        saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: dbURI,
+            collectionName: "sessions",
+        }),
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, 
+            httpOnly: true, 
+            secure: false,
+        }
+    })
+);
+
 mongoose.connect(dbURI)
     .then(() => {
         console.log("MongoDB Connected");
